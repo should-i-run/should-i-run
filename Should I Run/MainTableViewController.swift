@@ -19,6 +19,7 @@ import UIKit
         
 //        self.tableView.allowsMultipleSelectionDuringEditing = false;
         super.viewDidLoad()
+
         
         self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(226.0/255), green: CGFloat(122.0/255), blue: CGFloat(63.0/255), alpha: CGFloat(1.0)))
@@ -96,11 +97,11 @@ import UIKit
         
         if segue.identifier == "ResultsSegue" {
             var dest: ResultTableViewController = segue.destinationViewController as ResultTableViewController
-    
+
             var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
             dest.locationName = label.text
         } else if segue.identifier == "AddSegue" {
-            println("add screen segue")
+
         }
         
         

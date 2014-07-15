@@ -21,6 +21,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet var mapView: MKMapView
     
+
+    
     var locationManager = CLLocationManager()
 
 
@@ -46,6 +48,13 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    @IBAction func tapOnMap(gestureRecognizer: UIGestureRecognizer) {
+        var tapLocation: CGPoint = gestureRecognizer.locationInView(self.mapView)
+        var loc = self.mapView.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
+        
+        println("tapped location is: \(loc.latitude)")
+        
+    }
 
 
     override func viewDidLoad() {

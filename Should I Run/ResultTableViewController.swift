@@ -19,7 +19,7 @@ class ResultTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.destinationCell.textLabel.text = "You're going to be late going to " + self.locationName!
+        self.destinationCell.textLabel.text = "You're going to " + self.locationName!
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

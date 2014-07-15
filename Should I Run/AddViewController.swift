@@ -29,9 +29,15 @@ class AddViewController: UIViewController, MKMapViewDelegate {
         }
 
         self.place = Place(name: self.textField.text, latitude: 35.0, longitude: -120.0)
-
-
         
+                        let userDefaults = NSUserDefaults.standardUserDefaults()
+                        var number : Int = userDefaults.integerForKey("num")
+                        number = number+1
+                        println(number)
+                        userDefaults.setObject(["name": self.textField.text, "latitude": 35.9, "longitude": 6.40], forKey: String(number))
+        
+                        userDefaults.setInteger(number,forKey: "num")
+                        userDefaults.synchronize()
         
     }
 //

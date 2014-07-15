@@ -63,9 +63,10 @@ import UIKit
         
         
         if let row = indexPath?.row {
-            //get the place from storage associated with this cell index
-            //            var place = self.places[row]
-            println("Reaching here")
+            // get the place from storage associated with this cell index
+            // var place = self.places[row]
+            
+           
             if let userDefaults = NSUserDefaults.standardUserDefaults() {
                 
                 if let location : AnyObject = userDefaults.objectForKey(String(row+1)) {

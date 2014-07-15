@@ -38,9 +38,6 @@ class AddViewController: UIViewController, MKMapViewDelegate {
         
                         userDefaults.setInteger(number,forKey: "num")
                         userDefaults.synchronize()
-
-
-        
         
     }
 //

@@ -17,17 +17,25 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.places.append(Place(name: "Home", latitude: 37.783531, longitude: -122.40911))
-        self.places.append(Place(name: "Work", latitude: 37.783531, longitude: -122.40911))
-        self.places.append(Place(name: "Hack Reactor", latitude: 37.783531, longitude: -122.40911))
-        self.places.append(Place(name: "Berkeley", latitude: 37.856808, longitude: -122.252941))
-        self.places.append(Place(name: "Stanford", latitude: 37.856808, longitude: -122.252941))
-        
         self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(226.0/255), green: CGFloat(122.0/255), blue: CGFloat(63.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(239.0/255), green: CGFloat(201.0/255), blue: CGFloat(76.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(69.0/255), green: CGFloat(178.0/255), blue: CGFloat(157.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(51.0/255), green: CGFloat(77.0/255), blue: CGFloat(92.0/255), alpha: CGFloat(1.0)))
+        
+      
+        self.places.append(Place(name: "Berkeley", latitude: 37.856808, longitude: -122.252941))
+        self.places.append(Place(name: "Stanford", latitude: 37.856808, longitude: -122.252941))
+      
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        userDefaults.setObject(["name": "Stanford", "latitude": 20.31, "longitude": 60.40], forKey: "1")
+        
+        userDefaults.setObject(["name": "Mission", "latitude": 37.31, "longitude": -122.40], forKey: "2")
+        let number = 2
+        userDefaults.setInteger(number, forKey:"num")
+        userDefaults.synchronize()
+      
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -56,17 +64,23 @@ import UIKit
         
         if let row = indexPath?.row {
             //get the place from storage associated with this cell index
-            var place = self.places[row]
-            
-            //set cell text to place name
-            cell.textLabel.text = place.placeName
-            
-            var index = row % self.colors.count
-            
-            cell.backgroundColor = self.colors[index]
-            
+            //            var place = self.places[row]
+            println("Reaching here")
+            if let userDefaults = NSUserDefaults.standardUserDefaults() {
+                
+                if let location : AnyObject = userDefaults.objectForKey(String(row+1)) {
+                    cell.textLabel.text = location["name"] as NSString
+                    var index = row % self.colors.count
+                    cell.backgroundColor = self.colors[index]
+                } else {
+                    cell.textLabel.text = "Default"
+                    var index = row % self.colors.count
+                    cell.backgroundColor = self.colors[index]
+                }
+                
+            }
         }
-        
+
         return cell
     }
     
@@ -84,7 +98,7 @@ import UIKit
         
         if segue.identifier == "ResultsSegue" {
             var dest: ResultTableViewController = segue.destinationViewController as ResultTableViewController
-            println("result segue")
+    
             var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
             dest.locationName = label.text
         } else if segue.identifier == "AddSegue" {

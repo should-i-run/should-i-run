@@ -27,14 +27,14 @@ import UIKit
         self.places.append(Place(name: "Berkeley", latitude: 37.856808, longitude: -122.252941))
         self.places.append(Place(name: "Stanford", latitude: 37.856808, longitude: -122.252941))
       
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+//        let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        userDefaults.setObject(["name": "Stanford", "latitude": 20.31, "longitude": 60.40], forKey: "1")
-        
-        userDefaults.setObject(["name": "Mission", "latitude": 37.31, "longitude": -122.40], forKey: "2")
-        let number = 2
-        userDefaults.setInteger(number, forKey:"num")
-        userDefaults.synchronize()
+//        userDefaults.setObject(["name": "Stanford", "latitude": 20.31, "longitude": 60.40], forKey: "1")
+//        
+//        userDefaults.setObject(["name": "Mission", "latitude": 37.31, "longitude": -122.40], forKey: "2")
+//        let number = 2
+//        userDefaults.setInteger(number, forKey:"num")
+//        userDefaults.synchronize()
       
         
         
@@ -54,7 +54,10 @@ import UIKit
     }
     
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
-        return self.places.count
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        var number : Int = userDefaults.integerForKey("num")
+        return number
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
@@ -71,6 +74,7 @@ import UIKit
                 
                 if let location : AnyObject = userDefaults.objectForKey(String(row+1)) {
                     cell.textLabel.text = location["name"] as NSString
+                    println(location["name"])
                     var index = row % self.colors.count
                     cell.backgroundColor = self.colors[index]
                 } else {

@@ -63,12 +63,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //We don't need to be very accurate here, since we're just centering the map
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.locationManager.startUpdatingLocation()
-
-    }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-
+        
         //convert the user's location to a 2d coordinate
         let loc2d: CLLocationCoordinate2D =  locationManager.location.coordinate
         
@@ -76,15 +71,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
         self.mapView.setRegion(reg, animated: false)
 
-        
+
     }
-    
-    //    - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-    //    {
-    //    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    //    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-    //    }
-    
+
 
 //
 //    override func didReceiveMemoryWarning() {

@@ -142,7 +142,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
                                 <rect key="frame" x="20" y="133" width="280" height="415"/>
                             </mapView>
                         </subviews>
@@ -161,6 +161,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="qVv-dt-hy6" id="WTU-5y-PSy"/>
                         <outlet property="saveBarButton" destination="s3L-rf-hGK" id="KcE-zn-Hsf"/>
                         <outlet property="textField" destination="BOu-XN-4nQ" id="FXJ-LY-INO"/>
                     </connections>

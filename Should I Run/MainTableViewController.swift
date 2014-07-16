@@ -120,11 +120,11 @@ import UIKit
             var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
             dest.locationName = label.text
         } else if segue.identifier == "AddSegue" {
-<<<<<<< HEAD
 
-=======
+
+
            //do something
->>>>>>> Implemented delete from table and added comments
+
         }
         
     }

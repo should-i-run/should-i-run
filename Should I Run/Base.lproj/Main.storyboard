@@ -174,7 +174,7 @@
                 <exit id="fN2-mM-vwH" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="qzU-bv-yg7">
                     <connections>
-                        <action selector="tapOnMap:" destination="bNB-m3-407" id="cGe-7W-zOR"/>
+                        <action selector="tapOnMap:" destination="bNB-m3-407" id="fwS-dw-mHG"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

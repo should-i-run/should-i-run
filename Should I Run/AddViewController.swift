@@ -14,6 +14,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
     @IBOutlet var textField : UITextField
+    
+    var lat: Float = 0.00
+    var lng: Float = 0.00
 
 
     @IBOutlet var saveBarButton: UIBarButtonItem
@@ -34,25 +37,26 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if (sender as? UIBarButtonItem != self.saveBarButton) {
             return
         }
+       
+        var thisLat = self.lat
 
-        self.place = Place(name: self.textField.text, latitude: 35.0, longitude: -120.0)
         
-                        let userDefaults = NSUserDefaults.standardUserDefaults()
-                        var number : Int = userDefaults.integerForKey("num")
-                        number = number+1
-                        println(number)
-                        userDefaults.setObject(["name": self.textField.text, "latitude": 35.9, "longitude": 6.40], forKey: String(number))
-        
-                        userDefaults.setInteger(number,forKey: "num")
-                        userDefaults.synchronize()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        var number : Int = userDefaults.integerForKey("num")
+        number = number+1
+
+        userDefaults.setObject(["name": self.textField.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
+
+        userDefaults.setInteger(number,forKey: "num")
+        userDefaults.synchronize()
         
     }
     
     @IBAction func tapOnMap(gestureRecognizer: UIGestureRecognizer) {
         var tapLocation: CGPoint = gestureRecognizer.locationInView(self.mapView)
         var loc = self.mapView.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
-        
-        println("tapped location is: \(loc.latitude)")
+        self.lat = Float(loc.latitude)
+        self.lng = Float(loc.longitude)
         
     }
 

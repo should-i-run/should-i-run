@@ -96,12 +96,40 @@ import UIKit
     
     }
     
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        //kyle's API = AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg
+        //Neil's API = AIzaSyChLClMFZtSSmUSiP9fM333RLGms0w5ogc
+        let mapsUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg"
+        
+        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Montreal&destination=Toronto&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg")
+        
+//        var nycURL = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Paris&destination=Berlin&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&mode=transit")
+        
+        var request = NSURLRequest(URL: url)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+            (response, data, error) in
+            println("Data is ",data)
+            println("Errorrrrr",error)
+//            var result = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("Results are")
+            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+        }
+        
+//        prepareForSegue(segue: ResultsSegue, sender: self)
+    }
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         
         if segue.identifier == "ResultsSegue" {
+
             var dest: ResultTableViewController = segue.destinationViewController as ResultTableViewController
 
             var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
+            if label.text == "Add Destination" {
+                println("Reached here")
+//                return
+            }
             dest.locationName = label.text
         } else if segue.identifier == "AddSegue" {
 

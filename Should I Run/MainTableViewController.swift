@@ -16,9 +16,31 @@ import UIKit
      let userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
-        
-//        self.tableView.allowsMultipleSelectionDuringEditing = false;
         super.viewDidLoad()
+        
+        var testXMLString = "<items><item id=\"0001\" type=\"donut\"><name>Cake</name><ppu>0.55</ppu><batters><batter id=\"1001\">Regular</batter><batter id=\"1002\">Chocolate</batter><batter id=\"1003\">Blueberry</batter></batters><topping id=\"5001\">None</topping><topping id=\"5002\">Glazed</topping><topping id=\"5005\">Sugar</topping></item></items>";
+
+        
+        var parsed:NSDictionary = XMLReader.dictionaryForXMLString(testXMLString, error: nil)
+        
+        println(parsed)
+        
+        
+        var url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ncon&key=ZELI-U2UY-IBKQ-DT35")
+
+        
+        var data = NSMutableData.dataWithContentsOfURL(url, options: NSDataReadingOptions.DataReadingUncached, error: nil)
+        println(data)
+        
+
+        
+        let html = NSString(data: data, encoding: NSUTF8StringEncoding) as NSObject
+        println(html)
+        
+
+
+
+
 
         
         self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))

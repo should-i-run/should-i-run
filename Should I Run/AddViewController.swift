@@ -28,42 +28,51 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var currentAnnotation: MKPointAnnotation?
     
-
+    let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     
-//    var locationManager = CLLocationManager()
-
+    let locationManager = SharedUserLocation
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let loc2d: CLLocationCoordinate2D =  SharedUserLocation.currentLocation2d {
-
-            //create a 'region' with the user's location as the center, and set the map to that region
-            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
-            self.mapView.setRegion(reg, animated: false)
-            self.mapCenteredOnUser = true
+        self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+                let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+                
+                //create a 'region' with the user's location as the center, and set the map to that region
+                let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
+                self.mapView.setRegion(reg, animated: false)
+                self.mapCenteredOnUser = true
+            
+            
         }
-
         
         
         
-        //check required for iOS 8.
-        //we see if the location manager has this request method.
-        //If so we are on 8 and need to request auth
-//        if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
-//            self.locationManager.requestWhenInUseAuthorization()
+        //var observer = notificationCenter.addObserverForName(LocationDidUpdateNotification, object: NilLiteralConvertible, queue: mainQueue) { _ in
+          //  let loc2d: CLLocationCoordinate2D =  SharedUserLocation.currentLocation2d {
+                //
+                //            //create a 'region' with the user's location as the center, and set the map to that region
+                //            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
+                //            self.mapView.setRegion(reg, animated: false)
+                //            self.mapCenteredOnUser = true
+      //  }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setMapCenter:", name:"CLLocationDidUpdate", object: nil)
+        
+//        if let loc2d: CLLocationCoordinate2D =  SharedUserLocation.currentLocation2d {
+//
+//            //create a 'region' with the user's location as the center, and set the map to that region
+//            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
+//            self.mapView.setRegion(reg, animated: false)
+//            self.mapCenteredOnUser = true
 //        }
-//        
-//        
-//        self.locationManager.delegate = self
-//        
-//        //We don't need to be very accurate here, since we're just centering the map
-//        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//        self.locationManager.distanceFilter = 1000
-//        self.locationManager.startUpdatingLocation()
- 
+
         
     }
+    
+    
     
 //    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
 //        
@@ -101,21 +110,10 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.addAnnotation(marker)
         self.currentAnnotation = marker
         
-//        
-//        marker.
-//            coordinate(location2d)
+
     }
     
-//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-//        
-//        
-//        
-//        var marker: MKAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "marker")
-//        
-//        marker.annotation = annotation
-//        
-//        return marker
-//    }
+
     
     
 

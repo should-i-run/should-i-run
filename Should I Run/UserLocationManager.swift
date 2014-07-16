@@ -9,6 +9,12 @@
 
 // how to use:
 // call SharedUserLocation.currentLocation2d from any class
+// or, to receive updates
+//    let locationManager = SharedUserLocation //in the class body
+//        self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+//      let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+//      //now you can use the location
+//    }
 
 
 import MapKit
@@ -22,6 +28,9 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
       // currentLocation2d.latitude, etc
     //
     var currentLocation2d:CLLocationCoordinate2D?
+    
+    let notificationCenter:NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    let mainQueue:NSOperationQueue = NSOperationQueue.mainQueue()
 
     
     class var manager: UserLocation {
@@ -30,6 +39,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     init () {
         super.init()
+
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
             self.locationManager.requestWhenInUseAuthorization()
         }
@@ -37,10 +47,17 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.distanceFilter = 50
         self.locationManager.startUpdatingLocation()
+        
+        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         self.currentLocation2d = manager.location.coordinate
+
+
+        self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
+        
+        
         
     }
     

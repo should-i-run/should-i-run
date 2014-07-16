@@ -28,5 +28,7 @@
 	<array>
 		<string>armv7</string>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is required to get you to the train on time</string>
 </dict>
 </plist>

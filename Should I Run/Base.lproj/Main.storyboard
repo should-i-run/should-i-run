@@ -142,8 +142,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
                                 <rect key="frame" x="20" y="133" width="280" height="415"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="O0J-3O-MUh"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,12 +165,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="qVv-dt-hy6" id="WTU-5y-PSy"/>
                         <outlet property="saveBarButton" destination="s3L-rf-hGK" id="KcE-zn-Hsf"/>
                         <outlet property="textField" destination="BOu-XN-4nQ" id="FXJ-LY-INO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPL-y8-8gV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fN2-mM-vwH" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="qzU-bv-yg7">
+                    <connections>
+                        <action selector="tapOnMap:" destination="bNB-m3-407" id="cGe-7W-zOR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2327" y="868"/>
         </scene>

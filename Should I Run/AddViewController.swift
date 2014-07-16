@@ -10,13 +10,20 @@ import UIKit
 
 import MapKit
 
-class AddViewController: UIViewController, MKMapViewDelegate {
+class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
 
     @IBOutlet var textField : UITextField
 
 
     @IBOutlet var saveBarButton: UIBarButtonItem
+    
+    
+    @IBOutlet var mapView: MKMapView
+    
+
+    
+    var locationManager = CLLocationManager()
 
 
     var place:Place? = nil
@@ -40,13 +47,42 @@ class AddViewController: UIViewController, MKMapViewDelegate {
                         userDefaults.synchronize()
         
     }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//    }
-//    
+    
+    @IBAction func tapOnMap(gestureRecognizer: UIGestureRecognizer) {
+        var tapLocation: CGPoint = gestureRecognizer.locationInView(self.mapView)
+        var loc = self.mapView.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
+        
+        println("tapped location is: \(loc.latitude)")
+        
+    }
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //check required for iOS 8.
+        //we see if the location manager has this request method. 
+        //If so we are on 8 and need to request auth
+        if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
+                    self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        
+        self.locationManager.delegate = self
+        
+        //We don't need to be very accurate here, since we're just centering the map
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        
+        //convert the user's location to a 2d coordinate
+        let loc2d: CLLocationCoordinate2D =  locationManager.location.coordinate
+        
+        //create a 'region' with the user's location as the center, and set the map to that region
+        let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
+        self.mapView.setRegion(reg, animated: false)
+
+
+    }
+
 
 //
 //    override func didReceiveMemoryWarning() {

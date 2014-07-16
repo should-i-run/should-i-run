@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 
 @objc (MainTableViewController) class MainTableViewController: UITableViewController {
@@ -100,25 +101,41 @@ import UIKit
         
         //kyle's API = AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg
         //Neil's API = AIzaSyChLClMFZtSSmUSiP9fM333RLGms0w5ogc
-        let mapsUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg"
+
+        var time = Int(NSDate().timeIntervalSince1970)
+
+    
+        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=37.779259,-122.412731&destination=37.751321,-122.412623&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit")
         
-        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Montreal&destination=Toronto&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg")
-        
-//        var nycURL = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Paris&destination=Berlin&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&mode=transit")
-        
-        var request = NSURLRequest(URL: url)
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-            (response, data, error) in
-            println("Data is ",data)
-            println("Errorrrrr",error)
-//            var result = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Results are")
-            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
+            (data, response, error) in
+            
+         println("Errorrrrr",error)
+         var result = NSString(data: data, encoding: NSUTF8StringEncoding)
+            
+            
+            var error: NSError?
+            let jsonData: NSData = data
+            
+            let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: nil) as NSDictionary
+            
+            var steps:AnyObject = jsonDict["routes"]
+            self.convertGoogleToBart(jsonDict)
         }
         
-//        prepareForSegue(segue: ResultsSegue, sender: self)
+        task.resume()
     }
+    
+    func convertGoogleToBart(goog: NSDictionary) ->  Array<String> {
+        var results :Array<String> = []
+        
+        var steps : AnyObject = goog["routes"]
+//        var steps = goog.routes[0].legs[0].steps
+        println(steps)
+        
+        return results
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         
         if segue.identifier == "ResultsSegue" {
@@ -132,11 +149,7 @@ import UIKit
             }
             dest.locationName = label.text
         } else if segue.identifier == "AddSegue" {
-
-
-
            //do something
-
         }
         
     }

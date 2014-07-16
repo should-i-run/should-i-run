@@ -76,6 +76,26 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.lng = Float(loc.longitude)
     }
 
+    override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
+        if (sender as? UIBarButtonItem != self.saveBarButton) {
+            return true
+        }
+        if self.lng == 0.00 {
+            var message: UIAlertView = UIAlertView(title: "Location", message: "Please pick a location", delegate: nil, cancelButtonTitle: "Ok")
+            message.show()
+            return false
+        }
+        if self.textField.text == "" {
+            var message: UIAlertView = UIAlertView(title: "Location", message: "Please add a location name", delegate: nil, cancelButtonTitle: "Ok")
+            message.show()
+            return false
+            
+        }
+        return true
+        
+        
+    }
+
 
 
     override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
@@ -96,17 +116,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         userDefaults.synchronize()
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
-        if (sender as? UIBarButtonItem != self.saveBarButton) {
-            return true
-        }
-        if self.lng == 0.00 {
-            return false
-        }
-        return true
-        
-        
-    }
+
 
  
 

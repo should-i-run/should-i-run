@@ -84,11 +84,22 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return
         }
         
+<<<<<<< HEAD
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var number : Int = userDefaults.integerForKey("num")
         number += 1
         
         userDefaults.setObject(["name": self.textField.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
+=======
+                        let userDefaults = NSUserDefaults.standardUserDefaults()
+                        var number : Int = userDefaults.integerForKey("num")
+        
+                        println(number)
+                        userDefaults.setObject(["name": self.textField.text, "latitude": 35.9, "longitude": 6.40], forKey: String(number))
+                         number = number+1
+                        userDefaults.setInteger(number,forKey: "num")
+                        userDefaults.synchronize()
+>>>>>>> Implemented delete from table and added comments
         
         userDefaults.setInteger(number,forKey: "num")
         userDefaults.synchronize()

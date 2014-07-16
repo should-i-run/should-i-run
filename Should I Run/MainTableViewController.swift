@@ -27,13 +27,10 @@ import UIKit
         self.colors.append(UIColor(red: CGFloat(69.0/255), green: CGFloat(178.0/255), blue: CGFloat(157.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(51.0/255), green: CGFloat(77.0/255), blue: CGFloat(92.0/255), alpha: CGFloat(1.0)))
         
-      
-      
-       
-        
-//        userDefaults.setObject(["name": "Stanford", "latitude": 20.31, "longitude": 60.40], forKey: "1")
+
+//        userDefaults.setObject(["name": "Stanford", "latitude": 20.31, "longitude": 60.40], forKey: "0")
 //        
-//        userDefaults.setObject(["name": "Mission", "latitude": 37.31, "longitude": -12.40], forKey: "2")
+//        userDefaults.setObject(["name": "Mission", "latitude": 37.31, "longitude": -12.40], forKey: "1")
 //        let number = 2
 //        userDefaults.setInteger(number, forKey:"num")
 //        userDefaults.synchronize()
@@ -44,7 +41,7 @@ import UIKit
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+         self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,9 +53,35 @@ import UIKit
     }
     
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
-        
         let number : Int = userDefaults.integerForKey("num")
         return number
+    }
+    
+    override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        //check if editing style is delete
+        if editingStyle == .Delete {
+            //get the index row of the delete and compare with the number of objects in the plist
+           var number : Int = userDefaults.integerForKey("num")
+            //if last element, just reduce count of number of objects by 1
+            // else shift everything one step down
+
+            if indexPath.row + 1 < number  {
+                for index in indexPath.row...(number - 2) {
+                    let location : AnyObject = userDefaults.objectForKey(String(index + 1))
+                    userDefaults.setObject(location, forKey: String(index))
+                    //we want to synchronize immediately so state is updated
+                    userDefaults.synchronize()
+                    
+                }
+            }
+            //reduce count of objects by 1 and save it
+            number = number - 1
+            userDefaults.setInteger(number, forKey:"num")
+            //remove from table view with animation
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+        }
+        
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
@@ -67,9 +90,9 @@ import UIKit
         
         
         if let row = indexPath?.row {
-                if let location : AnyObject = userDefaults.objectForKey(String(row+1)) {
+            //retrieve from the collection of objects with key "row number"
+                if let location : AnyObject = userDefaults.objectForKey(String(row)) {
                     cell.textLabel.text = location["name"] as NSString
-                    println(location["name"])
                     var index = row % self.colors.count
                     cell.backgroundColor = self.colors[index]
                 } else {
@@ -84,13 +107,9 @@ import UIKit
     }
     
     func unwindToList(segue:UIStoryboardSegue)  {
-        var source = segue.sourceViewController as AddViewController
-        
-        if let item = source.place? {
-            self.places.append(item)
+        //reload the table on unwinding
             self.tableView.reloadData()
-        }
-        
+    
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
@@ -101,13 +120,14 @@ import UIKit
             var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
             dest.locationName = label.text
         } else if segue.identifier == "AddSegue" {
+<<<<<<< HEAD
 
+=======
+           //do something
+>>>>>>> Implemented delete from table and added comments
         }
-        
-        
-        
         
     }
     
-    
+  
 }

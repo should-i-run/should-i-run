@@ -105,34 +105,128 @@ import Foundation
         var time = Int(NSDate().timeIntervalSince1970)
 
     
-        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=37.779259,-122.412731&destination=37.751321,-122.412623&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit")
+        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=San+Francisco&destination=Oakland&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&provideRouteAlternatives=true")
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
             (data, response, error) in
             
-         println("Errorrrrr",error)
-         var result = NSString(data: data, encoding: NSUTF8StringEncoding)
+         var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
+         println("Error!!",error)
+//        println("Data returned is")
+//         println(dataFromGoogle)
             
             
-            var error: NSError?
-            let jsonData: NSData = data
+
+        let jsonData: NSData = data
             
-            let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: nil) as NSDictionary
+        let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
             
-            var steps:AnyObject = jsonDict["routes"]
+            
             self.convertGoogleToBart(jsonDict)
         }
         
         task.resume()
     }
     
+    
+    
     func convertGoogleToBart(goog: NSDictionary) ->  Array<String> {
         var results :Array<String> = []
+       
+        var foundWalking : Bool = false
+        var i:Int  = 0
+        var name1:String = ""
+        var fname1:String = ""
         
-        var steps : AnyObject = goog["routes"]
-//        var steps = goog.routes[0].legs[0].steps
-        println(steps)
+    
         
+        var inter : NSArray = goog.objectForKey("routes") as NSArray
+
+        var inter2 : NSArray = inter[0].objectForKey("legs") as NSArray
+
+        var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
+
+
+        while(!foundWalking){
+            if steps[i].objectForKey("travel_mode") as String == "WALKING" {
+                foundWalking = true
+                
+                name1 = steps[i].objectForKey("html_instructions") as String
+                fname1 = name1.substringFromIndex(7).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+              
+//                    println("Station name is \(name1)")
+                    println("Only Station name is \(fname1)")
+                var stn1 = bartLookup[fname1]
+                println("Bart Lookup for Station 1 is \(stn1)")
+                
+                var distance = steps[i].objectForKey("distance") as NSDictionary
+    
+                var value = distance["value"].intValue
+                
+                results.append(String(value))
+//                println("Results array is \(results)")
+                
+                results.append(stn1!.uppercaseString)
+            } else if i == steps.count {
+                foundWalking = true
+                println("No Valid Transit Directions")
+            }else {
+                i++
+            }
+        }
+        
+        i++
+        
+        var fname2:String = ""
+        var name2:String = steps[i].objectForKey("html_instructions") as String
+        
+        fname2 = name2.substringFromIndex(19).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+         println("Only Station 2 name is \(fname2)")
+        
+        var stn2 = bartLookup[fname2];
+        println("Bart Lookup for Station 2 is \(stn2)")
+
+        
+//        results.append(name1) //Name of station walking to
+        results.append(stn2!.uppercaseString)
+        
+          println("Results array after now is \(results)")
+        
+        i = 0;
+        var k: Int = 1
+        println("inter count is \(inter.count)")
+        while k < inter.count {
+
+          var inter2 = inter[k].objectForKey("legs") as NSArray
+          var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
+
+          foundWalking = false;
+          
+          while(!foundWalking){
+            if (steps[i]? && steps[i].objectForKey("travel_mode")? && steps[i].objectForKey("travel_mode") as String == "WALKING"){
+                foundWalking = true
+            } else if i+1 >= steps.count {
+                foundWalking = true
+            } else {
+                i++
+            }
+          }
+          println("I is \(i)")
+         i++
+            if i < steps.count {
+                name2 = steps[i].objectForKey("html_instructions") as String
+                name2 = name2.substringFromIndex(19)
+                println("We are here with \(name2)")
+            }
+            
+            if bartLookup[name2]{
+                stn2 = bartLookup[name2]
+                results.append(stn2!.uppercaseString)
+            }
+        k++
+        
+        }
+        println(results)
         return results
     }
     

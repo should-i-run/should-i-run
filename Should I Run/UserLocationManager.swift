@@ -40,18 +40,22 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     init () {
         super.init()
 
+        //ios 8 only
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
             self.locationManager.requestWhenInUseAuthorization()
         }
+        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.distanceFilter = 50
         self.locationManager.startUpdatingLocation()
+
         
         
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+
         self.currentLocation2d = manager.location.coordinate
 
 

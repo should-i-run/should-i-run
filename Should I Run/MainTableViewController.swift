@@ -232,16 +232,16 @@ import Foundation
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         
-        if segue.identifier == "ResultsSegue" {
+        if segue.identifier == "LoadingSegue" {
 
-            var dest: ResultTableViewController = segue.destinationViewController as ResultTableViewController
+//            var dest: LoadingViewController = segue.destinationViewController as LoadingViewController
 
-            var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
-            if label.text == "Add Destination" {
-                println("Reached here")
-//                return
-            }
-            dest.locationName = label.text
+//            var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
+//            dest.locationName = "hey"
+//            dest.lat = label.lat???
+//            dest.lng = label.lng???
+            
+            
         } else if segue.identifier == "AddSegue" {
            //do something
         }

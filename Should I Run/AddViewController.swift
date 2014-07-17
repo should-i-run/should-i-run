@@ -30,20 +30,30 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+
     
     let locationManager = SharedUserLocation
+    
     
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
+            self.mapView.setRegion(reg, animated: false)
+            self.mapCenteredOnUser = true
+            
+        }
+        
         self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
-                let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
-                
-                //create a 'region' with the user's location as the center, and set the map to that region
-                let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
-                self.mapView.setRegion(reg, animated: false)
-                self.mapCenteredOnUser = true
+            let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+            println("observer called")
+            
+            //create a 'region' with the user's location as the center, and set the map to that region
+            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
+            self.mapView.setRegion(reg, animated: false)
+            self.mapCenteredOnUser = true
             
             
         }
@@ -94,6 +104,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return false
             
         }
+
         return true
         
         

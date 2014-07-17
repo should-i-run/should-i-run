@@ -1,9 +1,7 @@
 xcdebugger
-<<<<<<< HEAD
 Should I Run.xcodeproj/project.xcworkspace/xcuserdata/kylecraft.xcuserdatad/UserInterfaceState.xcuserstate
 Should I Run.xcodeproj/xcuserdata/kylecraft.xcuserdatad/xcschemes/Should I Run.xcscheme
 Should I Run.xcodeproj/xcuserdata/kylecraft.xcuserdatad/xcschemes/xcschememanagement.plist
-=======
-Test.playground/
-Should I Run.xcodeproj/project.xcworkspace/xcuserdata/neil.xcuserdatad/UserInterfaceState.xcuserstate.orig
->>>>>>> Google Directions with bart lookups, miltiple paths remaining
+.DS_Store
+Should I Run.xcodeproj/project.xcworkspace/xcuserdata/LM.xcuserdatad/
+Should I Run.xcodeproj/xcuserdata/LM.xcuserdatad/

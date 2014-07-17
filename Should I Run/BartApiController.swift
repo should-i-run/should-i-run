@@ -9,16 +9,16 @@
 import UIKit
 
 // Create BART API protocol that needs to be adhered to
-protocol BartApiControllerProtocol {
+protocol BartApiControllerDelegate {
     // Actual implementation of methods needs to be written inside the class using this protocol
     func didReceiveBartResults(results: [(String, Int)])
 }
 
 class BartApiController: NSObject {
 
-    // Create protocol to delegate to
-    // i.e. any class conforming to the BartApiControllerProtocol will be delegated to
-    var delegate: BartApiControllerProtocol?
+    // Create delegate
+    // Can be any class, as long as it adheres to BartApiControllerProtocol (by defining didReceiveBartResults in this case)
+    var delegate: BartApiControllerDelegate?
     
 
     func searchBartFor(searchAbbr: String) {
@@ -67,8 +67,7 @@ class BartApiController: NSObject {
         // Sort the tuple array of termini and estimated arrival in ascending order
         allResults.sort{$0.1 < $1.1}
         
-        delegate?.didReceiveBartResults(allResults)
-//        return allResults
+        self.delegate?.didReceiveBartResults(allResults)
     }
     
     

@@ -8,13 +8,11 @@
 
 import UIKit
 
-class ResultTableViewController: UITableViewController, BartApiControllerProtocol {
+class ResultTableViewController: UITableViewController {
     
     var locationName: String?
     
     var senderUILabel: UILabel?
-    
-    var bartResults: [(String, Int)]?
 
     @IBOutlet var destinationCell : UITableViewCell
     
@@ -24,19 +22,7 @@ class ResultTableViewController: UITableViewController, BartApiControllerProtoco
         self.destinationCell.textLabel.text = "You're going to " + self.locationName!
 
         
-        
-        // Create controller to handle BART API queries
-        var bartApiController: BartApiController = BartApiController()
-        
-        // Set delegate to this class (we are delegating the controller's actions to this class)
-        bartApiController.delegate = self
-        
-        // Call didReceiveBartResults method below via delegate relationship
-        bartApiController.searchBartFor("cols")
-        
-        println(bartResults)
-        
-        
+                
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -44,17 +30,7 @@ class ResultTableViewController: UITableViewController, BartApiControllerProtoco
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
- 
-    // Conform to BartApiControllerProtocol by implementing this method
-    func didReceiveBartResults(results: [(String, Int)]) {
-        bartResults = results
 
-        dispatch_async(dispatch_get_main_queue(), {
-            // Add any code that should run asyncronously while waiting for data
-            // i.e. to move back in to the main thread, and reload the table view.
-        })
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

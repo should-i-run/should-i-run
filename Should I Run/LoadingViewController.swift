@@ -8,19 +8,39 @@
 
 import UIKit
 
-class LoadingViewController: UIViewController {
+class LoadingViewController: UIViewController, BartApiControllerDelegate {
     var locationName:String?
     
+    var bartResults: [(String, Int)]?
+    
+    // Create controller to handle BART API queries
+    var bartApiController: BartApiController = BartApiController()
+    
+
     override func viewDidLoad() {
-        resultsFromBart()
+        
+        resultsFromGoogle()
     }
 
+    func resultsFromGoogle() {
+        
+        // Set delegate to this class (we are delegating the controller's actions to this class)
+        self.bartApiController.delegate = self
+        
+        // Call didReceiveBartResults method below via delegate relationship
+        self.bartApiController.searchBartFor("cols")
+        
+        println(self.bartResults)
+
+        
+        resultsFromBart()
+    }
+    
+    
     func resultsFromBart() {
-            
+ 
+      
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
-        
-        
-        
         
         
     }
@@ -34,4 +54,15 @@ class LoadingViewController: UIViewController {
         
     }
 
+    
+    // Conform to BartApiControllerProtocol by implementing this method
+    func didReceiveBartResults(results: [(String, Int)]) {
+        self.bartResults = results
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            // Add any code that should run asyncronously while waiting for data
+            // i.e. "to move back in to the main thread, and reload the table view."
+            })
+    }
+    
 }

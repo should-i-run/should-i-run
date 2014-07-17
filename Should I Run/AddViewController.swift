@@ -48,47 +48,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }
         
-        
-        
-        //var observer = notificationCenter.addObserverForName(LocationDidUpdateNotification, object: NilLiteralConvertible, queue: mainQueue) { _ in
-          //  let loc2d: CLLocationCoordinate2D =  SharedUserLocation.currentLocation2d {
-                //
-                //            //create a 'region' with the user's location as the center, and set the map to that region
-                //            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
-                //            self.mapView.setRegion(reg, animated: false)
-                //            self.mapCenteredOnUser = true
-      //  }
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setMapCenter:", name:"CLLocationDidUpdate", object: nil)
-        
-//        if let loc2d: CLLocationCoordinate2D =  SharedUserLocation.currentLocation2d {
-//
-//            //create a 'region' with the user's location as the center, and set the map to that region
-//            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
-//            self.mapView.setRegion(reg, animated: false)
-//            self.mapCenteredOnUser = true
-//        }
-
-        
     }
     
-    
-    
-//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-//        
-//        //first check if the map has been centered yet. We don't want to keep recentering.
-//        
-//        if self.mapCenteredOnUser == false {
-//            //convert the user's location to a 2d coordinate
-//            let loc2d: CLLocationCoordinate2D =  locationManager.location.coordinate
-//                
-//            //create a 'region' with the user's location as the center, and set the map to that region
-//            let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
-//            self.mapView.setRegion(reg, animated: false)
-//            self.mapCenteredOnUser = true
-//        }
-//        
-//    }
+
 
 
     

@@ -9,13 +9,29 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
                             
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+        
+        //registering for sending user various kinds of notifications
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+        
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        println("did receive local notification in AppDelegate")
+        var state: UIApplicationState = application.applicationState;
+        println(state.hashValue)
+        
+        // This looks like "if state == UIApplicationStateActive" in Obj-C
+        if state.hashValue == 0 {
+            var alert = UIAlertView(title:"Reminder", message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
+            alert.show();
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

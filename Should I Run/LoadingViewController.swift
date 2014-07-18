@@ -124,9 +124,5 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         destinationController.departureStationName = self.departureStationName
         destinationController.departures = self.bartResults!
     }
-
-    
-
-    
     
 }

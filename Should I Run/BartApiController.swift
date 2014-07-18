@@ -29,6 +29,7 @@ class BartApiController: NSObject {
         let data = NSMutableData.dataWithContentsOfURL(url, options: NSDataReadingOptions.DataReadingUncached, error: nil)
         let html = NSString(data: data, encoding: NSUTF8StringEncoding)
 
+
         let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
         // Trim off unneeded data inside the dictionary
@@ -41,38 +42,46 @@ class BartApiController: NSObject {
         for item in stations {
             if (item.key as String == "etd") {
                 // We need to check if one result or multiple results exist. If we have multiple results, we'll do a loop. Otherwise, we can access terminus abbreviation and estimated time directly
-                if (item.value["abbreviation"]) {
-                    var abbr = item.value["abbreviation"] as NSDictionary
 
-                    if (object_getClassName(item.value["estimate"]) == "__NSArrayM") {
-                        for estimateItem in item.value["estimate"] as [AnyObject] {
-                            var estimateMin = estimateItem["minutes"] as NSDictionary
-                            
-                            // Create the terminus and estimated arrival tuple and push into our results
-                            var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
-                            allResults += myTuple
-                        }
+                // Check if stations are an Array or Dictionary
+                // If Dictionary, insert into an Array to iterate over
+                var etdList: AnyObject
+                if (object_getClassName(item.value) == "__NSArrayM") {
+                    println("itemvalue is NSArray")
+                    etdList = item.value
+                } else {
+                    println("itemvalue is NSDictionary")
+                    var tempDictArray: [NSDictionary] = []
+                    tempDictArray += item.value as NSDictionary
+                    etdList = tempDictArray
+                }
+                
+                for stationItem in etdList as [AnyObject] {
+                    var abbr = stationItem["abbreviation"] as NSDictionary
+
+                    // Check if time estimates are an Array or Dictionary
+                    // If Dictionary, insert into an Array to iterate over
+                    var estimates: AnyObject
+                    if (object_getClassName(stationItem["estimate"]) == "__NSArrayM") {
+                        estimates = stationItem["estimate"]
+                    } else {
+                        var tempDictArray: [NSDictionary] = []
+                        tempDictArray += stationItem["estimate"] as NSDictionary
+                        estimates = tempDictArray
                     }
 
-                    
-                } else {
-                    for stationItem in item.value as [AnyObject] {
-                        var abbr = stationItem["abbreviation"] as NSDictionary
+                    for estimateItem in estimates as [AnyObject] {
+                        var estimateMin = estimateItem["minutes"] as NSDictionary
                         
-                        if (object_getClassName(stationItem["estimate"]) == "__NSArrayM") {
-                            for estimateItem in stationItem["estimate"] as [AnyObject] {
-                                var estimateMin = estimateItem["minutes"] as NSDictionary
-                                
-                                // Create the terminus and estimated arrival tuple and push into our results
-                                var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
-                                allResults += myTuple
-                            }
-                        }
+                        // Create the terminus and estimated arrival tuple and push into our results
+                        var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
+                        allResults += myTuple
                     }
                 }
+
             }
         }
-        
+
         // Sort the tuple array of termini and estimated arrival in ascending order
         allResults.sort{$0.1 < $1.1}
         

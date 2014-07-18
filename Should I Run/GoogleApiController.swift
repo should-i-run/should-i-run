@@ -27,22 +27,20 @@ class GoogleApiController: NSObject{
         var time = Int(NSDate().timeIntervalSince1970)
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
-            (data, response, error) in
-            
-            var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
+        var request = NSURLRequest(URL: url)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+            (response, data, error) in
+            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+//            var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
             
             if error {println("Error!!",error)}
-            
-            let jsonData: NSData = data
-            let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-            
+
+            let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
            
             self.convertGoogleToBart(jsonDict)
-            
+
         }
-        task.resume()
+        
     }
    
     func convertGoogleToBart(goog: NSDictionary) {

@@ -122,8 +122,8 @@ import Foundation
             println("reached here")
             dest.locationName = self.locName
             //37.784923, -122.408396
-            dest.lat = self.locLat
-            dest.lng = self.locLong
+            dest.latDest = self.locLat
+            dest.lngDest = self.locLong
             
             
         } else if segue.identifier == "AddSegue" {

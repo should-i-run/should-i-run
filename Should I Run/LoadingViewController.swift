@@ -34,13 +34,19 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func didReceiveGoogleResults(results: Array<String>) {
+        println("got back from google")
         self.distanceToStart = results[0].toInt()!
         self.departureStationName = results[1]
+       
         self.bartApiController.searchBartFor(self.departureStationName)
+        
+//        self.performSegueWithIdentifier("ResultsSegue", sender: self)
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
+        
+        println("preparing to segue")
 
         var destinationController = segue.destinationViewController as ResultViewController
         destinationController.distance = self.distanceToStart

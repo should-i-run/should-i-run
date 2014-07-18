@@ -35,7 +35,7 @@ class GoogleApiController: NSObject {
         task.resume()
     }
    
-    func convertGoogleToBart(goog: NSDictionary) ->  Array<String> {
+    func convertGoogleToBart(goog: NSDictionary) {
         var results :Array<String> = []
         
         var foundWalking : Bool = false
@@ -61,7 +61,7 @@ class GoogleApiController: NSObject {
                 
                 
                 var stn1 = bartLookup[fname1]
-                println("Bart Lookup for Station 1 is \(stn1)")
+
                 
                 var distance = steps[i].objectForKey("distance") as NSDictionary
                 
@@ -86,7 +86,6 @@ class GoogleApiController: NSObject {
         fname2 = name2.substringFromIndex(19).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
         var stn2 = bartLookup[fname2];
-        println("Bart Lookup for Station 2 is \(stn2)")
         
         
         results.append(stn2!.uppercaseString)
@@ -124,7 +123,7 @@ class GoogleApiController: NSObject {
             k++
             
         }
-        println(results)
-        return results
+
+        self.delegate?.didReceiveGoogleResults(results)
     }
 }

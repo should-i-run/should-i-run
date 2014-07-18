@@ -41,10 +41,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
 
         //Fetching data from Google and parsing it
-<<<<<<< HEAD
-        println("\(self.locationName) and \(self.lat) and \(self.lng)")
-        self.gApi.fetchGoogleData(self.lat!,long: self.lng!)
-=======
+
         println("\(self.locationName) and \(self.latDest) and \(self.lngDest)")
         
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
@@ -66,7 +63,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
         }
         
->>>>>>> Added current user location
 
     }
     

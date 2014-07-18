@@ -20,12 +20,13 @@ class GoogleApiController: NSObject {
         var time = Int(NSDate().timeIntervalSince1970)
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(lat),\(long)&destination=Berkeley&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
+        
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
             (data, response, error) in
             
             var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
             
-            if error {println("Error!!",error)}
+            if error {println("Error!!",error)} else { println("Got some data")}
             
             let jsonData: NSData = data
             let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
@@ -45,7 +46,7 @@ class GoogleApiController: NSObject {
         var name1:String = ""
         var fname1:String = ""
         
-        
+        println("Reached here")
         
         var inter : NSArray = goog.objectForKey("routes") as NSArray
         

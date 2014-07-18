@@ -39,7 +39,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     init () {
         super.init()
-        println("Inside locaion manager init")
+
 
         //ios 8 only
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
@@ -56,7 +56,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        println("Inside location Manager did Update")
+
 
         self.currentLocation2d = manager.location.coordinate
 

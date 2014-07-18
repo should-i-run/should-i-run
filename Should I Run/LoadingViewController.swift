@@ -33,49 +33,66 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     //Create controller to handle Google API queries
     var gApi : GoogleApiController = GoogleApiController()
+    var googleCalled = false
     
 
     override func viewDidLoad(){
+        
+        //set this class as the delegate for the api controllers
         self.gApi.delegate = self
         self.bartApiController.delegate = self
         
-
         //Fetching data from Google and parsing it
-
-        println("\(self.locationName) and \(self.latDest) and \(self.lngDest)")
-        
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             
             println("Current location is \(loc2d)")
             
-            latStart = Float(loc2d.latitude)
-            lngStart = Float(loc2d.longitude)
+            self.latStart = Float(loc2d.latitude)
+            self.lngStart = Float(loc2d.longitude)
             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
+            self.googleCalled = true
+            
+        } else {   self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+            
+            if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+                
+                self.latStart = Float(loc2d.latitude)
+                self.lngStart = Float(loc2d.longitude)
+                
+                if self.googleCalled == false {
+                    self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
+                    self.googleCalled = true
+                }
+            }
         }
-        
-        self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
-            
-            let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
-            
-            //create a 'region' with the user's location as the center, and set the map to that region
-            println("Current location is \(loc2d)")
-            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
-            
         }
         
 
     }
     
     func didReceiveGoogleResults(results: Array<String>) {
-        println("got back from google")
+
         self.distanceToStart = results[0].toInt()!
+
         self.departureStationName = results[1]
        
         self.bartApiController.searchBartFor(self.departureStationName)
         
-//        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+
         
     }
+    
+    // Conform to BartApiControllerProtocol by implementing this method
+    func didReceiveBartResults(results: [(String, Int)]) {
+        println("Gotback from bart")
+        println("Bart Results are \(results)")
+        self.bartResults = results
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        
+        
+        
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         
@@ -84,21 +101,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         var destinationController = segue.destinationViewController as ResultViewController
         destinationController.distance = self.distanceToStart
         destinationController.departureStationName = self.departureStationName
-//        destinationController.departures = self.bartResults
+        destinationController.departures = self.bartResults!
     }
 
     
-    // Conform to BartApiControllerProtocol by implementing this method
-    func didReceiveBartResults(results: [(String, Int)]) {
-        println("Gotback from bart")
-        println("Bart Results are \(results)")
-        self.bartResults = results
-//        self.performSegueWithIdentifier("ResultsSegue", sender: self)
-        
-        
 
-    }
-    
     
     
 }

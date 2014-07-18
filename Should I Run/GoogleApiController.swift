@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol GoogleAPIControllerProtocol {
-    func didReceiveGoogleResults(results: Array<String>)
+    func didReceiveGoogleResults(results: Array<String>!, error:String?)
 }
 
 
@@ -155,19 +155,20 @@ class GoogleApiController: NSObject{
             return results
         }
         
-
         
         if let bartStep:NSDictionary = findBart(steps)? {
             results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
             results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
             results += getAllEOLStations(allRoutes)
             
-            self.delegate?.didReceiveGoogleResults(results)
+            self.delegate?.didReceiveGoogleResults(results, error: nil)
 
         } else {
             //error, no bart
             //TODO: trigger segue back to main screen with error
             println("No bart")
+            self.delegate?.didReceiveGoogleResults(nil, error: "No bart")
+
         }
         
         

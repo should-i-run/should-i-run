@@ -77,16 +77,20 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
     }
     
-    func didReceiveGoogleResults(results: Array<String>) {
+    func didReceiveGoogleResults(results: Array<String>!, error: String?) {
+        if let err = error? {
+            self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
+            
+        } else {
 
-        self.distanceToStart = results[0].toInt()!
+            self.distanceToStart = results[0].toInt()!
 
-        self.departureStationName = results[1]
-        
-        self.googleResults = results 
-       
-        self.bartApiController.searchBartFor(self.departureStationName)
-        
+            self.departureStationName = results[1]
+            
+            self.googleResults = results 
+           
+            self.bartApiController.searchBartFor(self.departureStationName)
+        }
 
         
     }
@@ -94,7 +98,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [(String, Int)]) {
 
-        
         //filter bart results based on google's EOL stations
         var goog = self.googleResults!
         
@@ -107,12 +110,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     filteredBartResults += trip
                 }
             }
-            
-            
         }
 
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        
         
         
         
@@ -124,10 +126,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         // On segue, stop animating
         spinner.stopAnimating()
 
-        var destinationController = segue.destinationViewController as ResultViewController
-        destinationController.distance = self.distanceToStart
-        destinationController.departureStationName = self.departureStationName
-        destinationController.departures = self.bartResults!
+            var destinationController = segue.destinationViewController as ResultViewController
+            destinationController.distance = self.distanceToStart
+            destinationController.departureStationName = self.departureStationName
+            destinationController.departures = self.bartResults!
+        } 
     }
     
 }

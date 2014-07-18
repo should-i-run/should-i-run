@@ -19,6 +19,7 @@
 		2508AF751975C10800E48B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508AF741975C10800E48B37 /* AppDelegate.swift */; };
 		2536F76D1976EC7D00A2CE2B /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2536F76C1976EC7D00A2CE2B /* XMLReader.m */; };
 		2536F76F197702CA00A2CE2B /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2536F76E197702CA00A2CE2B /* UserLocationManager.swift */; };
+		283F960C1978952D00A554CD /* GoogleApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283F960B1978952D00A554CD /* GoogleApiController.swift */; };
 		289A05AC197767650044E6B7 /* bartLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289A05AB197767650044E6B7 /* bartLookup.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should I Run-Bridging-Header.h"; sourceTree = "<group>"; };
 		2536F76C1976EC7D00A2CE2B /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		2536F76E197702CA00A2CE2B /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
+		283F960B1978952D00A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleApiController.swift; path = ../GoogleApiController.swift; sourceTree = "<group>"; };
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 		2508AF3C1975B4CE00E48B37 /* Should I Run */ = {
 			isa = PBXGroup;
 			children = (
+				283F960B1978952D00A554CD /* GoogleApiController.swift */,
 				2508AF741975C10800E48B37 /* AppDelegate.swift */,
 				2508AF691975C07100E48B37 /* AddViewController.swift */,
 				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2508AF731975C07100E48B37 /* ResultTableViewController.swift in Sources */,
+				283F960C1978952D00A554CD /* GoogleApiController.swift in Sources */,
 				2508AF6F1975C07100E48B37 /* AddViewController.swift in Sources */,
 				2508AF711975C07100E48B37 /* MainTableViewController.swift in Sources */,
 				2508AF751975C10800E48B37 /* AppDelegate.swift in Sources */,

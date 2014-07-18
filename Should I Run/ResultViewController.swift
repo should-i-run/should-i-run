@@ -23,8 +23,8 @@ class ResultViewController: UIViewController {
     //result area things
     @IBOutlet var resultArea: UIView
     @IBOutlet var instructionLabel: UILabel
-    @IBOutlet var departureStationLabel: UILabel
-    @IBOutlet var destinationLabel: UILabel
+    @IBOutlet var alarmButton: UIButton
+
 
     
 
@@ -32,6 +32,8 @@ class ResultViewController: UIViewController {
     @IBOutlet var timeToNextTrainLabel: UILabel
     @IBOutlet var distanceToStationLabel: UILabel
     @IBOutlet var stationNameLabel: UILabel
+    @IBOutlet var departureStationLabel: UILabel
+    @IBOutlet var destinationLabel: UILabel
     
     @IBOutlet var timeRunningLabel: UILabel
     @IBOutlet var timeWalkingLabel: UILabel
@@ -102,6 +104,8 @@ class ResultViewController: UIViewController {
             let walkUIColor = colorize(0x90D4D4)
             
             self.resultArea.backgroundColor = walkUIColor
+            
+            self.alarmButton.hidden = false
 
         } else {
             
@@ -110,6 +114,7 @@ class ResultViewController: UIViewController {
             
             self.instructionLabel.text = "Run!"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
+            self.alarmButton.hidden = true
             
         }
 

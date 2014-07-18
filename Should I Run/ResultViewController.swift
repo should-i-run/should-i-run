@@ -82,10 +82,12 @@ class ResultViewController: UIViewController {
                     foundResult = true
                     destinationStation = departure.0
                     departureTime = departure.1
-                    //need to check that we don't go past the end of the array
+
                     //next one is the subsequent train
-                    followingDestinationStation = departures[index + 1].0
-                    followingDepartureTime = departures[index + 1].1
+                    if index + 1 < departures.count {
+                        followingDestinationStation = departures[index + 1].0
+                        followingDepartureTime = departures[index + 1].1
+                    }
                 }
             }
         }

@@ -22,6 +22,7 @@ class BartApiController: NSObject {
     
 
     func searchBartFor(searchAbbr: String) {
+
         
         // Fetch information for the BART api and convert the returned XML into a dictionary
         let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + searchAbbr + "&key=ZELI-U2UY-IBKQ-DT35")
@@ -34,7 +35,8 @@ class BartApiController: NSObject {
         
         // Create an array of tuples to store our destination stations (termini) and their estimated arrival time to our closest BART  station
         var allResults: [(String, Int)] = []
-        
+
+        println("about to iterate")
         // Iterate over our stations
         for item in stations {
             if (item.key as String == "etd") {
@@ -67,7 +69,11 @@ class BartApiController: NSObject {
         // Sort the tuple array of termini and estimated arrival in ascending order
         allResults.sort{$0.1 < $1.1}
         
+                println("before delegate call")
+        
         self.delegate?.didReceiveBartResults(allResults)
+        
+                        println("after delegate call")
     }
     
     

@@ -5,3 +5,7 @@ Should I Run.xcodeproj/xcuserdata/kylecraft.xcuserdatad/xcschemes/xcschememanage
 .DS_Store
 Should I Run.xcodeproj/project.xcworkspace/xcuserdata/LM.xcuserdatad/
 Should I Run.xcodeproj/xcuserdata/LM.xcuserdatad/
+*.orig
+*.playground
+.xcuserdatad
+xcuserdata

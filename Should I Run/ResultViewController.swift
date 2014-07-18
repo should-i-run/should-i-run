@@ -20,6 +20,9 @@ class ResultViewController: UIViewController {
     var departureStationName:String?
     var departures:[(String, Int)] = []
     
+    //alarm
+    var alarmTime = 0
+    
     //result area things
     @IBOutlet var resultArea: UIView
     @IBOutlet var instructionLabel: UILabel
@@ -99,6 +102,7 @@ class ResultViewController: UIViewController {
             self.resultArea.backgroundColor = walkUIColor
             
             self.alarmButton.hidden = false
+            self.alarmTime = departureTime - walkingTime
 
         } else {
             
@@ -139,7 +143,7 @@ class ResultViewController: UIViewController {
                 
                 var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
                 
-                dest.walkTime = self.timeWalkingLabel.text
+                dest.walkTime = self.alarmTime
                 
             }
         }

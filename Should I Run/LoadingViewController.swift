@@ -52,8 +52,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         //Fetching data from Google and parsing it
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             
-            println("Current location is \(loc2d)")
-            
             self.latStart = Float(loc2d.latitude)
             self.lngStart = Float(loc2d.longitude)
             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
@@ -123,14 +121,13 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         
-        // On segue, stop animating
-        spinner.stopAnimating()
+    // On segue, stop animating
+    spinner.stopAnimating()
 
-            var destinationController = segue.destinationViewController as ResultViewController
-            destinationController.distance = self.distanceToStart
-            destinationController.departureStationName = self.departureStationName
-            destinationController.departures = self.bartResults!
-        } 
-    }
-    
+    var destinationController = segue.destinationViewController as ResultViewController
+    destinationController.distance = self.distanceToStart
+    destinationController.departureStationName = self.departureStationName
+    destinationController.departures = self.bartResults!
+    } 
 }
+

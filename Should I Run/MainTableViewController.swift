@@ -16,6 +16,10 @@ import Foundation
     var colors:Array<UIColor> = []
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
+    var locName:String = ""
+    var locLat:Float = 0.0
+    var locLong:Float = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,30 +95,34 @@ import Foundation
         return cell
     }
     
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
+        
+        
+        self.locName = location["name"] as NSString
+        self.locLat = location["latitude"] as Float
+        self.locLong = location["longitude"] as Float
+        
+        self.performSegueWithIdentifier("LoadingSegue", sender: self)
+    }
+    
     func unwindToList(segue:UIStoryboardSegue)  {
         //reload the table on unwinding
             self.tableView.reloadData()
     
-    }
-    
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        
-        //kyle's API = AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg
-        //Neil's API = AIzaSyChLClMFZtSSmUSiP9fM333RLGms0w5ogc
-
-       
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         
         if segue.identifier == "LoadingSegue" {
 
-//            var dest: LoadingViewController = segue.destinationViewController as LoadingViewController
-
-//            var label: UILabel = sender.textLabel as UILabel //extra step to typecast so that we can get the text property.
-//            dest.locationName = "hey"
-//            dest.lat = label.lat???
-//            dest.lng = label.lng???
+            var dest: LoadingViewController = segue.destinationViewController as LoadingViewController
+            
+//            let location : AnyObject = userDefaults.objectForKey(String(row))
+            dest.locationName = self.locName
+            //37.784923, -122.408396
+            dest.lat = self.locLat
+            dest.lng = self.locLong
             
             
         } else if segue.identifier == "AddSegue" {

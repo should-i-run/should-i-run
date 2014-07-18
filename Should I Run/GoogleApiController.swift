@@ -16,9 +16,9 @@ class GoogleApiController: NSObject {
     
     var delegate : GoogleAPIControllerProtocol?
     
-    func fetchGoogleData() {
+    func fetchGoogleData(lat:Float, long:Float) {
         var time = Int(NSDate().timeIntervalSince1970)
-        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=San+Francisco&destination=Oakland&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
+        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(lat),\(long)&destination=Berkeley&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
             (data, response, error) in
@@ -30,7 +30,9 @@ class GoogleApiController: NSObject {
             let jsonData: NSData = data
             let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
             
+           
             self.convertGoogleToBart(jsonDict)
+            
         }
         task.resume()
     }
@@ -62,14 +64,13 @@ class GoogleApiController: NSObject {
                 
                 var stn1 = bartLookup[fname1]
 
-                
                 var distance = steps[i].objectForKey("distance") as NSDictionary
                 
-                
                 results.append(String(distance["value"].intValue))
-                
-                
                 results.append(stn1!.uppercaseString)
+                
+                
+                
             } else if i == steps.count {
                 foundWalking = true
                 println("No Valid Transit Directions")
@@ -97,12 +98,15 @@ class GoogleApiController: NSObject {
         while k < inter.count {
             
             var inter2 = inter[k].objectForKey("legs") as NSArray
+           
             var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
             
             foundWalking = false;
             
+           
             while(!foundWalking){
-                if (steps[i]? && steps[i].objectForKey("travel_mode")? && steps[i].objectForKey("travel_mode") as String == "WALKING"){
+                
+                if (i<steps.count && steps[i]? && steps[i].objectForKey("travel_mode")? && steps[i].objectForKey("travel_mode") as String == "WALKING"){
                     foundWalking = true
                 } else if i+1 >= steps.count {
                     foundWalking = true
@@ -110,6 +114,7 @@ class GoogleApiController: NSObject {
                     i++
                 }
             }
+           
             i++
             if i < steps.count {
                 name2 = steps[i].objectForKey("html_instructions") as String
@@ -123,7 +128,8 @@ class GoogleApiController: NSObject {
             k++
             
         }
-
+        
+        println("Google Results is \(results)")
         self.delegate?.didReceiveGoogleResults(results)
     }
 }

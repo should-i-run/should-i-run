@@ -16,6 +16,10 @@ class AddAlarmViewController: UIViewController {
         super.viewDidLoad()
 
         alarmPicker.setValue(300, forKey: "countDownDuration")
+        
+        // Set background color
+        self.view.backgroundColor = globalBackgroundColor
+
     }
 
     override func didReceiveMemoryWarning() {

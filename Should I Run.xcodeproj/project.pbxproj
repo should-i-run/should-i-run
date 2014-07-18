@@ -204,6 +204,7 @@
 				TargetAttributes = {
 					2508AF391975B4CE00E48B37 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = UZM8CJQFWX;
 					};
 					2508AF4B1975B4CE00E48B37 = {
 						CreatedOnToolsVersion = 6.0;
@@ -383,6 +384,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Should I Run/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Should I Run/Should I Run-Bridging-Header.h";
@@ -397,6 +399,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Should I Run/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Should I Run/Should I Run-Bridging-Header.h";

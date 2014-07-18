@@ -82,12 +82,13 @@ class ResultViewController: UIViewController {
                 //find the first one that is > running time. This is our result
                 if departure.1 > runningTime {
                     foundResult = true
-                    destinationStation = departure.0
+                    println("departure is \(departure)")
+                    destinationStation = bartLookupReverse[departure.0.lowercaseString]!
                     departureTime = departure.1
 
                     //next one is the subsequent train
                     if index + 1 < departures.count {
-                        followingDestinationStation = departures[index + 1].0
+                        followingDestinationStation = bartLookupReverse[departures[index + 1].0.lowercaseString]!
                         followingDepartureTime = departures[index + 1].1
                     }
                 }
@@ -123,7 +124,7 @@ class ResultViewController: UIViewController {
         self.distanceToStationLabel.text = String(distance!)
         self.destinationLabel.text = "towards \(destinationStation)"
         
-        self.stationNameLabel.text = "meters to \(departureStationName) station"
+        self.stationNameLabel.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]) station"
         self.stationNameLabel.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel.text = String(runningTime)
         self.timeWalkingLabel.text = String(walkingTime)

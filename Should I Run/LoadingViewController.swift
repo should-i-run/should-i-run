@@ -8,61 +8,56 @@
 
 import UIKit
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol {
     var locationName:String?
     
     var bartResults: [(String, Int)]?
+    var googleResults : [String]?
+    
+    var distanceToStart : Int = 0
+    var departureStationName: String = ""
     
     // Create controller to handle BART API queries
     var bartApiController: BartApiController = BartApiController()
     
+    //Create controller to handle Google API queries
+    var gApi : GoogleApiController = GoogleApiController()
+    
 
-    override func viewDidLoad() {
-        
-        resultsFromGoogle()
-    }
-
-    func resultsFromGoogle() {
-        
-        // Set delegate to this class (we are delegating the controller's actions to this class)
+    override func viewDidLoad(){
+        self.gApi.delegate = self
         self.bartApiController.delegate = self
         
-        // Call didReceiveBartResults method below via delegate relationship
-        self.bartApiController.searchBartFor("cols")
-        
-        println(self.bartResults)
+        //Fetching data from Google and parsing it
+        self.gApi.fetchGoogleData()
 
-        
-        resultsFromBart()
     }
     
-    
-    func resultsFromBart() {
- 
-      
-        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+    func didReceiveGoogleResults(results: Array<String>) {
+        self.distanceToStart = results[0].toInt()!
+        self.departureStationName = results[1]
+        self.bartApiController.searchBartFor(self.departureStationName)
         
+    }
+     // Conform to BartApiControllerProtocol by implementing this method
+    func didReceiveBartResults(results: [(String, Int)]) {
+       
+        self.bartResults = results
+        
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         println("preparing for segue")
         var destinationController = segue.destinationViewController as ResultViewController
-        destinationController.distance = 1000
-        destinationController.departureStationName = "Powell Street"
-        destinationController.departures = [("PITT", 3), ("DBLN", 6), ("FRANCE", 12), ("London", 24), ("Kiev", 30)]
-        
+        destinationController.distance = self.distanceToStart
+        destinationController.departureStationName = self.departureStationName
+//        destinationController.departures = self.bartResults
     }
 
     
-    // Conform to BartApiControllerProtocol by implementing this method
-    func didReceiveBartResults(results: [(String, Int)]) {
-        self.bartResults = results
-        
-        dispatch_async(dispatch_get_main_queue(), {
-            // Add any code that should run asyncronously while waiting for data
-            // i.e. "to move back in to the main thread, and reload the table view."
-            })
-    }
+    
+    
     
 }

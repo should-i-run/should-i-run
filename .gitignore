@@ -1,5 +1,6 @@
 xcdebugger
 Should I Run.xcodeproj/project.xcworkspace/xcuserdata/kylecraft.xcuserdatad/UserInterfaceState.xcuserstate
+Should I Run.xcodeproj/project.xcworkspace/xcuserdata/neil.xcuserdatad/UserInterfaceState.xcuserstate
 Should I Run.xcodeproj/xcuserdata/kylecraft.xcuserdatad/xcschemes/Should I Run.xcscheme
 Should I Run.xcodeproj/xcuserdata/kylecraft.xcuserdatad/xcschemes/xcschememanagement.plist
 .DS_Store
@@ -9,3 +10,4 @@ Should I Run.xcodeproj/xcuserdata/LM.xcuserdatad/
 *.playground
 .xcuserdatad
 xcuserdata
+*.*xcuserstate*

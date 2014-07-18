@@ -31,6 +31,8 @@ class ResultViewController: UIViewController {
     //detial area things
     @IBOutlet var timeToNextTrainLabel: UILabel
     @IBOutlet var distanceToStationLabel: UILabel
+    @IBOutlet var stationNameLabel: UILabel
+    
     @IBOutlet var timeRunningLabel: UILabel
     @IBOutlet var timeWalkingLabel: UILabel
     
@@ -42,7 +44,15 @@ class ResultViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        println("in results view controller")
+        
+        func colorize (hex: Int, alpha: Double = 1.0) -> UIColor {
+            let red = Double((hex & 0xFF0000) >> 16) / 255.0
+            let green = Double((hex & 0xFF00) >> 8) / 255.0
+            let blue = Double((hex & 0xFF)) / 255.0
+            var color: UIColor = UIColor( red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha:CGFloat(alpha) )
+            return color
+        }
+
         super.viewDidLoad()
         
 
@@ -82,22 +92,43 @@ class ResultViewController: UIViewController {
 
         
         //result area things
-//        resultArea: UIView
-//        instructionLabel: UILabel
-        departureStationLabel.text = departureStationName
-        destinationLabel.text = "towards \(destinationStation)"
+            // run or not?
+        if departureTime - self.stationTime <= walkingTime {
+            self.instructionLabel.text = "Nah, take it easy"
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
+            
+            let walkUIColor = colorize(0x90D4D4)
+            
+            self.resultArea.backgroundColor = walkUIColor
+
+        } else {
+            
+            let runUIColor = colorize(0xF05A28)
+            self.resultArea.backgroundColor = runUIColor
+            
+            self.instructionLabel.text = "Run!"
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
+            
+        }
+
+
+        
         
         
         //detial area things
-        timeToNextTrainLabel.text = String(departureTime)
-        distanceToStationLabel.text = String(distance!)
-        timeRunningLabel.text = String(runningTime)
-        timeWalkingLabel.text = String(walkingTime)
+        self.timeToNextTrainLabel.text = String(departureTime)
+        self.distanceToStationLabel.text = String(distance!)
+        self.destinationLabel.text = "towards \(destinationStation)"
+        
+        self.stationNameLabel.text = "meters to \(departureStationName) station"
+        self.stationNameLabel.adjustsFontSizeToFitWidth = true
+        self.timeRunningLabel.text = String(runningTime)
+        self.timeWalkingLabel.text = String(walkingTime)
         
         
         //following departure area things
-        followingDepartureLabel.text = "\(followingDepartureTime) minutes"
-        followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
+        self.followingDepartureLabel.text = "\(followingDepartureTime)"
+        self.followingDepartureDestinationLabel.text = "to \(followingDestinationStation)"
         
         }
 

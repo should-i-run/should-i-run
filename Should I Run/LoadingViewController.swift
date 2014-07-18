@@ -39,17 +39,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.bartApiController.searchBartFor(self.departureStationName)
         
     }
-     // Conform to BartApiControllerProtocol by implementing this method
-    func didReceiveBartResults(results: [(String, Int)]) {
-       
-        self.bartResults = results
-        
-        self.performSegueWithIdentifier("ResultsSegue", sender: self)
-        
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
-        println("preparing for segue")
+
         var destinationController = segue.destinationViewController as ResultViewController
         destinationController.distance = self.distanceToStart
         destinationController.departureStationName = self.departureStationName
@@ -57,6 +49,16 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
 
     
+    // Conform to BartApiControllerProtocol by implementing this method
+    func didReceiveBartResults(results: [(String, Int)]) {
+        println("Gotback from bart")
+        self.bartResults = results
+        
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        
+        
+
+    }
     
     
     

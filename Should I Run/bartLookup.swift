@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Should I Run. All rights reserved.
 //
 
-import Foundation
-
 var bartLookup : [String : String] = ["12th St. Oakland City Center" : "12th",
     "16th St. Mission":"16th",
     "19th St. Oakland":"19th",

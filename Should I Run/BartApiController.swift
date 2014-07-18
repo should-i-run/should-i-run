@@ -28,6 +28,7 @@ class BartApiController: NSObject {
         let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + searchAbbr + "&key=ZELI-U2UY-IBKQ-DT35")
         let data = NSMutableData.dataWithContentsOfURL(url, options: NSDataReadingOptions.DataReadingUncached, error: nil)
         let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+
         let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
         // Trim off unneeded data inside the dictionary
@@ -42,23 +43,30 @@ class BartApiController: NSObject {
                 // We need to check if one result or multiple results exist. If we have multiple results, we'll do a loop. Otherwise, we can access terminus abbreviation and estimated time directly
                 if (item.value["abbreviation"]) {
                     var abbr = item.value["abbreviation"] as NSDictionary
-                    for estimateItem in item.value["estimate"] as [AnyObject] {
-                        var estimateMin = estimateItem["minutes"] as NSDictionary
-                        
-                        // Create the terminus and estimated arrival tuple and push into our results
-                        var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
-                        allResults += myTuple
-                    }
-                    
-                } else {
-                    for stationItem in item.value as [AnyObject] {
-                        var abbr = stationItem["abbreviation"] as NSDictionary
-                        for estimateItem in stationItem["estimate"] as [AnyObject] {
+
+                    if (object_getClassName(item.value["estimate"]) == "__NSArrayM") {
+                        for estimateItem in item.value["estimate"] as [AnyObject] {
                             var estimateMin = estimateItem["minutes"] as NSDictionary
                             
                             // Create the terminus and estimated arrival tuple and push into our results
                             var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
                             allResults += myTuple
+                        }
+                    }
+
+                    
+                } else {
+                    for stationItem in item.value as [AnyObject] {
+                        var abbr = stationItem["abbreviation"] as NSDictionary
+                        
+                        if (object_getClassName(stationItem["estimate"]) == "__NSArrayM") {
+                            for estimateItem in stationItem["estimate"] as [AnyObject] {
+                                var estimateMin = estimateItem["minutes"] as NSDictionary
+                                
+                                // Create the terminus and estimated arrival tuple and push into our results
+                                var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
+                                allResults += myTuple
+                            }
                         }
                     }
                 }

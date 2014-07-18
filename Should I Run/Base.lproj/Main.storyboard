@@ -258,14 +258,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="hmx-zy-7aK">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="olt-oh-zgo">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="14E-12-rly"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Bs2-Pa-RyS">
                             <connections>
-                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="6mb-y9-Pbw"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="plain" id="Bs2-Pa-RyS">
-                            <connections>
-                                <action selector="setAlarm:" destination="UkY-Fi-fDv" id="AMy-KR-3iM"/>
                                 <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="TQB-IX-NaG"/>
                             </connections>
                         </barButtonItem>

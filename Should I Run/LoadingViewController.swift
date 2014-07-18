@@ -10,6 +10,8 @@ import UIKit
 
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol {
     var locationName:String?
+    var lat : Float?
+    var lng : Float?
     
     var bartResults: [(String, Int)]?
     var googleResults : [String]?
@@ -28,8 +30,10 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.gApi.delegate = self
         self.bartApiController.delegate = self
         
+
         //Fetching data from Google and parsing it
-        self.gApi.fetchGoogleData()
+        println("\(self.locationName) and \(self.lat) and \(self.lng)")
+        self.gApi.fetchGoogleData(self.lat!,long: self.lng!)
 
     }
     
@@ -58,9 +62,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [(String, Int)]) {
         println("Gotback from bart")
+        println("Bart Results are \(results)")
         self.bartResults = results
-        
-        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+//        self.performSegueWithIdentifier("ResultsSegue", sender: self)
         
         
 

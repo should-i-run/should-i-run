@@ -118,8 +118,6 @@ import Foundation
 
             var dest: LoadingViewController = segue.destinationViewController as LoadingViewController
             
-//            let location : AnyObject = userDefaults.objectForKey(String(row))
-            println("reached here")
             dest.locationName = self.locName
             //37.784923, -122.408396
             dest.latDest = self.locLat

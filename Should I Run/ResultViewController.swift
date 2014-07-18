@@ -80,7 +80,7 @@ class ResultViewController: UIViewController {
             if foundResult == false {
                 //subtract the estimated station time from it
                 //find the first one that is > running time. This is our result
-                if departure.1 >= runningTime {
+                if departure.1 > runningTime {
                     foundResult = true
                     destinationStation = departure.0
                     departureTime = departure.1
@@ -97,7 +97,7 @@ class ResultViewController: UIViewController {
         
         //result area things
             // run or not?
-        if departureTime <= walkingTime {
+        if departureTime >= walkingTime {
             self.instructionLabel.text = "Nah, take it easy"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             

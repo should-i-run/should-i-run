@@ -14,6 +14,10 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var latDest : Float?
     var lngDest : Float?
     
+    var latStart:Float = 0.00
+    var lngStart:Float = 0.00
+    
+    
     
     var bartResults: [(String, Int)]?
     var googleResults : [String]?
@@ -66,7 +70,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 }
             }
         }
-             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+//             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
 
     }
     

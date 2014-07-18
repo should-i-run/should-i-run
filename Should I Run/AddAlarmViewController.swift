@@ -34,6 +34,7 @@ class AddAlarmViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if sender.valueForKey("title") as NSString == "Save" {
             self.setAlarm(sender)
+            println("alarm saved")
         }
     }
 }

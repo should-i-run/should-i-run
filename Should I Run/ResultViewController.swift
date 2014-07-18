@@ -131,5 +131,18 @@ class ResultViewController: UIViewController {
     func unwindToList(segue:UIStoryboardSegue)  {
 
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        
+        if segue.identifier {
+            if segue.identifier == "AlarmSegue" {
+                
+                var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
+                
+                dest.walkTime = self.timeWalkingLabel.text
+                
+            }
+        }
+    }
 }
 

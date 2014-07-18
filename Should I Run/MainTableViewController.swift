@@ -31,6 +31,12 @@ import Foundation
         
 
          self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        // Navigation and background colors
+//        self.navigationController.navigationBar.barTintColor = globalNavigationBarColor
+        self.navigationController.navigationBar.tintColor = globalTintColor
+        self.view.backgroundColor = globalBackgroundColor
+        self.navigationController.navigationBar.barStyle = globalBarStyle
     }
     
     override func didReceiveMemoryWarning() {

@@ -38,6 +38,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
     override func viewDidLoad(){
         
+        // Set background color
+        self.view.backgroundColor = globalBackgroundColor
+
         //set this class as the delegate for the api controllers
         self.gApi.delegate = self
         self.bartApiController.delegate = self
@@ -67,7 +70,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
         }
         
-
     }
     
     func didReceiveGoogleResults(results: Array<String>) {

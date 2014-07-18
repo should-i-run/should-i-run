@@ -9,13 +9,13 @@
 import UIKit
 
 class AddAlarmViewController: UIViewController {
-
-    @IBOutlet var alarmDatePicker: UIDatePicker
+    
+    @IBOutlet var alarmPicker: UIDatePicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        alarmDatePicker.setValue(500, forKey: "countDownDuration")
+        alarmPicker.setValue(300, forKey: "countDownDuration")
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,14 +23,17 @@ class AddAlarmViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func saveAlarm(sender: UIButton) {
+    @IBAction func setAlarm(sender: AnyObject) {
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
-        
         localNotification.alertBody = "Run!"
-        localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmDatePicker.countDownDuration)
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmPicker.countDownDuration)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 
-
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if sender.valueForKey("title") as NSString == "Save" {
+            self.setAlarm(sender)
+        }
+    }
 }

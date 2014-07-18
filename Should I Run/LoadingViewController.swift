@@ -103,8 +103,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             
         }
-
-        
+        println("bart results are\(results)" )
+        println("filtered bart results are\(filteredBartResults)" )
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
         

@@ -33,8 +33,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     
     let locationManager = SharedUserLocation
-    
-    
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +65,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-
-
-
-    
     @IBAction func tapOnMap(sender: UITapGestureRecognizer) {
 
         var tapLocation: CGPoint = sender.locationInView(self.mapView)
@@ -88,13 +82,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         marker.coordinate = location2d
         self.mapView.addAnnotation(marker)
         self.currentAnnotation = marker
-        
-
     }
-    
-
-    
-    
 
     override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
         if (sender as? UIBarButtonItem != self.saveBarButton) {

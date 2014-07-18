@@ -116,9 +116,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
-        
-        println("preparing to segue")
-
         var destinationController = segue.destinationViewController as ResultViewController
         destinationController.distance = self.distanceToStart
         destinationController.departureStationName = self.departureStationName

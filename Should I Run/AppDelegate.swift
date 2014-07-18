@@ -41,9 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        println("did receive local notification in AppDelegate")
         var state: UIApplicationState = application.applicationState;
-        println(state.hashValue)
         
         // This looks like "if state == UIApplicationStateActive" in Obj-C
         if state.hashValue == 0 {

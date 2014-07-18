@@ -49,6 +49,16 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
 
     
+    // Conform to BartApiControllerProtocol by implementing this method
+    func didReceiveBartResults(results: [(String, Int)]) {
+        println("Gotback from bart")
+        self.bartResults = results
+        
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        
+        
+
+    }
     
     
     

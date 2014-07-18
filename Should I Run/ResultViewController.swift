@@ -107,6 +107,8 @@ class ResultViewController: UIViewController {
             self.resultArea.backgroundColor = runUIColor
             
             self.instructionLabel.text = "Run!"
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
+            
         }
 
 

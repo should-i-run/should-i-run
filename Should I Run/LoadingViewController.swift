@@ -32,7 +32,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
 
         //Fetching data from Google and parsing it
-        println("\(self.locationName) and \(self.lat)")
+        println("\(self.locationName) and \(self.lat) and \(self.lng)")
         self.gApi.fetchGoogleData(self.lat!,long: self.lng!)
 
     }

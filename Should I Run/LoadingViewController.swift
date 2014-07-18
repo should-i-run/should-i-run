@@ -13,9 +13,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var locationName:String?
     var latDest : Float?
     var lngDest : Float?
-    
-    var latStart : Float?
-    var lngStart : Float?
+    //37.784228, -122.408632
+    var latStart : Float = 37.784228
+    var lngStart : Float = -122.408632
     
     
     var bartResults: [(String, Int)]?
@@ -49,24 +49,24 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             self.latStart = Float(loc2d.latitude)
             self.lngStart = Float(loc2d.longitude)
-            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
+            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
             self.googleCalled = true
             
         } else {   self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
             
-            if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
-                
-                self.latStart = Float(loc2d.latitude)
-                self.lngStart = Float(loc2d.longitude)
-                
-                if self.googleCalled == false {
-                    self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
-                    self.googleCalled = true
+                if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+                    
+                    self.latStart = Float(loc2d.latitude)
+                    self.lngStart = Float(loc2d.longitude)
+                    
+                    if self.googleCalled == false {
+                        self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+                        self.googleCalled = true
+                    }
                 }
             }
         }
-        }
-        
+             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
 
     }
     

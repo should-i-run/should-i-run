@@ -23,11 +23,9 @@ class GoogleApiController: NSObject{
     var delegate : GoogleAPIControllerProtocol?
     
     func fetchGoogleData(latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
-        println("Starting Google Function")
         
-      
-        
-//        println("Current location is \(loc2d)")
+        println("fetch google data called")
+
         
         var time = Int(NSDate().timeIntervalSince1970)
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
@@ -38,7 +36,7 @@ class GoogleApiController: NSObject{
             
             var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
             
-            if error {println("Error!!",error)} else { println("Got some data")}
+            if error {println("Error!!",error)}
             
             let jsonData: NSData = data
             let jsonDict = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
@@ -57,8 +55,6 @@ class GoogleApiController: NSObject{
         var i:Int  = 0
         var name1:String = ""
         var fname1:String = ""
-        
-        println("Reached here")
         
         var inter : NSArray = goog.objectForKey("routes") as NSArray
         
@@ -142,7 +138,7 @@ class GoogleApiController: NSObject{
             
         }
         
-        println("Google Results is \(results)")
+        println("Google Results are \(results)")
         self.delegate?.didReceiveGoogleResults(results)
     }
 }

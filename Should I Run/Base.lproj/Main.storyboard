@@ -45,7 +45,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="3gf-Kz-iQM" kind="push" identifier="LoadingSegue" id="kYc-xc-mjX"/>
+                        <segue destination="3gf-Kz-iQM" kind="push" identifier="LoadingSegue" id="gL2-fa-kE4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCN-DA-DIy" userLabel="First Responder" sceneMemberID="firstResponder"/>

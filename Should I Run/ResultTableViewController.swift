@@ -102,13 +102,17 @@ class ResultTableViewController: UITableViewController {
 
     // #pragma mark - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject?) {
-//        // Get the new view controller using [segue destinationViewController].
-//        // Pass the selected object to the new view controller.
-//        var controller = segue.destinationViewController as ResultTableViewController
-//        controller.locationName = ""
-//    }
+    func unwindToList(segue:UIStoryboardSegue)  {
+        //reload the table on unwinding
+        self.tableView.reloadData()
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        // Get the new view controller using segue.destinationViewController.
+        println("here")
+        // Pass the selected object to the new view controller.
+    }
 
 
 }

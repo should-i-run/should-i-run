@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E4875E41978445E0079C53E /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4875E31978445E0079C53E /* AddAlarmViewController.swift */; };
 		2508AF451975B4CE00E48B37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2508AF431975B4CE00E48B37 /* Main.storyboard */; };
 		2508AF471975B4CE00E48B37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2508AF461975B4CE00E48B37 /* Images.xcassets */; };
 		2508AF531975B4CE00E48B37 /* Should_I_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508AF521975B4CE00E48B37 /* Should_I_RunTests.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E4875E31978445E0079C53E /* AddAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		2508AF3A1975B4CE00E48B37 /* Should I Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Should I Run.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2508AF3E1975B4CE00E48B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2508AF441975B4CE00E48B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				2508AF6D1975C07100E48B37 /* Place.swift */,
 				2508AF6E1975C07100E48B37 /* ResultTableViewController.swift */,
 				2508AF431975B4CE00E48B37 /* Main.storyboard */,
+				1E4875E31978445E0079C53E /* AddAlarmViewController.swift */,
 				2508AF461975B4CE00E48B37 /* Images.xcassets */,
 				2508AF3D1975B4CE00E48B37 /* Supporting Files */,
 				2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */,
@@ -256,6 +259,7 @@
 			files = (
 				2508AF731975C07100E48B37 /* ResultTableViewController.swift in Sources */,
 				2508AF6F1975C07100E48B37 /* AddViewController.swift in Sources */,
+				1E4875E41978445E0079C53E /* AddAlarmViewController.swift in Sources */,
 				2508AF711975C07100E48B37 /* MainTableViewController.swift in Sources */,
 				252ADD881978357600ED0C3F /* ResultViewController.swift in Sources */,
 				2508AF751975C10800E48B37 /* AppDelegate.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
@@ -163,6 +163,15 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKn-3F-unA">
+                                        <rect key="frame" x="232" y="145" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="UkY-Fi-fDv" kind="push" id="GqH-Qf-3FW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.78431372549019607" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -216,6 +225,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wny-FK-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2145" y="220"/>
+        </scene>
+        <!--Add Alarm View Controller-->
+        <scene sceneID="0cD-t1-03O">
+            <objects>
+                <viewController id="UkY-Fi-fDv" customClass="AddAlarmViewController" customModule="Should_I_Run" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sIK-xg-Gqa"/>
+                        <viewControllerLayoutGuide type="bottom" id="fSE-mq-6iZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zfS-b1-tTb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
+                                <rect key="frame" x="20" y="135" width="147" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
+                                <rect key="frame" x="0.0" y="166" width="320" height="180"/>
+                                <date key="date" timeIntervalSinceReferenceDate="427344271.65988499">
+                                    <!--2014-07-18 02:44:31 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hmx-zy-7aK">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="olt-oh-zgo">
+                            <connections>
+                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="bcL-rg-q6x"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Bs2-Pa-RyS">
+                            <connections>
+                                <action selector="saveAlarm:" destination="UkY-Fi-fDv" id="L0b-U0-M07"/>
+                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="k56-Z4-gRr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="alarmDatePicker" destination="yog-Os-ERm" id="kGl-lW-sfa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ru9-wH-Bap" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="s5l-Yx-r0J" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2697" y="228"/>
         </scene>
         <!--Add Destination-->
         <scene sceneID="Cna-dX-z1h">

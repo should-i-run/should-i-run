@@ -71,6 +71,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dn2-ck-XGM">
+                                <rect key="frame" x="150" y="302" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -86,6 +89,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="spinner" destination="dn2-ck-XGM" id="iG1-3l-GXH"/>
                         <segue destination="8qB-Tw-PfR" kind="push" identifier="ResultsSegue" id="PoU-Ol-HGj"/>
                     </connections>
                 </viewController>

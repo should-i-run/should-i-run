@@ -105,15 +105,16 @@ import Foundation
         var time = Int(NSDate().timeIntervalSince1970)
 
     
-        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=San+Francisco&destination=Oakland&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&provideRouteAlternatives=true")
+        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=San+Francisco&destination=Oakland&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
             (data, response, error) in
             
          var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
-         println("Error!!",error)
-//        println("Data returned is")
-//         println(dataFromGoogle)
+            
+          if error {
+            println("Error!!",error)
+         }
             
             
 
@@ -154,17 +155,15 @@ import Foundation
                 name1 = steps[i].objectForKey("html_instructions") as String
                 fname1 = name1.substringFromIndex(7).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
               
-//                    println("Station name is \(name1)")
-                    println("Only Station name is \(fname1)")
+
                 var stn1 = bartLookup[fname1]
                 println("Bart Lookup for Station 1 is \(stn1)")
                 
                 var distance = steps[i].objectForKey("distance") as NSDictionary
     
-                var value = distance["value"].intValue
                 
-                results.append(String(value))
-//                println("Results array is \(results)")
+                results.append(String(distance["value"].intValue))
+
                 
                 results.append(stn1!.uppercaseString)
             } else if i == steps.count {
@@ -181,20 +180,17 @@ import Foundation
         var name2:String = steps[i].objectForKey("html_instructions") as String
         
         fname2 = name2.substringFromIndex(19).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-         println("Only Station 2 name is \(fname2)")
         
         var stn2 = bartLookup[fname2];
         println("Bart Lookup for Station 2 is \(stn2)")
 
         
-//        results.append(name1) //Name of station walking to
         results.append(stn2!.uppercaseString)
         
-          println("Results array after now is \(results)")
         
         i = 0;
         var k: Int = 1
-        println("inter count is \(inter.count)")
+        
         while k < inter.count {
 
           var inter2 = inter[k].objectForKey("legs") as NSArray
@@ -211,12 +207,10 @@ import Foundation
                 i++
             }
           }
-          println("I is \(i)")
          i++
             if i < steps.count {
                 name2 = steps[i].objectForKey("html_instructions") as String
                 name2 = name2.substringFromIndex(19)
-                println("We are here with \(name2)")
             }
             
             if bartLookup[name2]{

@@ -138,7 +138,7 @@ class ResultViewController: UIViewController {
     
     func unwindToList(segue:UIStoryboardSegue)  {
         //reload the view on unwinding
-        self.loadView()
+        
     }
 }
 

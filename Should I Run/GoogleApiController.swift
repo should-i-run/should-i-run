@@ -23,10 +23,7 @@ class GoogleApiController: NSObject{
     var delegate : GoogleAPIControllerProtocol?
     
     func fetchGoogleData(latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
-        
-        println("fetch google data called")
-
-        
+                
         var time = Int(NSDate().timeIntervalSince1970)
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         

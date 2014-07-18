@@ -75,6 +75,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.distanceToStart = results[0].toInt()!
 
         self.departureStationName = results[1]
+        
+        self.googleResults = results 
        
         self.bartApiController.searchBartFor(self.departureStationName)
         
@@ -84,9 +86,26 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [(String, Int)]) {
-        println("Gotback from bart")
-        println("Bart Results are \(results)")
-        self.bartResults = results
+
+        
+        //filter bart results based on google's EOL stations
+        var goog = self.googleResults!
+        
+        var filteredBartResults:[(String, Int)] = []
+        
+        for var i = 2; i < goog.count; ++i {
+            var stationName = goog[i]
+            for trip in results {
+                if trip.0 == stationName {
+                    filteredBartResults += trip
+                }
+            }
+            
+            
+        }
+
+        
+        self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
         
         

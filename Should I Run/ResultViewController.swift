@@ -82,6 +82,7 @@ class ResultViewController: UIViewController {
                 //find the first one that is > running time. This is our result
                 if departure.1 > runningTime {
                     foundResult = true
+                    println("departure is \(departure)")
                     destinationStation = departure.0
                     departureTime = departure.1
 
@@ -127,7 +128,7 @@ class ResultViewController: UIViewController {
         self.distanceToStationLabel.text = String(distance!)
         self.destinationLabel.text = "towards \(destinationStation)"
         
-        self.stationNameLabel.text = "meters to \(departureStationName) station"
+        self.stationNameLabel.text = "meters to \(departureStationName!) station"
         self.stationNameLabel.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel.text = String(runningTime)
         self.timeWalkingLabel.text = String(walkingTime)

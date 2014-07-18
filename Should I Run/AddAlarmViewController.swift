@@ -30,7 +30,7 @@ class AddAlarmViewController: UIViewController {
     @IBAction func setAlarm(sender: AnyObject) {
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.alertBody = "Run!"
+        localNotification.alertBody = "Should I Run?"
         localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmPicker.countDownDuration)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
@@ -38,7 +38,6 @@ class AddAlarmViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if sender.valueForKey("title") as NSString == "Save" {
             self.setAlarm(sender)
-            println("alarm saved")
         }
     }
 }

@@ -130,8 +130,7 @@ class ResultViewController: UIViewController {
     }
     
     func unwindToList(segue:UIStoryboardSegue)  {
-        //reload the view on unwinding
-        println("unwindToList called in ResultView")
+
     }
 }
 

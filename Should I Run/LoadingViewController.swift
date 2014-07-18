@@ -67,13 +67,14 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func didReceiveGoogleResults(results: Array<String>) {
-        println("got back from google")
+
         self.distanceToStart = results[0].toInt()!
+        println("google says the departure station is\(results[1])")
         self.departureStationName = results[1]
        
         self.bartApiController.searchBartFor(self.departureStationName)
         
-//        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+
         
     }
     
@@ -84,7 +85,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         var destinationController = segue.destinationViewController as ResultViewController
         destinationController.distance = self.distanceToStart
         destinationController.departureStationName = self.departureStationName
-//        destinationController.departures = self.bartResults
+        destinationController.departures = self.bartResults!
     }
 
     
@@ -93,7 +94,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         println("Gotback from bart")
         println("Bart Results are \(results)")
         self.bartResults = results
-//        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
         
         
 

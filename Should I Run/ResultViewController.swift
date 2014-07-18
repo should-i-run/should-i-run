@@ -69,8 +69,8 @@ class ResultViewController: UIViewController {
         //logic for when to run
         
         //use distance to generate range of times - running time, walking time
-        var walkingTime:Int = distance!/walkingSpeed
-        var runningTime:Int = distance!/runningSpeed
+        var walkingTime:Int = (distance!/walkingSpeed) + 1
+        var runningTime:Int = (distance!/runningSpeed) + 1
         
         
         var foundResult = false

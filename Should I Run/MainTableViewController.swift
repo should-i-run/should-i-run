@@ -23,10 +23,11 @@ import Foundation
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))
-        self.colors.append(UIColor(red: CGFloat(226.0/255), green: CGFloat(122.0/255), blue: CGFloat(63.0/255), alpha: CGFloat(1.0)))
+        
         self.colors.append(UIColor(red: CGFloat(239.0/255), green: CGFloat(201.0/255), blue: CGFloat(76.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(69.0/255), green: CGFloat(178.0/255), blue: CGFloat(157.0/255), alpha: CGFloat(1.0)))
+        self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))
+        self.colors.append(UIColor(red: CGFloat(226.0/255), green: CGFloat(122.0/255), blue: CGFloat(63.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(51.0/255), green: CGFloat(77.0/255), blue: CGFloat(92.0/255), alpha: CGFloat(1.0)))
         
 
@@ -109,7 +110,13 @@ import Foundation
         self.locLat = location["latitude"] as Float
         self.locLong = location["longitude"] as Float
         
-        self.performSegueWithIdentifier("LoadingSegue", sender: self)
+        if self.locName == "Add Destination" {
+            self.performSegueWithIdentifier("AddSegue", sender: self)
+        } else {
+            self.performSegueWithIdentifier("LoadingSegue", sender: self)
+        }
+        
+        
     }
     
     func unwindToList(segue:UIStoryboardSegue)  {

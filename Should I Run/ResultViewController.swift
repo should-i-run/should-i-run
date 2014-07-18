@@ -75,7 +75,6 @@ class ResultViewController: UIViewController {
                 //find the first one that is > running time. This is our result
                 if departure.1 > runningTime {
                     foundResult = true
-                    println("departure is \(departure)")
                     destinationStation = bartLookupReverse[departure.0.lowercaseString]!
                     departureTime = departure.1
 
@@ -125,7 +124,7 @@ class ResultViewController: UIViewController {
         
         //following departure area things
         self.followingDepartureLabel.text = "\(followingDepartureTime)"
-        self.followingDepartureDestinationLabel.text = "to \(followingDestinationStation)"
+        self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
         
     }
     

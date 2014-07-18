@@ -46,94 +46,133 @@ class GoogleApiController: NSObject{
     func convertGoogleToBart(goog: NSDictionary) {
         var results :Array<String> = []
         
-        var foundWalking : Bool = false
-        var i:Int  = 0
+        var walkingStepIndex = 0
+        
+        var foundBart : Bool = false
+        var i:Int  = 1 //start at 1 because the first step is always walking
         var name1:String = ""
         var fname1:String = ""
         
-        var inter : NSArray = goog.objectForKey("routes") as NSArray
+        var allRoutes : NSArray = goog.objectForKey("routes") as NSArray
         
-        var inter2 : NSArray = inter[0].objectForKey("legs") as NSArray
+        var inter2 : NSArray = allRoutes[0].objectForKey("legs") as NSArray
         
         var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
         
+        //iterate over each step until we find the one with 
+        //trainsit_detials / line / agencys [0] name
         
-        while(!foundWalking){
-            if steps[i].objectForKey("travel_mode") as String == "WALKING" {
-                foundWalking = true
-                
-                name1 = steps[i].objectForKey("html_instructions") as String
-                fname1 = name1.substringFromIndex(7).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-                
-                
-                var stn1 = bartLookup[fname1]
+        func findBart(stepsArray: NSArray) -> NSDictionary? {
+            var result:NSDictionary?
+            
+            for var i = 1; i < steps.count; ++i {
 
-                var distance = steps[i].objectForKey("distance") as NSDictionary
-                
-                results.append(String(distance["value"].intValue))
-                results.append(stn1!.uppercaseString)
-                
-                
-                
-            } else if i == steps.count {
-                foundWalking = true
-                println("No Valid Transit Directions")
-            }else {
-                i++
-            }
-        }
-        
-        i++
-        
-        var fname2:String = ""
-        var name2:String = steps[i].objectForKey("html_instructions") as String
-        
-        fname2 = name2.substringFromIndex(19).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        
-        var stn2 = bartLookup[fname2];
-        
-        
-        results.append(stn2!.uppercaseString)
-        
-        
-        i = 0;
-        var k: Int = 1
-        
-        while k < inter.count {
-            
-            var inter2 = inter[k].objectForKey("legs") as NSArray
-           
-            var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
-            
-            foundWalking = false;
-            
-           
-            while(!foundWalking){
-                
-                if (i<steps.count && steps[i]? && steps[i].objectForKey("travel_mode")? && steps[i].objectForKey("travel_mode") as String == "WALKING"){
-                    foundWalking = true
-                } else if i+1 >= steps.count {
-                    foundWalking = true
-                } else {
-                    i++
+                if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
+
+                    if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
+
+                        if let agencies = line.objectForKey("agencies") as? NSArray {
+
+                            if let name = agencies[0].objectForKey("name") as? String {
+
+                                if name == "Bay Area Rapid Transit" {
+                                    result = steps[i] as NSDictionary
+
+                                    walkingStepIndex = i - 1
+                                    i = steps.count // we found bart, so skip out of our for loop
+                                }
+                            }
+                        }
+                    }
                 }
             }
-           
-            i++
-            if i < steps.count {
-                name2 = steps[i].objectForKey("html_instructions") as String
-                name2 = name2.substringFromIndex(19)
-            }
-            
-            if bartLookup[name2]{
-                stn2 = bartLookup[name2]
-                results.append(stn2!.uppercaseString)
-            }
-            k++
-            
+            return result
         }
         
-        println("Google Results are \(results)")
-        self.delegate?.didReceiveGoogleResults(results)
+        func getDistanceFromWalkingStep(walkingStep: NSDictionary) -> String {
+            var result:String = ""
+            
+            var distanceDictinary = walkingStep.objectForKey("distance") as NSDictionary
+            
+            var distance = String(distanceDictinary.objectForKey("value").intValue) //stored as an int so we need to conver t to string
+            
+            result = distance
+            
+            return result
+        }
+        
+        func getOriginStationFromWalkingStep(step: NSDictionary) -> Array<String> {
+            
+            var result:[String] = []
+            var instructions = step.objectForKey("html_instructions") as String
+            
+            //trim off first 7 characters to get station name
+            var originStationName = instructions.substringFromIndex(7).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            
+            //get code for station
+            var originStationCode = bartLookup[originStationName]?.uppercaseString
+            
+            
+            result.append(originStationCode!)
+            
+            return result
+        }
+
+        func getEOLStationFromBartStep(step: NSDictionary) -> Array<String> {
+            
+            var result:[String] = []
+            var instructions = step.objectForKey("html_instructions") as String
+            
+            //trim off first 7 characters to get station name
+            
+            var eolStationName = instructions.substringFromIndex(19).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            
+            //get code for station
+
+            var eolStationCode = bartLookup[eolStationName]?.uppercaseString
+            
+
+            result.append(eolStationCode!)
+            
+            return result
+        }
+        
+        func getAllEOLStations(routes: NSArray) -> [String] {
+            var results:[String]  = []
+            
+            //iterate through each route and get the EOL station
+            for var i = 1; i < routes.count; ++i {
+                var legs : NSArray = routes[i].objectForKey("legs") as NSArray
+                var steps : NSArray = legs[0].objectForKey("steps") as NSArray
+                if let bartStep:NSDictionary = findBart(steps)? {
+                    results += getEOLStationFromBartStep(bartStep)
+                }
+
+                
+            }
+
+            
+            //TODO: make the results list uniq
+            return results
+        }
+        
+
+        
+        if let bartStep:NSDictionary = findBart(steps)? {
+            results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+            results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+            results += getAllEOLStations(allRoutes)
+            
+            self.delegate?.didReceiveGoogleResults(results)
+
+        } else {
+            //error, no bart
+            //TODO: trigger segue back to main screen with error
+            println("No bart")
+        }
+        
+        
+
+
     }
 }

@@ -47,10 +47,8 @@ class BartApiController: NSObject {
                 // If Dictionary, insert into an Array to iterate over
                 var etdList: AnyObject
                 if (object_getClassName(item.value) == "__NSArrayM") {
-                    println("itemvalue is NSArray")
                     etdList = item.value
                 } else {
-                    println("itemvalue is NSDictionary")
                     var tempDictArray: [NSDictionary] = []
                     tempDictArray += item.value as NSDictionary
                     etdList = tempDictArray

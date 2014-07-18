@@ -13,9 +13,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var locationName:String?
     var latDest : Float?
     var lngDest : Float?
-    //37.784228, -122.408632
-    var latStart : Float = 37.784228
-    var lngStart : Float = -122.408632
     
     
     var bartResults: [(String, Int)]?
@@ -106,8 +103,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             
         }
-        println("bart results are\(results)" )
-        println("filtered bart results are\(filteredBartResults)" )
+
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
         
@@ -117,6 +113,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
+
         var destinationController = segue.destinationViewController as ResultViewController
         destinationController.distance = self.distanceToStart
         destinationController.departureStationName = self.departureStationName

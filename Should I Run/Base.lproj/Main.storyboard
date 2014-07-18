@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
@@ -61,7 +62,7 @@
                         <viewControllerLayoutGuide type="bottom" id="T9T-o1-wLW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wrt-e8-Qnc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9y-F0-31e">
@@ -73,7 +74,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Hbw-0V-3hj"/>
+                    <navigationItem key="navigationItem" id="Hbw-0V-3hj">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="8Lp-xV-1HW">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TJE-Pm-rQE">
+                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title=" ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="8qB-Tw-PfR" kind="push" identifier="ResultsSegue" id="PoU-Ol-HGj"/>
                     </connections>
@@ -91,7 +102,7 @@
                         <viewControllerLayoutGuide type="bottom" id="svA-2S-M0p"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Eea-UV-eIr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KwT-He-R3e">
@@ -211,7 +222,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="280-uE-09o"/>
+                    <navigationItem key="navigationItem" id="280-uE-09o">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="x6r-sV-eQd">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vXF-xe-DBE">
+                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Erf-vT-Gbs" kind="unwind" unwindAction="unwindToList:" id="Xjm-eg-kjB"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="alarmButton" destination="WKn-3F-unA" id="Dqy-pW-i78"/>
                         <outlet property="destinationLabel" destination="huy-5W-OZJ" id="7TL-Zm-dc8"/>
@@ -227,6 +251,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wny-FK-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Erf-vT-Gbs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2145" y="220"/>
         </scene>
@@ -239,7 +264,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fSE-mq-6iZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zfS-b1-tTb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
@@ -258,7 +283,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="hmx-zy-7aK">
-                        <barButtonItem key="backBarButtonItem" title="Cancel" id="14E-12-rly"/>
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Bs2-Pa-RyS">
                             <connections>
                                 <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="TQB-IX-NaG"/>

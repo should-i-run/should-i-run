@@ -11,11 +11,14 @@ import UIKit
 class AddAlarmViewController: UIViewController {
     
     @IBOutlet var alarmPicker: UIDatePicker
+    var walkTime: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        alarmPicker.setValue(300, forKey: "countDownDuration")
+        
+        println(walkTime?.toInt())
+        var walkTimeInt = walkTime?.toInt()
+        alarmPicker.setValue(walkTimeInt! * 60, forKey: "countDownDuration")
         
         // Set background color
         self.view.backgroundColor = globalBackgroundColor

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
@@ -112,7 +112,7 @@
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="UkY-Fi-fDv" kind="push" id="GqH-Qf-3FW"/>
+                                            <segue destination="UkY-Fi-fDv" kind="push" identifier="AlarmSegue" id="GqH-Qf-3FW"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -258,20 +258,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="hmx-zy-7aK">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="olt-oh-zgo">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="olt-oh-zgo">
                             <connections>
-                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="bcL-rg-q6x"/>
+                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="6mb-y9-Pbw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Bs2-Pa-RyS">
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="plain" id="Bs2-Pa-RyS">
                             <connections>
-                                <action selector="saveAlarm:" destination="UkY-Fi-fDv" id="L0b-U0-M07"/>
-                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="k56-Z4-gRr"/>
+                                <action selector="setAlarm:" destination="UkY-Fi-fDv" id="AMy-KR-3iM"/>
+                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="TQB-IX-NaG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="alarmDatePicker" destination="yog-Os-ERm" id="kGl-lW-sfa"/>
+                        <outlet property="alarmPicker" destination="yog-Os-ERm" id="knl-UZ-Rty"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ru9-wH-Bap" userLabel="First Responder" sceneMemberID="firstResponder"/>

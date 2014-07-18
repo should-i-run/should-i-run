@@ -117,10 +117,6 @@ class ResultViewController: UIViewController {
             self.alarmButton.hidden = true
             
         }
-
-
-        
-        
         
         //detial area things
         self.timeToNextTrainLabel.text = String(departureTime)
@@ -137,7 +133,11 @@ class ResultViewController: UIViewController {
         self.followingDepartureLabel.text = "\(followingDepartureTime)"
         self.followingDepartureDestinationLabel.text = "to \(followingDestinationStation)"
         
-        }
-
+    }
+    
+    func unwindToList(segue:UIStoryboardSegue)  {
+        //reload the view on unwinding
+        self.loadView()
+    }
 }
 

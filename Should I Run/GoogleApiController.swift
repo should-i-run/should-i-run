@@ -8,17 +8,29 @@
 
 import UIKit
 
+
+
 protocol GoogleAPIControllerProtocol {
     func didReceiveGoogleResults(results: Array<String>)
 }
 
-class GoogleApiController: NSObject {
+
+class GoogleApiController: NSObject{
     
+    
+   
+
     var delegate : GoogleAPIControllerProtocol?
     
-    func fetchGoogleData(lat:Float, long:Float) {
+    func fetchGoogleData(latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
+        println("Starting Google Function")
+        
+      
+        
+//        println("Current location is \(loc2d)")
+        
         var time = Int(NSDate().timeIntervalSince1970)
-        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(lat),\(long)&destination=Berkeley&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
+        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
             (data, response, error) in

@@ -7,17 +7,26 @@
 //
 
 import UIKit
+import MapKit
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate  {
     var locationName:String?
-    var lat : Float?
-    var lng : Float?
+    var latDest : Float?
+    var lngDest : Float?
+    
+    var latStart : Float?
+    var lngStart : Float?
+    
     
     var bartResults: [(String, Int)]?
     var googleResults : [String]?
     
     var distanceToStart : Int = 0
     var departureStationName: String = ""
+    
+    let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    let locationManager = SharedUserLocation
     
     // Create controller to handle BART API queries
     var bartApiController: BartApiController = BartApiController()
@@ -32,8 +41,27 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
 
         //Fetching data from Google and parsing it
-        println("\(self.locationName) and \(self.lat)")
-        self.gApi.fetchGoogleData(self.lat!,long: self.lng!)
+        println("\(self.locationName) and \(self.latDest) and \(self.lngDest)")
+        
+        if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+            
+            println("Current location is \(loc2d)")
+            
+            latStart = Float(loc2d.latitude)
+            lngStart = Float(loc2d.longitude)
+            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
+        }
+        
+        self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+            
+            let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+            
+            //create a 'region' with the user's location as the center, and set the map to that region
+            println("Current location is \(loc2d)")
+            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart!,lngStart: self.lngStart!)
+            
+        }
+        
 
     }
     

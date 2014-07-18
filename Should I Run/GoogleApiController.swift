@@ -30,8 +30,7 @@ class GoogleApiController: NSObject{
         var request = NSURLRequest(URL: url)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
             (response, data, error) in
-            println(NSString(data: data, encoding: NSUTF8StringEncoding))
-//            var dataFromGoogle = NSString(data: data, encoding: NSUTF8StringEncoding)
+
             
             if error {println("Error!!",error)}
 

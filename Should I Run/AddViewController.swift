@@ -117,9 +117,12 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var number : Int = userDefaults.integerForKey("num")
         
+        let addDest : AnyObject = userDefaults.objectForKey(String(number))
+
         
         userDefaults.setObject(["name": self.textField.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
         number += 1
+        userDefaults.setObject(addDest, forKey: String(number))
   
         userDefaults.setInteger(number,forKey: "num")
         userDefaults.synchronize()

@@ -37,20 +37,15 @@
                             <outlet property="delegate" destination="w1f-Mq-beW" id="XYW-g9-rmE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Should I Run?" id="H38-Nd-7hy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ezb-uD-wgI">
-                            <connections>
-                                <segue destination="lWp-As-NnH" kind="modal" identifier="AddSegue" modalTransitionStyle="crossDissolve" id="Jys-UY-9Uf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Should I Run?" id="H38-Nd-7hy"/>
                     <connections>
                         <segue destination="3gf-Kz-iQM" kind="push" identifier="LoadingSegue" id="NRz-u3-g7B"/>
+                        <segue destination="lWp-As-NnH" kind="modal" identifier="AddSegue" id="3GY-5N-7Hc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCN-DA-DIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1234" y="509"/>
+            <point key="canvasLocation" x="1234" y="512"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="6pi-4x-WDs">

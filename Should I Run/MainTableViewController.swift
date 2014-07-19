@@ -24,7 +24,7 @@ import Foundation
         super.viewDidLoad()
         
         //setting an Add destination Button
-        userDefaults.setObject(["name": "Add Destination", "latitude": 0.0000, "longitude": 0.0000], forKey: "0")
+//        userDefaults.setObject(["name": "Add Destination", "latitude": 0.0000, "longitude": 0.0000], forKey: "0")
 //        userDefaults.setInteger(0,forKey: "num")
         userDefaults.synchronize()
         
@@ -56,6 +56,13 @@ import Foundation
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
         let number : Int = userDefaults.integerForKey("num")
         return number + 1
+    }
+    
+    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+        if indexPath.row == userDefaults.integerForKey("num") {
+            return false
+        }
+        return true
     }
     
     override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
@@ -93,16 +100,21 @@ import Foundation
         
         
         if let row = indexPath?.row {
+            if row == userDefaults.integerForKey("num")  {
+                cell.textLabel.text = "New Add Location"
+                cell.backgroundColor = self.colors[4]
+                
+            
             //retrieve from the collection of objects with key "row number"
-                if let location : AnyObject = userDefaults.objectForKey(String(row)) {
-                    cell.textLabel.text = location["name"] as NSString
-                    var index = row % self.colors.count
-                    cell.backgroundColor = self.colors[index]
-                } else {
-                    cell.textLabel.text = "Default"
-                    var index = row % self.colors.count
-                    cell.backgroundColor = self.colors[index]
-                }
+            } else if let location : AnyObject = userDefaults.objectForKey(String(row)) {
+                cell.textLabel.text = location["name"] as NSString
+                var index = row % self.colors.count
+                cell.backgroundColor = self.colors[index]
+            } else {
+                cell.textLabel.text = "Default"
+                var index = row % self.colors.count
+                cell.backgroundColor = self.colors[index]
+            }
             
         }
 

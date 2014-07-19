@@ -77,6 +77,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     func didReceiveGoogleResults(results: Array<String>!, error: String?) {
         if let err = error? {
+
             self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
             
         } else {
@@ -121,13 +122,18 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         
-    // On segue, stop animating
-    spinner.stopAnimating()
+        // On segue, stop animating
+        spinner.stopAnimating()
+        
+        
+        if segue.identifier == "ResultsSegue" {
+            var destinationController = segue.destinationViewController as ResultViewController
+            destinationController.distance = self.distanceToStart
+            destinationController.departureStationName = self.departureStationName
+            destinationController.departures = self.bartResults!
+        } else if segue.identifier == "ErrorUnwindSegue" {
 
-    var destinationController = segue.destinationViewController as ResultViewController
-    destinationController.distance = self.distanceToStart
-    destinationController.departureStationName = self.departureStationName
-    destinationController.departures = self.bartResults!
-    } 
+        }
+    }
 }
 

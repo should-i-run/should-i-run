@@ -23,7 +23,12 @@ import Foundation
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //setting an Add destination Button
+        userDefaults.setObject(["name": "Add Destination", "latitude": 0.0000, "longitude": 0.0000], forKey: "0")
+//        userDefaults.setInteger(0,forKey: "num")
+        userDefaults.synchronize()
         
+        //setting color scheme
         self.colors.append(UIColor(red: CGFloat(239.0/255), green: CGFloat(201.0/255), blue: CGFloat(76.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(69.0/255), green: CGFloat(178.0/255), blue: CGFloat(157.0/255), alpha: CGFloat(1.0)))
         self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))
@@ -50,14 +55,16 @@ import Foundation
     
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
         let number : Int = userDefaults.integerForKey("num")
-        return number
+        return number + 1
     }
     
     override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
         //check if editing style is delete
-        if editingStyle == .Delete {
+        var number : Int = userDefaults.integerForKey("num")
+        
+        if editingStyle == .Delete && indexPath.row != number {
             //get the index row of the delete and compare with the number of objects in the plist
-           var number : Int = userDefaults.integerForKey("num")
+           
             //if last element, just reduce count of number of objects by 1
             // else shift everything one step down
 

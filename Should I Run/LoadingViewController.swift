@@ -17,7 +17,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var latStart:Float = 0.00
     var lngStart:Float = 0.00
     
-    @IBOutlet var spinner: UIActivityIndicatorView
+    @IBOutlet var spinner: UIActivityIndicatorView?
     
     var bartResults: [(String, Int)]?
     var googleResults : [String]?
@@ -40,7 +40,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     override func viewDidLoad(){
         
         // Start spinner animation
-        spinner.startAnimating()
+        spinner!.startAnimating()
         
         // Set background color
         self.view.backgroundColor = globalBackgroundColor
@@ -124,7 +124,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         
         // On segue, stop animating
-        spinner.stopAnimating()
+        spinner!.stopAnimating()
         
         
         if segue.identifier == "ResultsSegue" {

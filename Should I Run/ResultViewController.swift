@@ -24,27 +24,27 @@ class ResultViewController: UIViewController {
     var alarmTime = 0
     
     //result area things
-    @IBOutlet var resultArea: UIView
-    @IBOutlet var instructionLabel: UILabel
-    @IBOutlet var alarmButton: UIButton
+    @IBOutlet var resultArea: UIView?
+    @IBOutlet var instructionLabel: UILabel?
+    @IBOutlet var alarmButton: UIButton?
 
 
     
 
     //detial area things
-    @IBOutlet var timeToNextTrainLabel: UILabel
-    @IBOutlet var distanceToStationLabel: UILabel
-    @IBOutlet var stationNameLabel: UILabel
-    @IBOutlet var departureStationLabel: UILabel
-    @IBOutlet var destinationLabel: UILabel
+    @IBOutlet var timeToNextTrainLabel: UILabel?
+    @IBOutlet var distanceToStationLabel: UILabel?
+    @IBOutlet var stationNameLabel: UILabel?
+    @IBOutlet var departureStationLabel: UILabel?
+    @IBOutlet var destinationLabel: UILabel?
     
-    @IBOutlet var timeRunningLabel: UILabel
-    @IBOutlet var timeWalkingLabel: UILabel
+    @IBOutlet var timeRunningLabel: UILabel?
+    @IBOutlet var timeWalkingLabel: UILabel?
     
     
     //following departure area things
-    @IBOutlet var followingDepartureLabel: UILabel
-    @IBOutlet var followingDepartureDestinationLabel: UILabel
+    @IBOutlet var followingDepartureLabel: UILabel?
+    @IBOutlet var followingDepartureDestinationLabel: UILabel?
 
     
     
@@ -94,41 +94,41 @@ class ResultViewController: UIViewController {
         //result area things
             // run or not?
         if departureTime >= walkingTime {
-            self.instructionLabel.text = "Nah, take it easy"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
+            self.instructionLabel!.text = "Nah, take it easy"
+            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
             let walkUIColor = colorize(0x90D4D4)
             
-            self.resultArea.backgroundColor = walkUIColor
+            self.resultArea!.backgroundColor = walkUIColor
             
-            self.alarmButton.hidden = false
+            self.alarmButton!.hidden = false
             self.alarmTime = departureTime - walkingTime
 
         } else {
             
             let runUIColor = colorize(0xF05A28)
-            self.resultArea.backgroundColor = runUIColor
+            self.resultArea!.backgroundColor = runUIColor
             
-            self.instructionLabel.text = "Run!"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
-            self.alarmButton.hidden = true
+            self.instructionLabel!.text = "Run!"
+            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
+            self.alarmButton!.hidden = true
             
         }
         
         //detial area things
-        self.timeToNextTrainLabel.text = String(departureTime)
-        self.distanceToStationLabel.text = String(distance!)
-        self.destinationLabel.text = "towards \(destinationStation)"
+        self.timeToNextTrainLabel!.text = String(departureTime)
+        self.distanceToStationLabel!.text = String(distance!)
+        self.destinationLabel!.text = "towards \(destinationStation)"
         
-        self.stationNameLabel.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]) station"
-        self.stationNameLabel.adjustsFontSizeToFitWidth = true
-        self.timeRunningLabel.text = String(runningTime)
-        self.timeWalkingLabel.text = String(walkingTime)
+        self.stationNameLabel!.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]) station"
+        self.stationNameLabel!.adjustsFontSizeToFitWidth = true
+        self.timeRunningLabel!.text = String(runningTime)
+        self.timeWalkingLabel!.text = String(walkingTime)
         
         
         //following departure area things
-        self.followingDepartureLabel.text = "\(followingDepartureTime)"
-        self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
+        self.followingDepartureLabel!.text = "\(followingDepartureTime)"
+        self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
         
     }
     

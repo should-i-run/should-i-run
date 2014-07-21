@@ -106,7 +106,9 @@ class GoogleApiController: NSObject{
             var instructions = step.objectForKey("html_instructions") as String
             
             //trim off first 7 characters to get station name
-            var originStationName = instructions.substringFromIndex(7).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            var originStationName = instructions.substringFromIndex(index: 7)
+                
+//                stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
             //get code for station
             var originStationCode = bartLookup[originStationName]?.uppercaseString

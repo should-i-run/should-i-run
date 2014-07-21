@@ -13,16 +13,16 @@ import MapKit
 class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
 
-    @IBOutlet var textField : UITextField
+    @IBOutlet var textField : UITextField?
     
     var lat: Float = 0.00
     var lng: Float = 0.00
 
 
-    @IBOutlet var saveBarButton: UIBarButtonItem
+    @IBOutlet var saveBarButton: UIBarButtonItem?
     
     
-    @IBOutlet var mapView: MKMapView
+    @IBOutlet var mapView: MKMapView?
     
     var mapCenteredOnUser: Bool = false
     
@@ -46,7 +46,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)
-            self.mapView.setRegion(reg, animated: false)
+            self.mapView!.setRegion(reg, animated: false)
             self.mapCenteredOnUser = true
             
         } else {
@@ -57,7 +57,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 //create a 'region' with the user's location as the center, and set the map to that region
                 let reg = MKCoordinateRegionMakeWithDistance(updatedLoc2d, 20000, 20000)
-                self.mapView.setRegion(reg, animated: false)
+                self.mapView!.setRegion(reg, animated: false)
                 self.mapCenteredOnUser = true
             }
         }
@@ -68,19 +68,19 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func tapOnMap(sender: UITapGestureRecognizer) {
 
         var tapLocation: CGPoint = sender.locationInView(self.mapView)
-        var loc = self.mapView.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
+        var loc = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
         self.lat = Float(loc.latitude)
         self.lng = Float(loc.longitude)
         
         var location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
         
         if let mk = self.currentAnnotation {
-            self.mapView.removeAnnotation(self.currentAnnotation)
+            self.mapView!.removeAnnotation(self.currentAnnotation)
         }
         
         var marker:MKPointAnnotation = MKPointAnnotation()
         marker.coordinate = location2d
-        self.mapView.addAnnotation(marker)
+        self.mapView!.addAnnotation(marker)
         self.currentAnnotation = marker
     }
 
@@ -93,7 +93,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             message.show()
             return false
         }
-        if self.textField.text == "" {
+        if self.textField!.text == "" {
             var message: UIAlertView = UIAlertView(title: "Location", message: "Please add a location name", delegate: nil, cancelButtonTitle: "Ok")
             message.show()
             return false
@@ -112,17 +112,13 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if (sender as? UIBarButtonItem != self.saveBarButton) {
             return
         }
-        
 
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var number : Int = userDefaults.integerForKey("num")
         
-//        let addDest : AnyObject = userDefaults.objectForKey(String(number))
-
-        
-        userDefaults.setObject(["name": self.textField.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
+        userDefaults.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
         number += 1
-//        userDefaults.setObject(addDest, forKey: String(number))
+
   
         userDefaults.setInteger(number,forKey: "num")
         userDefaults.synchronize()

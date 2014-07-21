@@ -108,8 +108,8 @@
 			children = (
 				2508AF741975C10800E48B37 /* AppDelegate.swift */,
 				2508AF691975C07100E48B37 /* AddViewController.swift */,
-				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,
 				8A7A2C2A1978725100B7F093 /* BartApiController.swift */,
+				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,
 				2508AF6C1975C07100E48B37 /* MainTableViewController.swift */,
 				283F960D1978A04000A554CD /* GoogleApiController.swift */,
 				252ADD8919784C1800ED0C3F /* LoadingViewController.swift */,

@@ -123,11 +123,9 @@ import Foundation
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let number : Int = userDefaults.integerForKey("num")
-        if number > 1 {
-            
         
+        if number > 1 {
             let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
-            
             
             self.locName = location["name"] as NSString
             self.locLat = location["latitude"] as Float

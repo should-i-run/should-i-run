@@ -23,6 +23,9 @@ import Foundation
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //setting an Add destination Button
+//        userDefaults.setObject(["name": "Add Destination", "latitude": 0.0000, "longitude": 0.0000], forKey: "0")
+//        userDefaults.setInteger(0,forKey: "num")
         userDefaults.synchronize()
         
         //setting color scheme
@@ -33,10 +36,10 @@ import Foundation
         self.colors.append(UIColor(red: CGFloat(51.0/255), green: CGFloat(77.0/255), blue: CGFloat(92.0/255), alpha: CGFloat(1.0)))
         
 
-        // uncomment this line to get the edit button back
-        // self.navigationItem.leftBarButtonItem = self.editButtonItem()
+         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
         // Navigation and background colors
+//        self.navigationController.navigationBar.barTintColor = globalNavigationBarColor
         self.navigationController.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
         self.navigationController.navigationBar.barStyle = globalBarStyle
@@ -97,14 +100,11 @@ import Foundation
         
         
         if let row = indexPath?.row {
-            
-            // 'num' is the number of user stored locations, 1 indexed.
-            // if the current row (zero indexed) is equal to that, we are on the add destination button
             if row == userDefaults.integerForKey("num")  {
-                cell.textLabel.text = "Add Destination"
+                cell.textLabel.text = "New Add Location"
                 cell.backgroundColor = self.colors[4]
-                cell.accessoryType = UITableViewCellAccessoryType.None
                 
+            
             //retrieve from the collection of objects with key "row number"
             } else if let location : AnyObject = userDefaults.objectForKey(String(row)) {
                 cell.textLabel.text = location["name"] as NSString
@@ -122,24 +122,17 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
         
-
-        let number : Int = userDefaults.integerForKey("num")
-        let row = indexPath.row as Int
         
-        // 'num' is the number of user stored locations, 1 indexed.
-        // if the current row (zero indexed) is equal to that, we are on the add destination button
-        if row < number {
-            let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
-            
-            self.locName = location["name"] as NSString
-            self.locLat = location["latitude"] as Float
-            self.locLong = location["longitude"] as Float
-
-            self.performSegueWithIdentifier("LoadingSegue", sender: self)
-
-        } else {
+        self.locName = location["name"] as NSString
+        self.locLat = location["latitude"] as Float
+        self.locLong = location["longitude"] as Float
+        
+        if self.locName == "Add Destination" {
             self.performSegueWithIdentifier("AddSegue", sender: self)
+        } else {
+            self.performSegueWithIdentifier("LoadingSegue", sender: self)
         }
         
         

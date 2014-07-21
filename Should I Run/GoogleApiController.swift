@@ -47,16 +47,16 @@ class GoogleApiController: NSObject{
         
         var walkingStepIndex = 0
         
-        var foundBart : Bool = false
-        var i:Int  = 1 //start at 1 because the first step is always walking
-        var name1:String = ""
-        var fname1:String = ""
+
+
         
         var allRoutes : NSArray = goog.objectForKey("routes") as NSArray
         
         var inter2 : NSArray = allRoutes[0].objectForKey("legs") as NSArray
         
         var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
+        
+
         
         //iterate over each step until we find the one with 
         //trainsit_detials / line / agencys [0] name
@@ -155,6 +155,19 @@ class GoogleApiController: NSObject{
             return results
         }
         
+        
+        //iterate through all routes until we find one that countains a bart route
+        //set the bart step
+        //the the current route as the bart route
+        
+//        for var i = 0; i < allRoutes.count; ++i {
+//            if bartStep == nil {
+//                
+//            }
+//        }
+        
+
+//
         
         if let bartStep:NSDictionary = findBart(steps)? {
             results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)

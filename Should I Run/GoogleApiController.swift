@@ -73,7 +73,6 @@ class GoogleApiController: NSObject{
                         if let agencies = line.objectForKey("agencies") as? NSArray {
 
                             if let name = agencies[0].objectForKey("name") as? String {
-                                println("transit agency: \(name)")
 
                                 if name == "Bay Area Rapid Transit" {
                                     result = steps[i] as NSDictionary

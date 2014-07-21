@@ -1,16 +1,17 @@
-## Should-I-Run
+# Should I Run?
 
 > We help you catch the first possible BART train using real-time transit data.
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Features](#features)
+1. [Press Release](#press-release)
 1. [Requirements](#requirements)
+1. [Installation](#installation)
 1. [Development](#development)
-    1. [Tasks](#tasks)
-1. [Style Guide](#styleguide)
+  * [Tasks](#tasks)
+1. [Style Guide](#style-guide)
 1. [Contributing](#contributing)
-1. [Press Release](#pressrelease)
 1. [License](#license)
 
 ## Features
@@ -20,15 +21,18 @@
 * Time and distance estimation based on your current location.
 * Set an alarm to notify you when to leave to catch your train.
 
+## Press Release
+
+View our [press release](PRESS-RELEASE.md).
+
+## Requirements
+
+- Xcode6-Beta3
 
 ## Installation
 
 1. Download the repository.
 2. Build and run with Xcode.
-
-## Requirements
-
-- Xcode6-Beta3
 
 ## Development
 

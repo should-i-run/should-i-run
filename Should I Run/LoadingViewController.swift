@@ -77,6 +77,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     func didReceiveGoogleResults(results: Array<String>!, error: String?) {
         if let err = error? {
+            println("google err, unwinding")
 
             self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
             

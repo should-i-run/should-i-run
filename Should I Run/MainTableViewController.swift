@@ -122,19 +122,24 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
-        
         
 
+        let number : Int = userDefaults.integerForKey("num")
+        let row = indexPath.row as Int
+        
         // 'num' is the number of user stored locations, 1 indexed.
         // if the current row (zero indexed) is equal to that, we are on the add destination button
-        if indexPath.row == userDefaults.integerForKey("num")  {
-            self.performSegueWithIdentifier("AddSegue", sender: self)
-        } else {
+        if row < number {
+            let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
+            
             self.locName = location["name"] as NSString
             self.locLat = location["latitude"] as Float
             self.locLong = location["longitude"] as Float
+
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
+
+        } else {
+            self.performSegueWithIdentifier("AddSegue", sender: self)
         }
         
         

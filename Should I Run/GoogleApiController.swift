@@ -75,7 +75,7 @@ class GoogleApiController: NSObject{
                             if let name = agencies[0].objectForKey("name") as? String {
 
                                 if name == "Bay Area Rapid Transit" {
-                                    result = steps[i] as NSDictionary
+                                    result = (steps[i] as NSDictionary)
 
                                     walkingStepIndex = i - 1
                                     i = steps.count // we found bart, so skip out of our for loop
@@ -103,18 +103,18 @@ class GoogleApiController: NSObject{
         func getOriginStationFromWalkingStep(step: NSDictionary) -> Array<String> {
             
             var result:[String] = []
-            var instructions = step.objectForKey("html_instructions") as String
+            var instructions:NSString = step.objectForKey("html_instructions") as NSString
             
             //trim off first 7 characters to get station name
-            var originStationName = instructions.substringFromIndex(index: 7)
-                
-//                stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+
+            var originStationName = instructions.substringFromIndex(7)
+                .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
             //get code for station
-            var originStationCode = bartLookup[originStationName]?.uppercaseString
+            var originStationCode = bartLookup[originStationName]!.uppercaseString
             
             
-            result.append(originStationCode!)
+            result.append(originStationCode)
             
             return result
         }
@@ -122,7 +122,7 @@ class GoogleApiController: NSObject{
         func getEOLStationFromBartStep(step: NSDictionary) -> Array<String> {
             
             var result:[String] = []
-            var instructions = step.objectForKey("html_instructions") as String
+            var instructions:NSString = step.objectForKey("html_instructions") as NSString
             
             //trim off first 7 characters to get station name
             

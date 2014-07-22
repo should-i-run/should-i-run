@@ -39,58 +39,58 @@ class BartApiController: NSObject {
         var allResults: [(String, Int)] = []
 
         // Iterate over our stations
-        for item in stations {
-            if (item.key as String == "etd") {
-                // We need to check if one result or multiple results exist. If we have multiple results, we'll do a loop. Otherwise, we can access terminus abbreviation and estimated time directly
+        for aStation in stations {
+            
+            if (aStation.key as String == "etd") {
 
-                // Check if stations are an Array or Dictionary
+
+                // Check if stations are in an Array, or if there is only one station, a Dictionary
                 // If Dictionary, insert into an Array to iterate over
-                var etdList: AnyObject
-                if (object_getClassName(item.value) == "__NSArrayM") {
-                    etdList = item.value
-                } else {
-                    var tempDictArray: [NSDictionary] = []
-                    tempDictArray += item.value as NSDictionary
-                    etdList = tempDictArray
+                var etdList:[NSDictionary] = []
+                
+                if let ival:[NSDictionary] = aStation.value as? [NSDictionary] {
+                    etdList += ival
+                    
+                } else if let ival:NSDictionary = aStation.value as? NSDictionary {
+                      etdList.append(ival)
+
                 }
                 
-                for stationItem in etdList as [AnyObject] {
+                
+
+                
+                for stationItem in etdList as [NSDictionary] {
                     var abbr = stationItem["abbreviation"] as NSDictionary
 
-                    // Check if time estimates are an Array or Dictionary
+                    // same issue for departures
+                    // Check if departures are in an Array, or if there is only one station, a Dictionary
                     // If Dictionary, insert into an Array to iterate over
-                    var estimates: AnyObject
-                    if (object_getClassName(stationItem["estimate"]) == "__NSArrayM") {
-                        estimates = stationItem["estimate"]
-                    } else {
-                        var tempDictArray: [NSDictionary] = []
-                        tempDictArray += stationItem["estimate"] as NSDictionary
-                        estimates = tempDictArray
-                    }
-
-                    for estimateItem in estimates as [AnyObject] {
-                        var estimateMin = estimateItem["minutes"] as NSDictionary
+                    
+                    var estimateList:[NSDictionary] = []
+                    
+                    if let estimate:[NSDictionary] = stationItem["estimate"] as? [NSDictionary]{
+                        estimateList += estimate
                         
+                    } else if let estimate:NSDictionary = stationItem["estimate"] as? NSDictionary {
+                        estimateList.append(estimate)
+                        
+                    }
+                    
+                    for estimateItem in estimateList as [AnyObject] {
+                        var estimateMin = estimateItem["minutes"] as NSDictionary
+
                         // Create the terminus and estimated arrival tuple and push into our results
                         var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
                         allResults += myTuple
                     }
                 }
-
             }
         }
 
         // Sort the tuple array of termini and estimated arrival in ascending order
         allResults.sort{$0.1 < $1.1}
         
-
-        
         self.delegate?.didReceiveBartResults(allResults)
-        
-
     }
-    
-    
-    
 }
     

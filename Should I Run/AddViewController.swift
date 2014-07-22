@@ -121,6 +121,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
   
         userDefaults.setInteger(number,forKey: "num")
+        println("number in add view: \(number)")
+        println(userDefaults.integerForKey("num"))
+        println("---still in add ^---")
         userDefaults.synchronize()
     }
     

@@ -95,8 +95,10 @@ import Foundation
         let CellIdentifier = "PlacePrototypeCell"
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
+
         
         if let row = indexPath?.row {
+                    println( userDefaults.integerForKey("num"))
             
             // 'num' is the number of user stored locations, 1 indexed.
             // if the current row (zero indexed) is equal to that, we are on the add destination button
@@ -140,6 +142,8 @@ import Foundation
 
         } else {
             self.performSegueWithIdentifier("AddSegue", sender: self)
+            let num = userDefaults.integerForKey("num")
+            println("number of places before add: \(num)")
         }
         
         
@@ -147,7 +151,7 @@ import Foundation
     
     func unwindToList(segue:UIStoryboardSegue)  {
         //reload the table on unwinding
-            self.tableView.reloadData()
+        self.tableView.reloadData()
     
     }
 

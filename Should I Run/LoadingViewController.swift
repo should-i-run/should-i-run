@@ -74,13 +74,22 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 //             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
 
     }
+
+    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
+    // It performs the unwind segue when done.
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
+        self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
+    }
     
     func didReceiveGoogleResults(results: Array<String>!, error: String?) {
         if let err = error? {
             println("google err, unwinding")
-
-            self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
             
+            // Create and show error message when no Google results are found. Delegate to itself on clickin 'Ok'.
+            // Call the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
+            var message: UIAlertView = UIAlertView(title: "Oops!", message: "No results found.", delegate: self, cancelButtonTitle: "Ok")
+            message.show()
+
         } else {
 
             self.distanceToStart = results[0].toInt()!

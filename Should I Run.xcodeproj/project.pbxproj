@@ -21,6 +21,7 @@
 		252ADD8A19784C1800ED0C3F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252ADD8919784C1800ED0C3F /* LoadingViewController.swift */; };
 		2536F76D1976EC7D00A2CE2B /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2536F76C1976EC7D00A2CE2B /* XMLReader.m */; };
 		2536F76F197702CA00A2CE2B /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2536F76E197702CA00A2CE2B /* UserLocationManager.swift */; };
+		2555AC4D197DF2FA0031A676 /* KMXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555AC4C197DF2FA0031A676 /* KMXMLParser.swift */; };
 		283F960E1978A04000A554CD /* GoogleApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283F960D1978A04000A554CD /* GoogleApiController.swift */; };
 		289A05AC197767650044E6B7 /* bartLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289A05AB197767650044E6B7 /* bartLookup.swift */; };
 		8A7A2C2B1978725100B7F093 /* BartApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A2C2A1978725100B7F093 /* BartApiController.swift */; };
@@ -58,6 +59,7 @@
 		2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should I Run-Bridging-Header.h"; sourceTree = "<group>"; };
 		2536F76C1976EC7D00A2CE2B /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		2536F76E197702CA00A2CE2B /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
+		2555AC4C197DF2FA0031A676 /* KMXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KMXMLParser.swift; path = ../../../../../Desktop/KMXMLParser.swift; sourceTree = "<group>"; };
 		283F960D1978A04000A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiController.swift; sourceTree = "<group>"; };
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
 		8A7A2C2A1978725100B7F093 /* BartApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BartApiController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		2508AF3C1975B4CE00E48B37 /* Should I Run */ = {
 			isa = PBXGroup;
 			children = (
+				2555AC4C197DF2FA0031A676 /* KMXMLParser.swift */,
 				2508AF741975C10800E48B37 /* AppDelegate.swift */,
 				2508AF691975C07100E48B37 /* AddViewController.swift */,
 				8A7A2C2A1978725100B7F093 /* BartApiController.swift */,
@@ -257,6 +260,7 @@
 				1E4875E41978445E0079C53E /* AddAlarmViewController.swift in Sources */,
 				2508AF711975C07100E48B37 /* MainTableViewController.swift in Sources */,
 				252ADD881978357600ED0C3F /* ResultViewController.swift in Sources */,
+				2555AC4D197DF2FA0031A676 /* KMXMLParser.swift in Sources */,
 				2508AF751975C10800E48B37 /* AppDelegate.swift in Sources */,
 				252ADD8A19784C1800ED0C3F /* LoadingViewController.swift in Sources */,
 				2536F76D1976EC7D00A2CE2B /* XMLReader.m in Sources */,

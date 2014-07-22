@@ -93,13 +93,10 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let CellIdentifier = "PlacePrototypeCell"
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
-
-        
         if let row = indexPath?.row {
-                    println( userDefaults.integerForKey("num"))
             
             // 'num' is the number of user stored locations, 1 indexed.
             // if the current row (zero indexed) is equal to that, we are on the add destination button
@@ -110,6 +107,7 @@ import Foundation
                 
             //retrieve from the collection of objects with key "row number"
             } else if let location : AnyObject = userDefaults.objectForKey(String(row)) {
+                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell.textLabel.text = location["name"] as NSString
                 var index = row % self.colors.count
                 cell.backgroundColor = self.colors[index]

@@ -108,6 +108,7 @@ import Foundation
                 
             //retrieve from the collection of objects with key "row number"
             } else if let location : AnyObject = userDefaults.objectForKey(String(row)) {
+                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell.textLabel.text = location["name"] as NSString
                 var index = row % self.colors.count
                 cell.backgroundColor = self.colors[index]

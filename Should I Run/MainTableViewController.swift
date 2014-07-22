@@ -97,7 +97,6 @@ import Foundation
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
         if let row = indexPath?.row {
-                    println( userDefaults.integerForKey("num"))
             
             // 'num' is the number of user stored locations, 1 indexed.
             // if the current row (zero indexed) is equal to that, we are on the add destination button

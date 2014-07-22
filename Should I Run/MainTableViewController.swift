@@ -93,10 +93,8 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let CellIdentifier = "PlacePrototypeCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
         if let row = indexPath?.row {
                     println( userDefaults.integerForKey("num"))

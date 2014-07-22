@@ -142,7 +142,7 @@ import Foundation
         } else {
             self.performSegueWithIdentifier("AddSegue", sender: self)
             let num = userDefaults.integerForKey("num")
-            println("number of places before add: \(num)")
+//            println("number of places before add: \(num)")
         }
         
         

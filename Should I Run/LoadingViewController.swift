@@ -13,9 +13,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var locationName:String?
     var latDest : Float?
     var lngDest : Float?
-    
-    var latStart:Float = 0.00
-    var lngStart:Float = 0.00
+    //37.786059, -122.405156
+    var latStart:Float = 37.786059
+    var lngStart:Float = -122.405156
     
     @IBOutlet var spinner: UIActivityIndicatorView?
     
@@ -71,7 +71,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 }
             }
         }
-//             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
 
     }
 

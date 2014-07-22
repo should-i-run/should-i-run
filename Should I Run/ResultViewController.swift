@@ -135,7 +135,8 @@ class ResultViewController: UIViewController {
     }
     
     func unwindToList(segue:UIStoryboardSegue)  {
-
+        println("We are here")
+        println(self.navigationController)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {

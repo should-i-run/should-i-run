@@ -20,6 +20,7 @@ import Foundation
     var locLat:Float = 0.0
     var locLong:Float = 0.0
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

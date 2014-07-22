@@ -47,9 +47,10 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
         }
         
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         self.locationManager.distanceFilter = 50
         self.locationManager.startUpdatingLocation()
+
 
         
         
@@ -62,7 +63,6 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
 
 
         self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
-        
         
         
     }

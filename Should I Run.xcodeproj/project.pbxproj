@@ -23,6 +23,7 @@
 		2536F76F197702CA00A2CE2B /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2536F76E197702CA00A2CE2B /* UserLocationManager.swift */; };
 		283F960E1978A04000A554CD /* GoogleApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283F960D1978A04000A554CD /* GoogleApiController.swift */; };
 		289A05AC197767650044E6B7 /* bartLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289A05AB197767650044E6B7 /* bartLookup.swift */; };
+		8A3A980F197F131200D23741 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A980E197F131200D23741 /* ColorHelper.swift */; };
 		8A7A2C2B1978725100B7F093 /* BartApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A2C2A1978725100B7F093 /* BartApiController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		2536F76E197702CA00A2CE2B /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		283F960D1978A04000A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiController.swift; sourceTree = "<group>"; };
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
+		8A3A980E197F131200D23741 /* ColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		8A7A2C2A1978725100B7F093 /* BartApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BartApiController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */,
 				2536F76E197702CA00A2CE2B /* UserLocationManager.swift */,
 				252ADD871978357600ED0C3F /* ResultViewController.swift */,
+				8A3A980E197F131200D23741 /* ColorHelper.swift */,
 			);
 			path = "Should I Run";
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				2536F76D1976EC7D00A2CE2B /* XMLReader.m in Sources */,
 				283F960E1978A04000A554CD /* GoogleApiController.swift in Sources */,
 				8A7A2C2B1978725100B7F093 /* BartApiController.swift in Sources */,
+				8A3A980F197F131200D23741 /* ColorHelper.swift in Sources */,
 				2508AF721975C07100E48B37 /* Place.swift in Sources */,
 				289A05AC197767650044E6B7 /* bartLookup.swift in Sources */,
 				2536F76F197702CA00A2CE2B /* UserLocationManager.swift in Sources */,

@@ -119,8 +119,9 @@ class ResultViewController: UIViewController {
         self.timeToNextTrainLabel!.text = String(departureTime)
         self.distanceToStationLabel!.text = String(distance!)
         self.destinationLabel!.text = "towards \(destinationStation)"
+        self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
-        self.stationNameLabel!.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]) station"
+        self.stationNameLabel!.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel!.text = String(runningTime)
         self.timeWalkingLabel!.text = String(walkingTime)
@@ -129,6 +130,7 @@ class ResultViewController: UIViewController {
         //following departure area things
         self.followingDepartureLabel!.text = "\(followingDepartureTime)"
         self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
+        self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
     }
     

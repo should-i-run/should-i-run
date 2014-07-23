@@ -24,6 +24,7 @@
 		25C31ED919803C780000E7BC /* MuniApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C31ED819803C780000E7BC /* MuniApiController.swift */; };
 		283F960E1978A04000A554CD /* GoogleApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283F960D1978A04000A554CD /* GoogleApiController.swift */; };
 		289A05AC197767650044E6B7 /* bartLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289A05AB197767650044E6B7 /* bartLookup.swift */; };
+		28B17423198075220090F129 /* Locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28B17422198075220090F129 /* Locations.plist */; };
 		8A3A980F197F131200D23741 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A980E197F131200D23741 /* ColorHelper.swift */; };
 		8A7A2C2B1978725100B7F093 /* BartApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A2C2A1978725100B7F093 /* BartApiController.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		25C31ED819803C780000E7BC /* MuniApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuniApiController.swift; sourceTree = "<group>"; };
 		283F960D1978A04000A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiController.swift; sourceTree = "<group>"; };
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
+		28B17422198075220090F129 /* Locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Locations.plist; sourceTree = "<group>"; };
 		8A3A980E197F131200D23741 /* ColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		8A7A2C2A1978725100B7F093 /* BartApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BartApiController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				2508AF3E1975B4CE00E48B37 /* Info.plist */,
+				28B17422198075220090F129 /* Locations.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B17423198075220090F129 /* Locations.plist in Resources */,
 				2508AF451975B4CE00E48B37 /* Main.storyboard in Resources */,
 				2508AF471975B4CE00E48B37 /* Images.xcassets in Resources */,
 			);

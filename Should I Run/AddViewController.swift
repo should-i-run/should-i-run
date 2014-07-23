@@ -116,9 +116,17 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var number : Int = userDefaults.integerForKey("num")
         
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+        loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)
+        let done = loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
+         println("Adding is \(done)")
+        
         userDefaults.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
         number += 1
-
+        
+        
+        
+       
   
         userDefaults.setInteger(number,forKey: "num")
         println("number in add view: \(number)")

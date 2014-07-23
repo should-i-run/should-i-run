@@ -9,8 +9,7 @@
 import UIKit
 import MapKit
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate {
-    
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
     var locationName:String?
     var destinationLatitude : Float?
     var destinationLongitude : Float?
@@ -37,6 +36,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     //Create controller to handle Google API queries
     var googleApiHandler : GoogleApiController = GoogleApiController()
     
+    // controllers to handle agency API queries
+    var bartApiController = BartApiController()
+    var muniApiController = MuniApiController()
+    
+
     override func viewDidLoad(){
         super.viewDidLoad()
         // Start spinner animation
@@ -48,6 +52,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         //set this class as the delegate for the api controllers
         self.googleApiHandler.delegate = self
         self.bartApiHandler.delegate = self
+        self.gApi.delegate = self
+        self.bartApiController.delegate = self
+        self.muniApiController.delegate = self
         
         //Fetching data from Google and parsing it
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
@@ -68,8 +75,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 }
             }
         }
-
-
     }
 
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
@@ -94,9 +99,17 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             self.googleResults = results
             self.bartApiHandler.searchBartFor(self.departureStationName)
         }
-
-        
     }
+    
+    func didReceiveGoogleResults(results: Array<String>!, muni: Bool) {
+        println("back from google with muni results")
+        
+        //TODO: save results as appropriate
+        
+        
+        self.muniApiController.searchMuniFor(results)
+    }
+
     
     // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [(String, Int)]) {
@@ -117,9 +130,24 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
-        
+
     }
     
+    func didReceiveMuniResults(results: Array<String>!, error: String?) {
+        if let err = error? {
+            println("muni err, unwinding")
+            
+            // Create and show error message when no Google results are found. Delegate to itself on clickin 'Ok'.
+            // Call the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
+            var message: UIAlertView = UIAlertView(title: "Oops!", message: "problem getting muni directions.", delegate: self, cancelButtonTitle: "Ok")
+            message.show()
+            
+        } else {
+            // do things with muni results
+            println("muni data!!!!")
+//            self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         

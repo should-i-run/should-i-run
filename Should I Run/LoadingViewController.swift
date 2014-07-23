@@ -71,7 +71,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 }
             }
         }
-             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+
 
     }
 

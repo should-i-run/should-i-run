@@ -12,6 +12,7 @@ import UIKit
 
 protocol GoogleAPIControllerProtocol {
     func didReceiveGoogleResults(results: Array<String>!, error:String?)
+    func didReceiveGoogleResults(results: Array<String>!, muni: Bool)
 }
 
 
@@ -76,9 +77,8 @@ class GoogleApiController: NSObject{
 
                                 if name == "Bay Area Rapid Transit" {
                                     result = (steps[i] as NSDictionary)
-
                                     walkingStepIndex = i - 1
-                                    i = steps.count // we found bart, so skip out of our for loop
+                                    return result
                                 }
                             }
                         }
@@ -131,10 +131,7 @@ class GoogleApiController: NSObject{
             //get code for station
 
             var eolStationCode = bartLookup[eolStationName]?.uppercaseString
-            
-
             result.append(eolStationCode!)
-            
             return result
         }
         
@@ -148,28 +145,105 @@ class GoogleApiController: NSObject{
                 if let bartStep:NSDictionary = findBart(steps)? {
                     results += getEOLStationFromBartStep(bartStep)
                 }
-
-                
             }
-
-            
-            //TODO: make the results list uniq
             return results
         }
         
+// muni helper functions
+        func findMuni(stepsArray: NSArray) -> NSDictionary? {
+            var result:NSDictionary?
+            
+            for var i = 1; i < steps.count; ++i {
+                
+                if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
+                    
+                    if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
+                        
+                        if let agencies = line.objectForKey("agencies") as? NSArray {
+                            
+                            if let name = agencies[0].objectForKey("name") as? String {
+                                
+                                if name == "San Francisco Municipal Transportation Agency" {
+                                    result = (steps[i] as NSDictionary)
+                                    walkingStepIndex = i - 1
+                                    println(steps)
+                                    
+                                    return result
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result
+        }
         
-        //iterate through all routes until we find one that countains a bart route
-        //set the bart step
-        //the the current route as the bart route
+        func getMuniOriginStationFromWalkingStep(step: NSDictionary) -> Array<String> {
+            
+            var result:[String] = []
+            var instructions:NSString = step.objectForKey("html_instructions") as NSString
+            
+            //trim off first 7 characters to get station name
+            var originStationName = instructions.substringFromIndex(7)
+                .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+
+            result.append(originStationName)
+            return result
+        }
         
-//        for var i = 0; i < allRoutes.count; ++i {
-//            if bartStep == nil {
-//                
+        func getLineFromMuniStep(step: NSDictionary) -> Array<String> {
+
+            var result:[String] = []
+            
+            if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
+                if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
+                    var shortName = line.objectForKey("short_name") as NSString
+                    result.append(shortName)
+                    
+                    var lineName = line.objectForKey("name") as NSString
+                    result.append(lineName)
+                }
+            }
+            
+            var instructions:NSString = step.objectForKey("html_instructions") as NSString
+            
+            // google will return two possible results here:
+                // "Bus towards the Sunset District"
+                // "Light rail towards Balboa Park Station via Downtown"
+            // so we need to check the first character, which will determine the length of what needs to be sliced off
+                // NSString.characterAtIndex(0) -> returns a character code
+                // B == 66
+                // L == 76
+            var eolStationName = "error" // if it's not a bus or light rail, send back an error
+
+            if instructions.characterAtIndex(0) == 66 {
+                eolStationName = instructions.substringFromIndex(12).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                
+            } else if instructions.characterAtIndex(0) == 76 {
+                eolStationName = instructions.substringFromIndex(18).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                
+            }
+            
+            result.append(eolStationName)
+            return result
+        }
+        
+        //I don't think we need this right now... google is giving us the same directions over and over
+//        func getAllMuniEOLStations(routes: NSArray) -> [String] {
+//            var results:[String]  = []
+//            
+//            //iterate through each route and get the EOL station
+//            for var i = 1; i < routes.count; ++i {
+//                var legs : NSArray = routes[i].objectForKey("legs") as NSArray
+//                var steps : NSArray = legs[0].objectForKey("steps") as NSArray
+//                if let muniStep:NSDictionary = findMuni(steps)? {
+//                    results += getLineFromMuniStep(muniStep)
+//                }
 //            }
+//            return results
 //        }
         
 
-//
         
         if let bartStep:NSDictionary = findBart(steps)? {
             results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
@@ -178,11 +252,23 @@ class GoogleApiController: NSObject{
             
             self.delegate?.didReceiveGoogleResults(results, error: nil)
 
+        } else if let muniStep:NSDictionary = findMuni(steps)? {
+            results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+            results += getMuniOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+            results += getLineFromMuniStep(steps[walkingStepIndex + 1] as NSDictionary)
+
+            
+            println("found muni")
+            println(results)
+            //results: [distance to station, station name, line code, line name, EOL station]
+            
+            self.delegate?.didReceiveGoogleResults(results, muni: true)
+            
         } else {
             //error, no bart
             //TODO: trigger segue back to main screen with error
-            println("No bart")
-            self.delegate?.didReceiveGoogleResults(nil, error: "No bart")
+            println("No bart or muni")
+            self.delegate?.didReceiveGoogleResults(nil, error: "No bart or muni")
 
         }
         

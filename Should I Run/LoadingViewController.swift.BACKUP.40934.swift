@@ -9,7 +9,12 @@
 import UIKit
 import MapKit
 
+<<<<<<< HEAD
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate {
+    
+=======
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
+>>>>>>> begin implementing MUNI API
     var locationName:String?
     var destinationLatitude : Float?
     var destinationLongitude : Float?
@@ -30,16 +35,23 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     let locationManager = SharedUserLocation
     
+<<<<<<< HEAD
     // Create controller to handle BART API queries
-    var bartApiHandler = BartApiController()
-    var muniApiHandler = MuniApiController()
+    var bartApiHandler: BartApiController = BartApiController()
     
+=======
+>>>>>>> begin implementing MUNI API
     //Create controller to handle Google API queries
     var googleApiHandler : GoogleApiController = GoogleApiController()
-
-
+    
+<<<<<<< HEAD
+=======
+    // controllers to handle agency API queries
+    var bartApiController = BartApiController()
+    var muniApiController = MuniApiController()
     
 
+>>>>>>> begin implementing MUNI API
     override func viewDidLoad(){
         super.viewDidLoad()
         // Start spinner animation
@@ -49,9 +61,14 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.view.backgroundColor = globalBackgroundColor
 
         //set this class as the delegate for the api controllers
+<<<<<<< HEAD
         self.googleApiHandler.delegate = self
         self.bartApiHandler.delegate = self
-        self.muniApiHandler.delegate = self
+=======
+        self.gApi.delegate = self
+        self.bartApiController.delegate = self
+        self.muniApiController.delegate = self
+>>>>>>> begin implementing MUNI API
         
         //Fetching data from Google and parsing it
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
@@ -72,6 +89,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 }
             }
         }
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> begin implementing MUNI API
     }
 
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
@@ -98,13 +120,13 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
     }
     
-    func didReceiveGoogleResults(results: [String]!, muni: Bool) {
+    func didReceiveGoogleResults(results: Array<String>!, muni: Bool) {
         println("back from google with muni results")
         
         //TODO: save results as appropriate
         
         
-        self.muniApiHandler.searchMuniFor(results)
+        self.muniApiController.searchMuniFor(results)
     }
 
     
@@ -127,10 +149,14 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> begin implementing MUNI API
     }
     
-    func didReceiveMuniResults(results: [String]!, error: String?) {
+    func didReceiveMuniResults(results: Array<String>!, error: String?) {
         if let err = error? {
             println("muni err, unwinding")
             

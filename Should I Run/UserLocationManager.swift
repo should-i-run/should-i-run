@@ -19,6 +19,7 @@
 
 import MapKit
 
+let SharedUserLocation = UserLocation()
 
 class UserLocation: NSObject, CLLocationManagerDelegate {
     
@@ -26,11 +27,10 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     //you can access the lat and long by calling:
       // currentLocation2d.latitude, etc
-    //
     var currentLocation2d:CLLocationCoordinate2D?
     
-    let notificationCenter:NSNotificationCenter = NSNotificationCenter.defaultCenter()
-    let mainQueue:NSOperationQueue = NSOperationQueue.mainQueue()
+    let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
 
     
     class var manager: UserLocation {
@@ -39,7 +39,6 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     init () {
         super.init()
-
 
         //ios 8 only
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
@@ -51,27 +50,18 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
         self.locationManager.distanceFilter = 50
         self.locationManager.startUpdatingLocation()
 
-
-        
-        
     }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
 
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
 
         self.currentLocation2d = manager.location.coordinate
 
-
         self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
         
-        
     }
-    
-    
-    
 
 }
 
-let SharedUserLocation = UserLocation()
+
 
 

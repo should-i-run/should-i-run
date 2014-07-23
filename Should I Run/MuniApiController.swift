@@ -84,7 +84,7 @@ class MuniApiController: NSObject{
             let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
             
             // Trim off unneeded data inside the dictionary
-            let stations: NSDictionary = parsed.objectForKey("root").objectForKey("station") as NSDictionary
+//            let stations: NSDictionary = parsed.objectForKey("root").objectForKey("station") as NSDictionary
             
             self.delegate!.didReceiveMuniResults(result, error: nil)
         }

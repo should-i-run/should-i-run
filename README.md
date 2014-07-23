@@ -27,7 +27,7 @@ View our [press release](PRESS-RELEASE.md).
 
 ## Requirements
 
-- Xcode6-Beta3
+- Xcode6-Beta4
 
 ## Installation
 

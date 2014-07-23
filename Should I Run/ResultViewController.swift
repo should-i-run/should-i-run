@@ -28,8 +28,8 @@ class ResultViewController: UIViewController {
     @IBOutlet var instructionLabel: UILabel?
     @IBOutlet var alarmButton: UIButton?
 
+//    @IBOutlet weak var backButton: UIBarButtonItem!
 
-    
 
     //detial area things
     @IBOutlet var timeToNextTrainLabel: UILabel?
@@ -47,9 +47,11 @@ class ResultViewController: UIViewController {
     @IBOutlet var followingDepartureDestinationLabel: UILabel?
 
     
-    
     override func viewDidLoad() {
+        
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("backToMain"))
 
+        
         
         super.viewDidLoad()
         
@@ -134,12 +136,18 @@ class ResultViewController: UIViewController {
         
     }
     
-    func unwindToList(segue:UIStoryboardSegue)  {
-        println("We are here")
-        println(self.navigationController)
-    }
+    
+   
+//    func backToMain(sender: AnyObject) {
+//        println("Here at this point")
+//        self.navigationController.popToRootViewControllerAnimated(true)
+//    }
+    
+
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        
+        
         
         if segue.identifier {
             if segue.identifier == "AlarmSegue" {

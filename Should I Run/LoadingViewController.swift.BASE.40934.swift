@@ -9,14 +9,13 @@
 import UIKit
 import MapKit
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate {
     var locationName:String?
-    var destinationLatitude : Float?
-    var destinationLongitude : Float?
-    
+    var latDest : Float?
+    var lngDest : Float?
     //37.786059, -122.405156
-    var startLatitude:Float = 37.786059
-    var startLongitude:Float = -122.405156
+    var latStart:Float = 37.786059
+    var lngStart:Float = -122.405156
     
     @IBOutlet var spinner: UIActivityIndicatorView?
     
@@ -31,17 +30,15 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     let locationManager = SharedUserLocation
     
     // Create controller to handle BART API queries
-    var bartApiHandler = BartApiController()
-    var muniApiHandler = MuniApiController()
+    var bartApiController: BartApiController = BartApiController()
     
     //Create controller to handle Google API queries
-    var googleApiHandler : GoogleApiController = GoogleApiController()
-
-
+    var gApi : GoogleApiController = GoogleApiController()
+    var googleCalled = false
     
 
     override func viewDidLoad(){
-        super.viewDidLoad()
+        
         // Start spinner animation
         spinner!.startAnimating()
         
@@ -49,29 +46,33 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.view.backgroundColor = globalBackgroundColor
 
         //set this class as the delegate for the api controllers
-        self.googleApiHandler.delegate = self
-        self.bartApiHandler.delegate = self
-        self.muniApiHandler.delegate = self
+        self.gApi.delegate = self
+        self.bartApiController.delegate = self
         
         //Fetching data from Google and parsing it
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             
-            self.startLatitude = Float(loc2d.latitude)
-            self.startLongitude = Float(loc2d.longitude)
-            self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+            self.latStart = Float(loc2d.latitude)
+            self.lngStart = Float(loc2d.longitude)
+            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+            self.googleCalled = true
             
-        } else {
-            
-            self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+        } else {   self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
             
                 if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                     
-                    self.startLatitude = Float(loc2d.latitude)
-                    self.startLongitude = Float(loc2d.longitude)
-                    self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+                    self.latStart = Float(loc2d.latitude)
+                    self.lngStart = Float(loc2d.longitude)
+                    
+                    if self.googleCalled == false {
+                        self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+                        self.googleCalled = true
+                    }
                 }
             }
         }
+             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+
     }
 
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
@@ -92,21 +93,16 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         } else {
 
             self.distanceToStart = results[0].toInt()!
-            self.departureStationName = results[1]
-            self.googleResults = results
-            self.bartApiHandler.searchBartFor(self.departureStationName)
-        }
-    }
-    
-    func didReceiveGoogleResults(results: Array<String>!, muni: Bool) {
-        println("back from google with muni results")
-        
-        //TODO: save results as appropriate
-        
-        
-        self.muniApiHandler.searchMuniFor(results)
-    }
 
+            self.departureStationName = results[1]
+            
+            self.googleResults = results 
+           
+            self.bartApiController.searchBartFor(self.departureStationName)
+        }
+
+        
+    }
     
     // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [(String, Int)]) {
@@ -127,30 +123,19 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
-
+        
+        
+        
+        
     }
     
-    func didReceiveMuniResults(results: Array<String>!, error: String?) {
-        if let err = error? {
-            println("muni err, unwinding")
-            
-            // Create and show error message when no Google results are found. Delegate to itself on clickin 'Ok'.
-            // Call the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
-            var message: UIAlertView = UIAlertView(title: "Oops!", message: "problem getting muni directions.", delegate: self, cancelButtonTitle: "Ok")
-            message.show()
-            
-        } else {
-            // do things with muni results
-            println("muni data!!!!")
-//            self.performSegueWithIdentifier("ResultsSegue", sender: self)
-        }
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         
         // On segue, stop animating
         spinner!.stopAnimating()
-    
+        
+        
         if segue.identifier == "ResultsSegue" {
             var destinationController = segue.destinationViewController as ResultViewController
             destinationController.distance = self.distanceToStart

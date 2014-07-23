@@ -136,13 +136,9 @@ class ResultViewController: UIViewController {
         
     }
     
-    
-   
-//    func backToMain(sender: AnyObject) {
-//        println("Here at this point")
-//        self.navigationController.popToRootViewControllerAnimated(true)
-//    }
-    
+    @IBAction func returnToRoot(sender: UIButton) {
+        self.navigationController.popToRootViewControllerAnimated(true)
+    }
 
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {

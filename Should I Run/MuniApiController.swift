@@ -21,6 +21,45 @@ class MuniApiController: NSObject{
     var delegate: MuniAPIControllerDelegate?
     
     func searchMuniFor(data: [String]) {
+        //data: [distance to station, station name, line code, line name, EOL station]
+        //hack reactor
+        //lat 37.780948
+        //-122.414045
+        
+        //taraval st
+        //37.74261,-122.491207
+        
+        /*
+        possible results from google:
+            Metro Civic Center Station/Downtn -> muni wants inbound
+            Metro Civic Center Station/Outbd
+            Market St & 7th St
+        
+        */
+        
+        var googleOriginStationName = data[1]
+//        var googleOriginStationName:NSString = "Metro Civic Center Station/Outbd"
+        println(googleOriginStationName)
+
+        
+        var muniOriginStationName = googleOriginStationName.stringByReplacingOccurrencesOfString("&", withString: "and")
+        
+        //additionally, light rail station names need "muni " removed, and /outbd /inbd replaced with " outbound" etc
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: " Outbound")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
+        
+        println(muniOriginStationName)
+
+        
+        var baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
+        
+        var y = googleOriginStationName.stringByReplacingOccurrencesOfString("&", withString: "and")
+        
+        var x:String = y.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        
+        
         
         //83d1f7f4-1d1e-4fc0-a070-162a95bd106f
         //http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=MUNI&stopName=Metro Civic Center Station/Outbd
@@ -28,6 +67,10 @@ class MuniApiController: NSObject{
         //http://services.my511.org/Transit2.0/GetAgencies.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f
         
         self.delegate!.didReceiveMuniResults(data, error: nil)
+        
+    }
+    
+    func processMuniData() {
         
     }
 

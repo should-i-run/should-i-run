@@ -16,8 +16,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var destinationLongitude : Float?
     
     //37.786059, -122.405156
-    var latStart:Float = 37.786059
-    var lngStart:Float = -122.405156
+    var startLatitude:Float = 37.786059
+    var startLongitude:Float = -122.405156
     
     @IBOutlet var spinner: UIActivityIndicatorView?
     
@@ -32,10 +32,10 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     let locationManager = SharedUserLocation
     
     // Create controller to handle BART API queries
-    var bartApiController: BartApiController = BartApiController()
+    var bartApiHandler: BartApiController = BartApiController()
     
     //Create controller to handle Google API queries
-    var gApi : GoogleApiController = GoogleApiController()
+    var googleApiHandler : GoogleApiController = GoogleApiController()
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -46,15 +46,15 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.view.backgroundColor = globalBackgroundColor
 
         //set this class as the delegate for the api controllers
-        self.gApi.delegate = self
-        self.bartApiController.delegate = self
+        self.googleApiHandler.delegate = self
+        self.bartApiHandler.delegate = self
         
         //Fetching data from Google and parsing it
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             
-            self.latStart = Float(loc2d.latitude)
-            self.lngStart = Float(loc2d.longitude)
-            self.gApi.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.latStart,lngStart: self.lngStart)
+            self.startLatitude = Float(loc2d.latitude)
+            self.startLongitude = Float(loc2d.longitude)
+            self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
             
         } else {
             
@@ -62,9 +62,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
                 if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                     
-                    self.latStart = Float(loc2d.latitude)
-                    self.lngStart = Float(loc2d.longitude)
-                    self.gApi.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.latStart,lngStart: self.lngStart)
+                    self.startLatitude = Float(loc2d.latitude)
+                    self.startLongitude = Float(loc2d.longitude)
+                    self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
                 }
             }
         }
@@ -92,7 +92,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             self.distanceToStart = results[0].toInt()!
             self.departureStationName = results[1]
             self.googleResults = results
-            self.bartApiController.searchBartFor(self.departureStationName)
+            self.bartApiHandler.searchBartFor(self.departureStationName)
         }
 
         

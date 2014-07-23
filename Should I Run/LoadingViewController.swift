@@ -57,7 +57,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
             self.googleCalled = true
             
-        } else {   self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+        } else {
+            self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
             
                 if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                     

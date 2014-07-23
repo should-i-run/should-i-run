@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate  {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate {
     var locationName:String?
     var latDest : Float?
     var lngDest : Float?

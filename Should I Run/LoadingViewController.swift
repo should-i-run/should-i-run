@@ -98,7 +98,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
     }
     
-    func didReceiveGoogleResults(results: Array<String>!, muni: Bool) {
+    func didReceiveGoogleResults(results: [String]!, muni: Bool) {
         println("back from google with muni results")
         
         //TODO: save results as appropriate
@@ -130,7 +130,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
     }
     
-    func didReceiveMuniResults(results: Array<String>!, error: String?) {
+    func didReceiveMuniResults(results: [String]!, error: String?) {
         if let err = error? {
             println("muni err, unwinding")
             

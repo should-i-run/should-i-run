@@ -21,6 +21,8 @@ class MuniApiController: NSObject{
     var delegate: MuniAPIControllerDelegate?
     
     func searchMuniFor(data: [String]) {
+        
+        //83d1f7f4-1d1e-4fc0-a070-162a95bd106f
         //data: [distance to station, station name, line code, line name, EOL station]
         //hack reactor
         //lat 37.780948
@@ -31,15 +33,14 @@ class MuniApiController: NSObject{
         
         /*
         possible results from google:
-            Metro Civic Center Station/Downtn -> muni wants inbound
-            Metro Civic Center Station/Outbd
+            Metro Civic Center Station/Downtn -> muni wants Inbound
+            Metro Civic Center Station/Outbd -> muni wants Outbound
             Market St & 7th St
         
         */
         
         var googleOriginStationName = data[1]
-//        var googleOriginStationName:NSString = "Metro Civic Center Station/Outbd"
-        println(googleOriginStationName)
+        println("station name from google: \(googleOriginStationName)")
 
         
         var muniOriginStationName = googleOriginStationName.stringByReplacingOccurrencesOfString("&", withString: "and")
@@ -50,29 +51,51 @@ class MuniApiController: NSObject{
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
         
-        println(muniOriginStationName)
+        println("station name from google: \(muniOriginStationName)")
 
         
+        // build up url
         var baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
+        var escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        let url = NSURL(string: baseUrl + escapedStationName)
         
-        var y = googleOriginStationName.stringByReplacingOccurrencesOfString("&", withString: "and")
+        var request = NSURLRequest(URL: url)
         
-        var x:String = y.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        
-        
-        //83d1f7f4-1d1e-4fc0-a070-162a95bd106f
-        //http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=MUNI&stopName=Metro Civic Center Station/Outbd
-        
-        //http://services.my511.org/Transit2.0/GetAgencies.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f
-        
-        self.delegate!.didReceiveMuniResults(data, error: nil)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            self.processMuniData(data, andError: error)
+            })
         
     }
     
-    func processMuniData() {
+    func processMuniData(data:NSData?, andError error:NSError?){
+        if let err = error? {
+            //handle error
+            
+        } else if let rawMuniXML = data? {
+            var result:[String] = []
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            
+            
+            let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+            
+            let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
+            
+            // Trim off unneeded data inside the dictionary
+            let stations: NSDictionary = parsed.objectForKey("root").objectForKey("station") as NSDictionary
+            
+            self.delegate!.didReceiveMuniResults(result, error: nil)
+        }
+        
+
+
+        
         
     }
+    
+
 
 }
 

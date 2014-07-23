@@ -10,9 +10,11 @@ import UIKit
 import MapKit
 
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate {
+    
     var locationName:String?
-    var latDest : Float?
-    var lngDest : Float?
+    var destinationLatitude : Float?
+    var destinationLongitude : Float?
+    
     //37.786059, -122.405156
     var latStart:Float = 37.786059
     var lngStart:Float = -122.405156
@@ -52,7 +54,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             self.latStart = Float(loc2d.latitude)
             self.lngStart = Float(loc2d.longitude)
-            self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+            self.gApi.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.latStart,lngStart: self.lngStart)
             
         } else {
             
@@ -62,7 +64,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     
                     self.latStart = Float(loc2d.latitude)
                     self.lngStart = Float(loc2d.longitude)
-                    self.gApi.fetchGoogleData(self.latDest!,lngDest: self.lngDest!,latStart: self.latStart,lngStart: self.lngStart)
+                    self.gApi.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.latStart,lngStart: self.lngStart)
                 }
             }
         }

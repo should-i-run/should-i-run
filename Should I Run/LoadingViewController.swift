@@ -38,7 +38,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
 
     override func viewDidLoad(){
-        
+        super.viewDidLoad()
         // Start spinner animation
         spinner!.startAnimating()
         

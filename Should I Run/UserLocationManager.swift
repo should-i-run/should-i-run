@@ -25,6 +25,10 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     var locationManager = CLLocationManager()
     
+    // Boolean flag to check whether a location has been found. This is checked on the loading screen to decide whether
+    // to return or not. It automatically is reassigned whenever the user location fails (false) or updates (true).
+    var hasLocation = true
+    
     //you can access the lat and long by calling:
       // currentLocation2d.latitude, etc
     var currentLocation2d:CLLocationCoordinate2D?
@@ -39,7 +43,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     init () {
         super.init()
-
+        println("im here")
         //ios 8 only
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
             self.locationManager.requestWhenInUseAuthorization()
@@ -49,17 +53,28 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         self.locationManager.distanceFilter = 50
         self.locationManager.startUpdatingLocation()
-
     }
 
+    // didUpdateLocations
+    // This method is executed whenever a location is found.
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-
+        println("location found")
         self.currentLocation2d = manager.location.coordinate
-
         self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
-        
+        self.hasLocation = true
     }
+    
+    // didFailWithError
+    // This method is executed whenever a location is not found.
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        self.hasLocation = false
+        if error {
+            println("location fail error:")
+            println(error)
+        }
 
+    }
+    
 }
 
 

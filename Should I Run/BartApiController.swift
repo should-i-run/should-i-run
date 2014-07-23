@@ -19,7 +19,6 @@ class BartApiController: NSObject , NSURLConnectionDelegate{
     // Create delegate
     // Can be any class, as long as it adheres to BartApiControllerProtocol (by defining didReceiveBartResults in this case)
     var delegate: BartApiControllerDelegate?
-    
 
     func searchBartFor(searchAbbr: String) {
 
@@ -30,11 +29,10 @@ class BartApiController: NSObject , NSURLConnectionDelegate{
         var request = NSURLRequest(URL: url)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
+
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
                 self.hanldeConnectionCallbackWithData(data, andError: error)
             })
-
     }
     
     func hanldeConnectionCallbackWithData(data:NSData?, andError error:NSError?){
@@ -42,7 +40,6 @@ class BartApiController: NSObject , NSURLConnectionDelegate{
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
         let html = NSString(data: data, encoding: NSUTF8StringEncoding)
-        
         let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
         // Trim off unneeded data inside the dictionary

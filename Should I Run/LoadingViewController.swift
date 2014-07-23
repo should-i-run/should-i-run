@@ -39,9 +39,22 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
 
     
+    // Create a timer to segue back on a hard timelimit
+    var timeoutTimer: NSTimer = NSTimer()
+
 
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        if (!self.locationManager.hasLocation) {
+            var message: UIAlertView = UIAlertView(title: "Sorry!", message: "We couldn't find your location.", delegate: self, cancelButtonTitle: "Ok")
+            message.show()
+        }
+        
+        // Set timer to segue back (by calling segueFromView) back to the main table view
+        var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
+        timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("segueFromView:"), userInfo: timeoutText, repeats: false)
+
         // Start spinner animation
         spinner!.startAnimating()
         
@@ -69,9 +82,21 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     self.startLatitude = Float(loc2d.latitude)
                     self.startLongitude = Float(loc2d.longitude)
                     self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
-                }
+                    self.locationManager.hasLocation = true
+                                    }
             }
         }
+    }
+
+    // This pop-up is created, right before segue, whenever:
+    // - No location is found
+    // - Timeout limit is reached
+    func segueFromView(timer: NSTimer) {
+//        NSURLConnectinon.cancel(self.bartApiController.currentBartConnection)
+        var timerTitle = timer.userInfo.objectForKey("titleString") as String
+        var timerMessage = timer.userInfo.objectForKey("messageString") as String
+        var message: UIAlertView = UIAlertView(title: timerTitle, message: timerMessage, delegate: self, cancelButtonTitle: "Ok")
+        message.show()
     }
 
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
@@ -83,21 +108,23 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     func didReceiveGoogleResults(results: Array<String>!, error: String?) {
         if let err = error? {
             println("google err, unwinding")
-            
+
+            // Invalidate the timeout timer when we leave the view
+            timeoutTimer.invalidate()
+
             // Create and show error message when no Google results are found. Delegate to itself on clickin 'Ok'.
             // Call the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
             var message: UIAlertView = UIAlertView(title: "Oops!", message: "No results found.", delegate: self, cancelButtonTitle: "Ok")
             message.show()
 
         } else {
-
             self.distanceToStart = results[0].toInt()!
             self.departureStationName = results[1]
             self.googleResults = results
             self.bartApiHandler.searchBartFor(self.departureStationName)
         }
     }
-    
+
     func didReceiveGoogleResults(results: [String]!, muni: Bool) {
         println("back from google with muni results")
         
@@ -127,7 +154,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
-
     }
     
     func didReceiveMuniResults(results: [String]!, error: String?) {
@@ -150,7 +176,10 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         // On segue, stop animating
         spinner!.stopAnimating()
-    
+
+        // Invalidate the timeout timer when we leave the view
+        timeoutTimer.invalidate()
+        
         if segue.identifier == "ResultsSegue" {
             var destinationController = segue.destinationViewController as ResultViewController
             destinationController.distance = self.distanceToStart

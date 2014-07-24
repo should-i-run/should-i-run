@@ -12,7 +12,7 @@ import UIKit
 protocol BartApiControllerDelegate {
     // Actual implementation of methods needs to be written inside the class using this protocol
     func didReceiveBartResults(results: [(String, Int)])
-//    func didFinishLoading()
+    func handleError(errorMessage: String)
 }
 
 class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
@@ -46,7 +46,7 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
 
     // If BART connection fails, handle error here
     func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        // self.delegate?.handleBartError()
+        self.delegate?.handleError("BART connection failed")
     }
     
     // On connection success, handle data we get from BART
@@ -55,6 +55,10 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     }
     
     func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){
+        if let err = error? {
+            self.delegate?.handleError("BART connection failed")
+            return
+        }
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         

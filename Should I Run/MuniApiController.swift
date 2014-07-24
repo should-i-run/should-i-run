@@ -11,7 +11,8 @@ import UIKit
 
 
 protocol MuniAPIControllerDelegate {
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)], error:String?)
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)])
+    func handleError(errorMessage: String)
 
 }
 
@@ -143,9 +144,9 @@ class MuniApiController: NSObject{
             
             result.sort{$0.departureTime < $1.departureTime}
 
-            self.delegate!.didReceiveMuniResults(result, error: nil)
+            self.delegate!.didReceiveMuniResults(result)
         } else {
-            //error, no routes in result. 
+            self.delegate!.handleError("There was a problem getting MUNI results...")
         }
     }
 }

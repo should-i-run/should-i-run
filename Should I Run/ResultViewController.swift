@@ -50,14 +50,10 @@ class ResultViewController: UIViewController {
 
     
     override func viewDidLoad() {
-        
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("backToMain"))
-
-        
+       
         
         super.viewDidLoad()
         
-
         var destinationStation:String = ""
         var departureTime:Int = 0
         var followingDestinationStation:String = ""

@@ -54,7 +54,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         // Set timer to segue back (by calling segueFromView) back to the main table view
         var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
-        timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("segueFromView:"), userInfo: timeoutText, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeut:"), userInfo: timeoutText, repeats: false)
 
         // Start spinner animation
         spinner!.startAnimating()
@@ -84,52 +84,21 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     self.startLongitude = Float(loc2d.longitude)
                     self.googleApiHandler.fetchGoogleData(self.locationName!, latDest:self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
                     self.locationManager.hasLocation = true
-                                    }
+                }
             }
         }
     }
-    
-    // This pop-up is created, right before segue, whenever:
-    // - No location is found
-    // - Timeout limit is reached
-    func segueFromView(timer: NSTimer) {
-//        NSURLConnectinon.cancel(self.bartApiController.currentBartConnection)
-        bartApiHandler.cancelConnection()
-        var timerTitle = timer.userInfo.objectForKey("titleString") as String
-        var timerMessage = timer.userInfo.objectForKey("messageString") as String
-        var message: UIAlertView = UIAlertView(title: timerTitle, message: timerMessage, delegate: self, cancelButtonTitle: "Ok")
-        message.show()
-    }
 
-    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
-    // It performs the unwind segue when done.
-    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
-        self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
-    }
-    
-    func didReceiveGoogleResults(results: Array<String>!, error: String?) {
-        if let err = error? {
-            println("google err, unwinding")
+    func didReceiveGoogleResults(results: [String]) {
 
-            // Invalidate the timeout timer when we leave the view
-            timeoutTimer.invalidate()
+        self.distanceToStart = results[0].toInt()!
+        self.departureStationName = results[1]
+        self.googleResults = results
+        self.bartApiHandler.searchBartFor(self.departureStationName)
 
-            // Create and show error message when no Google results are found. Delegate to itself on clickin 'Ok'.
-            // Call the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
-            var message: UIAlertView = UIAlertView(title: "Oops!", message: "No results found.", delegate: self, cancelButtonTitle: "Ok")
-            message.show()
-
-        } else {
-            
-            self.distanceToStart = results[0].toInt()!
-            self.departureStationName = results[1]
-            self.googleResults = results
-            self.bartApiHandler.searchBartFor(self.departureStationName)
-        }
     }
 
     func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool) {
-        //TODO: save results as appropriate
   
         self.muniApiHandler.searchMuniFor(results)
     }
@@ -156,20 +125,38 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)], error:String?) {
-        if let err = error? {
-            println("muni err, unwinding")
-            
-            // Create and show error message when no Google results are found. Delegate to itself on clickin 'Ok'.
-            // Call the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
-            var message: UIAlertView = UIAlertView(title: "Oops!", message: "problem getting muni directions.", delegate: self, cancelButtonTitle: "Ok")
-            message.show()
-            
-        } else {
-            self.muniResults = results
-            self.performSegueWithIdentifier("ResultsSegue", sender: self)
-        }
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]) {
+
+        self.muniResults = results
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
+    
+    
+
+    // Error handling-----------------------------------------------------
+    
+    
+    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
+    // It performs the unwind segue when done.
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
+        timeoutTimer.invalidate()
+        self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
+    }
+    
+    func handleError(errorMessage: String) {
+        self.bartApiHandler.cancelConnection()
+        // Create and show error message
+        // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
+        var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        message.show()
+        
+    }
+    
+    // Timeouts redirect here.
+    func timerTimeout(timer: NSTimer) {
+        handleError("Request timed out")
+    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         

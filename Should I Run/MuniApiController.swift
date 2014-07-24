@@ -40,8 +40,6 @@ class MuniApiController: NSObject{
         */
         
         var googleOriginStationName = data[1]
-        println("station name from google: \(googleOriginStationName)")
-
         
         var muniOriginStationName = googleOriginStationName.stringByReplacingOccurrencesOfString("&", withString: "and")
         
@@ -50,15 +48,10 @@ class MuniApiController: NSObject{
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: " Outbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
-        
-        println("processed station name: \(muniOriginStationName)")
 
-        
         // build up url
-        var baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
-        var escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        
-        println(baseUrl + escapedStationName)
+        let baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
+        let escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let url = NSURL(string: baseUrl + escapedStationName)
         
         var request = NSURLRequest(URL: url)
@@ -78,38 +71,74 @@ class MuniApiController: NSObject{
     
     func processMuniData(rawMuniXML:NSData, targetRoute: String){
 
-            var result:[String] = []
+        var result:[String] = []
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        
+        let html = NSString(data: rawMuniXML, encoding: NSUTF8StringEncoding)
+        
+        let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
+        
+        // Trim off unneeded headers
+        if let routes: NSDictionary = parsedXML.objectForKey("RTT")?.objectForKey("AgencyList")?.objectForKey("Agency")?.objectForKey("RouteList")? as? NSDictionary {
+
+            //what's left should be an array of routes... if not it will crash
+            var routesArray:[NSDictionary] = []
             
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            
-            
-            let html = NSString(data: rawMuniXML, encoding: NSUTF8StringEncoding)
-            
-            let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
-            
-            // Trim off unneeded headers
-            let routes: NSDictionary = parsedXML.objectForKey("RTT").objectForKey("AgencyList").objectForKey("Agency").objectForKey("RouteList") as NSDictionary
-            //what's left should be an array of routes... if not it will crash but haven't seen that yet
-            
-            var results:[String] = []
-            println("routes-----------------------------")
-            println(routes)
-            
-        for routeObject in routes {
-                println("we have a routeObject----------------")
-                println(routeObject)
-                if let route:NSDictionary = routeObject.value.objectForKey("Route") as? NSDictionary {
-                println("we have a route")
-                    if route.objectForKey("Code") as String == targetRoute {
-                        println("target route found")
-                        println(route)
-                    
-                    }
-                }
+            if let temp:[NSDictionary] = routes.objectForKey("Route") as? [NSDictionary] {
+                routesArray += temp
+                
+            } else if let temp:NSDictionary = routes.objectForKey("Route") as? NSDictionary {
+                routesArray.append(temp)
             }
             
-        self.delegate!.didReceiveMuniResults(result, error: nil)
+            let results:[String] = []
+
+            for route in routesArray {
+                let code = route.objectForKey("Code")
+                
+                if route.objectForKey("Code") as String == targetRoute {
+
+                    if let routeDirectionList = route.objectForKey("RouteDirectionList") as? NSDictionary {
+                        if let routeDirection = routeDirectionList.objectForKey("RouteDirection") as? NSDictionary {
+                            if let stopList = routeDirection.objectForKey("StopList") as? NSDictionary {
+                                if let stop = stopList.objectForKey("Stop") as? NSDictionary {
+                                    if let departureTimeList = stop.objectForKey("DepartureTimeList") as? NSDictionary {
+                                        //what's left should be an array of departure times or a dictionary of a single time
+                                        var departureTimesArray:[NSDictionary] = []
+                                        
+                                        if let temp:[NSDictionary] = departureTimeList.objectForKey("DepartureTime") as? [NSDictionary] {
+                                            routesArray += temp
+                                            
+                                        } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
+                                            routesArray.append(temp)
+                                        }
+                                        
+                                        println(departureTimesArray)
+                                        
+                                        for departureTime in departureTimesArray {
+                                            var text = departureTime.objectForKey("text") as String
+                                            var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                                            println("departure time found: \(trimmedText)")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+//                    
+//                    let departureTimes:NSDictionary = route.objectForKey("RouteDirectionList").objectForKey("RouteDirection").objectForKey("StopList").objectForKey("Stop").objectForKey("DepartureTimeList") as NSDictionary
+                    
+
+                }
+            }
+
+            self.delegate!.didReceiveMuniResults(result, error: nil)
+        } else {
+            //error, no routes in result. 
         }
+    }
 }
 
 /*

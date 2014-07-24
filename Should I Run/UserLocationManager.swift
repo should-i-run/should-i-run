@@ -43,7 +43,6 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     init () {
         super.init()
-        println("im here")
         //ios 8 only
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {
             self.locationManager.requestWhenInUseAuthorization()
@@ -58,7 +57,6 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     // didUpdateLocations
     // This method is executed whenever a location is found.
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        println("location found")
         self.currentLocation2d = manager.location.coordinate
         self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
         self.hasLocation = true

@@ -18,26 +18,46 @@ protocol GoogleAPIControllerProtocol {
 
 class GoogleApiController: NSObject{
     
-    
-   
-
     var delegate : GoogleAPIControllerProtocol?
     
-    func fetchGoogleData(latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
-                
+    var doNotRun = true
+    
+    func fetchGoogleData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
+        var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
+//        println("Cache is \(cache[""])")
         var time = Int(NSDate().timeIntervalSince1970)
+
+        for item in cache {
+            var cachedLocaton = item["location"] as String
+            var cachedPosition = item["position"] as Float
+            var cachedTime = item["time"] as Int
+            if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 600) ) {
+                println("Cached Results found")
+                doNotRun = false
+                var cachedResults = item["results"] as NSDictionary
+                 self.convertGoogleToBart(cachedResults)
+            }
+        }
+       
+
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
         var request = NSURLRequest(URL: url)
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+        if doNotRun {
+
+           NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
             (response, data, error) in
 
             
-            if error {println("Error!!",error)}
+            if error {
+                println("Error!!",error)
+            } else {
 
             let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-           
-            self.parseGoogleTransitData(jsonDict)
+            var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
+            cache.insertObject(["time" : time, "location" : locName, "position" : latStart, "results" : jsonDict], atIndex: cache.count)
+
+            let done = cache.writeToFile(NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"), atomically: false)
 
         }
         

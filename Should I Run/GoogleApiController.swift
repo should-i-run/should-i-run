@@ -12,7 +12,7 @@ import UIKit
 
 protocol GoogleAPIControllerProtocol {
     func didReceiveGoogleResults(results: Array<String>!, error:String?)
-    func didReceiveGoogleResults(results: Array<String>!, muni: Bool)
+    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool)
 }
 
 
@@ -293,7 +293,7 @@ class GoogleApiController: NSObject{
             println(muniData)
             //results: [distance to station, station name, line code, line name, EOL station]
             
-            self.delegate?.didReceiveGoogleResults(results, muni: true)
+            self.delegate?.didReceiveGoogleResults(muniData, muni: true)
             
         } else {
             //error, no bart

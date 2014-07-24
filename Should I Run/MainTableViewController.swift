@@ -12,12 +12,8 @@ import Foundation
 
 @objc (MainTableViewController) class MainTableViewController: UITableViewController {
     
-    var places:Array<Place> = []
+
     var colors:Array<UIColor> = []
-    let userDefaults = NSUserDefaults.standardUserDefaults()
-   
-    
-    
 
     var locName:String = ""
     var locLat:Float = 0.0
@@ -130,7 +126,6 @@ import Foundation
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
 
         } else {
-            println("Performing Add Segue")
             self.performSegueWithIdentifier("AddSegue", sender: self)
         }
         
@@ -141,8 +136,6 @@ import Foundation
         //reload the table on unwinding
         var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
      
-//        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-//         println("Location Count on unwinding is \(loc.count)")
         self.tableView.reloadData()
     
     }

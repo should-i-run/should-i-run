@@ -71,7 +71,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             self.startLatitude = Float(loc2d.latitude)
             self.startLongitude = Float(loc2d.longitude)
-            self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+            self.googleApiHandler.fetchGoogleData(self.locationName!, latDest: self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
             
         } else {
             
@@ -81,7 +81,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     
                     self.startLatitude = Float(loc2d.latitude)
                     self.startLongitude = Float(loc2d.longitude)
-                    self.googleApiHandler.fetchGoogleData(self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+                    self.googleApiHandler.fetchGoogleData(self.locationName!, latDest:self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
                     self.locationManager.hasLocation = true
                                     }
             }
@@ -118,6 +118,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             message.show()
 
         } else {
+            
             self.distanceToStart = results[0].toInt()!
             self.departureStationName = results[1]
             self.googleResults = results

@@ -22,6 +22,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     var bartResults: [(String, Int)]?
     var googleResults : [String]?
+    var muniResults: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]?
     
     var distanceToStart : Int = 0
     var departureStationName: String = ""
@@ -154,7 +155,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], error:String?) {
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)], error:String?) {
         if let err = error? {
             println("muni err, unwinding")
             
@@ -164,8 +165,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             message.show()
             
         } else {
-            // do things with muni results
-//            self.performSegueWithIdentifier("ResultsSegue", sender: self)
+            self.muniResults = results
+            self.performSegueWithIdentifier("ResultsSegue", sender: self)
         }
     }
     
@@ -179,9 +180,19 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         if segue.identifier == "ResultsSegue" {
             var destinationController = segue.destinationViewController as ResultViewController
-            destinationController.distance = self.distanceToStart
-            destinationController.departureStationName = self.departureStationName
-            destinationController.departures = self.bartResults!
+            
+            //if we have muni data, pass it in
+            if let muniData = self.muniResults {
+                destinationController.muniResults = muniData
+                //stuff as appropriate
+                
+            //otherwise assuming we have bart
+            } else {
+
+                destinationController.distanceToOrigin = self.distanceToStart
+                destinationController.departureStationName = bartLookupReverse[self.departureStationName.lowercaseString]!
+                destinationController.departures = self.bartResults!
+            }
         } else if segue.identifier == "ErrorUnwindSegue" {
 
         }

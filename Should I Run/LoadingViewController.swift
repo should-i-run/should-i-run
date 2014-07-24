@@ -126,7 +126,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
     }
 
-    func didReceiveGoogleResults(results: [String]!, muni: Bool) {
+    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool) {
         //TODO: save results as appropriate
   
         self.muniApiHandler.searchMuniFor(results)
@@ -154,7 +154,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
-    func didReceiveMuniResults(results: [String]!, error: String?) {
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], error:String?) {
         if let err = error? {
             println("muni err, unwinding")
             

@@ -12,7 +12,7 @@ import UIKit
 
 protocol GoogleAPIControllerProtocol {
     func didReceiveGoogleResults(results: Array<String>!, error:String?)
-    func didReceiveGoogleResults(results: Array<String>!, muni: Bool)
+    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool)
 }
 
 
@@ -35,7 +35,9 @@ class GoogleApiController: NSObject{
                 println("Cached Results found")
                 doNotRun = false
                 var cachedResults = item["results"] as NSDictionary
-                 self.convertGoogleToBart(cachedResults)
+                
+                self.parseGoogleTransitData(cachedResults)
+                return
             }
         }
        
@@ -49,16 +51,20 @@ class GoogleApiController: NSObject{
             (response, data, error) in
 
             
-            if error {
-                println("Error!!",error)
-            } else {
+                if error {
+                    println("Error!!",error)
+                } else {
 
-            let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-            var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
-            cache.insertObject(["time" : time, "location" : locName, "position" : latStart, "results" : jsonDict], atIndex: cache.count)
+                    let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+                    var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
+                    cache.insertObject(["time" : time, "location" : locName, "position" : latStart, "results" : jsonDict], atIndex: cache.count)
 
-            let done = cache.writeToFile(NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"), atomically: false)
+                    let done = cache.writeToFile(NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"), atomically: false)
+                    
+                    self.parseGoogleTransitData(jsonDict)
 
+                }
+            }
         }
         
     }
@@ -288,12 +294,10 @@ class GoogleApiController: NSObject{
             self.delegate?.didReceiveGoogleResults(results, error: nil)
 
         } else if let muniData = getMuniData(allRoutes)? {
-            println("we have muni data and it is")
 
-            println(muniData)
             //results: [distance to station, station name, line code, line name, EOL station]
             
-            self.delegate?.didReceiveGoogleResults(results, muni: true)
+            self.delegate?.didReceiveGoogleResults(muniData, muni: true)
             
         } else {
             //error, no bart

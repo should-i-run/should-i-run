@@ -37,27 +37,20 @@ class GoogleApiController: NSObject{
 
             let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
            
-            self.convertGoogleToBart(jsonDict)
+            self.parseGoogleTransitData(jsonDict)
 
         }
         
     }
    
-    func convertGoogleToBart(goog: NSDictionary) {
-        var results :Array<String> = []
+    func parseGoogleTransitData(goog: NSDictionary) {
+        var results :[String] = []
         
         var walkingStepIndex = 0
         
-
-
-        
         var allRoutes : NSArray = goog.objectForKey("routes") as NSArray
-        
         var inter2 : NSArray = allRoutes[0].objectForKey("legs") as NSArray
-        
         var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
-        
-
         
         //iterate over each step until we find the one with 
         //trainsit_detials / line / agencys [0] name
@@ -164,10 +157,24 @@ class GoogleApiController: NSObject{
                             if let name = agencies[0].objectForKey("name") as? String {
                                 
                                 if name == "San Francisco Municipal Transportation Agency" {
-                                    result = (steps[i] as NSDictionary)
-                                    walkingStepIndex = i - 1
                                     
-                                    return result
+                                    //For now, limiting to light rail by checking the vehicle type
+                                    //comment out this block to remove the limitation
+                                    if let vehicle = line.objectForKey("vehicle") as? NSDictionary {
+                                        
+                                        if let type = vehicle.objectForKey("type") as? String {
+                                            
+                                            if type == "TRAM" {
+                                            //but keep this part
+                                                result = (steps[i] as NSDictionary)
+                                                walkingStepIndex = i - 1
+                                                return result
+
+                                            //return to commenting
+                                            }
+                                        }
+                                    }
+                                    //end commenting
                                 }
                             }
                         }
@@ -256,8 +263,6 @@ class GoogleApiController: NSObject{
             results += getMuniOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
             results += getLineFromMuniStep(steps[walkingStepIndex + 1] as NSDictionary)
 
-            
-            println("found muni")
             println(results)
             //results: [distance to station, station name, line code, line name, EOL station]
             

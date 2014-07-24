@@ -126,11 +126,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
 
     func didReceiveGoogleResults(results: [String]!, muni: Bool) {
-        println("back from google with muni results")
-        
         //TODO: save results as appropriate
-        
-        
+  
         self.muniApiHandler.searchMuniFor(results)
     }
 
@@ -167,7 +164,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
         } else {
             // do things with muni results
-            println("muni data!!!!")
 //            self.performSegueWithIdentifier("ResultsSegue", sender: self)
         }
     }

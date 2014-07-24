@@ -1,144 +1,1148 @@
 (
         {
-        distance =         {
-            text = "466 ft";
-            value = 142;
+        bounds =         {
+            northeast =             {
+                lat = "37.7808942";
+                lng = "-122.4140362";
+            };
+            southwest =             {
+                lat = "37.7645184";
+                lng = "-122.429133";
+            };
         };
-        duration =         {
-            text = "2 mins";
-            value = 97;
-        };
-        "end_location" =         {
-            lat = "37.780568";
-            lng = "-122.412441";
-        };
-        "html_instructions" = "Walk to Market St & 7th St";
-        polyline =         {
-            points = "qareFv~cjVIeAKaBpAaBBE@?Ao@";
-        };
-        "start_location" =         {
-            lat = "37.7808942";
-            lng = "-122.4140362";
-        };
-        steps =         (
+        copyrights = "Map data \U00a92014 Google";
+        legs =         (
                         {
+                "arrival_time" =                 {
+                    text = "7:24pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406168682;
+                };
+                "departure_time" =                 {
+                    text = "7:12pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406167965;
+                };
                 distance =                 {
-                    text = "246 ft";
-                    value = 75;
+                    text = "1.6 mi";
+                    value = 2647;
                 };
                 duration =                 {
-                    text = "1 min";
-                    value = 52;
+                    text = "12 mins";
+                    value = 717;
                 };
+                "end_address" = "3301-3321 16th Street, San Francisco, CA 94114, USA";
                 "end_location" =                 {
-                    lat = "37.781005";
-                    lng = "-122.4131953";
+                    lat = "37.7645876";
+                    lng = "-122.4273324";
                 };
-                "html_instructions" = "Head <b>east</b> on <b>McAllister St</b> toward <b>Leavenworth St</b>";
-                polyline =                 {
-                    points = "qareFv~cjVIeAKaB";
-                };
+                "start_address" = "100 McAllister Street, UC Hastings College of the Law, San Francisco, CA 94102, USA";
                 "start_location" =                 {
                     lat = "37.7808942";
                     lng = "-122.4140362";
                 };
-                "travel_mode" = WALKING;
-            },
-                        {
-                distance =                 {
-                    text = "220 ft";
-                    value = 67;
-                };
-                duration =                 {
-                    text = "1 min";
-                    value = 45;
-                };
-                "end_location" =                 {
-                    lat = "37.780568";
-                    lng = "-122.412441";
-                };
-                "html_instructions" = "Turn <b>right</b> onto <b>Charles J. Brenham Pl</b>";
-                maneuver = "turn-right";
-                polyline =                 {
-                    points = "gbreFnycjVpAaBBE@?Ao@";
-                };
-                "start_location" =                 {
-                    lat = "37.781005";
-                    lng = "-122.4131953";
-                };
-                "travel_mode" = WALKING;
-            }
-        );
-        "travel_mode" = WALKING;
-    },
-        {
-        distance =         {
-            text = "6.1 mi";
-            value = 9887;
-        };
-        duration =         {
-            text = "43 mins";
-            value = 2600;
-        };
-        "end_location" =         {
-            lat = "37.753241";
-            lng = "-122.501002";
-        };
-        "html_instructions" = "Bus towards the Sunset District";
-        polyline =         {
-            points = "q_reFvtcjVBCLP|GhJ`ArAxDlFj@t@NP|DpF|DjFhA~ALR|CdEdAxAl@|@j@v@fB`CY`@BVF|@`@hGF|@`@hGF~@\\pFBVf@fIh@dIF~@`@jGf@pH@Vh@dIh@nIF|@`@lGf@rH@Th@fI`@dGDl@@Tj@pI?@F|@^~F?Af@nH@XZrELrBJ`B@JZzEV~DRlCbDa@PCzDc@dDa@TIDx@b@lGDz@j@xIFx@Av@Iz@I`@EXKh@]pBE^Aj@Bb@DpDF|C@v@HtE@x@FzCFtE@z@FzCHrE@z@DzCHrE@z@FxCFvEBz@DxCH~E@z@FbDHvE@z@DxCH~EBx@DpCHtE@x@DzCHtEl@CjIUl@CpHSRA`JYR?`JYP?~IWRAbJYP?HtEFzD?XHtEHvEFzD?XHrEHvEFzD@VFvEHvEF|D@VHtEFtEBfA@b@BhBF|D@VFtEHzD?XHvEF|DO?";
-        };
-        "start_location" =         {
-            lat = "37.780568";
-            lng = "-122.412441";
-        };
-        "transit_details" =         {
-            "arrival_stop" =             {
-                location =                 {
-                    lat = "37.753241";
-                    lng = "-122.501002";
-                };
-                name = "Noriega St & 42nd Ave";
-            };
-            "arrival_time" =             {
-                text = "1:31pm";
-                "time_zone" = "America/Los_Angeles";
-                value = 1406147507;
-            };
-            "departure_stop" =             {
-                location =                 {
-                    lat = "37.780568";
-                    lng = "-122.412441";
-                };
-                name = "Market St & 7th St";
-            };
-            "departure_time" =             {
-                text = "12:48pm";
-                "time_zone" = "America/Los_Angeles";
-                value = 1406144907;
-            };
-            headsign = "the Sunset District";
-            line =             {
-                agencies =                 (
+                steps =                 (
                                         {
-                        name = "San Francisco Municipal Transportation Agency";
-                        url = "http://www.sfmta.com/";
+                        distance =                         {
+                            text = "0.2 mi";
+                            value = 323;
+                        };
+                        duration =                         {
+                            text = "4 mins";
+                            value = 236;
+                        };
+                        "end_location" =                         {
+                            lat = "37.778675";
+                            lng = "-122.414995";
+                        };
+                        "html_instructions" = "Walk to Metro Civic Center Station/Outbd";
+                        polyline =                         {
+                            points = "qareFv~cjVHtAH`AJjBxDc@nBWdAMh@D";
+                        };
+                        "start_location" =                         {
+                            lat = "37.7808942";
+                            lng = "-122.4140362";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "381 ft";
+                                    value = 116;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 88;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7807256";
+                                    lng = "-122.4153361";
+                                };
+                                "html_instructions" = "Head <b>west</b> on <b>McAllister St</b> toward <b>Hyde St</b>";
+                                polyline =                                 {
+                                    points = "qareFv~cjVHtAH`AJjB";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7808942";
+                                    lng = "-122.4140362";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "0.1 mi";
+                                    value = 207;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 148;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.778675";
+                                    lng = "-122.414995";
+                                };
+                                "html_instructions" = "Turn <b>left</b> onto <b>Hyde St</b>";
+                                maneuver = "turn-left";
+                                polyline =                                 {
+                                    points = "q`reFzfdjVxDc@nBWdAMh@D";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7807256";
+                                    lng = "-122.4153361";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    },
+                                        {
+                        distance =                         {
+                            text = "1.4 mi";
+                            value = 2222;
+                        };
+                        duration =                         {
+                            text = "7 mins";
+                            value = 407;
+                        };
+                        "end_location" =                         {
+                            lat = "37.764621";
+                            lng = "-122.428722";
+                        };
+                        "html_instructions" = "Light rail towards Balboa Park Station";
+                        polyline =                         {
+                            points = "wsqeFvddjVNSbDlEx@fA|DrF~DjFrAnBB@|CfEdAxAl@|@j@t@fBbCb@l@dAvA|CfEx@hAfClDbF`HLjAXlMKXzCMpDOJAj@CpGYnHY?D";
+                        };
+                        "start_location" =                         {
+                            lat = "37.778675";
+                            lng = "-122.414995";
+                        };
+                        "transit_details" =                         {
+                            "arrival_stop" =                             {
+                                location =                                 {
+                                    lat = "37.764621";
+                                    lng = "-122.428722";
+                                };
+                                name = "Church St & 16th St";
+                            };
+                            "arrival_time" =                             {
+                                text = "7:23pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168617;
+                            };
+                            "departure_stop" =                             {
+                                location =                                 {
+                                    lat = "37.778675";
+                                    lng = "-122.414995";
+                                };
+                                name = "Metro Civic Center Station/Outbd";
+                            };
+                            "departure_time" =                             {
+                                text = "7:16pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168210;
+                            };
+                            headsign = "Balboa Park Station";
+                            line =                             {
+                                agencies =                                 (
+                                                                        {
+                                        name = "San Francisco Municipal Transportation Agency";
+                                        url = "http://www.sfmta.com/";
+                                    }
+                                );
+                                name = Church;
+                                "short_name" = J;
+                                vehicle =                                 {
+                                    icon = "//maps.gstatic.com/mapfiles/transit/iw/6/tram.png";
+                                    name = "Light rail";
+                                    type = TRAM;
+                                };
+                            };
+                            "num_stops" = 3;
+                        };
+                        "travel_mode" = TRANSIT;
+                    },
+                                        {
+                        distance =                         {
+                            text = "335 ft";
+                            value = 102;
+                        };
+                        duration =                         {
+                            text = "1 min";
+                            value = 67;
+                        };
+                        "end_location" =                         {
+                            lat = "37.7645876";
+                            lng = "-122.4273324";
+                        };
+                        "html_instructions" = "Walk to 3301-3321 16th Street, San Francisco, CA 94114, USA";
+                        polyline =                         {
+                            points = "{{neFnzfjVRo@IqDCs@";
+                        };
+                        "start_location" =                         {
+                            lat = "37.764621";
+                            lng = "-122.428722";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "335 ft";
+                                    value = 102;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 67;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7645876";
+                                    lng = "-122.4273324";
+                                };
+                                "html_instructions" = "Head <b>east</b> on <b>16th St</b> toward <b>Landers St</b><div style=\"font-size:0.9em\">Destination will be on the left</div>";
+                                polyline =                                 {
+                                    points = "{{neFnzfjVRo@IqDCs@";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.764621";
+                                    lng = "-122.428722";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
                     }
                 );
-                name = "Haight-Noriega";
-                "short_name" = 71;
-                vehicle =                 {
-                    icon = "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png";
-                    name = Bus;
-                    type = BUS;
-                };
-            };
-            "num_stops" = 45;
+                "via_waypoint" =                 (
+                );
+            }
+        );
+        "overview_polyline" =         {
+            points = "qareFv~cjVRvCJjBxDc@tDe@h@DNS|EtG|J~MzHrKjS|XbF`HLjAXlMKXlI]v@E`Qs@?DRo@MeF";
         };
-        "travel_mode" = TRANSIT;
+        summary = "";
+        warnings =         (
+            "Walking directions are in beta.    Use caution \U2013 This route may be missing sidewalks or pedestrian paths."
+        );
+        "waypoint_order" =         (
+        );
+    },
+        {
+        bounds =         {
+            northeast =             {
+                lat = "37.7808942";
+                lng = "-122.4140362";
+            };
+            southwest =             {
+                lat = "37.7647751";
+                lng = "-122.429321";
+            };
+        };
+        copyrights = "Map data \U00a92014 Google";
+        legs =         (
+                        {
+                "arrival_time" =                 {
+                    text = "7:21pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406168482;
+                };
+                "departure_time" =                 {
+                    text = "7:09pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406167785;
+                };
+                distance =                 {
+                    text = "1.6 mi";
+                    value = 2537;
+                };
+                duration =                 {
+                    text = "12 mins";
+                    value = 697;
+                };
+                "end_address" = "3301-3321 16th Street, San Francisco, CA 94114, USA";
+                "end_location" =                 {
+                    lat = "37.7647751";
+                    lng = "-122.4276208";
+                };
+                "start_address" = "100 McAllister Street, UC Hastings College of the Law, San Francisco, CA 94102, USA";
+                "start_location" =                 {
+                    lat = "37.7808942";
+                    lng = "-122.4140362";
+                };
+                steps =                 (
+                                        {
+                        distance =                         {
+                            text = "0.2 mi";
+                            value = 323;
+                        };
+                        duration =                         {
+                            text = "4 mins";
+                            value = 236;
+                        };
+                        "end_location" =                         {
+                            lat = "37.778675";
+                            lng = "-122.414995";
+                        };
+                        "html_instructions" = "Walk to Metro Civic Center Station/Outbd";
+                        polyline =                         {
+                            points = "qareFv~cjVHtAH`AJjBxDc@nBWdAMh@D";
+                        };
+                        "start_location" =                         {
+                            lat = "37.7808942";
+                            lng = "-122.4140362";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "381 ft";
+                                    value = 116;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 88;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7807256";
+                                    lng = "-122.4153361";
+                                };
+                                "html_instructions" = "Head <b>west</b> on <b>McAllister St</b> toward <b>Hyde St</b>";
+                                polyline =                                 {
+                                    points = "qareFv~cjVHtAH`AJjB";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7808942";
+                                    lng = "-122.4140362";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "0.1 mi";
+                                    value = 207;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 148;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.778675";
+                                    lng = "-122.414995";
+                                };
+                                "html_instructions" = "Turn <b>left</b> onto <b>Hyde St</b>";
+                                maneuver = "turn-left";
+                                polyline =                                 {
+                                    points = "q`reFzfdjVxDc@nBWdAMh@D";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7807256";
+                                    lng = "-122.4153361";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    },
+                                        {
+                        distance =                         {
+                            text = "1.1 mi";
+                            value = 1803;
+                        };
+                        duration =                         {
+                            text = "3 mins";
+                            value = 182;
+                        };
+                        "end_location" =                         {
+                            lat = "37.767327";
+                            lng = "-122.429321";
+                        };
+                        "html_instructions" = "Light rail towards San Francisco Zoo";
+                        polyline =                         {
+                            points = "wsqeFvddjVNS`DlEz@fA|DpF|DjFtAnB@B|CdEdAxAl@|@j@v@fB`Cb@l@fAxAzCfEx@hAfCjDdFbH`B|B`ArAnEbGl@x@n@z@KL";
+                        };
+                        "start_location" =                         {
+                            lat = "37.778675";
+                            lng = "-122.414995";
+                        };
+                        "transit_details" =                         {
+                            "arrival_stop" =                             {
+                                location =                                 {
+                                    lat = "37.767327";
+                                    lng = "-122.429321";
+                                };
+                                name = "Metro Church Station/Outbound";
+                            };
+                            "arrival_time" =                             {
+                                text = "7:16pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168212;
+                            };
+                            "departure_stop" =                             {
+                                location =                                 {
+                                    lat = "37.778675";
+                                    lng = "-122.414995";
+                                };
+                                name = "Metro Civic Center Station/Outbd";
+                            };
+                            "departure_time" =                             {
+                                text = "7:13pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168030;
+                            };
+                            headsign = "San Francisco Zoo";
+                            line =                             {
+                                agencies =                                 (
+                                                                        {
+                                        name = "San Francisco Municipal Transportation Agency";
+                                        url = "http://www.sfmta.com/";
+                                    }
+                                );
+                                name = Taraval;
+                                "short_name" = L;
+                                vehicle =                                 {
+                                    icon = "//maps.gstatic.com/mapfiles/transit/iw/6/tram.png";
+                                    name = "Light rail";
+                                    type = TRAM;
+                                };
+                            };
+                            "num_stops" = 2;
+                        };
+                        "travel_mode" = TRANSIT;
+                    },
+                                        {
+                        distance =                         {
+                            text = "0.3 mi";
+                            value = 411;
+                        };
+                        duration =                         {
+                            text = "5 mins";
+                            value = 289;
+                        };
+                        "end_location" =                         {
+                            lat = "37.7647751";
+                            lng = "-122.4276208";
+                        };
+                        "html_instructions" = "Walk to 3301-3321 16th Street, San Francisco, CA 94114, USA";
+                        polyline =                         {
+                            points = "yloeFf~fjVBo@SUCGAAfCMzBG?EK_EhBKpD[";
+                        };
+                        "start_location" =                         {
+                            lat = "37.767327";
+                            lng = "-122.429321";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "62 ft";
+                                    value = 19;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 12;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.76744";
+                                    lng = "-122.4289248";
+                                };
+                                "html_instructions" = "Head <b>northeast</b> on <b>Market St</b> toward <b>Church St</b>";
+                                polyline =                                 {
+                                    points = "yloeFf~fjVBo@SUCGAA";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.767327";
+                                    lng = "-122.429321";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "476 ft";
+                                    value = 145;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 107;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7661377";
+                                    lng = "-122.4288075";
+                                };
+                                "html_instructions" = "Turn <b>right</b> onto <b>Church St</b>";
+                                maneuver = "turn-right";
+                                polyline =                                 {
+                                    points = "omoeFv{fjVfCMzBG";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.76744";
+                                    lng = "-122.4289248";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "285 ft";
+                                    value = 87;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 54;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7662025";
+                                    lng = "-122.4278218";
+                                };
+                                "html_instructions" = "Turn <b>left</b> onto <b>15th St</b>";
+                                maneuver = "turn-left";
+                                polyline =                                 {
+                                    points = "keoeF`{fjV?EK_E";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7661377";
+                                    lng = "-122.4288075";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "0.1 mi";
+                                    value = 160;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 116;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7647751";
+                                    lng = "-122.4276208";
+                                };
+                                "html_instructions" = "Turn <b>right</b> onto <b>Landers St</b><div style=\"font-size:0.9em\">Destination will be on the left</div>";
+                                maneuver = "turn-right";
+                                polyline =                                 {
+                                    points = "weoeFztfjVhBKpD[";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7662025";
+                                    lng = "-122.4278218";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    }
+                );
+                "via_waypoint" =                 (
+                );
+            }
+        );
+        "overview_polyline" =         {
+            points = "qareFv~cjVRvCJjBxDc@tDe@h@DNS|EtGzJ|MzHrKxAtBjCnDdLvOhKtN|F|Hn@z@KLBo@SUEIbGUKeEzGg@";
+        };
+        summary = "";
+        warnings =         (
+            "Walking directions are in beta.    Use caution \U2013 This route may be missing sidewalks or pedestrian paths."
+        );
+        "waypoint_order" =         (
+        );
+    },
+        {
+        bounds =         {
+            northeast =             {
+                lat = "37.781005";
+                lng = "-122.4124192";
+            };
+            southwest =             {
+                lat = "37.7647751";
+                lng = "-122.428628";
+            };
+        };
+        copyrights = "Map data \U00a92014 Google";
+        legs =         (
+                        {
+                "arrival_time" =                 {
+                    text = "7:29pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406168940;
+                };
+                "departure_time" =                 {
+                    text = "7:10pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406167821;
+                };
+                distance =                 {
+                    text = "1.6 mi";
+                    value = 2581;
+                };
+                duration =                 {
+                    text = "19 mins";
+                    value = 1119;
+                };
+                "end_address" = "3301-3321 16th Street, San Francisco, CA 94114, USA";
+                "end_location" =                 {
+                    lat = "37.7647751";
+                    lng = "-122.4276208";
+                };
+                "start_address" = "100 McAllister Street, UC Hastings College of the Law, San Francisco, CA 94102, USA";
+                "start_location" =                 {
+                    lat = "37.7808942";
+                    lng = "-122.4140362";
+                };
+                steps =                 (
+                                        {
+                        distance =                         {
+                            text = "466 ft";
+                            value = 142;
+                        };
+                        duration =                         {
+                            text = "2 mins";
+                            value = 97;
+                        };
+                        "end_location" =                         {
+                            lat = "37.780568";
+                            lng = "-122.412441";
+                        };
+                        "html_instructions" = "Walk to Market St & 7th St";
+                        polyline =                         {
+                            points = "qareFv~cjVIeAKaBpAaBBE@?Ao@";
+                        };
+                        "start_location" =                         {
+                            lat = "37.7808942";
+                            lng = "-122.4140362";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "246 ft";
+                                    value = 75;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 52;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.781005";
+                                    lng = "-122.4131953";
+                                };
+                                "html_instructions" = "Head <b>east</b> on <b>McAllister St</b> toward <b>Leavenworth St</b>";
+                                polyline =                                 {
+                                    points = "qareFv~cjVIeAKaB";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7808942";
+                                    lng = "-122.4140362";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "220 ft";
+                                    value = 67;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 45;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.780568";
+                                    lng = "-122.412441";
+                                };
+                                "html_instructions" = "Turn <b>right</b> onto <b>Charles J. Brenham Pl</b>";
+                                maneuver = "turn-right";
+                                polyline =                                 {
+                                    points = "gbreFnycjVpAaBBE@?Ao@";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.781005";
+                                    lng = "-122.4131953";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    },
+                                        {
+                        distance =                         {
+                            text = "1.3 mi";
+                            value = 2015;
+                        };
+                        duration =                         {
+                            text = "12 mins";
+                            value = 720;
+                        };
+                        "end_location" =                         {
+                            lat = "37.767829";
+                            lng = "-122.428628";
+                        };
+                        "html_instructions" = "Light rail towards Castro Station via Downtown";
+                        polyline =                         {
+                            points = "q_reFvtcjVBCNRzGdJbAvAxDjFh@r@NR|DrF~DjFfA|ANR|CfEdAxAl@|@j@t@`ArAd@n@b@l@dAvA|CfEx@hAbB~Bb@l@bEzF^d@`B|B`ArAbEtFEF";
+                        };
+                        "start_location" =                         {
+                            lat = "37.780568";
+                            lng = "-122.412441";
+                        };
+                        "transit_details" =                         {
+                            "arrival_stop" =                             {
+                                location =                                 {
+                                    lat = "37.767829";
+                                    lng = "-122.428628";
+                                };
+                                name = "Market St & Church St";
+                            };
+                            "arrival_time" =                             {
+                                text = "7:24pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168640;
+                            };
+                            "departure_stop" =                             {
+                                location =                                 {
+                                    lat = "37.780568";
+                                    lng = "-122.412441";
+                                };
+                                name = "Market St & 7th St";
+                            };
+                            "departure_time" =                             {
+                                text = "7:12pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406167920;
+                            };
+                            headsign = "Castro Station via Downtown";
+                            line =                             {
+                                agencies =                                 (
+                                                                        {
+                                        name = "San Francisco Municipal Transportation Agency";
+                                        url = "http://www.sfmta.com/";
+                                    }
+                                );
+                                name = "Market & Wharves";
+                                "short_name" = F;
+                                vehicle =                                 {
+                                    icon = "//maps.gstatic.com/mapfiles/transit/iw/6/tram.png";
+                                    name = "Light rail";
+                                    type = TRAM;
+                                };
+                            };
+                            "num_stops" = 7;
+                        };
+                        "travel_mode" = TRANSIT;
+                    },
+                                        {
+                        distance =                         {
+                            text = "0.3 mi";
+                            value = 424;
+                        };
+                        duration =                         {
+                            text = "5 mins";
+                            value = 300;
+                        };
+                        "end_location" =                         {
+                            lat = "37.7647751";
+                            lng = "-122.4276208";
+                        };
+                        "html_instructions" = "Walk to 3301-3321 16th Street, San Francisco, CA 94114, USA";
+                        polyline =                         {
+                            points = "}ooeF|yfjVAi@NPIkC~HW@XhBKpD[";
+                        };
+                        "start_location" =                         {
+                            lat = "37.767829";
+                            lng = "-122.428628";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "39 ft";
+                                    value = 12;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 8;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7677619";
+                                    lng = "-122.4285137";
+                                };
+                                "html_instructions" = "Head <b>southwest</b> on <b>Market St</b> toward <b>14th St</b>";
+                                polyline =                                 {
+                                    points = "}ooeF|yfjVAi@NP";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.767829";
+                                    lng = "-122.428628";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "203 ft";
+                                    value = 62;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 51;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7678085";
+                                    lng = "-122.4278138";
+                                };
+                                "html_instructions" = "Sharp <b>left</b> onto <b>14th St</b>";
+                                maneuver = "turn-sharp-left";
+                                polyline =                                 {
+                                    points = oooeFdyfjVIkC;
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7677619";
+                                    lng = "-122.4285137";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "0.1 mi";
+                                    value = 178;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 115;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7662108";
+                                    lng = "-122.4276877";
+                                };
+                                "html_instructions" = "Turn <b>right</b> onto <b>Landers St</b>";
+                                maneuver = "turn-right";
+                                polyline =                                 {
+                                    points = "yooeFxtfjV~HW";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7678085";
+                                    lng = "-122.4278138";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "39 ft";
+                                    value = 12;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 10;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7662025";
+                                    lng = "-122.4278218";
+                                };
+                                "html_instructions" = "Turn <b>right</b> onto <b>15th St</b>";
+                                maneuver = "turn-right";
+                                polyline =                                 {
+                                    points = "yeoeF`tfjV@X";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7662108";
+                                    lng = "-122.4276877";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "0.1 mi";
+                                    value = 160;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 116;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7647751";
+                                    lng = "-122.4276208";
+                                };
+                                "html_instructions" = "Turn <b>left</b> onto <b>Landers St</b><div style=\"font-size:0.9em\">Destination will be on the left</div>";
+                                maneuver = "turn-left";
+                                polyline =                                 {
+                                    points = "weoeFztfjVhBKpD[";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7662025";
+                                    lng = "-122.4278218";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    }
+                );
+                "via_waypoint" =                 (
+                );
+            }
+        );
+        "overview_polyline" =         {
+            points = "qareFv~cjVUgDtAgB?o@BCNR~I|LbF~GlEfGfGhI`HrJvDfFjVv\\dGhIEFAi@NPIkC~HW@XzGg@";
+        };
+        summary = "";
+        warnings =         (
+            "Walking directions are in beta.    Use caution \U2013 This route may be missing sidewalks or pedestrian paths."
+        );
+        "waypoint_order" =         (
+        );
+    },
+        {
+        bounds =         {
+            northeast =             {
+                lat = "37.7809372";
+                lng = "-122.4135786";
+            };
+            southwest =             {
+                lat = "37.7645876";
+                lng = "-122.4273324";
+            };
+        };
+        copyrights = "Map data \U00a92014 Google";
+        legs =         (
+                        {
+                "arrival_time" =                 {
+                    text = "7:25pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406168728;
+                };
+                "departure_time" =                 {
+                    text = "7:11pm";
+                    "time_zone" = "America/Los_Angeles";
+                    value = 1406167916;
+                };
+                distance =                 {
+                    text = "1.6 mi";
+                    value = 2517;
+                };
+                duration =                 {
+                    text = "14 mins";
+                    value = 812;
+                };
+                "end_address" = "3301-3321 16th Street, San Francisco, CA 94114, USA";
+                "end_location" =                 {
+                    lat = "37.7645876";
+                    lng = "-122.4273324";
+                };
+                "start_address" = "100 McAllister Street, UC Hastings College of the Law, San Francisco, CA 94102, USA";
+                "start_location" =                 {
+                    lat = "37.7808942";
+                    lng = "-122.4140362";
+                };
+                steps =                 (
+                                        {
+                        distance =                         {
+                            text = "0.1 mi";
+                            value = 172;
+                        };
+                        duration =                         {
+                            text = "2 mins";
+                            value = 124;
+                        };
+                        "end_location" =                         {
+                            lat = "37.779528";
+                            lng = "-122.413756";
+                        };
+                        "html_instructions" = "Walk to Civic Center/UN Plaza";
+                        polyline =                         {
+                            points = "qareFv~cjVIeAvBUVNh@?d@?RTd@A";
+                        };
+                        "start_location" =                         {
+                            lat = "37.7808942";
+                            lng = "-122.4140362";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "98 ft";
+                                    value = 30;
+                                };
+                                duration =                                 {
+                                    text = "1 min";
+                                    value = 21;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7809372";
+                                    lng = "-122.4136944";
+                                };
+                                "html_instructions" = "Head <b>east</b> on <b>McAllister St</b> toward <b>Leavenworth St</b>";
+                                polyline =                                 {
+                                    points = "qareFv~cjVIeA";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7808942";
+                                    lng = "-122.4140362";
+                                };
+                                "travel_mode" = WALKING;
+                            },
+                                                        {
+                                distance =                                 {
+                                    text = "466 ft";
+                                    value = 142;
+                                };
+                                duration =                                 {
+                                    text = "2 mins";
+                                    value = 103;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.779528";
+                                    lng = "-122.413756";
+                                };
+                                "html_instructions" = "Turn <b>right</b> onto <b>Leavenworth St</b>";
+                                maneuver = "turn-right";
+                                polyline =                                 {
+                                    points = "{areFp|cjVvBUVNh@?d@?RTd@A";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.7809372";
+                                    lng = "-122.4136944";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    },
+                                        {
+                        distance =                         {
+                            text = "1.1 mi";
+                            value = 1691;
+                        };
+                        duration =                         {
+                            text = "2 mins";
+                            value = 120;
+                        };
+                        "end_location" =                         {
+                            lat = "37.765062";
+                            lng = "-122.419694";
+                        };
+                        "html_instructions" = "Metro rail towards San Francisco Int'l Airport";
+                        polyline =                         {
+                            points = "ayqeF~|cjVlyA`d@";
+                        };
+                        "start_location" =                         {
+                            lat = "37.779528";
+                            lng = "-122.413756";
+                        };
+                        "transit_details" =                         {
+                            "arrival_stop" =                             {
+                                location =                                 {
+                                    lat = "37.765062";
+                                    lng = "-122.419694";
+                                };
+                                name = "16th St. Mission";
+                            };
+                            "arrival_time" =                             {
+                                text = "7:16pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168160;
+                            };
+                            "departure_stop" =                             {
+                                location =                                 {
+                                    lat = "37.779528";
+                                    lng = "-122.413756";
+                                };
+                                name = "Civic Center/UN Plaza";
+                            };
+                            "departure_time" =                             {
+                                text = "7:14pm";
+                                "time_zone" = "America/Los_Angeles";
+                                value = 1406168040;
+                            };
+                            headsign = "San Francisco Int'l Airport";
+                            line =                             {
+                                agencies =                                 (
+                                                                        {
+                                        name = "Bay Area Rapid Transit";
+                                        url = "http://www.bart.gov/";
+                                    }
+                                );
+                                color = "#f2f230";
+                                name = "Pittsburg/Bay Point - SFIA/Millbrae";
+                                url = "http://www.bart.gov/schedules/bylineresults?route=1";
+                                vehicle =                                 {
+                                    icon = "//maps.gstatic.com/mapfiles/transit/iw/6/metro.png";
+                                    "local_icon" = "//maps.gstatic.com/mapfiles/transit/iw/6/us-ca-bart.png";
+                                    name = "Metro rail";
+                                    type = SUBWAY;
+                                };
+                            };
+                            "num_stops" = 1;
+                        };
+                        "travel_mode" = TRANSIT;
+                    },
+                                        {
+                        distance =                         {
+                            text = "0.4 mi";
+                            value = 654;
+                        };
+                        duration =                         {
+                            text = "9 mins";
+                            value = 568;
+                        };
+                        "end_location" =                         {
+                            lat = "37.7645876";
+                            lng = "-122.4273324";
+                        };
+                        "html_instructions" = "Walk to 3301-3321 16th Street, San Francisco, CA 94114, USA";
+                        polyline =                         {
+                            points = "s~neF`bejVBl@FtB?PB~@B`A@\\DdBJ`EBr@J`E?PBnATzI@\\HfD";
+                        };
+                        "start_location" =                         {
+                            lat = "37.765062";
+                            lng = "-122.419694";
+                        };
+                        steps =                         (
+                                                        {
+                                distance =                                 {
+                                    text = "0.4 mi";
+                                    value = 654;
+                                };
+                                duration =                                 {
+                                    text = "9 mins";
+                                    value = 568;
+                                };
+                                "end_location" =                                 {
+                                    lat = "37.7645876";
+                                    lng = "-122.4273324";
+                                };
+                                "html_instructions" = "Head <b>west</b> on <b>16th St</b> toward <b>Wiese St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>";
+                                polyline =                                 {
+                                    points = "s~neF`bejVBl@FtB?PB~@B`A@\\DdBJ`EBr@J`E?PBnATzI@\\HfD";
+                                };
+                                "start_location" =                                 {
+                                    lat = "37.765062";
+                                    lng = "-122.419694";
+                                };
+                                "travel_mode" = WALKING;
+                            }
+                        );
+                        "travel_mode" = WALKING;
+                    }
+                );
+                "via_waypoint" =                 (
+                );
+            }
+        );
+        "overview_polyline" =         {
+            points = "qareFv~cjVIeAvBUVNh@?d@?RTd@AlyA`d@JbDBpAVfKRvI`@`P";
+        };
+        summary = "";
+        warnings =         (
+            "Walking directions are in beta.    Use caution \U2013 This route may be missing sidewalks or pedestrian paths."
+        );
+        "waypoint_order" =         (
+        );
     }
 )
-
-%20
-
-http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName=Civic Center Station Downtown

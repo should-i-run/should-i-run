@@ -61,7 +61,6 @@
 		2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should I Run-Bridging-Header.h"; sourceTree = "<group>"; };
 		2536F76C1976EC7D00A2CE2B /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		2536F76E197702CA00A2CE2B /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
-		25C31ED719802B100000E7BC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		25C31ED819803C780000E7BC /* MuniApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuniApiController.swift; sourceTree = "<group>"; };
 		283F960D1978A04000A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiController.swift; sourceTree = "<group>"; };
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 				2508AF6C1975C07100E48B37 /* MainTableViewController.swift */,
 				252ADD871978357600ED0C3F /* ResultViewController.swift */,
 				1E4875E31978445E0079C53E /* AddAlarmViewController.swift */,
-				25C31ED719802B100000E7BC /* MyPlayground.playground */,
 				2508AF431975B4CE00E48B37 /* Main.storyboard */,
 				2508AF461975B4CE00E48B37 /* Images.xcassets */,
 				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,

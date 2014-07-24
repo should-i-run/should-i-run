@@ -88,12 +88,13 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             }
         }
     }
-
+    
     // This pop-up is created, right before segue, whenever:
     // - No location is found
     // - Timeout limit is reached
     func segueFromView(timer: NSTimer) {
 //        NSURLConnectinon.cancel(self.bartApiController.currentBartConnection)
+        bartApiHandler.cancelConnection()
         var timerTitle = timer.userInfo.objectForKey("titleString") as String
         var timerMessage = timer.userInfo.objectForKey("messageString") as String
         var message: UIAlertView = UIAlertView(title: timerTitle, message: timerMessage, delegate: self, cancelButtonTitle: "Ok")

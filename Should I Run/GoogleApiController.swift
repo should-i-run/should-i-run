@@ -166,7 +166,6 @@ class GoogleApiController: NSObject{
                                 if name == "San Francisco Municipal Transportation Agency" {
                                     result = (steps[i] as NSDictionary)
                                     walkingStepIndex = i - 1
-                                    println(steps)
                                     
                                     return result
                                 }

@@ -1,0 +1,144 @@
+(
+        {
+        distance =         {
+            text = "466 ft";
+            value = 142;
+        };
+        duration =         {
+            text = "2 mins";
+            value = 97;
+        };
+        "end_location" =         {
+            lat = "37.780568";
+            lng = "-122.412441";
+        };
+        "html_instructions" = "Walk to Market St & 7th St";
+        polyline =         {
+            points = "qareFv~cjVIeAKaBpAaBBE@?Ao@";
+        };
+        "start_location" =         {
+            lat = "37.7808942";
+            lng = "-122.4140362";
+        };
+        steps =         (
+                        {
+                distance =                 {
+                    text = "246 ft";
+                    value = 75;
+                };
+                duration =                 {
+                    text = "1 min";
+                    value = 52;
+                };
+                "end_location" =                 {
+                    lat = "37.781005";
+                    lng = "-122.4131953";
+                };
+                "html_instructions" = "Head <b>east</b> on <b>McAllister St</b> toward <b>Leavenworth St</b>";
+                polyline =                 {
+                    points = "qareFv~cjVIeAKaB";
+                };
+                "start_location" =                 {
+                    lat = "37.7808942";
+                    lng = "-122.4140362";
+                };
+                "travel_mode" = WALKING;
+            },
+                        {
+                distance =                 {
+                    text = "220 ft";
+                    value = 67;
+                };
+                duration =                 {
+                    text = "1 min";
+                    value = 45;
+                };
+                "end_location" =                 {
+                    lat = "37.780568";
+                    lng = "-122.412441";
+                };
+                "html_instructions" = "Turn <b>right</b> onto <b>Charles J. Brenham Pl</b>";
+                maneuver = "turn-right";
+                polyline =                 {
+                    points = "gbreFnycjVpAaBBE@?Ao@";
+                };
+                "start_location" =                 {
+                    lat = "37.781005";
+                    lng = "-122.4131953";
+                };
+                "travel_mode" = WALKING;
+            }
+        );
+        "travel_mode" = WALKING;
+    },
+        {
+        distance =         {
+            text = "6.1 mi";
+            value = 9887;
+        };
+        duration =         {
+            text = "43 mins";
+            value = 2600;
+        };
+        "end_location" =         {
+            lat = "37.753241";
+            lng = "-122.501002";
+        };
+        "html_instructions" = "Bus towards the Sunset District";
+        polyline =         {
+            points = "q_reFvtcjVBCLP|GhJ`ArAxDlFj@t@NP|DpF|DjFhA~ALR|CdEdAxAl@|@j@v@fB`CY`@BVF|@`@hGF|@`@hGF~@\\pFBVf@fIh@dIF~@`@jGf@pH@Vh@dIh@nIF|@`@lGf@rH@Th@fI`@dGDl@@Tj@pI?@F|@^~F?Af@nH@XZrELrBJ`B@JZzEV~DRlCbDa@PCzDc@dDa@TIDx@b@lGDz@j@xIFx@Av@Iz@I`@EXKh@]pBE^Aj@Bb@DpDF|C@v@HtE@x@FzCFtE@z@FzCHrE@z@DzCHrE@z@FxCFvEBz@DxCH~E@z@FbDHvE@z@DxCH~EBx@DpCHtE@x@DzCHtEl@CjIUl@CpHSRA`JYR?`JYP?~IWRAbJYP?HtEFzD?XHtEHvEFzD?XHrEHvEFzD@VFvEHvEF|D@VHtEFtEBfA@b@BhBF|D@VFtEHzD?XHvEF|DO?";
+        };
+        "start_location" =         {
+            lat = "37.780568";
+            lng = "-122.412441";
+        };
+        "transit_details" =         {
+            "arrival_stop" =             {
+                location =                 {
+                    lat = "37.753241";
+                    lng = "-122.501002";
+                };
+                name = "Noriega St & 42nd Ave";
+            };
+            "arrival_time" =             {
+                text = "1:31pm";
+                "time_zone" = "America/Los_Angeles";
+                value = 1406147507;
+            };
+            "departure_stop" =             {
+                location =                 {
+                    lat = "37.780568";
+                    lng = "-122.412441";
+                };
+                name = "Market St & 7th St";
+            };
+            "departure_time" =             {
+                text = "12:48pm";
+                "time_zone" = "America/Los_Angeles";
+                value = 1406144907;
+            };
+            headsign = "the Sunset District";
+            line =             {
+                agencies =                 (
+                                        {
+                        name = "San Francisco Municipal Transportation Agency";
+                        url = "http://www.sfmta.com/";
+                    }
+                );
+                name = "Haight-Noriega";
+                "short_name" = 71;
+                vehicle =                 {
+                    icon = "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png";
+                    name = Bus;
+                    type = BUS;
+                };
+            };
+            "num_stops" = 45;
+        };
+        "travel_mode" = TRANSIT;
+    }
+)
+
+%20
+
+http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName=Civic Center Station Downtown

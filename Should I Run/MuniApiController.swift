@@ -101,64 +101,47 @@ class MuniApiController: NSObject{
                 
                 for datum in data {
                     if route.objectForKey("Code") as String == datum.lineCode {
-                        if let routeDirectionList = route.objectForKey("RouteDirectionList") as? NSDictionary {
-                            if let routeDirection = routeDirectionList.objectForKey("RouteDirection") as? NSDictionary {
-                                if let stopList = routeDirection.objectForKey("StopList") as? NSDictionary {
-                                    if let stop = stopList.objectForKey("Stop") as? NSDictionary {
-                                        if let departureTimeList = stop.objectForKey("DepartureTimeList") as? NSDictionary {
-                                            //what's left should be an array of departure times or a dictionary of a single time
-                                            var departureTimesArray:[NSDictionary] = []
-                                            
-                                            if let temp:[NSDictionary] = departureTimeList.objectForKey("DepartureTime") as? [NSDictionary] {
-                                                departureTimesArray += temp
-                                            
-                                            } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
-                                                departureTimesArray.append(temp)
-                                            }
-                                        
-                                            for departureTime in departureTimesArray {
-                                                var text = departureTime.objectForKey("text") as String
-                                                var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                                                
-                                                //build up tuple
-                                                var thisResult: (departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)
-                                                
-                                                thisResult.departureTime = trimmedText.toInt()!
-                                                thisResult.distanceToStation = datum.distanceToStation
-                                                
-                                                var muniOriginStationName = datum.muniOriginStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
-                                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
-                                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
-                                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
-                                                
-                                                thisResult.muniOriginStationName = muniOriginStationName
-                                                thisResult.lineCode = datum.lineCode
-                                                thisResult.lineName = datum.lineName
-                                                thisResult.eolStationName = datum.eolStationName
-                                                
-                                                //first, if result is empty just put it on there.
-                                                if result.count == 0 {
-                                                    result.insert(thisResult, atIndex: 0)
-                                                    
-                                                //if it's lower than the first item, put it first and first second
-                                                } else if result[0].departureTime > thisResult.departureTime {
-                                                    var temp = result[0]
-                                                    result.insert(thisResult, atIndex: 0)
-                                                    result.insert(temp, atIndex: 1)
+                        if let departureTimeList  = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection")?.objectForKey("StopList").objectForKey("Stop").objectForKey("DepartureTimeList") as? NSDictionary {
+                            
+                            //what's left should be an array of departure times or a dictionary of a single time
+                            var departureTimesArray:[NSDictionary] = []
+                            
+                            if let temp:[NSDictionary] = departureTimeList.objectForKey("DepartureTime") as? [NSDictionary] {
+                                departureTimesArray += temp
+                            
+                            } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
+                                departureTimesArray.append(temp)
+                            }
+                        
+                            for departureTime in departureTimesArray {
+                                var text = departureTime.objectForKey("text") as String
+                                var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                                
+                                //build up tuple
+                                var thisResult: (departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)
+                                
+                                thisResult.departureTime = trimmedText.toInt()!
+                                thisResult.distanceToStation = datum.distanceToStation
+                                
+                                var muniOriginStationName = datum.muniOriginStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
+                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
+                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
+                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
+                                
+                                thisResult.muniOriginStationName = muniOriginStationName
+                                thisResult.lineCode = datum.lineCode
+                                thisResult.lineName = datum.lineName
+                                thisResult.eolStationName = datum.eolStationName
+                                
+                                result.insert(thisResult, atIndex: 0)
 
-                                                //if it's lower than the second, put it there
-                                                } else if result.count < 0 && result[1].departureTime > thisResult.departureTime {
-                                                    result.insert(thisResult, atIndex: 1)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
                 }
             }
+            
+            result.sort{$0.departureTime < $1.departureTime}
             println(result)
 
             self.delegate!.didReceiveMuniResults(result, error: nil)

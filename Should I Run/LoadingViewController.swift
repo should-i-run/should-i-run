@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
     var locationName:String?
     var destinationLatitude : Float?

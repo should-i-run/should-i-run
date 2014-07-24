@@ -288,9 +288,7 @@ class GoogleApiController: NSObject{
             self.delegate?.didReceiveGoogleResults(results, error: nil)
 
         } else if let muniData = getMuniData(allRoutes)? {
-            println("we have muni data and it is")
 
-            println(muniData)
             //results: [distance to station, station name, line code, line name, EOL station]
             
             self.delegate?.didReceiveGoogleResults(muniData, muni: true)

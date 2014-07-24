@@ -116,19 +116,22 @@ class MuniApiController: NSObject{
                                                 departureTimesArray.append(temp)
                                             }
                                         
-                                            println(departureTimesArray)
-                                        
                                             for departureTime in departureTimesArray {
                                                 var text = departureTime.objectForKey("text") as String
                                                 var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                                                println("departure time found: \(trimmedText)")
                                                 
                                                 //build up tuple
                                                 var thisResult: (departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)
                                                 
                                                 thisResult.departureTime = trimmedText.toInt()!
                                                 thisResult.distanceToStation = datum.distanceToStation
-                                                thisResult.muniOriginStationName = datum.muniOriginStationName
+                                                
+                                                var muniOriginStationName = datum.muniOriginStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
+                                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
+                                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
+                                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
+                                                
+                                                thisResult.muniOriginStationName = muniOriginStationName
                                                 thisResult.lineCode = datum.lineCode
                                                 thisResult.lineName = datum.lineName
                                                 thisResult.eolStationName = datum.eolStationName
@@ -144,7 +147,7 @@ class MuniApiController: NSObject{
                                                     result.insert(temp, atIndex: 1)
 
                                                 //if it's lower than the second, put it there
-                                                } else if result[1].departureTime > thisResult.departureTime {
+                                                } else if result.count < 0 && result[1].departureTime > thisResult.departureTime {
                                                     result.insert(thisResult, atIndex: 1)
                                                 }
                                             }
@@ -156,6 +159,7 @@ class MuniApiController: NSObject{
                     }
                 }
             }
+            println(result)
 
             self.delegate!.didReceiveMuniResults(result, error: nil)
         } else {

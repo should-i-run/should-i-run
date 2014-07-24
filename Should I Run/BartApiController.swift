@@ -12,7 +12,7 @@ import UIKit
 protocol BartApiControllerDelegate {
     // Actual implementation of methods needs to be written inside the class using this protocol
     func didReceiveBartResults(results: [(String, Int)])
-//    func didFinishLoading()
+    func handleError(errorMessage: String)
 }
 
 class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {

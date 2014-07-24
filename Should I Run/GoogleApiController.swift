@@ -11,8 +11,9 @@ import UIKit
 
 
 protocol GoogleAPIControllerProtocol {
-    func didReceiveGoogleResults(results: Array<String>!, error:String?)
+    func didReceiveGoogleResults(results: [String])
     func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool)
+    func handleError(errorMessage: String)
 }
 
 
@@ -187,8 +188,10 @@ class GoogleApiController: NSObject{
                     return shortName
                 }
             }
-            return "error"
+            self.delegate?.handleError("There was a problem getting BART results...")
+            return "Error"
         }
+        
         func getLineNameFromMuniStep(step:NSDictionary) -> String {
             if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
                 if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
@@ -196,6 +199,7 @@ class GoogleApiController: NSObject{
                     return lineName
                 }
             }
+            self.delegate?.handleError("There was a problem getting BART results...")
             return "error"
         }
 
@@ -291,19 +295,13 @@ class GoogleApiController: NSObject{
             results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
             results += getAllEOLStations(allRoutes)
             
-            self.delegate?.didReceiveGoogleResults(results, error: nil)
+            self.delegate?.didReceiveGoogleResults(results)
 
         } else if let muniData = getMuniData(allRoutes)? {
-
-            //results: [distance to station, station name, line code, line name, EOL station]
-            
             self.delegate?.didReceiveGoogleResults(muniData, muni: true)
             
         } else {
-            //error, no bart
-            //TODO: trigger segue back to main screen with error
-            println("No bart or muni")
-            self.delegate?.didReceiveGoogleResults(nil, error: "No bart or muni")
+            self.delegate?.handleError("Couldn't find any BART or MUNI trips between here and there")
 
         }
     }

@@ -46,7 +46,7 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
 
     // If BART connection fails, handle error here
     func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        // self.delegate?.handleBartError()
+        self.delegate?.handleError("BART connection failed")
     }
     
     // On connection success, handle data we get from BART
@@ -55,6 +55,10 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     }
     
     func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){
+        if let err = error? {
+            self.delegate?.handleError("BART connection failed")
+            return
+        }
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         

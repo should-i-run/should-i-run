@@ -1,4 +1,4 @@
-//
+
 //  MuniApiController.swift
 //  Should I Run
 //
@@ -51,52 +51,65 @@ class MuniApiController: NSObject{
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
         
-        println("station name from google: \(muniOriginStationName)")
+        println("processed station name: \(muniOriginStationName)")
 
         
         // build up url
         var baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
         var escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        
+        println(baseUrl + escapedStationName)
         let url = NSURL(string: baseUrl + escapedStationName)
         
         var request = NSURLRequest(URL: url)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            self.processMuniData(data, andError: error)
-            })
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response: NSURLResponse!, rawXML: NSData?, error: NSError?) -> Void in
+            if let err = error? {
+                //handle error
+                
+            } else if let rawMuniXML = rawXML {
+                self.processMuniData(rawMuniXML, targetRoute: data[2])
+            }
+        })
         
     }
     
-    func processMuniData(data:NSData?, andError error:NSError?){
-        if let err = error? {
-            //handle error
-            
-        } else if let rawMuniXML = data? {
+    func processMuniData(rawMuniXML:NSData, targetRoute: String){
+
             var result:[String] = []
             
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
             
-            let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+            let html = NSString(data: rawMuniXML, encoding: NSUTF8StringEncoding)
             
-            let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
+            let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
             
-            // Trim off unneeded data inside the dictionary
-//            let stations: NSDictionary = parsed.objectForKey("root").objectForKey("station") as NSDictionary
+            // Trim off unneeded headers
+            let routes: NSDictionary = parsedXML.objectForKey("RTT").objectForKey("AgencyList").objectForKey("Agency").objectForKey("RouteList") as NSDictionary
+            //what's left should be an array of routes... if not it will crash but haven't seen that yet
             
-            self.delegate!.didReceiveMuniResults(result, error: nil)
+            var results:[String] = []
+            println("routes-----------------------------")
+            println(routes)
+            
+        for routeObject in routes {
+                println("we have a routeObject----------------")
+                println(routeObject)
+                if let route:NSDictionary = routeObject.value.objectForKey("Route") as? NSDictionary {
+                println("we have a route")
+                    if route.objectForKey("Code") as String == targetRoute {
+                        println("target route found")
+                        println(route)
+                    
+                    }
+                }
+            }
+            
+        self.delegate!.didReceiveMuniResults(result, error: nil)
         }
-        
-
-
-        
-        
-    }
-    
-
-
 }
 
 /*

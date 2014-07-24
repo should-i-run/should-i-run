@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol MuniAPIControllerDelegate {
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], error:String?)
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)], error:String?)
 
 }
 
@@ -71,7 +71,7 @@ class MuniApiController: NSObject{
     
     func processMuniData(rawMuniXML:NSData, data: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]){
 
-        var result:[(departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)] = []
+        var result:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)] = []
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
@@ -118,7 +118,7 @@ class MuniApiController: NSObject{
                                 var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                                 
                                 //build up tuple
-                                var thisResult: (departureTime: Int, distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)
+                                var thisResult: (departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)
                                 
                                 thisResult.departureTime = trimmedText.toInt()!
                                 thisResult.distanceToStation = datum.distanceToStation
@@ -128,9 +128,9 @@ class MuniApiController: NSObject{
                                 muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
                                 muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
                                 
-                                thisResult.muniOriginStationName = muniOriginStationName
-                                thisResult.lineCode = datum.lineCode
-                                thisResult.lineName = datum.lineName
+                                thisResult.originStationName = muniOriginStationName
+   
+                                thisResult.lineName = "\(datum.lineCode)—\(datum.lineName)"
                                 thisResult.eolStationName = datum.eolStationName
                                 
                                 result.insert(thisResult, atIndex: 0)
@@ -142,7 +142,6 @@ class MuniApiController: NSObject{
             }
             
             result.sort{$0.departureTime < $1.departureTime}
-            println(result)
 
             self.delegate!.didReceiveMuniResults(result, error: nil)
         } else {

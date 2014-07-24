@@ -16,9 +16,11 @@ class ResultViewController: UIViewController {
     let runningSpeed = 200 //meters per minute
     let stationTime = 2 //minutes in station
     
-    var distance:Int?
+    var distanceToOrigin:Int?
     var departureStationName:String?
     var departures:[(String, Int)] = []
+    
+    var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]?
     
     //alarm
     var alarmTime = 0
@@ -61,37 +63,85 @@ class ResultViewController: UIViewController {
         var followingDestinationStation:String = ""
         var followingDepartureTime:Int = 0
         
+        var walkingTime:Int?
+        var runningTime:Int?
+        
 
         
         //calculate
         //logic for when to run
         
-        //use distance to generate range of times - running time, walking time
-        var walkingTime:Int = (distance!/walkingSpeed) + self.stationTime
-        var runningTime:Int = (distance!/runningSpeed) + self.stationTime
-        
-        
-        var foundResult = false
-        
-        //go through list of possible times.
-        for (index, departure) in enumerate(departures) {
-            if foundResult == false {
-                //subtract the estimated station time from it
-                //find the first one that is > running time. This is our result
-                if departure.1 > runningTime {
-                    foundResult = true
-                    destinationStation = bartLookupReverse[departure.0.lowercaseString]!
-                    departureTime = departure.1
+        if !muniResults? {
+            //use distance to generate range of times - running time, walking time
+            walkingTime = (self.distanceToOrigin!/walkingSpeed) + self.stationTime
+            runningTime = (self.distanceToOrigin!/runningSpeed) + self.stationTime
+            
+            
+            var foundResult = false
+            
+            //go through list of possible times.
+            for (index, departure) in enumerate(departures) {
+                if foundResult == false {
+                    //subtract the estimated station time from it
+                    //find the first one that is > running time. This is our result
+                    if departure.1 > runningTime {
+                        foundResult = true
+                        destinationStation = "towards \(bartLookupReverse[departure.0.lowercaseString]!)"
+                        departureTime = departure.1
 
-                    //next one is the subsequent train
-                    if index + 1 < departures.count {
-                        followingDestinationStation = bartLookupReverse[departures[index + 1].0.lowercaseString]!
-                        followingDepartureTime = departures[index + 1].1
+                        //next one is the subsequent train
+                        if index + 1 < departures.count {
+                            followingDestinationStation = "towards \(bartLookupReverse[departures[index + 1].0.lowercaseString]!)"
+                            followingDepartureTime = departures[index + 1].1
+                        }
                     }
                 }
             }
-        }
+        } else {
+            
+            var foundResult = false
+            
+            for var i = 0; i < self.muniResults!.count; ++i {
+                if !foundResult {
+                    
+                    let thisDeparture = self.muniResults![i]
+                    let dist = thisDeparture.distanceToStation.toInt()
+                    
+                    walkingTime = (dist!/walkingSpeed) + self.stationTime
+                    runningTime = (dist!/runningSpeed) + self.stationTime
+                    
+                    if thisDeparture.departureTime > runningTime { //if time to departure is less than time to get to station
+                        foundResult = true
+                        destinationStation = "\(thisDeparture.lineName) / \(thisDeparture.eolStationName)"
+                        departureTime = thisDeparture.departureTime
+                        departureStationName = thisDeparture.originStationName
+                        //sets the class global distance to the current distance
+                        self.distanceToOrigin = dist
+                        
+                        if i + 1 < self.muniResults!.count {
+                            let nextDeparture = self.muniResults![i + 1]
+                            followingDestinationStation = "\(nextDeparture.lineName) / \(nextDeparture.eolStationName)"
+                            followingDepartureTime = nextDeparture.departureTime
+                        }
+                    }
+                }
+            }
+            
+            if !foundResult {
+                //error, no result
+            }
+            
+            //need to get these things from our muni data:
+            //distance to origin station
+            //origin station name
+            //departure time
+            //line/destination station
+            //following departure time
+            //following line/destination station
+            
+            //first iterate over the data
 
+        }
         
         //result area things
             // run or not?
@@ -104,7 +154,7 @@ class ResultViewController: UIViewController {
             self.resultArea!.backgroundColor = walkUIColor
             
             self.alarmButton!.hidden = false
-            self.alarmTime = departureTime - walkingTime
+            self.alarmTime = departureTime - walkingTime!
 
         } else {
             
@@ -119,19 +169,19 @@ class ResultViewController: UIViewController {
         
         //detial area things
         self.timeToNextTrainLabel!.text = String(departureTime)
-        self.distanceToStationLabel!.text = String(distance!)
-        self.destinationLabel!.text = "towards \(destinationStation)"
+        self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
+        self.destinationLabel!.text = destinationStation
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
-        self.stationNameLabel!.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]!) station"
+        self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
-        self.timeRunningLabel!.text = String(runningTime)
-        self.timeWalkingLabel!.text = String(walkingTime)
+        self.timeRunningLabel!.text = String(runningTime!)
+        self.timeWalkingLabel!.text = String(walkingTime!)
         
         
         //following departure area things
         self.followingDepartureLabel!.text = "\(followingDepartureTime)"
-        self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
+        self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
     }

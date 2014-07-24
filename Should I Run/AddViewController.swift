@@ -118,7 +118,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)
         //writing it back to the file
         let done = loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
-         println("Adding is \(done) and location count is \(loc.count)")
         
     }
     

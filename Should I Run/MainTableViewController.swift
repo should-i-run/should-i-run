@@ -15,16 +15,18 @@ import Foundation
     var places:Array<Place> = []
     var colors:Array<UIColor> = []
     let userDefaults = NSUserDefaults.standardUserDefaults()
+   
     
+    
+
     var locName:String = ""
     var locLat:Float = 0.0
     var locLong:Float = 0.0
     
 
     override func viewDidLoad() {
+      
         super.viewDidLoad()
-        
-        userDefaults.synchronize()
         
         //setting color scheme
         self.colors.append(UIColor(red: CGFloat(239.0/255), green: CGFloat(201.0/255), blue: CGFloat(76.0/255), alpha: CGFloat(1.0)))
@@ -52,42 +54,33 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
-        let number : Int = userDefaults.integerForKey("num")
-        return number + 1
+        //loc is locations plist as an array
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+        return loc.count + 1
     }
     
     override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        if indexPath.row == userDefaults.integerForKey("num") {
+        //loc is locations plist as an array
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+        if indexPath.row == loc.count {
             return false
         }
         return true
     }
     
     override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        //loc is locations plist as an array
         //check if editing style is delete
-        var number : Int = userDefaults.integerForKey("num")
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
         
-        if editingStyle == .Delete && indexPath.row != number {
+        if editingStyle == .Delete && indexPath.row != loc.count {
+         
             //get the index row of the delete and compare with the number of objects in the plist
-           
-            //if last element, just reduce count of number of objects by 1
-            // else shift everything one step down
-
-            if indexPath.row + 1 < number  {
-                for index in indexPath.row...(number - 2) {
-                    let location : AnyObject = userDefaults.objectForKey(String(index + 1))
-                    userDefaults.setObject(location, forKey: String(index))
-                    //we want to synchronize immediately so state is updated
-                    userDefaults.synchronize()
-                    
-                }
-            }
-            //reduce count of objects by 1 and save it
-            number = number - 1
-            userDefaults.setInteger(number, forKey:"num")
-            //remove from table view with animation
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+    
+            loc.removeObjectAtIndex(indexPath.row)
+            loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
             
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         
     }
@@ -95,18 +88,18 @@ import Foundation
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
-        
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
         if let row = indexPath?.row {
-            
-            // 'num' is the number of user stored locations, 1 indexed.
+
             // if the current row (zero indexed) is equal to that, we are on the add destination button
-            if row == userDefaults.integerForKey("num")  {
+            if row == loc.count {
+                
                 cell.textLabel.text = "Add Destination"
                 cell.backgroundColor = self.colors[4]
                 cell.accessoryType = UITableViewCellAccessoryType.None
                 
             //retrieve from the collection of objects with key "row number"
-            } else if let location : AnyObject = userDefaults.objectForKey(String(row)) {
+            } else if let location : AnyObject = loc[row] {
                 cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 cell.textLabel.text = location["name"] as NSString
                 var index = row % self.colors.count
@@ -123,26 +116,22 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        
-
-        let number : Int = userDefaults.integerForKey("num")
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
         let row = indexPath.row as Int
         
-        // 'num' is the number of user stored locations, 1 indexed.
-        // if the current row (zero indexed) is equal to that, we are on the add destination button
-        if row < number {
-            let location : AnyObject = userDefaults.objectForKey(String(indexPath.row))
+        // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
+        if row < loc.count {
+            let locationSelected:AnyObject = loc[row]
             
-            self.locName = location["name"] as NSString
-            self.locLat = location["latitude"] as Float
-            self.locLong = location["longitude"] as Float
+            self.locName = locationSelected["name"] as NSString
+            self.locLat = locationSelected["latitude"] as Float
+            self.locLong = locationSelected["longitude"] as Float
 
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
 
         } else {
+            println("Performing Add Segue")
             self.performSegueWithIdentifier("AddSegue", sender: self)
-            let num = userDefaults.integerForKey("num")
-//            println("number of places before add: \(num)")
         }
         
         
@@ -150,6 +139,10 @@ import Foundation
     
     func unwindToList(segue:UIStoryboardSegue)  {
         //reload the table on unwinding
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+     
+//        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+//         println("Location Count on unwinding is \(loc.count)")
         self.tableView.reloadData()
     
     }
@@ -166,10 +159,7 @@ import Foundation
             dest.destinationLongitude = self.locLong
             
             
-        } else if segue.identifier == "AddSegue" {
-           //do something
         }
-        
     }
     
   

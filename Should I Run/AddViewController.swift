@@ -112,19 +112,14 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if (sender as? UIBarButtonItem != self.saveBarButton) {
             return
         }
-
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        var number : Int = userDefaults.integerForKey("num")
+        //loc is locations plist as an array
+        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+        //adding a new object to the array
+        loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)
+        //writing it back to the file
+        let done = loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
+         println("Adding is \(done) and location count is \(loc.count)")
         
-        userDefaults.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], forKey: String(number))
-        number += 1
-
-  
-        userDefaults.setInteger(number,forKey: "num")
-        println("number in add view: \(number)")
-        println(userDefaults.integerForKey("num"))
-        println("---still in add ^---")
-        userDefaults.synchronize()
     }
     
 

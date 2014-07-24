@@ -12,14 +12,18 @@ import UIKit
 protocol BartApiControllerDelegate {
     // Actual implementation of methods needs to be written inside the class using this protocol
     func didReceiveBartResults(results: [(String, Int)])
+//    func didFinishLoading()
 }
 
-class BartApiController: NSObject , NSURLConnectionDelegate{
+class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
 
     // Create delegate
     // Can be any class, as long as it adheres to BartApiControllerProtocol (by defining didReceiveBartResults in this case)
     var delegate: BartApiControllerDelegate?
-
+    
+    // Create a reference to our BART connection so we can cancel it later
+    var currentBartConnection: NSURLConnection?
+    
     func searchBartFor(searchAbbr: String) {
 
         
@@ -30,12 +34,27 @@ class BartApiController: NSObject , NSURLConnectionDelegate{
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-                self.hanldeConnectionCallbackWithData(data, andError: error)
-            })
+        // Initiate the request and save the reference so we can do operations on it later
+        self.currentBartConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
+    }
+
+    // Cancel the connection the BART connection.
+    func cancelConnection() {
+        println("cancelling BART request")
+        self.currentBartConnection?.cancel()
+    }
+
+    // If BART connection fails, handle error here
+    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+        // self.delegate?.handleBartError()
     }
     
-    func hanldeConnectionCallbackWithData(data:NSData?, andError error:NSError?){
+    // On connection success, handle data we get from BART
+    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+        self.handleConnectionCallbackWithData(data, andError: nil)
+    }
+    
+    func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         

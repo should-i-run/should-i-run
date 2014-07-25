@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol MuniAPIControllerDelegate {
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)])
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))])
     func handleError(errorMessage: String)
 
 }
@@ -26,7 +26,7 @@ class MuniApiController: NSObject{
     var currentMuniData: NSMutableData = NSMutableData()
     
     // Store user location data in this variable so we can use it once the Google API data is downloaded
-    var dataFromGoogle: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]?
+    var dataFromGoogle: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
 
 // MARK: MUNI API Connection Methods
     
@@ -54,7 +54,7 @@ class MuniApiController: NSObject{
     
 // MARK: Search and Handle MUNI data
     
-    func searchMuniFor(data:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]) {
+    func searchMuniFor(data:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]) {
 
         self.dataFromGoogle = data
 
@@ -90,9 +90,9 @@ class MuniApiController: NSObject{
         
     }
     
-    func processMuniData(rawMuniXML:NSData, data: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]){
+    func processMuniData(rawMuniXML:NSData, data: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]){
 
-        var result:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)] = []
+        var result:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))] = []
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
@@ -139,7 +139,8 @@ class MuniApiController: NSObject{
                                 var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                                 
                                 //build up tuple
-                                var thisResult: (departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)
+                                
+                                var thisResult: (departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))
                                 
                                 thisResult.departureTime = trimmedText.toInt()!
                                 thisResult.distanceToStation = datum.distanceToStation
@@ -153,6 +154,7 @@ class MuniApiController: NSObject{
    
                                 thisResult.lineName = "\(datum.lineCode)—\(datum.lineName)"
                                 thisResult.eolStationName = datum.eolStationName
+                                thisResult.originLatLon = datum.originLatLon
                                 
                                 result.insert(thisResult, atIndex: 0)
 

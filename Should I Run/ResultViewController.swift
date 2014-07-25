@@ -20,7 +20,7 @@ class ResultViewController: UIViewController {
     var departureStationName:String?
     var departures:[(String, Int)] = []
     
-    var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]?
+    var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
     
     //alarm
     var alarmTime = 0

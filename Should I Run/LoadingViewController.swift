@@ -33,7 +33,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     var bartResults: [(String, Int)]?
     var googleResults : [String]?
-    var muniResults: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]?
+    var muniResults: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
     
     var distanceToStart : Int = 0
     var departureStationName: String = ""
@@ -131,7 +131,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
     }
     
-    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool) {
+    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))], muni: Bool) {
         
         self.muniApiHandler.searchMuniFor(results)
     }
@@ -158,7 +158,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]) {
+    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]) {
         
         self.muniResults = results
         self.performSegueWithIdentifier("ResultsSegue", sender: self)

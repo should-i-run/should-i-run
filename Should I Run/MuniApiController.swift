@@ -20,8 +20,49 @@ protocol MuniAPIControllerDelegate {
 class MuniApiController: NSObject{
     
     var delegate: MuniAPIControllerDelegate?
+
+    // Create a reference to our MUNI API connection so we can cancel it later
+    var currentMuniConnection: NSURLConnection?
+    var currentMuniData: NSMutableData = NSMutableData()
+    
+    // Store user location data in this variable so we can use it once the Google API data is downloaded
+    var muniSearchData: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)] = [("","","","","")]
+
+// MARK: MUNI API Connection Methods
+    
+    // Cancel the MUNI API connection (on timeout)
+    func cancelConnection() {
+        println("cancelling MUNI request")
+        self.currentMuniConnection?.cancel()
+    }
+    
+    // If MUNI API connection fails, handle error here
+    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+        self.delegate?.handleError("MUNI API connection failed")
+    }
+    
+    // Append data as we receive it from the MUNI API
+    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+        self.currentMuniData.appendData(data)
+    }
+    
+    // On connection success, handle data we get from the MUNI API
+    func connectionDidFinishLoading(connection: NSURLConnection!) {
+        println("MUNI API finished loading")
+        self.processMuniData(currentMuniData, data: muniSearchData)
+    }
+
+    
+// MARK: Search and Handle MUNI data
     
     func searchMuniFor(data:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]) {
+
+        self.muniSearchData[0].distanceToStation = data[0].distanceToStation
+        self.muniSearchData[0].muniOriginStationName = data[0].muniOriginStationName
+        self.muniSearchData[0].lineCode = data[0].lineCode
+        self.muniSearchData[0].lineName = data[0].lineName
+        self.muniSearchData[0].eolStationName = data[0].eolStationName
+        
         
         //83d1f7f4-1d1e-4fc0-a070-162a95bd106f
         //data: [distance to station, station name, line code, line name, EOL station]
@@ -59,14 +100,8 @@ class MuniApiController: NSObject{
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response: NSURLResponse!, rawXML: NSData?, error: NSError?) -> Void in
-            if let err = error? {
-                //handle error
-                
-            } else if let rawMuniXML = rawXML {
-                self.processMuniData(rawMuniXML, data: data)
-            }
-        })
+        // Make a request to the MUNI API if no cached results are found
+        self.currentMuniConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
         
     }
     

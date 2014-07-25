@@ -164,7 +164,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func handleError(errorMessage: String) {
+        self.googleApiHandler.cancelConnection()
         self.bartApiHandler.cancelConnection()
+        self.muniApiHandler.cancelConnection()
         // Create and show error message
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")

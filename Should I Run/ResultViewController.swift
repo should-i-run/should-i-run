@@ -29,10 +29,10 @@ class ResultViewController: UIViewController {
     @IBOutlet var resultArea: UIView?
     @IBOutlet var instructionLabel: UILabel?
     @IBOutlet var alarmButton: UIButton?
-
-//    @IBOutlet weak var backButton: UIBarButtonItem!
-
-
+    
+    //    @IBOutlet weak var backButton: UIBarButtonItem!
+    
+    
     //detial area things
     @IBOutlet var timeToNextTrainLabel: UILabel?
     @IBOutlet var distanceToStationLabel: UILabel?
@@ -44,13 +44,22 @@ class ResultViewController: UIViewController {
     @IBOutlet var timeWalkingLabel: UILabel?
     
     
+    @IBOutlet var secondsToNextTrainLabel: UILabel?
+    
     //following departure area things
     @IBOutlet var followingDepartureLabel: UILabel?
     @IBOutlet var followingDepartureDestinationLabel: UILabel?
-
+    
+    //    @IBOutlet var followingDepartureSecondsLabel: UILabel!
+    
+    @IBOutlet var followingDepartureSecondsLabel: UILabel?
+    
+    
+    
+    
+    var secondTimer: NSTimer = NSTimer()
     
     override func viewDidLoad() {
-       
         
         super.viewDidLoad()
         
@@ -62,11 +71,10 @@ class ResultViewController: UIViewController {
         var walkingTime:Int?
         var runningTime:Int?
         
-
+        
         
         //calculate
         //logic for when to run
-        
         if !muniResults? {
             //use distance to generate range of times - running time, walking time
             walkingTime = (self.distanceToOrigin!/walkingSpeed) + self.stationTime
@@ -82,9 +90,9 @@ class ResultViewController: UIViewController {
                     //find the first one that is > running time. This is our result
                     if departure.1 > runningTime {
                         foundResult = true
-                        destinationStation = "towards \(bartLookupReverse[departure.0.lowercaseString]!)"
+                        destinationStation = bartLookupReverse[departure.0.lowercaseString]!
                         departureTime = departure.1
-
+                        
                         //next one is the subsequent train
                         if index + 1 < departures.count {
                             followingDestinationStation = "towards \(bartLookupReverse[departures[index + 1].0.lowercaseString]!)"
@@ -136,11 +144,11 @@ class ResultViewController: UIViewController {
             //following line/destination station
             
             //first iterate over the data
-
+            
         }
         
         //result area things
-            // run or not?
+        // run or not?
         if departureTime >= walkingTime {
             self.instructionLabel!.text = "Nah, take it easy"
             self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
@@ -151,7 +159,7 @@ class ResultViewController: UIViewController {
             
             self.alarmButton!.hidden = false
             self.alarmTime = departureTime - walkingTime!
-
+            
         } else {
             
             let runUIColor = colorize(0xF05A28)
@@ -163,11 +171,16 @@ class ResultViewController: UIViewController {
             
         }
         
-        //detial area things
+        //detail area things
         self.timeToNextTrainLabel!.text = String(departureTime)
+        self.secondsToNextTrainLabel!.text = "00"
+        
         self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
-        self.destinationLabel!.text = destinationStation
+        self.destinationLabel!.text = "towards \(destinationStation)"
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
+        
+        
+        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
         
         self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
@@ -177,15 +190,48 @@ class ResultViewController: UIViewController {
         
         //following departure area things
         self.followingDepartureLabel!.text = "\(followingDepartureTime)"
-        self.followingDepartureDestinationLabel!.text = followingDestinationStation
+        self.followingDepartureSecondsLabel!.text = "00"
+        self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
+    }
+    
+    func segueOfSeconds(timer: NSTimer) {
+        //countdown for the next train
+        var tempString: NSString = self.secondsToNextTrainLabel!.text
+        tempString = tempString.substringFromIndex(1)
+        var currentSeconds:Int = tempString.integerValue
+        
+        if currentSeconds == 0 {
+            var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
+            currentMinutes--
+            currentSeconds = 59
+            self.timeToNextTrainLabel!.text = String(currentMinutes)
+        } else {
+            currentSeconds--
+        }
+        self.secondsToNextTrainLabel!.text = ":"+String(currentSeconds)
+        
+        //countdown for the following train
+        tempString  = self.followingDepartureSecondsLabel!.text
+        tempString = tempString.substringFromIndex(1)
+        var followingSeconds:Int = tempString.integerValue
+        
+        if followingSeconds == 0 {
+            var followingMinutes:Int = self.followingDepartureLabel!.text.toInt()!
+            followingMinutes--
+            followingSeconds = 59
+            self.followingDepartureLabel!.text = String(followingMinutes)
+        } else {
+            followingSeconds--
+        }
+        self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
     }
     
     @IBAction func returnToRoot(sender: UIButton) {
         self.navigationController.popToRootViewControllerAnimated(true)
     }
-
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         

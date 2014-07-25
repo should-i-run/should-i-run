@@ -24,10 +24,12 @@ class GoogleApiController: NSObject{
     var doNotRun = true
     
     func fetchGoogleData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
+        //opening the local cache where we are caching google results to prevent repeated API calls in a short time
         var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
-//        println("Cache is \(cache[""])")
+
         var time = Int(NSDate().timeIntervalSince1970)
 
+        //checking if the location is cached && if the users location has not changed && if the results are not more than 5 min old
         for item in cache {
             var cachedLocaton = item["location"] as String
             var cachedPosition = item["position"] as Float
@@ -57,6 +59,7 @@ class GoogleApiController: NSObject{
                 } else {
 
                     let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+                    //saving the fetched results to the local cache
                     var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
                     cache.insertObject(["time" : time, "location" : locName, "position" : latStart, "results" : jsonDict], atIndex: cache.count)
 

@@ -23,6 +23,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     let fileManager = SharedFileManager
     
+    // Create a reference to our Google API connection so we can cancel it later
     var currentGoogleConnection: NSURLConnection?
     var currentGoogleData: NSMutableData = NSMutableData()
     
@@ -73,9 +74,11 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         
     }
     
+// MARK: Google API Connection Methods
 
     // Cancel the Google API connection (on timeout)
     func cancelConnection() {
+        println("cancelling Google API request")
         self.currentGoogleConnection?.cancel()
     }
     
@@ -103,7 +106,8 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         self.parseGoogleTransitData(jsonDict)
     }
     
-   
+// MARK: Data Handling Methods
+    
     func parseGoogleTransitData(goog: NSDictionary) {
         var results :[String] = []
         

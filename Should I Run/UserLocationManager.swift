@@ -51,7 +51,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        self.locationManager.distanceFilter = 50
+        self.locationManager.distanceFilter = 10
         self.locationManager.startUpdatingLocation()
     }
 

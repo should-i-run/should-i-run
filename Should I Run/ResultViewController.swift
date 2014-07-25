@@ -14,16 +14,18 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var locationName: String?//temporary, this should be deleted
     let locationManager = SharedUserLocation
     
-    var walkingDirectionsManager = SharedWalkingDirectionsManager
-    
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
     let stationTime = 2 //minutes in station
+
+    var walkingDirectionsManager = SharedWalkingDirectionsManager
+
     
     var distanceToOrigin:Int?
     var departureStationName:String?
     var departures:[(String, Int)] = []
     var bartOriginStationLocation:(lat: String, lon: String)?
+    var muniOriginStationLocation:(lat: String, lon: String)?
     
     var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
     
@@ -75,16 +77,17 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     var updateResultTimer : NSTimer = NSTimer()
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+       
+        self.walkingDirectionsManager.delegate = self
         
         secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
-        
         updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
         
         displayResults()
-        
     }
     
     
@@ -125,10 +128,16 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 if !foundResult {
                     
                     let thisDeparture = self.muniResults![i]
-                    let dist = thisDeparture.distanceToStation.toInt()
+                    var dist = 0
+                    if self.distanceToOrigin {
+                        dist = self.distanceToOrigin!
+                    } else {
+                        dist = thisDeparture.distanceToStation.toInt()!
+                    }
                     
-                    walkingTime = (dist!/walkingSpeed) + self.stationTime
-                    runningTime = (dist!/runningSpeed) + self.stationTime
+                    
+                    walkingTime = (dist/walkingSpeed) + self.stationTime
+                    runningTime = (dist/runningSpeed) + self.stationTime
                     
                     if thisDeparture.departureTime > runningTime { //if time to departure is less than time to get to station
                         foundResult = true
@@ -137,6 +146,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                         departureStationName = thisDeparture.originStationName
                         //sets the class global distance to the current distance
                         self.distanceToOrigin = dist
+                        self.muniOriginStationLocation = thisDeparture.originLatLon
                         
                         if i + 1 < self.muniResults!.count {
                             let nextDeparture = self.muniResults![i + 1]
@@ -212,14 +222,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         var start = (lat: startLatitude!,lon: startLongitude!)
         
         if muniResults{
-//            walkingDirectionsManager.()
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.muniOriginStationLocation!)
         } else {
             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.bartOriginStationLocation!)
         }
     }
     
     func handleWalkingDistance(distance:Int){
-        
+        self.distanceToOrigin = distance
+        self.displayResults()
         
     }
     

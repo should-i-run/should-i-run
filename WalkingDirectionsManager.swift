@@ -17,6 +17,7 @@ protocol WalkingDirectionsDelegate {
 
 class WalkingDirectionsManager: NSObject {
     
+    var delegate : WalkingDirectionsDelegate?
 
     class var manager: WalkingDirectionsManager {
     return SharedWalkingDirectionsManager
@@ -62,8 +63,9 @@ class WalkingDirectionsManager: NSObject {
         if error {
             //error
         } else {
-            println(response.routes[0].distance)
             response.routes[0].distance.hashValue
+            var temp = Int(response.routes[0].distance)
+            self.delegate?.handleWalkingDistance(temp)
         }
     }
     

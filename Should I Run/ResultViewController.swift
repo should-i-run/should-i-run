@@ -191,7 +191,7 @@ class ResultViewController: UIViewController {
         //following departure area things
         self.followingDepartureLabel!.text = "\(followingDepartureTime)"
         self.followingDepartureSecondsLabel!.text = "00"
-        self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
+        self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
     }

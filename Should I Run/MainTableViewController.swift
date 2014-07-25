@@ -121,7 +121,6 @@ import Foundation
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         
         var locations = fileManager.readFromDestinationsList()
-        println("did select at index path, locations are\(locations)")
 
         let row = indexPath.row as Int
         

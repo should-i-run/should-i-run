@@ -95,7 +95,7 @@ class ResultViewController: UIViewController {
                         
                         //next one is the subsequent train
                         if index + 1 < departures.count {
-                            followingDestinationStation = "towards \(bartLookupReverse[departures[index + 1].0.lowercaseString]!)"
+                            followingDestinationStation = "\(bartLookupReverse[departures[index + 1].0.lowercaseString]!)"
                             followingDepartureTime = departures[index + 1].1
                         }
                     }
@@ -134,17 +134,7 @@ class ResultViewController: UIViewController {
             if !foundResult {
                 //error, no result
             }
-            
-            //need to get these things from our muni data:
-            //distance to origin station
-            //origin station name
-            //departure time
-            //line/destination station
-            //following departure time
-            //following line/destination station
-            
-            //first iterate over the data
-            
+
         }
         
         //result area things
@@ -173,7 +163,7 @@ class ResultViewController: UIViewController {
         
         //detail area things
         self.timeToNextTrainLabel!.text = String(departureTime)
-        self.secondsToNextTrainLabel!.text = "00"
+        self.secondsToNextTrainLabel!.text = ":00"
         
         self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
         self.destinationLabel!.text = destinationStation
@@ -190,7 +180,7 @@ class ResultViewController: UIViewController {
         
         //following departure area things
         self.followingDepartureLabel!.text = "\(followingDepartureTime)"
-        self.followingDepartureSecondsLabel!.text = "00"
+        self.followingDepartureSecondsLabel!.text = ":00"
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         

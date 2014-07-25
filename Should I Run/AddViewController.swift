@@ -33,6 +33,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     
     let locationManager = SharedUserLocation
+    let fileManager = SharedFileManager
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +114,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return
         }
         //loc is locations plist as an array
+        
+        
         var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
         //adding a new object to the array
         loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)

@@ -43,17 +43,26 @@ class ResultViewController: UIViewController {
     @IBOutlet var timeRunningLabel: UILabel?
     @IBOutlet var timeWalkingLabel: UILabel?
     
+
+    @IBOutlet var secondsToNextTrainLabel: UILabel?
     
     //following departure area things
     @IBOutlet var followingDepartureLabel: UILabel?
     @IBOutlet var followingDepartureDestinationLabel: UILabel?
 
+//    @IBOutlet var followingDepartureSecondsLabel: UILabel!
+    
+    @IBOutlet var followingDepartureSecondsLabel: UILabel?
+    
+    
+    
+    
+    var secondTimer: NSTimer = NSTimer()
     
     override func viewDidLoad() {
-       
         
         super.viewDidLoad()
-        
+
         var destinationStation:String = ""
         var departureTime:Int = 0
         var followingDestinationStation:String = ""
@@ -67,23 +76,22 @@ class ResultViewController: UIViewController {
         //calculate
         //logic for when to run
         
-        if !muniResults? {
-            //use distance to generate range of times - running time, walking time
-            walkingTime = (self.distanceToOrigin!/walkingSpeed) + self.stationTime
-            runningTime = (self.distanceToOrigin!/runningSpeed) + self.stationTime
-            
-            
-            var foundResult = false
-            
-            //go through list of possible times.
-            for (index, departure) in enumerate(departures) {
-                if foundResult == false {
-                    //subtract the estimated station time from it
-                    //find the first one that is > running time. This is our result
-                    if departure.1 > runningTime {
-                        foundResult = true
-                        destinationStation = "towards \(bartLookupReverse[departure.0.lowercaseString]!)"
-                        departureTime = departure.1
+        //use distance to generate range of times - running time, walking time
+        var walkingTime:Int = (distance!/walkingSpeed) + self.stationTime
+        var runningTime:Int = (distance!/runningSpeed) + self.stationTime
+        
+        
+        var foundResult = false
+        
+        //go through list of possible times.
+        for (index, departure) in enumerate(departures) {
+            if foundResult == false {
+                //subtract the estimated station time from it
+                //find the first one that is > running time. This is our result
+                if departure.1 > runningTime {
+                    foundResult = true
+                    destinationStation = bartLookupReverse[departure.0.lowercaseString]!
+                    departureTime = departure.1
 
                         //next one is the subsequent train
                         if index + 1 < departures.count {
@@ -163,13 +171,18 @@ class ResultViewController: UIViewController {
             
         }
         
-        //detial area things
+        //detail area things
         self.timeToNextTrainLabel!.text = String(departureTime)
-        self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
-        self.destinationLabel!.text = destinationStation
+        self.secondsToNextTrainLabel!.text = "00"
+        
+        self.distanceToStationLabel!.text = String(distance!)
+        self.destinationLabel!.text = "towards \(destinationStation)"
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
-        self.stationNameLabel!.text = "meters to \(departureStationName!) station"
+
+        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
+        
+        self.stationNameLabel!.text = "meters to \(bartLookupReverse[departureStationName!.lowercaseString]!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel!.text = String(runningTime!)
         self.timeWalkingLabel!.text = String(walkingTime!)
@@ -177,9 +190,42 @@ class ResultViewController: UIViewController {
         
         //following departure area things
         self.followingDepartureLabel!.text = "\(followingDepartureTime)"
-        self.followingDepartureDestinationLabel!.text = followingDestinationStation
+        self.followingDepartureSecondsLabel!.text = "00"
+        self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
+    }
+    
+    func segueOfSeconds(timer: NSTimer) {
+        //countdown for the next train
+        var tempString: NSString = self.secondsToNextTrainLabel!.text
+        tempString = tempString.substringFromIndex(1)
+        var currentSeconds:Int = tempString.integerValue
+        
+        if currentSeconds == 0 {
+            var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
+            currentMinutes--
+            currentSeconds = 59
+            self.timeToNextTrainLabel!.text = String(currentMinutes)
+        } else {
+            currentSeconds--
+        }
+        self.secondsToNextTrainLabel!.text = ":"+String(currentSeconds)
+        
+        //countdown for the following train
+        tempString  = self.followingDepartureSecondsLabel!.text
+        tempString = tempString.substringFromIndex(1)
+        var followingSeconds:Int = tempString.integerValue
+        
+        if followingSeconds == 0 {
+            var followingMinutes:Int = self.followingDepartureLabel!.text.toInt()!
+            followingMinutes--
+            followingSeconds = 59
+            self.followingDepartureLabel!.text = String(followingMinutes)
+        } else {
+            followingSeconds--
+        }
+        self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
     }
     
     @IBAction func returnToRoot(sender: UIButton) {

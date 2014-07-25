@@ -23,21 +23,10 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     
     // Create a reference to our BART connection so we can cancel it later
     var currentBartConnection: NSURLConnection?
+    var currentBartData: NSMutableData = NSMutableData()
+
+// MARK: BART API Connection Methods
     
-    func searchBartFor(searchAbbr: String) {
-
-        
-        // Fetch information for the BART api and convert the returned XML into a dictionary
-        let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + searchAbbr + "&key=ZELI-U2UY-IBKQ-DT35")
-
-        var request = NSURLRequest(URL: url)
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-
-        // Initiate the request and save the reference so we can do operations on it later
-        self.currentBartConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
-    }
-
     // Cancel the connection the BART connection.
     func cancelConnection() {
         println("cancelling BART request")
@@ -51,7 +40,26 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     
     // On connection success, handle data we get from BART
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.handleConnectionCallbackWithData(data, andError: nil)
+        self.currentBartData.appendData(data)
+    }
+    
+    // On connection success, handle data we get from the BART API
+    func connectionDidFinishLoading(connection: NSURLConnection!) {
+        self.handleConnectionCallbackWithData(currentBartData, andError: nil)
+    }
+    
+// MARK: Search and Handle BART Data
+
+    func searchBartFor(searchAbbr: String) {
+        // Fetch information for the BART api and convert the returned XML into a dictionary
+        let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + searchAbbr + "&key=ZELI-U2UY-IBKQ-DT35")
+        
+        var request = NSURLRequest(URL: url)
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        // Initiate the request and save the reference so we can do operations on it later
+        self.currentBartConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
     }
     
     func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){

@@ -17,13 +17,26 @@ protocol GoogleAPIControllerProtocol {
 }
 
 
-class GoogleApiController: NSObject{
+class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
     
     var delegate : GoogleAPIControllerProtocol?
     
-    var doNotRun = true
+    var currentGoogleConnection: NSURLConnection?
+    var currentGoogleData: NSMutableData = NSMutableData()
+    
+    var cachedLocationFound = false
+    
+    // Store user location data in this variable so we can use it once the Google API data is downloaded
+    var locationUserData = Dictionary<String, Any>()
     
     func fetchGoogleData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
+      
+        self.locationUserData["locName"] = locName as String
+//        self.locationUserData["latDest"] = latDest as Float
+//        self.locationUserData["lngDest"] = lngDest as Float
+        self.locationUserData["latStart"] = latStart as Float
+//        self.locationUserData["lngStart"] = lngStart as Float
+        
         //opening the local cache where we are caching google results to prevent repeated API calls in a short time
         var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
 
@@ -36,7 +49,7 @@ class GoogleApiController: NSObject{
             var cachedTime = item["time"] as Int
             if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 600) ) {
                 println("Cached Results found")
-                doNotRun = false
+                cachedLocationFound = true
                 var cachedResults = item["results"] as NSDictionary
                 
                 self.parseGoogleTransitData(cachedResults)
@@ -48,30 +61,45 @@ class GoogleApiController: NSObject{
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
         var request = NSURLRequest(URL: url)
-        if doNotRun {
+        if !cachedLocationFound {
 
-           NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-            (response, data, error) in
+            // Make a request to the Google API if no cached results are found
+            self.currentGoogleConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
 
-            
-                if error {
-                    println("Error!!",error)
-                } else {
-
-                    let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-                    //saving the fetched results to the local cache
-                    var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
-                    cache.insertObject(["time" : time, "location" : locName, "position" : latStart, "results" : jsonDict], atIndex: cache.count)
-
-                    let done = cache.writeToFile(NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"), atomically: false)
-                    
-                    self.parseGoogleTransitData(jsonDict)
-
-                }
-            }
         }
         
     }
+    
+
+    // Cancel the Google API connection (on timeout)
+    func cancelConnection() {
+        self.currentGoogleConnection?.cancel()
+    }
+    
+    // If Google API connection fails, handle error here
+    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+        self.delegate?.handleError("Google API connection failed")
+    }
+    
+    // Append data as we receive it from the Google API
+    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
+        self.currentGoogleData.appendData(data)
+    }
+    
+    // On connection success, handle data we get from the Google API
+    func connectionDidFinishLoading(connection: NSURLConnection!) {
+
+        let jsonDict = NSJSONSerialization.JSONObjectWithData(self.currentGoogleData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        var time = Int(NSDate().timeIntervalSince1970)
+        
+        //saving the fetched results to the local cache
+        var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
+        cache.insertObject(["time" : time, "location" : self.locationUserData["locName"] as String, "position" : self.locationUserData["latStart"] as Float, "results" : jsonDict], atIndex: cache.count)
+        let done = cache.writeToFile(NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"), atomically: false)
+
+        self.parseGoogleTransitData(jsonDict)
+    }
+    
    
     func parseGoogleTransitData(goog: NSDictionary) {
         var results :[String] = []

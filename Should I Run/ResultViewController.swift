@@ -59,6 +59,8 @@ class ResultViewController: UIViewController {
     
     var secondTimer: NSTimer = NSTimer()
     
+    var updateResultTimer : NSTimer = NSTimer()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -170,8 +172,6 @@ class ResultViewController: UIViewController {
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
         
-        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
-        
         self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel!.text = String(runningTime!)
@@ -184,8 +184,14 @@ class ResultViewController: UIViewController {
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
+         secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
+        
+        updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
     }
     
+    func updateResults(timer: NSTimer){
+        
+    }
     func segueOfSeconds(timer: NSTimer) {
         //countdown for the next train
         var tempString: NSString = self.secondsToNextTrainLabel!.text

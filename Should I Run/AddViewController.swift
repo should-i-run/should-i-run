@@ -115,12 +115,20 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         //loc is locations plist as an array
         
+        var savedLocations = fileManager.readFromDestinationsList()
+        println("got this from the file manager when asking for locatins \(savedLocations)")
+       
+        savedLocations.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
         
-        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-        //adding a new object to the array
-        loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)
-        //writing it back to the file
-        let done = loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
+        fileManager.saveToDestinationsList(savedLocations)
+        
+//        
+//        
+//        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+//        //adding a new object to the array
+//        loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)
+//        //writing it back to the file
+//        let done = loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
         
     }
     

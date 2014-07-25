@@ -9,6 +9,13 @@
 import UIKit
 import MapKit
 
+
+enum NetworkStatusStruct: Int {
+    case NotReachable = 0
+    case ReachableViaWiFi
+    case ReachableViaWWAN
+}
+
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
     var locationName:String?
     var destinationLatitude : Float?
@@ -37,15 +44,23 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     //Create controller to handle Google API queries
     var googleApiHandler : GoogleApiController = GoogleApiController()
-
-
+    
+    var internetReachability: Reachability = Reachability.reachabilityForInternetConnection()
     
     // Create a timer to segue back on a hard timelimit
     var timeoutTimer: NSTimer = NSTimer()
-
-
+    
+    
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        
+        internetReachability.connectionRequired()
+        internetReachability.startNotifier()
+        
+        var networkStatus  = self.internetReachability.currentReachabilityStatus()
+        
+        
         
         if (!self.locationManager.hasLocation) {
             var message: UIAlertView = UIAlertView(title: "Sorry!", message: "We couldn't find your location.", delegate: self, cancelButtonTitle: "Ok")
@@ -61,13 +76,17 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         // Set background color
         self.view.backgroundColor = globalBackgroundColor
-
+        
         //set this class as the delegate for the api controllers
         self.googleApiHandler.delegate = self
         self.bartApiHandler.delegate = self
         self.muniApiHandler.delegate = self
         
+        
         //Fetching data from Google and parsing it
+        if(networkStatus == NOT_REACHABLE ){
+            self.navigationController.popViewControllerAnimated(true)
+        }else{
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             
             self.startLatitude = Float(loc2d.latitude)
@@ -77,18 +96,19 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         } else {
             
             self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
-            
-                if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                     
+                    if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+                        
                     self.startLatitude = Float(loc2d.latitude)
                     self.startLongitude = Float(loc2d.longitude)
                     self.googleApiHandler.fetchGoogleData(self.locationName!, latDest:self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
                     self.locationManager.hasLocation = true
+                    }
                 }
             }
         }
     }
-
+    
     func didReceiveGoogleResults(results: [String]) {
 
         self.distanceToStart = results[0].toInt()!
@@ -102,11 +122,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
   
         self.muniApiHandler.searchMuniFor(results)
     }
-
+    
     
     // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [(String, Int)]) {
-
+        
         //filter bart results based on google's EOL stations
         var goog = self.googleResults!
         
@@ -120,7 +140,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 }
             }
         }
-
+        
         self.bartResults = filteredBartResults
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
@@ -162,7 +182,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         // On segue, stop animating
         spinner!.stopAnimating()
-
+        
         // Invalidate the timeout timer when we leave the view
         timeoutTimer.invalidate()
         
@@ -182,7 +202,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 destinationController.departures = self.bartResults!
             }
         } else if segue.identifier == "ErrorUnwindSegue" {
-
+            
         }
     }
 }

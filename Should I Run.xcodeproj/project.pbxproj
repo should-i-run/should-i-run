@@ -25,6 +25,7 @@
 		289A05AC197767650044E6B7 /* bartLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289A05AB197767650044E6B7 /* bartLookup.swift */; };
 		28B17423198075220090F129 /* Locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28B17422198075220090F129 /* Locations.plist */; };
 		28FACEC61980C50B00D12A6D /* Cache.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FACEC51980C50B00D12A6D /* Cache.plist */; };
+		82E3F3611980C03400B402C5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E3F3601980C03400B402C5 /* Reachability.m */; };
 		8A3A980F197F131200D23741 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A980E197F131200D23741 /* ColorHelper.swift */; };
 		8A7A2C2B1978725100B7F093 /* BartApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7A2C2A1978725100B7F093 /* BartApiController.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,8 @@
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
 		28B17422198075220090F129 /* Locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Locations.plist; sourceTree = "<group>"; };
 		28FACEC51980C50B00D12A6D /* Cache.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Cache.plist; path = ../Cache.plist; sourceTree = "<group>"; };
+		82E3F35F1980C03400B402C5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
+		82E3F3601980C03400B402C5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../Reachability.m; sourceTree = "<group>"; };
 		8A3A980E197F131200D23741 /* ColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		8A7A2C2A1978725100B7F093 /* BartApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BartApiController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,8 +115,8 @@
 		2508AF3C1975B4CE00E48B37 /* Should I Run */ = {
 			isa = PBXGroup;
 			children = (
-				25C31EDB198041190000E7BC /* helpers */,
-				25C31EDA198040FB0000E7BC /* APIControllers */,
+				25C31EDB198041190000E7BC /* Helpers */,
+				25C31EDA198040FB0000E7BC /* APIHandlers */,
 				2508AF741975C10800E48B37 /* AppDelegate.swift */,
 				2508AF691975C07100E48B37 /* AddViewController.swift */,
 				252ADD8919784C1800ED0C3F /* LoadingViewController.swift */,
@@ -123,7 +126,6 @@
 				2508AF431975B4CE00E48B37 /* Main.storyboard */,
 				2508AF461975B4CE00E48B37 /* Images.xcassets */,
 				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,
-				2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */,
 				2508AF3D1975B4CE00E48B37 /* Supporting Files */,
 				2536F76E197702CA00A2CE2B /* UserLocationManager.swift */,
 			);
@@ -157,25 +159,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		25C31EDA198040FB0000E7BC /* APIControllers */ = {
+		25C31EDA198040FB0000E7BC /* APIHandlers */ = {
 			isa = PBXGroup;
 			children = (
 				8A7A2C2A1978725100B7F093 /* BartApiController.swift */,
 				283F960D1978A04000A554CD /* GoogleApiController.swift */,
 				25C31ED819803C780000E7BC /* MuniApiController.swift */,
 			);
-			name = APIControllers;
+			name = APIHandlers;
 			sourceTree = "<group>";
 		};
-		25C31EDB198041190000E7BC /* helpers */ = {
+		25C31EDB198041190000E7BC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				289A05AB197767650044E6B7 /* bartLookup.swift */,
+				2536F76B1976EC7D00A2CE2B /* Should I Run-Bridging-Header.h */,
+				82E3F35F1980C03400B402C5 /* Reachability.h */,
+				82E3F3601980C03400B402C5 /* Reachability.m */,
 				2536F76A1976EC6600A2CE2B /* XMLReader.h */,
 				2536F76C1976EC7D00A2CE2B /* XMLReader.m */,
+				289A05AB197767650044E6B7 /* bartLookup.swift */,
 				8A3A980E197F131200D23741 /* ColorHelper.swift */,
 			);
-			name = helpers;
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +289,7 @@
 				1E4875E41978445E0079C53E /* AddAlarmViewController.swift in Sources */,
 				2508AF711975C07100E48B37 /* MainTableViewController.swift in Sources */,
 				25C31ED919803C780000E7BC /* MuniApiController.swift in Sources */,
+				82E3F3611980C03400B402C5 /* Reachability.m in Sources */,
 				252ADD881978357600ED0C3F /* ResultViewController.swift in Sources */,
 				2508AF751975C10800E48B37 /* AppDelegate.swift in Sources */,
 				252ADD8A19784C1800ED0C3F /* LoadingViewController.swift in Sources */,

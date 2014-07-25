@@ -175,6 +175,7 @@ class ResultViewController: UIViewController {
         self.destinationLabel!.text = destinationStation
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
+        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
         
         self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true

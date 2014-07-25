@@ -22,7 +22,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     var delegate : GoogleAPIControllerProtocol?
     
     var currentGoogleConnection: NSURLConnection?
-    var currentData: NSMutableData = NSMutableData()
+    var currentGoogleData: NSMutableData = NSMutableData()
     
     var cachedLocationFound = false
     
@@ -83,13 +83,13 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     // Append data as we receive it from the Google API
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.currentData.appendData(data)
+        self.currentGoogleData.appendData(data)
     }
     
     // On connection success, handle data we get from the Google API
     func connectionDidFinishLoading(connection: NSURLConnection!) {
 
-        let jsonDict = NSJSONSerialization.JSONObjectWithData(self.currentData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        let jsonDict = NSJSONSerialization.JSONObjectWithData(self.currentGoogleData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
         var time = Int(NSDate().timeIntervalSince1970)
         
         //saving the fetched results to the local cache

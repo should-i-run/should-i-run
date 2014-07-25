@@ -59,10 +59,16 @@ class ResultViewController: UIViewController {
     
     var secondTimer: NSTimer = NSTimer()
     
+    var updateResultTimer : NSTimer = NSTimer()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
+        
+        updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+
         var destinationStation:String = ""
         var departureTime:Int = 0
         var followingDestinationStation:String = ""
@@ -170,8 +176,6 @@ class ResultViewController: UIViewController {
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
         
-        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
-        
         self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel!.text = String(runningTime!)
@@ -184,8 +188,13 @@ class ResultViewController: UIViewController {
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
-    }
+             }
     
+    func updateResults(timer: NSTimer){
+        
+        //call entire reload of display in this function
+        
+    }
     func segueOfSeconds(timer: NSTimer) {
         //countdown for the next train
         var tempString: NSString = self.secondsToNextTrainLabel!.text
@@ -195,12 +204,21 @@ class ResultViewController: UIViewController {
         if currentSeconds == 0 {
             var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
             currentMinutes--
-            currentSeconds = 59
+            if currentMinutes == 0 {
+                currentSeconds = 0
+            } else {
+                currentSeconds = 59    
+            }
+            
             self.timeToNextTrainLabel!.text = String(currentMinutes)
         } else {
             currentSeconds--
         }
+        if currentSeconds < 10 {
+        self.secondsToNextTrainLabel!.text = ":0"+String(currentSeconds)
+        } else {
         self.secondsToNextTrainLabel!.text = ":"+String(currentSeconds)
+        }
         
         //countdown for the following train
         tempString  = self.followingDepartureSecondsLabel!.text
@@ -215,7 +233,12 @@ class ResultViewController: UIViewController {
         } else {
             followingSeconds--
         }
-        self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
+        if followingSeconds < 10 {
+            self.followingDepartureSecondsLabel!.text = ":0"+String(followingSeconds)
+        } else {
+          self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
+        }
+        
     }
     
     @IBAction func returnToRoot(sender: UIButton) {

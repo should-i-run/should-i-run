@@ -26,7 +26,7 @@ class MuniApiController: NSObject{
     var currentMuniData: NSMutableData = NSMutableData()
     
     // Store user location data in this variable so we can use it once the Google API data is downloaded
-    var muniSearchData: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)] = [("","","","","")]
+    var dataFromGoogle: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]?
 
 // MARK: MUNI API Connection Methods
     
@@ -48,7 +48,7 @@ class MuniApiController: NSObject{
     
     // On connection success, handle data we get from the MUNI API
     func connectionDidFinishLoading(connection: NSURLConnection!) {
-        self.processMuniData(currentMuniData, data: muniSearchData)
+        self.processMuniData(currentMuniData, data: self.dataFromGoogle!)
     }
 
     
@@ -56,22 +56,8 @@ class MuniApiController: NSObject{
     
     func searchMuniFor(data:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]) {
 
-        self.muniSearchData[0].distanceToStation = data[0].distanceToStation
-        self.muniSearchData[0].muniOriginStationName = data[0].muniOriginStationName
-        self.muniSearchData[0].lineCode = data[0].lineCode
-        self.muniSearchData[0].lineName = data[0].lineName
-        self.muniSearchData[0].eolStationName = data[0].eolStationName
-        
-        
-        //83d1f7f4-1d1e-4fc0-a070-162a95bd106f
-        //data: [distance to station, station name, line code, line name, EOL station]
-        //hack reactor
-        //lat 37.780948
-        //-122.414045
-        
-        //taraval st
-        //37.74261,-122.491207
-        
+        self.dataFromGoogle = data
+
         /*
         possible results from google:
             Metro Civic Center Station/Downtn -> muni wants Inbound

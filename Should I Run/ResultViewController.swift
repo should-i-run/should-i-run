@@ -9,12 +9,12 @@
 import UIKit
 import MapKit
 
-class ResultViewController: UIViewController, CLLocationManagerDelegate {
+class ResultViewController: UIViewController, CLLocationManagerDelegate, WalkingDirectionsDelegate {
     
     var locationName: String?//temporary, this should be deleted
     let locationManager = SharedUserLocation
-    var startLatitude:Float?
-    var startLongitude:Float?
+    
+    var walkingDirectionsManager = SharedWalkingDirectionsManager
     
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
@@ -29,6 +29,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
     //alarm
     var alarmTime = 0
+    
+    //for displaying results
+    var destinationStation:String = ""
+    var departureTime:Int = 0
+    var followingDestinationStation:String = ""
+    var followingDepartureTime:Int = 0
+    
+    var walkingTime:Int?
+    var runningTime:Int?
     
     //result area things
     @IBOutlet var resultArea: UIView?
@@ -74,16 +83,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
         
         updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
         
-        var destinationStation:String = ""
-        var departureTime:Int = 0
-        var followingDestinationStation:String = ""
-        var followingDepartureTime:Int = 0
+        displayResults()
         
-        var walkingTime:Int?
-        var runningTime:Int?
-        
-        
-        
+    }
+    
+    
+    func displayResults() {
         //calculate
         //logic for when to run
         if !muniResults? {
@@ -193,25 +198,31 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
         self.followingDepartureSecondsLabel!.text = ":00"
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
-        
+    
     }
+    
     
     func updateResults(timer: NSTimer){
         
         //call entire reload of display in this function
         let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
-        self.startLatitude = Float(loc2d.latitude)
-        self.startLongitude = Float(loc2d.longitude)
+        var startLatitude = (loc2d.latitude as NSNumber).stringValue
+        var startLongitude = (loc2d.longitude as NSNumber).stringValue
+        
+        var start = (lat: startLatitude!,lon: startLongitude!)
         
         if muniResults{
-          WalkingDirectionsManager()
+//            walkingDirectionsManager.()
         } else {
-          WalkingDirectionsManager()
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.bartOriginStationLocation!)
         }
+    }
+    
+    func handleWalkingDistance(distance:Int){
         
-  
         
     }
+    
     func segueOfSeconds(timer: NSTimer) {
         //countdown for the next train
         var tempString: NSString = self.secondsToNextTrainLabel!.text
@@ -232,9 +243,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate {
             currentSeconds--
         }
         if currentSeconds < 10 {
-            self.secondsToNextTrainLabel!.text = ":0"+String(currentSeconds)
+            self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
         } else {
-            self.secondsToNextTrainLabel!.text = ":"+String(currentSeconds)
+            self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
         }
         
         //countdown for the following train

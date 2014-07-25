@@ -19,6 +19,7 @@ class ResultViewController: UIViewController {
     var distanceToOrigin:Int?
     var departureStationName:String?
     var departures:[(String, Int)] = []
+    var bartOriginStationLocation:(lat: String, lon: String)?
     
     var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
     

@@ -10,6 +10,11 @@ import MapKit
 
 let SharedWalkingDirectionsManager = WalkingDirectionsManager()
 
+protocol WalkingDirectionsDelegate {
+    func handleWalkingDistance(distance:Int)
+    
+}
+
 class WalkingDirectionsManager: NSObject {
     
 
@@ -22,20 +27,6 @@ class WalkingDirectionsManager: NSObject {
 
     }
     
-    func getWalkingDirectionsDistanceBetween(startLatLon:(lat:String, lon:String), endLatLon:(lat:String, lon:String)) {
-        var walkingRouteRequest = MKDirectionsRequest()
-        walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
-        
-
-        let sourceMapItem = stringCorrdToMapItem(startLatLon.lat, lon: startLatLon.lon)
-        let endMapItem = stringCorrdToMapItem(endLatLon.lat, lon: endLatLon.lon)
-        
-        walkingRouteRequest.setSource(sourceMapItem)
-        walkingRouteRequest.setDestination(endMapItem)
-
-        
-    }
-    
     func stringCorrdToMapItem(lat:String, lon:String) -> MKMapItem {
         
         var latDouble = (lat as NSString).doubleValue
@@ -46,9 +37,37 @@ class WalkingDirectionsManager: NSObject {
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord2d, addressDictionary: nil))
         
         return mapItem
-
+        
         
     }
+    
+    func getWalkingDirectionsBetween(startLatLon:(lat:String, lon:String), endLatLon:(lat:String, lon:String)) {
+        var walkingRouteRequest = MKDirectionsRequest()
+        walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
+        
+
+        let sourceMapItem = stringCorrdToMapItem(startLatLon.lat, lon: startLatLon.lon)
+        let endMapItem = stringCorrdToMapItem(endLatLon.lat, lon: endLatLon.lon)
+        
+        walkingRouteRequest.setSource(sourceMapItem)
+        walkingRouteRequest.setDestination(endMapItem)
+        
+        var walkingRouteDirections = MKDirections(request: walkingRouteRequest)
+        
+        walkingRouteDirections.calculateDirectionsWithCompletionHandler(getDistanceFromDirections)
+        
+    }
+    
+    func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
+        if error {
+            //error
+        } else {
+            println(response.routes[0].distance)
+            response.routes[0].distance.hashValue
+        }
+    }
+    
+
     
 }
 

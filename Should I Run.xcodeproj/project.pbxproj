@@ -64,7 +64,7 @@
 		2536F76C1976EC7D00A2CE2B /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		2536F76E197702CA00A2CE2B /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		25C31ED819803C780000E7BC /* MuniApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuniApiController.swift; sourceTree = "<group>"; };
-		25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkingDirectionsManager.swift; sourceTree = "<group>"; };
+		25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkingDirectionsManager.swift; path = ../WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		25D8FBEB1982193400FA9FA0 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../File.swift; sourceTree = "<group>"; };
 		283F960D1978A04000A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiController.swift; sourceTree = "<group>"; };
 		289A05AB197767650044E6B7 /* bartLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bartLookup.swift; sourceTree = "<group>"; };
@@ -99,7 +99,6 @@
 		2508AF311975B4CD00E48B37 = {
 			isa = PBXGroup;
 			children = (
-				25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */,
 				2508AF671975B54E00E48B37 /* CoreLocation.framework */,
 				2508AF651975B54900E48B37 /* MapKit.framework */,
 				2508AF3C1975B4CE00E48B37 /* Should I Run */,
@@ -133,6 +132,7 @@
 				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,
 				2508AF3D1975B4CE00E48B37 /* Supporting Files */,
 				2536F76E197702CA00A2CE2B /* UserLocationManager.swift */,
+				25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */,
 				25D8FBEB1982193400FA9FA0 /* File.swift */,
 			);
 			path = "Should I Run";

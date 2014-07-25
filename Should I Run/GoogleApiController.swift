@@ -21,6 +21,8 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     var delegate : GoogleAPIControllerProtocol?
     
+    let fileManager = SharedFileManager
+    
     var currentGoogleConnection: NSURLConnection?
     var currentGoogleData: NSMutableData = NSMutableData()
     
@@ -32,13 +34,14 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     func fetchGoogleData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
       
         self.locationUserData["locName"] = locName as String
-//        self.locationUserData["latDest"] = latDest as Float
-//        self.locationUserData["lngDest"] = lngDest as Float
         self.locationUserData["latStart"] = latStart as Float
-//        self.locationUserData["lngStart"] = lngStart as Float
+
         
         //opening the local cache where we are caching google results to prevent repeated API calls in a short time
-        var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
+        
+        var cache = fileManager.readFromCache()
+        
+//var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
 
         var time = Int(NSDate().timeIntervalSince1970)
 
@@ -93,9 +96,9 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         var time = Int(NSDate().timeIntervalSince1970)
         
         //saving the fetched results to the local cache
-        var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
+        var cache = self.fileManager.readFromCache()
         cache.insertObject(["time" : time, "location" : self.locationUserData["locName"] as String, "position" : self.locationUserData["latStart"] as Float, "results" : jsonDict], atIndex: cache.count)
-        let done = cache.writeToFile(NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"), atomically: false)
+        self.fileManager.saveToCache(cache)
 
         self.parseGoogleTransitData(jsonDict)
     }

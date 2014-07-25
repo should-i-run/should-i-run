@@ -48,7 +48,6 @@ class MuniApiController: NSObject{
     
     // On connection success, handle data we get from the MUNI API
     func connectionDidFinishLoading(connection: NSURLConnection!) {
-        println("MUNI API finished loading")
         self.processMuniData(currentMuniData, data: muniSearchData)
     }
 

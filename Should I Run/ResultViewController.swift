@@ -176,7 +176,7 @@ class ResultViewController: UIViewController {
         self.secondsToNextTrainLabel!.text = "00"
         
         self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
-        self.destinationLabel!.text = "towards \(destinationStation)"
+        self.destinationLabel!.text = destinationStation
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
         

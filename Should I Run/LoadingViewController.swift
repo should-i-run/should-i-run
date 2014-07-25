@@ -50,18 +50,27 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     // Create a timer to segue back on a hard timelimit
     var timeoutTimer: NSTimer = NSTimer()
     
-    
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Start spinner animation
+        spinner!.startAnimating()
         
-        internetReachability.connectionRequired()
-        internetReachability.startNotifier()
+        // Set background color
+        self.view.backgroundColor = globalBackgroundColor
+        
+        //get the internet going
+        self.internetReachability.connectionRequired()
+        self.internetReachability.startNotifier()
+        
+    }
+    
+
+    
+    override func viewDidAppear(animated: Bool){
         
         var networkStatus  = self.internetReachability.currentReachabilityStatus()
-        
-        
-        
+
         if (!self.locationManager.hasLocation) {
             var message: UIAlertView = UIAlertView(title: "Sorry!", message: "We couldn't find your location.", delegate: self, cancelButtonTitle: "Ok")
             message.show()
@@ -71,11 +80,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeut:"), userInfo: timeoutText, repeats: false)
 
-        // Start spinner animation
-        spinner!.startAnimating()
-        
-        // Set background color
-        self.view.backgroundColor = globalBackgroundColor
+
         
         //set this class as the delegate for the api controllers
         self.googleApiHandler.delegate = self

@@ -14,8 +14,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var locationName: String?//temporary, this should be deleted
     let locationManager = SharedUserLocation
     
-    var walkingDirectionsManager = SharedWalkingDirectionsManager
-    
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
     let stationTime = 2 //minutes in station

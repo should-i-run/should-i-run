@@ -10,8 +10,7 @@ import UIKit
 
 import MapKit
 
-class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
+class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UITextFieldDelegate {
 
     @IBOutlet var textField : UITextField?
 
@@ -32,6 +31,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     let locationManager = SharedUserLocation
     let fileManager = SharedFileManager
+
+    var destinationNameAlertView:UIAlertView?
 
     let geocoder = CLGeocoder()
 
@@ -68,6 +69,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     @IBAction func geocodeAddress(sender: AnyObject) {
 
+        self.textField?.resignFirstResponder()
         var currentRegion = CLCircularRegion(circularRegionWithCenter: self.locationManager.currentLocation2d!, radius: 1000.0, identifier: nil)
         geocoder.geocodeAddressString(textField?.text, inRegion: currentRegion, completionHandler:{
             (response: Array!, error: NSError!) -> Void in
@@ -134,7 +136,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return false
         }
         if self.textField!.text == "" {
-            var message: UIAlertView = UIAlertView(title: "Location", message: "Please add a location name", delegate: nil, cancelButtonTitle: "Ok")
+            var message: UIAlertView = UIAlertView(title: "Location", message: "Please add a destination", delegate: nil, cancelButtonTitle: "Ok")
             message.show()
             return false
 
@@ -155,17 +157,41 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
+    func alertView(alertView: UIAlertView!, willDismissWithButtonIndex buttonIndex: Int) {
+        if(buttonIndex == 1){
+            self.performSegueWithIdentifier("backToMain", sender: self)
+        }
+    }
+
+    @IBAction func presentAlertAndSave(sender: AnyObject) {
+
+        self.destinationNameAlertView = UIAlertView(title: "Destination name", message: "Please choose a desination name", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Done")
+
+        self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
+
+        self.destinationNameAlertView!.textFieldAtIndex(0).delegate = self
+
+        self.destinationNameAlertView!.show()
+        //self.performSegueWithIdentifier("backToMain", sender: sender)
+    }
+
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+
+        destinationNameAlertView!.dismissWithClickedButtonIndex(1, animated: true)
+
+        return true
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
 
-        if (sender as? UIBarButtonItem != self.saveBarButton) {
-            return
-        }
+//        if (sender as? UIBarButtonItem != self.saveBarButton) {
+//            return
+//        }
         //loc is locations plist as an array
 
         var savedLocations = self.fileManager.readFromDestinationsList()
         
-        savedLocations.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
+        savedLocations.setObject(["name": self.destinationNameAlertView!.textFieldAtIndex(0).text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
         
         self.fileManager.saveToDestinationsList(savedLocations)
         

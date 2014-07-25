@@ -32,6 +32,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     //you can access the lat and long by calling:
       // currentLocation2d.latitude, etc
     var currentLocation2d:CLLocationCoordinate2D?
+    var currentLocation:CLLocation?
     
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
@@ -58,6 +59,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     // This method is executed whenever a location is found.
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         self.currentLocation2d = manager.location.coordinate
+        self.currentLocation =  manager.location
         self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
         self.hasLocation = true
     }

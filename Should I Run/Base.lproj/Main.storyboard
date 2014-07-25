@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H3J-Mj-aFw">
     <dependencies>
         <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
@@ -327,30 +327,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a destination" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BOu-XN-4nQ">
-                                <rect key="frame" x="20" y="95" width="280" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter address or hold on map" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BOu-XN-4nQ">
+                                <rect key="frame" x="20" y="86" width="219" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
-                                <rect key="frame" x="20" y="133" width="280" height="415"/>
+                                <rect key="frame" x="0.0" y="133" width="320" height="435"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="O0J-3O-MUh"/>
+                                    <outlet property="delegate" destination="bNB-m3-407" id="swL-m6-ssZ"/>
+                                    <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="6jF-o1-0PI"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvZ-bZ-qAc">
+                                <rect key="frame" x="254" y="86" width="48" height="30"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="geocodeAddress:" destination="bNB-m3-407" eventType="touchUpInside" id="Jtr-fX-D1n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Destination" id="Mr5-RA-NYH">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="G4M-yo-wkO">
                             <connections>
-                                <segue destination="fN2-mM-vwH" kind="unwind" unwindAction="unwindToList:" id="gAp-Xz-IN4"/>
+                                <segue destination="fN2-mM-vwH" kind="unwind" identifier="backToMain" unwindAction="unwindToList:" id="gAp-Xz-IN4"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="s3L-rf-hGK">
                             <connections>
-                                <segue destination="fN2-mM-vwH" kind="unwind" unwindAction="unwindToList:" id="gnu-CR-QGI"/>
+                                <action selector="presentAlertAndSave:" destination="bNB-m3-407" id="5HN-T0-wL0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -362,13 +372,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPL-y8-8gV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fN2-mM-vwH" userLabel="Exit" sceneMemberID="exit"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="DSg-G3-m7O"/>
                 <tapGestureRecognizer id="qzU-bv-yg7">
                     <connections>
-                        <action selector="tapOnMap:" destination="bNB-m3-407" id="fwS-dw-mHG"/>
+                        <action selector="tapOnMap:" destination="bNB-m3-407" id="VaI-zZ-j9v"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1656" y="883"/>
+            <point key="canvasLocation" x="1636" y="883"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="28Y-KD-qFE">

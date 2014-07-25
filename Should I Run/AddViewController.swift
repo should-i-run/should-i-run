@@ -116,7 +116,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //loc is locations plist as an array
         
         var savedLocations = fileManager.readFromDestinationsList()
-        println("got this from the file manager when asking for locatins \(savedLocations)")
        
         savedLocations.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
         

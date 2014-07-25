@@ -54,14 +54,13 @@ import Foundation
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
         //loc is locations plist as an array
         var locations = fileManager.readFromDestinationsList()
-//var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
+        
         return locations.count + 1
     }
     
     override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
         //loc is locations plist as an array
         var locations = fileManager.readFromDestinationsList()
-//var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
         
         if indexPath.row == locations.count {
             return false
@@ -75,15 +74,12 @@ import Foundation
         
         var locations = fileManager.readFromDestinationsList()
         
-//var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-        
         if editingStyle == .Delete && indexPath.row != locations.count {
          
             //get the index row of the delete and compare with the number of objects in the plist
     
             locations.removeObjectAtIndex(indexPath.row)
             fileManager.saveToDestinationsList(locations)
-//loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
             
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
@@ -95,10 +91,7 @@ import Foundation
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
         var locations = fileManager.readFromDestinationsList()
-                println("got this from the file manager when asking for locatins \(locations)")
-        
-//var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-        
+      
         if let row = indexPath?.row {
 
             // if the current row (zero indexed) is equal to that, we are on the add destination button
@@ -128,10 +121,7 @@ import Foundation
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         
         var locations = fileManager.readFromDestinationsList()
-        println("got this from the file manager when asking for locatins \(locations)")
-        
-//var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-        
+
         let row = indexPath.row as Int
         
         // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
@@ -153,8 +143,7 @@ import Foundation
     
     func unwindToList(segue:UIStoryboardSegue)  {
         //reload the table on unwinding
-// var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-     
+
         self.tableView.reloadData()
     
     }

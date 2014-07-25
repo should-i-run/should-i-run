@@ -68,16 +68,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
     
     override func viewDidAppear(animated: Bool){
-        println("in view did appear")
-        
-        
-        
-
         
         var networkStatus  = self.internetReachability.currentReachabilityStatus()
-        
-        
-        
+
         if (!self.locationManager.hasLocation) {
             var message: UIAlertView = UIAlertView(title: "Sorry!", message: "We couldn't find your location.", delegate: self, cancelButtonTitle: "Ok")
             message.show()

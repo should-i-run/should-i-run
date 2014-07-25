@@ -211,7 +211,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 
                 //otherwise assuming we have bart
             } else {
-                
+                var goog = self.googleResults!
+                destinationController.bartOriginStationLocation = (lat: goog[5], lon: goog[6])
                 destinationController.distanceToOrigin = self.distanceToStart
                 destinationController.departureStationName = bartLookupReverse[self.departureStationName.lowercaseString]!
                 destinationController.departures = self.bartResults!

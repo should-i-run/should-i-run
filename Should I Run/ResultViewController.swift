@@ -19,6 +19,7 @@ class ResultViewController: UIViewController {
     var distanceToOrigin:Int?
     var departureStationName:String?
     var departures:[(String, Int)] = []
+    var bartOriginStationLocation:(lat: String, lon: String)?
     
     var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
     
@@ -175,6 +176,7 @@ class ResultViewController: UIViewController {
         self.destinationLabel!.text = destinationStation
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
+        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
         
         self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true

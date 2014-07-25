@@ -52,7 +52,6 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             var cachedPosition = item["position"] as Float
             var cachedTime = item["time"] as Int
             if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 600) ) {
-                println("Cached Results found")
                 cachedLocationFound = true
                 var cachedResults = item["results"] as NSDictionary
                 
@@ -181,13 +180,16 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             var result:(lat: String, lon: String) = (lat: "", lon:"")
             
             if let endLocation = step.objectForKey("end_location") as? NSDictionary {
-                if let lat = endLocation.objectForKey("lat") as? NSString {
+
+                if var lat = (endLocation.objectForKey("lat") as NSNumber).stringValue {
+
                     result.lat = lat
                 }
-                if let lon = endLocation.objectForKey("lng") as? NSString {
-                    result.lat = lon
+                if let lon = (endLocation.objectForKey("lng") as NSNumber).stringValue  {
+                    result.lon = lon
                 }
             }
+
             return result
         }
 

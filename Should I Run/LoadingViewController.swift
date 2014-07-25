@@ -142,6 +142,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         //filter bart results based on google's EOL stations
         var goog = self.googleResults!
+        println(goog)
         
         var filteredBartResults:[(String, Int)] = []
         

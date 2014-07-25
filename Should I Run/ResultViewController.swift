@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
-class ResultViewController: UIViewController {
+class ResultViewController: UIViewController, CLLocationManagerDelegate {
     
     var locationName: String?//temporary, this should be deleted
+    let locationManager = SharedUserLocation
+    var startLatitude:Float?
+    var startLongitude:Float?
     
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
@@ -69,7 +73,7 @@ class ResultViewController: UIViewController {
         secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
         
         updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
-
+        
         var destinationStation:String = ""
         var departureTime:Int = 0
         var followingDestinationStation:String = ""
@@ -141,7 +145,7 @@ class ResultViewController: UIViewController {
             if !foundResult {
                 //error, no result
             }
-
+            
         }
         
         //result area things
@@ -190,11 +194,22 @@ class ResultViewController: UIViewController {
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
-             }
+    }
     
     func updateResults(timer: NSTimer){
         
         //call entire reload of display in this function
+        let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+        self.startLatitude = Float(loc2d.latitude)
+        self.startLongitude = Float(loc2d.longitude)
+        
+        if muniResults{
+          WalkingDirectionsManager()
+        } else {
+          WalkingDirectionsManager()
+        }
+        
+  
         
     }
     func segueOfSeconds(timer: NSTimer) {
@@ -209,7 +224,7 @@ class ResultViewController: UIViewController {
             if currentMinutes == 0 {
                 currentSeconds = 0
             } else {
-                currentSeconds = 59    
+                currentSeconds = 59
             }
             
             self.timeToNextTrainLabel!.text = String(currentMinutes)
@@ -217,9 +232,9 @@ class ResultViewController: UIViewController {
             currentSeconds--
         }
         if currentSeconds < 10 {
-        self.secondsToNextTrainLabel!.text = ":0"+String(currentSeconds)
+            self.secondsToNextTrainLabel!.text = ":0"+String(currentSeconds)
         } else {
-        self.secondsToNextTrainLabel!.text = ":"+String(currentSeconds)
+            self.secondsToNextTrainLabel!.text = ":"+String(currentSeconds)
         }
         
         //countdown for the following train
@@ -238,7 +253,7 @@ class ResultViewController: UIViewController {
         if followingSeconds < 10 {
             self.followingDepartureSecondsLabel!.text = ":0"+String(followingSeconds)
         } else {
-          self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
+            self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
         }
         
     }
@@ -249,9 +264,6 @@ class ResultViewController: UIViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        
-        
-        
         if segue.identifier {
             if segue.identifier == "AlarmSegue" {
                 

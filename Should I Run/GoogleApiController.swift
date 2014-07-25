@@ -12,7 +12,7 @@ import UIKit
 
 protocol GoogleAPIControllerProtocol {
     func didReceiveGoogleResults(results: [String])
-    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool)
+    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))], muni: Bool)
     func handleError(errorMessage: String)
 }
 
@@ -175,6 +175,21 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             
             return result
         }
+        
+        func getOriginStationLocationFromWalkingStep(step: NSDictionary) -> (lat: String, lon: String) {
+            
+            var result:(lat: String, lon: String) = (lat: "", lon:"")
+            
+            if let endLocation = step.objectForKey("end_location") as? NSDictionary {
+                if let lat = endLocation.objectForKey("lat") as? NSString {
+                    result.lat = lat
+                }
+                if let lon = endLocation.objectForKey("lng") as? NSString {
+                    result.lat = lon
+                }
+            }
+            return result
+        }
 
         func getEOLStationFromBartStep(step: NSDictionary) -> Array<String> {
             
@@ -217,8 +232,8 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                 .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
             return originStationName
-            
         }
+        
         func getLineCodeFromMuniStep(step:NSDictionary) -> String {
             if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
                 if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
@@ -265,8 +280,8 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             return eolStationName
         }
         
-        func getMuniData(allRoutes: [NSDictionary]) -> [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)]? {
-            var result:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)] = []
+        func getMuniData(allRoutes: [NSDictionary]) -> [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]? {
+            var result:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))] = []
             for route in allRoutes  {
                 if let legs = route.objectForKey("legs") as? [NSDictionary] {
                     //for whatever reason legs is always an array with only one element
@@ -294,7 +309,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                                                             
                                                             // now that we have the step, get the data
                                                             
-                                                            var thisResult: (distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)
+                                                            var thisResult: (distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))
                                                             var thisStep = steps[i] as NSDictionary
                                                             var walkingStep = steps[i - 1] as NSDictionary
                                                             
@@ -303,6 +318,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                                                             thisResult.lineCode = getLineCodeFromMuniStep(thisStep)
                                                             thisResult.lineName = getLineNameFromMuniStep(thisStep)
                                                             thisResult.eolStationName = getEolStationNameFromMuniStep(thisStep)
+                                                            thisResult.originLatLon = getOriginStationLocationFromWalkingStep(walkingStep)
                                                             
                                                             result.insert(thisResult, atIndex: result.count)
                                                             //return to commenting
@@ -332,6 +348,9 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
             results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
             results += getAllEOLStations(allRoutes)
+            var (lat, lon) = getOriginStationLocationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+            results += lat
+            results += lon
             
             self.delegate?.didReceiveGoogleResults(results)
 

@@ -102,8 +102,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
 
         return true
-        
-        
     }
 
 
@@ -115,32 +113,13 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         //loc is locations plist as an array
         
-        var savedLocations = fileManager.readFromDestinationsList()
+        var savedLocations = self.fileManager.readFromDestinationsList()
        
         savedLocations.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
         
-        fileManager.saveToDestinationsList(savedLocations)
-        
-//        
-//        
-//        var loc = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"))
-//        //adding a new object to the array
-//        loc.setObject(["name": self.textField!.text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: loc.count)
-//        //writing it back to the file
-//        let done = loc.writeToFile(NSBundle.mainBundle().pathForResource("Locations", ofType: "plist"), atomically: false)
+        self.fileManager.saveToDestinationsList(savedLocations)
         
     }
-    
-
-
- 
-
-//
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-    
 
 
 }

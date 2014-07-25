@@ -17,6 +17,10 @@ enum NetworkStatusStruct: Int {
 }
 
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
+    
+    var viewHasAlreadyAppeared = false
+    
+    
     var locationName:String?
     var destinationLatitude : Float?
     var destinationLongitude : Float?
@@ -65,49 +69,53 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
     }
     
-
+    
     
     override func viewDidAppear(animated: Bool){
         
-        var networkStatus  = self.internetReachability.currentReachabilityStatus()
-
-        if (!self.locationManager.hasLocation) {
-            var message: UIAlertView = UIAlertView(title: "Sorry!", message: "We couldn't find your location.", delegate: self, cancelButtonTitle: "Ok")
-            message.show()
-        }
-        
-        // Set timer to segue back (by calling segueFromView) back to the main table view
-        var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeut:"), userInfo: timeoutText, repeats: false)
-
-
-        
-        //set this class as the delegate for the api controllers
-        self.googleApiHandler.delegate = self
-        self.bartApiHandler.delegate = self
-        self.muniApiHandler.delegate = self
-        
-        
-        //Fetching data from Google and parsing it
-        if(networkStatus == NOT_REACHABLE ){
-            self.navigationController.popViewControllerAnimated(true)
-        }else{
-        if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+        if !self.viewHasAlreadyAppeared {
             
-            self.startLatitude = Float(loc2d.latitude)
-            self.startLongitude = Float(loc2d.longitude)
-            self.googleApiHandler.fetchGoogleData(self.locationName!, latDest: self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+            self.viewHasAlreadyAppeared = true
             
-        } else {
+            var networkStatus  = self.internetReachability.currentReachabilityStatus()
             
-            self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+            if (!self.locationManager.hasLocation) {
+                var message: UIAlertView = UIAlertView(title: "Sorry!", message: "We couldn't find your location.", delegate: self, cancelButtonTitle: "Ok")
+                message.show()
+            }
+            
+            // Set timer to segue back (by calling segueFromView) back to the main table view
+            var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
+            self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeut:"), userInfo: timeoutText, repeats: false)
+            
+            
+            //set this class as the delegate for the api controllers
+            self.googleApiHandler.delegate = self
+            self.bartApiHandler.delegate = self
+            self.muniApiHandler.delegate = self
+            
+            
+            //Fetching data from Google and parsing it
+            if(networkStatus == NOT_REACHABLE ){
+                self.navigationController.popViewControllerAnimated(true)
+            }else{
+                if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                     
-                    if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
-                        
                     self.startLatitude = Float(loc2d.latitude)
                     self.startLongitude = Float(loc2d.longitude)
-                    self.googleApiHandler.fetchGoogleData(self.locationName!, latDest:self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
-                    self.locationManager.hasLocation = true
+                    self.googleApiHandler.fetchGoogleData(self.locationName!, latDest: self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+                    
+                } else {
+                    
+                    self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+                        
+                        if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
+                            
+                            self.startLatitude = Float(loc2d.latitude)
+                            self.startLongitude = Float(loc2d.longitude)
+                            self.googleApiHandler.fetchGoogleData(self.locationName!, latDest:self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+                            self.locationManager.hasLocation = true
+                        }
                     }
                 }
             }
@@ -115,16 +123,16 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func didReceiveGoogleResults(results: [String]) {
-
+        
         self.distanceToStart = results[0].toInt()!
         self.departureStationName = results[1]
         self.googleResults = results
         self.bartApiHandler.searchBartFor(self.departureStationName)
-
+        
     }
-
+    
     func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String)], muni: Bool) {
-  
+        
         self.muniApiHandler.searchMuniFor(results)
     }
     
@@ -151,13 +159,13 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String)]) {
-
+        
         self.muniResults = results
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
     
-
+    
     // Error handling-----------------------------------------------------
     
     
@@ -183,7 +191,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     func timerTimeout(timer: NSTimer) {
         handleError("Request timed out")
     }
-
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
         
@@ -201,9 +209,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                 destinationController.muniResults = muniData
                 //stuff as appropriate
                 
-            //otherwise assuming we have bart
+                //otherwise assuming we have bart
             } else {
-
+                
                 destinationController.distanceToOrigin = self.distanceToStart
                 destinationController.departureStationName = bartLookupReverse[self.departureStationName.lowercaseString]!
                 destinationController.departures = self.bartResults!

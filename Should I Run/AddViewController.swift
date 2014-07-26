@@ -39,6 +39,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.textField!.returnKeyType = UIReturnKeyType.Go
+
         // Navigation and background colors
         //        self.navigationController.navigationBar.barTintColor = globalNavigationBarColor
         self.navigationController.navigationBar.tintColor = globalTintColor
@@ -107,14 +109,24 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     @IBAction func tapOnMap(sender: UIGestureRecognizer) {
-
+        self.textField?.resignFirstResponder()
 
         var tapLocation: CGPoint = sender.locationInView(self.mapView)
-        var loc = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
-        self.lat = Float(loc.latitude)
-        self.lng = Float(loc.longitude)
+        var geographicLocaction = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
+        self.lat = Float(geographicLocaction.latitude)
+        self.lng = Float(geographicLocaction.longitude)
 
-        var location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
+        var location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
+
+        let touchCLLLocation = CLLocation(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
+
+
+        geocoder.reverseGeocodeLocation(touchCLLLocation, completionHandler: {
+            (response: [AnyObject]!, error: NSError!) -> Void in
+                if(response.count > 0){
+                    self.textField!.text = "\(response[0].subThoroughfare) \(response[0].thoroughfare), \(response[0].locality)"
+                }
+            })
 
         if let mk = self.currentAnnotation {
             self.mapView!.removeAnnotation(self.currentAnnotation)

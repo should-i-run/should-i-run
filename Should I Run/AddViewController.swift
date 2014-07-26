@@ -39,6 +39,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.textField!.returnKeyType = UIReturnKeyType.Go
+
         // Navigation and background colors
         //        self.navigationController.navigationBar.barTintColor = globalNavigationBarColor
         self.navigationController.navigationBar.tintColor = globalTintColor
@@ -107,7 +109,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     @IBAction func tapOnMap(sender: UIGestureRecognizer) {
-
+        self.textField?.resignFirstResponder()
 
         var tapLocation: CGPoint = sender.locationInView(self.mapView)
         var geographicLocaction = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
@@ -121,7 +123,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         geocoder.reverseGeocodeLocation(touchCLLLocation, completionHandler: {
             (response: [AnyObject]!, error: NSError!) -> Void in
-                self.textField!.text = "\(response[0].name), \(response[0].locality)"
+                if(response.count > 0){
+                    self.textField!.text = "\(response[0].subThoroughfare) \(response[0].thoroughfare), \(response[0].locality)"
+                }
             })
 
         if let mk = self.currentAnnotation {

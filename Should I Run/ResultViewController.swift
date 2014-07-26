@@ -17,9 +17,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
     let stationTime = 2 //minutes in station
-
+    
     var walkingDirectionsManager = SharedWalkingDirectionsManager
-
+    
     
     var distanceToOrigin:Int?
     var departureStationName:String?
@@ -81,7 +81,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func viewDidLoad() {
         
         super.viewDidLoad()
-       
+        
         self.walkingDirectionsManager.delegate = self
         
         secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
@@ -208,7 +208,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         self.followingDepartureSecondsLabel!.text = ":00"
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
-    
+        
     }
     
     

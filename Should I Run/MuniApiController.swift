@@ -13,22 +13,22 @@ import UIKit
 protocol MuniAPIControllerDelegate {
     func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))])
     func handleError(errorMessage: String)
-
+    
 }
 
 
 class MuniApiController: NSObject{
     
     var delegate: MuniAPIControllerDelegate?
-
+    
     // Create a reference to our MUNI API connection so we can cancel it later
     var currentMuniConnection: NSURLConnection?
     var currentMuniData: NSMutableData = NSMutableData()
     
     // Store user location data in this variable so we can use it once the Google API data is downloaded
     var dataFromGoogle: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
-
-// MARK: MUNI API Connection Methods
+    
+    // MARK: MUNI API Connection Methods
     
     // Cancel the MUNI API connection (on timeout)
     func cancelConnection() {
@@ -50,19 +50,20 @@ class MuniApiController: NSObject{
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         self.processMuniData(currentMuniData, data: self.dataFromGoogle!)
     }
-
     
-// MARK: Search and Handle MUNI data
+    
+    // MARK: Search and Handle MUNI data
     
     func searchMuniFor(data:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]) {
-
+        
         self.dataFromGoogle = data
-
+        
         /*
         possible results from google:
-            Metro Civic Center Station/Downtn -> muni wants Inbound
-            Metro Civic Center Station/Outbd -> muni wants Outbound
-            Market St & 7th St
+        Metro Civic Center Station/Downtn -> muni wants Inbound
+        Metro Civic Center Station/Outbd -> muni wants Outbound
+        Powell Station/Outbound
+        Market St & 7th St
         
         */
         //we are going to assume that there is only one origin station in the results.
@@ -73,9 +74,11 @@ class MuniApiController: NSObject{
         //additionally, light rail station names need "muni " removed, and /outbd /inbd replaced with " outbound" etc
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: " Outbound")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbound", withString: " Outbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbound", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
-
+        
         // build up url
         let baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
         let escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
@@ -91,7 +94,7 @@ class MuniApiController: NSObject{
     }
     
     func processMuniData(rawMuniXML:NSData, data: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]){
-
+        
         var result:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))] = []
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -101,9 +104,10 @@ class MuniApiController: NSObject{
         
         let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
+        
         // Trim off unneeded headers
         if let routes: NSDictionary = parsedXML.objectForKey("RTT")?.objectForKey("AgencyList")?.objectForKey("Agency")?.objectForKey("RouteList")? as? NSDictionary {
-
+            
             //what's left should be an array of routes, but we'll check just in case
             var routesArray:[NSDictionary] = []
             
@@ -115,10 +119,10 @@ class MuniApiController: NSObject{
             }
             
             let results:[String] = []
-
+            
             for route in routesArray {
-//                let code = route.objectForKey("Code") as String
-//                println("code is \(code) and target is \(targetRoute)")
+                //                let code = route.objectForKey("Code") as String
+                //                println("code is \(code) and target is \(targetRoute)")
                 
                 for datum in data {
                     if route.objectForKey("Code") as String == datum.lineCode {
@@ -129,11 +133,11 @@ class MuniApiController: NSObject{
                             
                             if let temp:[NSDictionary] = departureTimeList.objectForKey("DepartureTime") as? [NSDictionary] {
                                 departureTimesArray += temp
-                            
+                                
                             } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
                                 departureTimesArray.append(temp)
                             }
-                        
+                            
                             for departureTime in departureTimesArray {
                                 var text = departureTime.objectForKey("text") as String
                                 var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -151,13 +155,13 @@ class MuniApiController: NSObject{
                                 muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
                                 
                                 thisResult.originStationName = muniOriginStationName
-   
+                                
                                 thisResult.lineName = "\(datum.lineCode)—\(datum.lineName)"
                                 thisResult.eolStationName = datum.eolStationName
                                 thisResult.originLatLon = datum.originLatLon
                                 
                                 result.insert(thisResult, atIndex: 0)
-
+                                
                             }
                         }
                     }
@@ -165,7 +169,7 @@ class MuniApiController: NSObject{
             }
             
             result.sort{$0.departureTime < $1.departureTime}
-
+            
             self.delegate!.didReceiveMuniResults(result)
         } else {
             self.delegate!.handleError("There was a problem getting MUNI results...")
@@ -250,7 +254,7 @@ http://services.my511.org/Transit2.0/GetStopsForRoute.aspx?token=83d1f7f4-1d1e-4
 light rail result:
 [323, Metro Civic Center Station/Outbd, L, Taraval, San Francisco Zoo]
 
-bus result: 
+bus result:
 [142, Market St & 7th St, 71, Haight-Noriega, the Sunset District]
 
 http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=MUNI&stopName=Metro Civic Center Station/Outbd

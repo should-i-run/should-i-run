@@ -152,7 +152,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             return result
         }
         
-        func getOriginStationFromWalkingStep(step: NSDictionary) -> Array<String> {
+        func getOriginStationFromWalkingStep(step: NSDictionary) -> [String] {
             
             var result:[String] = []
             var instructions:NSString = step.objectForKey("html_instructions") as NSString
@@ -163,11 +163,14 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                 .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
             //get code for station
-            var originStationCode = bartLookup[originStationName]!.uppercaseString
             
-            
-            result.append(originStationCode)
-            
+            //if there's no station code at this point, it's probably because they are already at the station, and these are train directions rather than walking directions
+            if let stationCode = bartLookup[originStationName]?.uppercaseString {
+                result.append(stationCode)
+                return result
+            } else {
+                self.handleError(message:"You're already at the station")
+            }
             return result
         }
         
@@ -239,7 +242,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                     return shortName
                 }
             }
-            self.delegate?.handleError("There was a problem getting BART results...")
+            self.handleError(message:"There was a problem getting BART results...")
             return "Error"
         }
         
@@ -250,7 +253,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                     return lineName
                 }
             }
-            self.delegate?.handleError("There was a problem getting BART results...")
+            self.handleError(message:"There was a problem getting BART results...")
             return "error"
         }
 
@@ -318,6 +321,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                                                             thisResult.eolStationName = getEolStationNameFromMuniStep(thisStep)
                                                             thisResult.originLatLon = getOriginStationLocationFromWalkingStep(walkingStep)
                                                             
+                                                            
                                                             result.insert(thisResult, atIndex: result.count)
                                                             //return to commenting
                                                         }
@@ -346,7 +350,14 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                     if let steps : NSArray = legs[0].objectForKey("steps") as? NSArray {
                         if let bartStep:NSDictionary = findBart(steps)? {
                             results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
-                            results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+                            let originStation = getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+
+                            if originStation.count > 0 {
+                                results += originStation
+                            } else {
+                                return
+                            }
+                            
                             results += getAllEOLStations(allRoutes)
                             var (lat, lon) = getOriginStationLocationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
                             results += lat
@@ -357,9 +368,9 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                         } else if let muniData = getMuniData(allRoutes as [NSDictionary] ) {
                             self.delegate?.didReceiveGoogleResults(muniData, muni: true)
                             
-                        } else { self.handleError() }
+                        }
 
-                    } else { self.handleError() }
+                    }
 
                 } else { self.handleError() }
                 
@@ -368,7 +379,8 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         
     }
     
-    func handleError() {
-        self.delegate?.handleError("Couldn't find any BART or MUNI trips between those locations...")
+    func handleError(message:String="Couldn't find any BART or MUNI trips between those locations...") {
+            self.delegate?.handleError(message)
+
     }
 }

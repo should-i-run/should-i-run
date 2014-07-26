@@ -208,7 +208,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        }
         //loc is locations plist as an array
 
-        if(sender as String == "saveButton"){
+        if(sender is String){
             var savedLocations = self.fileManager.readFromDestinationsList()
 
             savedLocations.setObject(["name": self.destinationNameAlertView!.textFieldAtIndex(0).text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)

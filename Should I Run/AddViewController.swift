@@ -201,11 +201,14 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        }
         //loc is locations plist as an array
 
-        var savedLocations = self.fileManager.readFromDestinationsList()
-        
-        savedLocations.setObject(["name": self.destinationNameAlertView!.textFieldAtIndex(0).text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
-        
-        self.fileManager.saveToDestinationsList(savedLocations)
+        if(segue?.identifier != "backToMain"){
+            var savedLocations = self.fileManager.readFromDestinationsList()
+
+            savedLocations.setObject(["name": self.destinationNameAlertView!.textFieldAtIndex(0).text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
+
+            self.fileManager.saveToDestinationsList(savedLocations)
+        }
+
         
     }
     

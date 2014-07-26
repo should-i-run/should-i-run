@@ -39,6 +39,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.textField!.delegate = self;
         self.textField!.returnKeyType = UIReturnKeyType.Go
 
         // Navigation and background colors
@@ -93,6 +94,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.mapView!.removeAnnotations(self.mapView!.annotations)
                 self.mapView!.addAnnotation(marker)
                 self.currentAnnotation = marker
+
             }else{
                 let geocodeAlertView = UIAlertView(title: "Error", message: "We couldnt find the specified address", delegate: nil, cancelButtonTitle: "Ok")
                 geocodeAlertView.show()
@@ -171,7 +173,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     func alertView(alertView: UIAlertView!, willDismissWithButtonIndex buttonIndex: Int) {
         if(buttonIndex == 1){
-            self.performSegueWithIdentifier("backToMain", sender: self)
+            self.performSegueWithIdentifier("backToMain", sender: "saveButton")
         }
     }
 
@@ -184,12 +186,17 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.destinationNameAlertView!.textFieldAtIndex(0).delegate = self
 
         self.destinationNameAlertView!.show()
-        //self.performSegueWithIdentifier("backToMain", sender: sender)
     }
 
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
 
-        destinationNameAlertView!.dismissWithClickedButtonIndex(1, animated: true)
+        if(textField.tag == 1){
+            self.geocodeAddress(textField)
+        }else{
+            destinationNameAlertView!.dismissWithClickedButtonIndex(1, animated: true)
+        }
+
+
 
         return true
     }
@@ -201,14 +208,13 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        }
         //loc is locations plist as an array
 
-        if(segue?.identifier != "backToMain"){
+        if(sender as String == "saveButton"){
             var savedLocations = self.fileManager.readFromDestinationsList()
 
             savedLocations.setObject(["name": self.destinationNameAlertView!.textFieldAtIndex(0).text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
 
             self.fileManager.saveToDestinationsList(savedLocations)
         }
-
         
     }
     

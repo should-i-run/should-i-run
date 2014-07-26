@@ -112,18 +112,14 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         
         var walkingStepIndex = 0
         
-        
-        var allRoutes = goog.objectForKey("routes") as [NSDictionary]
-        var inter2 : NSArray = allRoutes[0].objectForKey("legs") as NSArray
-        var steps : NSArray = inter2[0].objectForKey("steps") as NSArray
-        
 //Bart helper functions
         func findBart(stepsArray: NSArray) -> NSDictionary? {
+            
             var result:NSDictionary?
             
-            for var i = 1; i < steps.count; ++i {
+            for var i = 1; i < stepsArray.count; ++i {
 
-                if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
+                if let transit_details = stepsArray[i].objectForKey("transit_details") as? NSDictionary {
 
                     if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
 
@@ -132,7 +128,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
                             if let name = agencies[0].objectForKey("name") as? String {
 
                                 if name == "Bay Area Rapid Transit" {
-                                    result = (steps[i] as NSDictionary)
+                                    result = (stepsArray[i] as NSDictionary)
                                     walkingStepIndex = i - 1
                                     return result
                                 }
@@ -344,24 +340,33 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             }
         }
 
+        if let allRoutes = goog.objectForKey("routes") as? [NSDictionary] {
+            if let inter2 : NSArray = allRoutes[0].objectForKey("legs") as? NSArray {
+                if let steps : NSArray = inter2[0].objectForKey("steps") as? NSArray {
+                    if let bartStep:NSDictionary = findBart(steps)? {
+                        results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+                        results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+                        results += getAllEOLStations(allRoutes)
+                        var (lat, lon) = getOriginStationLocationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
+                        results += lat
+                        results += lon
+                        
+                        self.delegate?.didReceiveGoogleResults(results)
+                        
+                    } else if let muniData = getMuniData(allRoutes)? {
+                        self.delegate?.didReceiveGoogleResults(muniData, muni: true)
+                        
+                    } else {
+                        self.delegate?.handleError("Couldn't find any BART or MUNI trips between here and there")
+                        
+                    }
 
-        
-        if let bartStep:NSDictionary = findBart(steps)? {
-            results += getDistanceFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
-            results += getOriginStationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
-            results += getAllEOLStations(allRoutes)
-            var (lat, lon) = getOriginStationLocationFromWalkingStep(steps[walkingStepIndex] as NSDictionary)
-            results += lat
-            results += lon
-            
-            self.delegate?.didReceiveGoogleResults(results)
-
-        } else if let muniData = getMuniData(allRoutes)? {
-            self.delegate?.didReceiveGoogleResults(muniData, muni: true)
-            
+                }
+                
+            }
         } else {
             self.delegate?.handleError("Couldn't find any BART or MUNI trips between here and there")
-
         }
+        
     }
 }

@@ -90,6 +90,8 @@ import Foundation
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
+        
+        
         var locations = fileManager.readFromDestinationsList()
       
         if let row = indexPath?.row {
@@ -116,6 +118,10 @@ import Foundation
         }
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 101
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {

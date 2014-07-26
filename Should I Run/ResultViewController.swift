@@ -90,7 +90,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
 
     }
     

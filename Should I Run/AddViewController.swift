@@ -110,11 +110,19 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
         var tapLocation: CGPoint = sender.locationInView(self.mapView)
-        var loc = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
-        self.lat = Float(loc.latitude)
-        self.lng = Float(loc.longitude)
+        var geographicLocaction = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
+        self.lat = Float(geographicLocaction.latitude)
+        self.lng = Float(geographicLocaction.longitude)
 
-        var location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
+        var location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
+
+        let touchCLLLocation = CLLocation(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
+
+
+        geocoder.reverseGeocodeLocation(touchCLLLocation, completionHandler: {
+            (response: [AnyObject]!, error: NSError!) -> Void in
+                self.textField!.text = "\(response[0].name), \(response[0].locality)"
+            })
 
         if let mk = self.currentAnnotation {
             self.mapView!.removeAnnotation(self.currentAnnotation)

@@ -18,14 +18,14 @@ protocol WalkingDirectionsDelegate {
 class WalkingDirectionsManager: NSObject {
     
     var delegate : WalkingDirectionsDelegate?
-
+    
     class var manager: WalkingDirectionsManager {
     return SharedWalkingDirectionsManager
     }
     
     init () {
         
-
+        
     }
     
     func stringCorrdToMapItem(lat:String, lon:String) -> MKMapItem {
@@ -46,7 +46,7 @@ class WalkingDirectionsManager: NSObject {
         var walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
         
-
+        
         let sourceMapItem = stringCorrdToMapItem(startLatLon.lat, lon: startLatLon.lon)
         let endMapItem = stringCorrdToMapItem(endLatLon.lat, lon: endLatLon.lon)
         
@@ -69,7 +69,7 @@ class WalkingDirectionsManager: NSObject {
         }
     }
     
-
+    
     
 }
 

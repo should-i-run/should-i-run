@@ -14,6 +14,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var locationName: String?//temporary, this should be deleted
     let locationManager = SharedUserLocation
     
+    var firstRun:Bool = false
+    
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
     let stationTime = 2 //minutes in station
@@ -69,8 +71,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     //    @IBOutlet var followingDepartureSecondsLabel: UILabel!
     
     @IBOutlet var followingDepartureSecondsLabel: UILabel?
-    
-    
     
     
     var secondTimer: NSTimer = NSTimer()
@@ -188,24 +188,34 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         
         //detail area things
-        self.timeToNextTrainLabel!.text = String(departureTime)
-        self.secondsToNextTrainLabel!.text = ":00"
+        
+        
         
         self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
         self.destinationLabel!.text = destinationStation
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
-        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
+        
         
         self.stationNameLabel!.text = "meters to \(departureStationName!) station"
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
         self.timeRunningLabel!.text = String(runningTime!)
         self.timeWalkingLabel!.text = String(walkingTime!)
         
+        if !firstRun {
+            //time for the following departure ime
+            self.followingDepartureLabel!.text = "\(followingDepartureTime)"
+            self.followingDepartureSecondsLabel!.text = ":00"
+            
+            // time for the next train
+            self.timeToNextTrainLabel!.text = String(departureTime)
+            self.secondsToNextTrainLabel!.text = ":00"
+            
+            firstRun = true
+        }
         
-        //following departure area things
-        self.followingDepartureLabel!.text = "\(followingDepartureTime)"
-        self.followingDepartureSecondsLabel!.text = ":00"
+        
+        //other details for the following departure ime
         self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
@@ -288,13 +298,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if segue.identifier {
             if segue.identifier == "AlarmSegue" {
-                
                 var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
-                
                 dest.walkTime = self.alarmTime
-                
             }
         }
     }
+    
 }
 

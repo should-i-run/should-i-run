@@ -84,12 +84,20 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         self.walkingDirectionsManager.delegate = self
         
-        secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
-        updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
         
         displayResults()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.updateResultTimer.invalidate()
+
+    }
     
     func displayResults() {
         //calculate

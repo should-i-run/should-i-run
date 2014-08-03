@@ -11,11 +11,13 @@ import UIKit
 // Create BART API protocol that needs to be adhered to
 protocol BartApiControllerDelegate {
     // Actual implementation of methods needs to be written inside the class using this protocol
-    func didReceiveBartResults(results: [(String, Int)])
+    func didReceiveBartResults(results: [Route])
     func handleError(errorMessage: String)
 }
 
 class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
+    
+    var routeDataFromGoogle = [Route]()
 
     // Create delegate
     // Can be any class, as long as it adheres to BartApiControllerProtocol (by defining didReceiveBartResults in this case)
@@ -50,9 +52,12 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     
 // MARK: Search and Handle BART Data
 
-    func searchBartFor(searchAbbr: String) {
+    func searchBartFor(data:[Route]) {
+        self.routeDataFromGoogle = data
         // Fetch information for the BART api and convert the returned XML into a dictionary
-        let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + searchAbbr + "&key=ZELI-U2UY-IBKQ-DT35")
+        
+        //we can assume that for the set of routes being passed in, there is only one origin station.
+        let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + data[0].originStationName + "&key=ZELI-U2UY-IBKQ-DT35")
         
         var request = NSURLRequest(URL: url)
         
@@ -77,7 +82,7 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
         let stations: NSDictionary = parsed.objectForKey("root").objectForKey("station") as NSDictionary
         
         // Create an array of tuples to store our destination stations (termini) and their estimated arrival time to our closest BART  station
-        var allResults: [(String, Int)] = []
+        var bartRouteResults = [Route]()
         
         // Iterate over our stations
         for aStation in stations {
@@ -102,36 +107,46 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
                 
                 for stationItem in etdList as [NSDictionary] {
                     var abbr = stationItem["abbreviation"] as NSDictionary
+                    var abbrText = abbr["text"] as String
                     
-                    // same issue for departures
-                    // Check if departures are in an Array, or if there is only one station, a Dictionary
-                    // If Dictionary, insert into an Array to iterate over
+                    for datum in self.routeDataFromGoogle {
+                        if abbrText == datum.eolStationName {
+                            
+                            // same issue for departures
+                            // Check if departures are in an Array, or if there is only one station, a Dictionary
+                            // If Dictionary, insert into an Array to iterate over
+                            
+                            var estimateList:[NSDictionary] = []
+                            
+                            if let estimate:[NSDictionary] = stationItem["estimate"] as? [NSDictionary]{
+                                estimateList += estimate
+                                
+                            } else if let estimate:NSDictionary = stationItem["estimate"] as? NSDictionary {
+                                estimateList.append(estimate)
+                                
+                            }
+                            
+                            for estimateItem in estimateList as [AnyObject] {
+                                var departureTime = estimateItem["minutes"] as NSDictionary
+                                
+                                //  (abbr["text"] as String, estimateMin["text"].integerValue)
+                                
+                                // Create the terminus and estimated arrival tuple and push into our results
+                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: datum.lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: nil)
+                                bartRouteResults.append(thisResult)
+                            }
+
+                        }
                     
-                    var estimateList:[NSDictionary] = []
-                    
-                    if let estimate:[NSDictionary] = stationItem["estimate"] as? [NSDictionary]{
-                        estimateList += estimate
-                        
-                    } else if let estimate:NSDictionary = stationItem["estimate"] as? NSDictionary {
-                        estimateList.append(estimate)
-                        
-                    }
-                    
-                    for estimateItem in estimateList as [AnyObject] {
-                        var estimateMin = estimateItem["minutes"] as NSDictionary
-                        
-                        // Create the terminus and estimated arrival tuple and push into our results
-                        var myTuple: (String, Int) = (abbr["text"] as String, estimateMin["text"].integerValue)
-                        allResults += myTuple
                     }
                 }
             }
         }
         
         // Sort the tuple array of termini and estimated arrival in ascending order
-        allResults.sort{$0.1 < $1.1}
+        bartRouteResults.sort{$0.departureTime < $1.departureTime}
         
-        self.delegate?.didReceiveBartResults(allResults)
+        self.delegate?.didReceiveBartResults(bartRouteResults)
 
         
     }

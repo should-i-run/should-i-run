@@ -14,11 +14,12 @@ class Route {
     var distanceToStation: Int
     var originStationName: String
     var lineName: String
+    var lineCode:String?
     var eolStationName: String
     var originLatLon:CLLocationCoordinate2D
     var agency: String
     
-    init (distanceToStation: Int, originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Int?) {
+    init (distanceToStation: Int, originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Int?, lineCode: String?) {
         
         self.distanceToStation = distanceToStation
         self.originStationName = originStationName
@@ -30,6 +31,9 @@ class Route {
         //initialise departure time, if it's around
         if let time = departureTime? {
             self.departureTime = time
+        }
+        if let code = lineCode? {
+            self.lineCode = code
         }
     }
     

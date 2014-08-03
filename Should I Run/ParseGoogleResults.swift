@@ -26,14 +26,13 @@ protocol ParseGoogleHelperDelegate {
 
 class ParseGoogleHelper {
     
-    var delegate:ParseGoogleHelperDelegate?
+    var delegate:ParseGoogleHelperDelegate? = nil
     
-    func getLineNameFromMuniStep(step:NSDictionary) -> String {
+    func getLineCodeFromMuniStep(step:NSDictionary) -> String {
         if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
             if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
-                var lineName = line.objectForKey("name") as NSString
                 var shortName = line.objectForKey("short_name") as NSString
-                return "\(shortName)/\(lineName)"
+                return shortName
             }
         }
         self.handleError(message:"There was a problem getting BART results...")
@@ -41,7 +40,7 @@ class ParseGoogleHelper {
         
     }
     
-    func getLineNameFromBartStep(step:NSDictionary) -> String {
+    func getLineNameFromTransitStep(step:NSDictionary) -> String {
         if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
             if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
                 var lineName = line.objectForKey("name") as NSString
@@ -187,12 +186,13 @@ class ParseGoogleHelper {
                                                     
                                                     let muniOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
                                                     
-                                                    let lineName = self.getLineNameFromMuniStep(thisStep)
+                                                    let lineName = self.getLineNameFromTransitStep(thisStep)
+                                                    let lineCode = self.getLineCodeFromMuniStep(thisStep)
                                                     let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
                                                     
                                                     let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
                                                     
-                                                    let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil)
+                                                    let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil, lineCode: lineCode)
                                                     
                                                     return thisResult
                                                     //return to commenting
@@ -244,12 +244,12 @@ class ParseGoogleHelper {
                                         
                                         let bartOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
                                         
-                                        let lineName = self.getLineNameFromBartStep(thisStep)
+                                        let lineName = self.getLineNameFromTransitStep(thisStep)
                                         let eolStationName = self.getEolStationNameFromBartStep(thisStep)
                                         
                                         let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
                                         
-                                        let thisResult = Route(distanceToStation: distanceToStation, originStationName: bartOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "bart", departureTime: nil)
+                                        let thisResult = Route(distanceToStation: distanceToStation, originStationName: bartOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "bart", departureTime: nil, lineCode: nil)
                                         
                                         return thisResult
                                         
@@ -266,26 +266,39 @@ class ParseGoogleHelper {
     }
     
     func parser (googleResults: NSDictionary) {
-        var result = [Route]()
+        var results = [Route]()
+        
+        func addToResultsIfUniq (thisRoute:Route) {
+            //only append if the result is uniq, that is, has different origin and eol station
+            var uniq = true
+            for res in results {
+                if res.eolStationName == thisRoute.eolStationName || res.originStationName == thisRoute.originStationName {
+                    uniq = false
+                }
+            }
+            if uniq {
+                results.append(thisRoute)
+            }
+        }
         
         if let allRoutes = googleResults.objectForKey("routes") as? [AnyObject] {
             for route in allRoutes {
                 if let bartResult:Route = self.getBartResultFromGoogleRoute(route as NSDictionary) {
-                    result.append(bartResult)
+                    addToResultsIfUniq(bartResult)
+                    
+
                 } else if let muniResult:Route = self.getMuniResultFromGoogleRoute(route as NSDictionary) {
-                    result.append(muniResult)
+                    addToResultsIfUniq(muniResult)
                 }
             }
         }
+
+
         
-        
-        
-        
-        
-        if result.count == 0 {
-            //handle error
+        if results.count == 0 {
+            self.handleError()
         } else {
-            //pass reuslts back
+            self.delegate?.didReceiveGoogleResults(results)
         }
         
     }

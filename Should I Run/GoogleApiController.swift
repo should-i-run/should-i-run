@@ -11,8 +11,7 @@ import UIKit
 
 
 protocol GoogleAPIControllerProtocol {
-    func didReceiveGoogleResults(results: [String])
-    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))], muni: Bool)
+    func didReceiveGoogleResults(results: [Route])
     func handleError(errorMessage: String)
 }
 
@@ -30,7 +29,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     var cachedLocationFound = false
     
     // Store user location data in this variable so we can use it once the Google API data is downloaded
-    var locationUserData = Dictionary<String, Any>()
+    var locationUserData = [String: Any]()
     
     func fetchGoogleData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
       
@@ -39,10 +38,8 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
 
         
         //opening the local cache where we are caching google results to prevent repeated API calls in a short time
-        
         var cache = fileManager.readFromCache()
         
-//var cache = NSMutableArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Cache", ofType: "plist"))
 
         var time = Int(NSDate().timeIntervalSince1970)
 

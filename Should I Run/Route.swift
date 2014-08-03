@@ -18,20 +18,14 @@ class Route {
     var originLatLon:CLLocationCoordinate2D
     var agency: String
     
-    init (distanceToStation: Int, originStationName: String, lineName: String, eolStationName: String, originLat: String, originLon: String, agency: String, departureTime: Int?) {
+    init (distanceToStation: Int, originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Int?) {
         
         self.distanceToStation = distanceToStation
         self.originStationName = originStationName
         self.lineName = lineName
         self.eolStationName = eolStationName
         self.agency = agency
-        
-        
-        //make a coord2d out of the lat lon
-        var latDouble = (originLat as NSString).doubleValue
-        var lonDouble = (originLon as NSString).doubleValue
-        
-        self.originLatLon = CLLocationCoordinate2DMake(CLLocationDegrees(latDouble), CLLocationDegrees(lonDouble))
+        self.originLatLon = originCoord2d
         
         //initialise departure time, if it's around
         if let time = departureTime? {

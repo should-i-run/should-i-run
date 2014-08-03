@@ -16,7 +16,7 @@ enum NetworkStatusStruct: Int {
     case ReachableViaWWAN
 }
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, ParseGoogleHelperDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
     
     var viewHasAlreadyAppeared = false
     
@@ -48,6 +48,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     //Create controller to handle Google API queries
     var googleApiHandler : GoogleApiController = GoogleApiController()
+    var parseGoogleHelper:ParseGoogleHelper = ParseGoogleHelper()
     
     var internetReachability: Reachability = Reachability.reachabilityForInternetConnection()
     
@@ -93,6 +94,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             self.googleApiHandler.delegate = self
             self.bartApiHandler.delegate = self
             self.muniApiHandler.delegate = self
+            self.parseGoogleHelper.delegate = self
             
             
             //Fetching data from Google and parsing it
@@ -122,19 +124,25 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
     }
     
-    func didReceiveGoogleResults(results: [String]) {
+    func didReceiveGoogleData(data: NSDictionary)  {
         
-        self.distanceToStart = results[0].toInt()!
-        self.departureStationName = results[1]
-        self.googleResults = results
-        self.bartApiHandler.searchBartFor(self.departureStationName)
+        self.parseGoogleHelper.parser(data)
+        
         
     }
     
-    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))], muni: Bool) {
-        
-        self.muniApiHandler.searchMuniFor(results)
+    func didReceiveGoogleResults(results: [Route]) {
+        for result in results {
+            if result.agency == "bart" {
+                self.bartApiHandler.searchBartFor(self.departureStationName)
+                
+            } else if result.agency == "muni" {
+                self.muniApiHandler.searchMuniFor(results)
+            }
+        }
     }
+    
+
     
     
     // Conform to BartApiControllerProtocol by implementing this method

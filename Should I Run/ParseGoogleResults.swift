@@ -18,7 +18,15 @@
 
 import MapKit
 
+protocol ParseGoogleHelperDelegate {
+    func didReceiveGoogleResults(results: [Route])
+    func handleError(errorMessage: String)
+    
+}
+
 class ParseGoogleHelper {
+    
+    var delegate:ParseGoogleHelperDelegate?
     
     func getLineNameFromMuniStep(step:NSDictionary) -> String {
         if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
@@ -26,6 +34,18 @@ class ParseGoogleHelper {
                 var lineName = line.objectForKey("name") as NSString
                 var shortName = line.objectForKey("short_name") as NSString
                 return "\(shortName)/\(lineName)"
+            }
+        }
+        self.handleError(message:"There was a problem getting BART results...")
+        return "error"
+        
+    }
+    
+    func getLineNameFromBartStep(step:NSDictionary) -> String {
+        if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
+            if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
+                var lineName = line.objectForKey("name") as NSString
+                return lineName
             }
         }
         self.handleError(message:"There was a problem getting BART results...")
@@ -57,11 +77,30 @@ class ParseGoogleHelper {
         return eolStationName
     }
     
-    func getMuniOriginStationFromMuniStep(step: NSDictionary) -> String {
+    func getEolStationNameFromBartStep(step: NSDictionary) -> String {
+        
+        var instructions:NSString = step.objectForKey("html_instructions") as NSString
+        
+
+        var eolStationName = "error" // if it's not a bus or light rail, send back an error
+        
+        eolStationName = instructions.substringFromIndex(19).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+        //get code for station
+        
+        if let code = bartLookup[eolStationName]?.uppercaseString {
+            return code
+        }
+        
+        return "error getting bar station code"
+
+    }
+    
+    func getOriginStationNameFromTransitStep(step: NSDictionary) -> String {
         
         if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
-            if let line:NSDictionary = transit_details.objectForKey("departure_stop") as? NSDictionary {
-                var stationName = line.objectForKey("name") as NSString
+            if let departureStop:NSDictionary = transit_details.objectForKey("departure_stop") as? NSDictionary {
+                var stationName = departureStop.objectForKey("name") as NSString
                 return stationName
             }
         } else {
@@ -146,7 +185,7 @@ class ParseGoogleHelper {
                                                         }
                                                     }
                                                     
-                                                    let muniOriginStationName =  getMuniOriginStationFromMuniStep(thisStep)
+                                                    let muniOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
                                                     
                                                     let lineName = self.getLineNameFromMuniStep(thisStep)
                                                     let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
@@ -203,14 +242,14 @@ class ParseGoogleHelper {
                                             }
                                         }
                                         
-                                        let muniOriginStationName =  getMuniOriginStationFromMuniStep(thisStep)
+                                        let bartOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
                                         
-                                        let lineName = self.getLineNameFromMuniStep(thisStep)
-                                        let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
+                                        let lineName = self.getLineNameFromBartStep(thisStep)
+                                        let eolStationName = self.getEolStationNameFromBartStep(thisStep)
                                         
                                         let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
                                         
-                                        let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil)
+                                        let thisResult = Route(distanceToStation: distanceToStation, originStationName: bartOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "bart", departureTime: nil)
                                         
                                         return thisResult
                                         

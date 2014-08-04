@@ -42,11 +42,25 @@
 			remoteGlobalIDString = 2508AF391975B4CE00E48B37;
 			remoteInfo = "Should I Run";
 		};
+		25EA12F6198F4B6F008EE765 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2508AF321975B4CD00E48B37 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2508AF391975B4CE00E48B37;
+			remoteInfo = "Should I Run";
+		};
+		25EA12F8198F4B70008EE765 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2508AF321975B4CD00E48B37 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2508AF391975B4CE00E48B37;
+			remoteInfo = "Should I Run";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E4875E31978445E0079C53E /* AddAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
-		2508AF3A1975B4CE00E48B37 /* Should I Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Should I Run.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2508AF3A1975B4CE00E48B37 /* Should I Run?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Should I Run?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2508AF3E1975B4CE00E48B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2508AF441975B4CE00E48B37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2508AF461975B4CE00E48B37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -114,7 +128,7 @@
 		2508AF3B1975B4CE00E48B37 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2508AF3A1975B4CE00E48B37 /* Should I Run.app */,
+				2508AF3A1975B4CE00E48B37 /* Should I Run?.app */,
 				2508AF4C1975B4CE00E48B37 /* Should I RunTests.xctest */,
 			);
 			name = Products;
@@ -212,7 +226,7 @@
 			);
 			name = "Should I Run";
 			productName = "Should I Run";
-			productReference = 2508AF3A1975B4CE00E48B37 /* Should I Run.app */;
+			productReference = 2508AF3A1975B4CE00E48B37 /* Should I Run?.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2508AF4B1975B4CE00E48B37 /* Should I RunTests */ = {
@@ -227,6 +241,8 @@
 			);
 			dependencies = (
 				2508AF4E1975B4CE00E48B37 /* PBXTargetDependency */,
+				25EA12F7198F4B6F008EE765 /* PBXTargetDependency */,
+				25EA12F9198F4B70008EE765 /* PBXTargetDependency */,
 			);
 			name = "Should I RunTests";
 			productName = "Should I RunTests";
@@ -334,6 +350,16 @@
 			target = 2508AF391975B4CE00E48B37 /* Should I Run */;
 			targetProxy = 2508AF4D1975B4CE00E48B37 /* PBXContainerItemProxy */;
 		};
+		25EA12F7198F4B6F008EE765 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2508AF391975B4CE00E48B37 /* Should I Run */;
+			targetProxy = 25EA12F6198F4B6F008EE765 /* PBXContainerItemProxy */;
+		};
+		25EA12F9198F4B70008EE765 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2508AF391975B4CE00E48B37 /* Should I Run */;
+			targetProxy = 25EA12F8198F4B70008EE765 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -382,7 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -418,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -436,7 +462,7 @@
 				INFOPLIST_FILE = "Should I Run/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Should I Run?";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Should I Run/Should I Run-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -455,7 +481,7 @@
 				INFOPLIST_FILE = "Should I Run/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Should I Run?";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Should I Run/Should I Run-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;

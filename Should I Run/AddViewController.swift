@@ -75,12 +75,12 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.textField?.resignFirstResponder()
         var currentRegion = CLCircularRegion(circularRegionWithCenter: self.locationManager.currentLocation2d!, radius: 1000.0, identifier: nil)
         geocoder.geocodeAddressString(textField?.text, inRegion: currentRegion, completionHandler:{
-            (response: Array!, error: NSError!) -> Void in
+            (response: Array?, error: NSError!) -> Void in
 
             var marker:MKPointAnnotation = MKPointAnnotation()
 
-            if (response.count > 0) {
-                var resultsLocation = (response[0] as CLPlacemark).location
+            if let res = response? {
+                var resultsLocation = (res[0] as CLPlacemark).location
                 var distanceBetweenPoints = resultsLocation.distanceFromLocation(self.locationManager.currentLocation)
 
                 let mapCenterlatitude = (resultsLocation.coordinate.latitude + self.locationManager.currentLocation2d!.latitude)/2
@@ -90,7 +90,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
                 self.mapView?.setRegion(self.mapView!.regionThatFits(region), animated: true)
 
-                marker.coordinate = (response[0] as CLPlacemark).location.coordinate
+                marker.coordinate = (res[0] as CLPlacemark).location.coordinate
                 self.mapView!.removeAnnotations(self.mapView!.annotations)
                 self.mapView!.addAnnotation(marker)
                 self.currentAnnotation = marker
@@ -100,14 +100,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 geocodeAlertView.show()
 
             }
-
         })
-
-        //        geocoder.geocodeAddressString(textField?.text, completionHandler:{
-        //            (response: [AnyObject]!,error: NSError!) -> Void in
-        //                println(response)
-        //            })
-
     }
 
     @IBAction func tapOnMap(sender: UIGestureRecognizer) {
@@ -202,10 +195,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-
-//        if (sender as? UIBarButtonItem != self.saveBarButton) {
-//            return
-//        }
         //loc is locations plist as an array
 
         if(sender is String){

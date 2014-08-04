@@ -106,6 +106,7 @@ class ParseGoogleHelper {
             self.handleError(message:"There was a problem getting MUNI results...")
             return "error"
         }
+        return "error"
         
         //  "departure_stop" =                             {
         //        location =                                 {
@@ -242,7 +243,7 @@ class ParseGoogleHelper {
                                             }
                                         }
                                         
-                                        let bartOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
+                                        let bartOriginStationName =  bartLookup[getOriginStationNameFromTransitStep(thisStep)]!
                                         
                                         let lineName = self.getLineNameFromTransitStep(thisStep)
                                         let eolStationName = self.getEolStationNameFromBartStep(thisStep)

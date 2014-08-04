@@ -137,7 +137,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         // as well as different origin stations
         // we will also need to keep track of the requests made, and not transition until they all come back-- allowing for errors
         
-        
         var bartResults = [Route]()
         var muniResults = [Route]()
         

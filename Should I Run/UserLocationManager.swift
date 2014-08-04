@@ -42,7 +42,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
         return SharedUserLocation
     }
     
-    init () {
+    override init () {
         super.init()
         //ios 8 only
         if self.locationManager.respondsToSelector(Selector("requestAlwaysAuthorization")) {

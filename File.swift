@@ -24,7 +24,7 @@ class FileManager: NSObject {
         return SharedFileManager
     }
     
-    init () {
+    override init () {
 
         let directorys : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
         

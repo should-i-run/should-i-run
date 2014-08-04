@@ -23,7 +23,7 @@ class WalkingDirectionsManager: NSObject {
     return SharedWalkingDirectionsManager
     }
     
-    init () {
+    override init () {
         
         
     }
@@ -55,13 +55,13 @@ class WalkingDirectionsManager: NSObject {
     }
     
     func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
-        if error {
-            //error
-        } else {
+//        if error {
+//            //error
+//        } else {
             response.routes[0].distance.hashValue
             var temp = Int(response.routes[0].distance)
             self.delegate?.handleWalkingDistance(temp)
-        }
+//        }
     }
     
     

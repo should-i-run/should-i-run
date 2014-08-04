@@ -108,8 +108,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 
                 let route = self.resultsRoutes[i]
 
-                if self.distanceToOrigin {
-                    distanceToStation = self.distanceToOrigin!
+                if let dist = self.distanceToOrigin? {
+                    distanceToStation = dist
                 } else {
                     distanceToStation = route.distanceToStation
                 }

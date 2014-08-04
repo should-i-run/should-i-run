@@ -140,7 +140,7 @@ class ParseGoogleHelper {
     
     func getDistanceFromWalkingStep(walkingStep: NSDictionary) -> Int? {
         
-        if let distance = walkingStep.objectForKey("distance")?.objectForKey("value")?.integerValue as? Int {
+        if let distance = walkingStep.objectForKey("distance")?.objectForKey("value")?.integerValue as Int! {
             return distance
         } else {
             return nil

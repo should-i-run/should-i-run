@@ -151,7 +151,7 @@ class MuniApiController: NSObject{
                                 
                              
                                 
-                                var lineName = "\(datum.lineCode)—\(datum.lineName)"
+                                var lineName = "\(datum.lineCode!)—\(datum.lineName)"
  
                                 
                                 var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: datum.lineCode)

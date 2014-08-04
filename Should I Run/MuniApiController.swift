@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol MuniAPIControllerDelegate {
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))])
+    func didReceiveMuniResults(results: [Route])
     func handleError(errorMessage: String)
     
 }
@@ -26,7 +26,7 @@ class MuniApiController: NSObject{
     var currentMuniData: NSMutableData = NSMutableData()
     
     // Store user location data in this variable so we can use it once the Google API data is downloaded
-    var dataFromGoogle: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
+    var dataFromGoogle: [Route]?
     
     // MARK: MUNI API Connection Methods
     
@@ -54,7 +54,7 @@ class MuniApiController: NSObject{
     
     // MARK: Search and Handle MUNI data
     
-    func searchMuniFor(data:[(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]) {
+    func searchMuniFor(data:[Route]) {
         
         self.dataFromGoogle = data
         
@@ -67,7 +67,8 @@ class MuniApiController: NSObject{
         
         */
         //we are going to assume that there is only one origin station in the results.
-        var googleOriginStationName = data[0].muniOriginStationName
+        //otherwise two API calls would have been made
+        var googleOriginStationName = data[0].originStationName
         
         var muniOriginStationName = googleOriginStationName.stringByReplacingOccurrencesOfString("&", withString: "and")
         
@@ -93,9 +94,9 @@ class MuniApiController: NSObject{
         
     }
     
-    func processMuniData(rawMuniXML:NSData, data: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]){
+    func processMuniData(rawMuniXML:NSData, data: [Route]){
         
-        var result:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))] = []
+        var muniRouteResults = [Route]()
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
@@ -121,11 +122,9 @@ class MuniApiController: NSObject{
             let results:[String] = []
             
             for route in routesArray {
-                //                let code = route.objectForKey("Code") as String
-                //                println("code is \(code) and target is \(targetRoute)")
                 
                 for datum in data {
-                    if route.objectForKey("Code") as String == datum.lineCode {
+                    if route.objectForKey("Code") as? String == datum.lineCode {
                         if let departureTimeList  = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection")?.objectForKey("StopList").objectForKey("Stop").objectForKey("DepartureTimeList") as? NSDictionary {
                             
                             //what's left should be an array of departure times or a dictionary of a single time
@@ -142,25 +141,21 @@ class MuniApiController: NSObject{
                                 var text = departureTime.objectForKey("text") as String
                                 var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                                 
-                                //build up tuple
+   
+                                var departureTime = trimmedText.toInt()!
                                 
-                                var thisResult: (departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))
-                                
-                                thisResult.departureTime = trimmedText.toInt()!
-                                thisResult.distanceToStation = datum.distanceToStation
-                                
-                                var muniOriginStationName = datum.muniOriginStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
+                                var muniOriginStationName = datum.originStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
                                 muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
                                 muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
                                 muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
                                 
-                                thisResult.originStationName = muniOriginStationName
+                             
                                 
-                                thisResult.lineName = "\(datum.lineCode)—\(datum.lineName)"
-                                thisResult.eolStationName = datum.eolStationName
-                                thisResult.originLatLon = datum.originLatLon
+                                var lineName = "\(datum.lineCode!)—\(datum.lineName)"
+ 
                                 
-                                result.insert(thisResult, atIndex: 0)
+                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: datum.lineCode)
+                                muniRouteResults.append(thisResult)
                                 
                             }
                         }
@@ -168,9 +163,9 @@ class MuniApiController: NSObject{
                 }
             }
             
-            result.sort{$0.departureTime < $1.departureTime}
+            muniRouteResults.sort{$0.departureTime < $1.departureTime}
             
-            self.delegate!.didReceiveMuniResults(result)
+            self.delegate!.didReceiveMuniResults(muniRouteResults)
         } else {
             self.delegate!.handleError("There was a problem getting MUNI results...")
         }

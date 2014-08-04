@@ -28,27 +28,22 @@ class WalkingDirectionsManager: NSObject {
         
     }
     
-    func stringCorrdToMapItem(lat:String, lon:String) -> MKMapItem {
+    func loc2dToMapItem(loc:CLLocationCoordinate2D) -> MKMapItem {
         
-        var latDouble = (lat as NSString).doubleValue
-        var lonDouble = (lon as NSString).doubleValue
-        
-        var coord2d = CLLocationCoordinate2DMake(CLLocationDegrees(latDouble), CLLocationDegrees(lonDouble))
-        
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord2d, addressDictionary: nil))
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: loc, addressDictionary: nil))
         
         return mapItem
         
         
     }
     
-    func getWalkingDirectionsBetween(startLatLon:(lat:String, lon:String), endLatLon:(lat:String, lon:String)) {
+    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D) {
         var walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
         
         
-        let sourceMapItem = stringCorrdToMapItem(startLatLon.lat, lon: startLatLon.lon)
-        let endMapItem = stringCorrdToMapItem(endLatLon.lat, lon: endLatLon.lon)
+        let sourceMapItem = loc2dToMapItem(startLatLon)
+        let endMapItem = loc2dToMapItem(endLatLon)
         
         walkingRouteRequest.setSource(sourceMapItem)
         walkingRouteRequest.setDestination(endMapItem)

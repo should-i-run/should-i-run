@@ -22,26 +22,21 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     var walkingDirectionsManager = SharedWalkingDirectionsManager
     
+    var resultsRoutes = [Route]()
+    var currentBestRoute:Route?
+    var currentSecondRoute:Route?
+    
     
     var distanceToOrigin:Int?
-    var departureStationName:String?
+
     var departures:[(String, Int)] = []
-    var bartOriginStationLocation:(lat: String, lon: String)?
-    var muniOriginStationLocation:(lat: String, lon: String)?
+
     
-    var muniResults:[(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
+
     
     //alarm
     var alarmTime = 0
     
-    //for displaying results
-    var destinationStation:String = ""
-    var departureTime:Int = 0
-    var followingDestinationStation:String = ""
-    var followingDepartureTime:Int = 0
-    
-    var walkingTime:Int?
-    var runningTime:Int?
     
     //result area things
     @IBOutlet var resultArea: UIView?
@@ -102,78 +97,46 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     func displayResults() {
         //calculate
         //logic for when to run
-        if !muniResults? {
-            //use distance to generate range of times - running time, walking time
-            walkingTime = (self.distanceToOrigin!/walkingSpeed) + self.stationTime
-            runningTime = (self.distanceToOrigin!/runningSpeed) + self.stationTime
-            
-            
-            var foundResult = false
-            
-            //go through list of possible times.
-            for (index, departure) in enumerate(departures) {
-                if foundResult == false {
-                    //subtract the estimated station time from it
-                    //find the first one that is > running time. This is our result
-                    if departure.1 > runningTime {
-                        foundResult = true
-                        destinationStation = bartLookupReverse[departure.0.lowercaseString]!
-                        departureTime = departure.1
-                        
-                        //next one is the subsequent train
-                        if index + 1 < departures.count {
-                            followingDestinationStation = "\(bartLookupReverse[departures[index + 1].0.lowercaseString]!)"
-                            followingDepartureTime = departures[index + 1].1
-                        }
-                    }
-                }
-            }
-        } else {
-            
-            var foundResult = false
-            
-            for var i = 0; i < self.muniResults!.count; ++i {
-                if !foundResult {
-                    
-                    let thisDeparture = self.muniResults![i]
-                    var dist = 0
-                    if self.distanceToOrigin {
-                        dist = self.distanceToOrigin!
-                    } else {
-                        dist = thisDeparture.distanceToStation.toInt()!
-                    }
-                    
-                    
-                    walkingTime = (dist/walkingSpeed) + self.stationTime
-                    runningTime = (dist/runningSpeed) + self.stationTime
-                    
-                    if thisDeparture.departureTime > runningTime { //if time to departure is less than time to get to station
-                        foundResult = true
-                        destinationStation = "\(thisDeparture.lineName) / \(thisDeparture.eolStationName)"
-                        departureTime = thisDeparture.departureTime
-                        departureStationName = thisDeparture.originStationName
-                        //sets the class global distance to the current distance
-                        self.distanceToOrigin = dist
-                        self.muniOriginStationLocation = thisDeparture.originLatLon
-                        
-                        if i + 1 < self.muniResults!.count {
-                            let nextDeparture = self.muniResults![i + 1]
-                            followingDestinationStation = "\(nextDeparture.lineName) / \(nextDeparture.eolStationName)"
-                            followingDepartureTime = nextDeparture.departureTime
-                        }
-                    }
-                }
-            }
-            
+        var foundResult = false
+        var walkingTime = 0
+        var runningTime = 0
+        var distanceToStation = 0
+        
+        
+        for var i = 0; i < self.resultsRoutes.count; ++i {
             if !foundResult {
-                //error, no result
+                
+                let route = self.resultsRoutes[i]
+
+                if self.distanceToOrigin {
+                    distanceToStation = self.distanceToOrigin!
+                } else {
+                    distanceToStation = route.distanceToStation
+                }
+                
+                walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
+                runningTime = (distanceToStation/runningSpeed) + self.stationTime
+                
+                if route.departureTime > runningTime { //if time to departure is less than time to get to station
+                    foundResult = true
+                    self.currentBestRoute = route
+                    
+                    if i + 1 < self.resultsRoutes.count {
+                        self.currentSecondRoute = self.resultsRoutes[i + 1]
+
+                    }
+                }
+            } else {
+                //error, no results
             }
+
             
         }
+
         
         //result area things
         // run or not?
-        if departureTime >= walkingTime {
+        if self.currentBestRoute!.departureTime! >= walkingTime {
             self.instructionLabel!.text = "Nah, take it easy"
             self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
@@ -182,7 +145,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.resultArea!.backgroundColor = walkUIColor
             
             self.alarmButton!.hidden = false
-            self.alarmTime = departureTime - walkingTime!
+            self.alarmTime = self.currentBestRoute!.departureTime! - walkingTime
             
         } else {
             
@@ -198,33 +161,55 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //detail area things
         
         
-        
-        self.distanceToStationLabel!.text = String(self.distanceToOrigin!)
-        self.destinationLabel!.text = destinationStation
+        //distance to station label
+        self.distanceToStationLabel!.text = String(distanceToStation)
+    
+        //line and destination station label
+        if self.currentBestRoute!.agency == "bart" {
+            let destinationStation = bartLookupReverse[self.currentBestRoute!.eolStationName.lowercaseString]!
+            self.destinationLabel!.text = "\(self.currentBestRoute!.lineName) / \(destinationStation)"
+        } else if self.currentBestRoute!.agency == "muni" {
+            self.destinationLabel!.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
+        }
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
         
-        
-        self.stationNameLabel!.text = "meters to \(departureStationName!) station"
+        //departure station name label
+        if self.currentBestRoute!.agency == "bart" {
+            let name = bartLookupReverse[self.currentBestRoute!.originStationName]!
+            self.stationNameLabel!.text = "meters to \(name) station"
+        } else if self.currentBestRoute!.agency == "muni" {
+            self.stationNameLabel!.text = "meters to \(self.currentBestRoute!.originStationName) station"
+        }
         self.stationNameLabel!.adjustsFontSizeToFitWidth = true
-        self.timeRunningLabel!.text = String(runningTime!)
-        self.timeWalkingLabel!.text = String(walkingTime!)
         
+        //running and walking time labels
+        self.timeRunningLabel!.text = String(runningTime)
+        self.timeWalkingLabel!.text = String(walkingTime)
+        
+        
+        //timer Labels
         if !firstRun {
-            //time for the following departure ime
-            self.followingDepartureLabel!.text = "\(followingDepartureTime)"
-            self.followingDepartureSecondsLabel!.text = ":00"
-            
+          
             // time for the next train
-            self.timeToNextTrainLabel!.text = String(departureTime)
+            self.timeToNextTrainLabel!.text = String(self.currentBestRoute!.departureTime!)
             self.secondsToNextTrainLabel!.text = ":00"
+            
+            //time for the following departure time
+            self.followingDepartureLabel!.text = "\(self.currentSecondRoute!.departureTime!)"
+            self.followingDepartureSecondsLabel!.text = ":00"
             
             firstRun = true
         }
         
+        //following destination station name label
+        if self.currentSecondRoute!.agency == "bart" {
+            let followingDestinationStation = bartLookupReverse[self.currentSecondRoute!.eolStationName.lowercaseString]!
+            self.followingDepartureDestinationLabel!.text = "\(self.currentSecondRoute!.lineName) / \(followingDestinationStation)"
+        } else if self.currentSecondRoute!.agency == "muni" {
+            self.followingDepartureDestinationLabel!.text = "\(self.currentSecondRoute!.lineName) / \(self.currentSecondRoute!.eolStationName)"
+        }
         
-        //other details for the following departure ime
-        self.followingDepartureDestinationLabel!.text = followingDestinationStation
         self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
         
     }
@@ -233,17 +218,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     func updateResults(timer: NSTimer){
         
         //call entire reload of display in this function
-        let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
-        var startLatitude = (loc2d.latitude as NSNumber).stringValue
-        var startLongitude = (loc2d.longitude as NSNumber).stringValue
-        
-        var start = (lat: startLatitude!,lon: startLongitude!)
-        
-        if muniResults{
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.muniOriginStationLocation!)
-        } else {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.bartOriginStationLocation!)
-        }
+        let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+
+        self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
+
+
     }
     
     func handleWalkingDistance(distance:Int){

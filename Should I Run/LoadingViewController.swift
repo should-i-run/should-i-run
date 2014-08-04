@@ -16,27 +16,24 @@ enum NetworkStatusStruct: Int {
     case ReachableViaWWAN
 }
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, ParseGoogleHelperDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
     
     var viewHasAlreadyAppeared = false
     
     
-    var locationName:String?
-    var destinationLatitude : Float?
-    var destinationLongitude : Float?
     
-    //37.786059, -122.405156
-    var startLatitude:Float = 37.786059
-    var startLongitude:Float = -122.405156
+    var locationName = String()
+    var destinationLatitude = Float()
+    var destinationLongitude = Float()
+    
+    
+    var startLatitude = Float()
+    var startLongitude = Float()
+    var resultsRoutes = [Route]()
     
     @IBOutlet var spinner: UIActivityIndicatorView?
     
-    var bartResults: [(String, Int)]?
-    var googleResults : [String]?
-    var muniResults: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]?
-    
-    var distanceToStart : Int = 0
-    var departureStationName: String = ""
+
     
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
@@ -48,6 +45,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     //Create controller to handle Google API queries
     var googleApiHandler : GoogleApiController = GoogleApiController()
+    var parseGoogleHelper:ParseGoogleHelper = ParseGoogleHelper()
     
     var internetReachability: Reachability = Reachability.reachabilityForInternetConnection()
     
@@ -86,13 +84,14 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             // Set timer to segue back (by calling segueFromView) back to the main table view
             var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
-            self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeut:"), userInfo: timeoutText, repeats: false)
+            self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
             
             
             //set this class as the delegate for the api controllers
             self.googleApiHandler.delegate = self
             self.bartApiHandler.delegate = self
             self.muniApiHandler.delegate = self
+            self.parseGoogleHelper.delegate = self
             
             
             //Fetching data from Google and parsing it
@@ -103,7 +102,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     
                     self.startLatitude = Float(loc2d.latitude)
                     self.startLongitude = Float(loc2d.longitude)
-                    self.googleApiHandler.fetchGoogleData(self.locationName!, latDest: self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+                    self.googleApiHandler.fetchGoogleData(self.locationName, latDest: self.destinationLatitude, lngDest: self.destinationLongitude,latStart: self.startLatitude,lngStart: self.startLongitude)
                     
                 } else {
                     
@@ -113,7 +112,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                             
                             self.startLatitude = Float(loc2d.latitude)
                             self.startLongitude = Float(loc2d.longitude)
-                            self.googleApiHandler.fetchGoogleData(self.locationName!, latDest:self.destinationLatitude!,lngDest: self.destinationLongitude!,latStart: self.startLatitude,lngStart: self.startLongitude)
+                            self.googleApiHandler.fetchGoogleData(self.locationName, latDest:self.destinationLatitude,lngDest: self.destinationLongitude,latStart: self.startLatitude,lngStart: self.startLongitude)
                             self.locationManager.hasLocation = true
                         }
                     }
@@ -122,45 +121,48 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
     }
     
-    func didReceiveGoogleResults(results: [String]) {
+    func didReceiveGoogleData(data: NSDictionary)  {
         
-        self.distanceToStart = results[0].toInt()!
-        self.departureStationName = results[1]
-        self.googleResults = results
-        self.bartApiHandler.searchBartFor(self.departureStationName)
+        self.parseGoogleHelper.parser(data)
+        
         
     }
     
-    func didReceiveGoogleResults(results: [(distanceToStation: String, muniOriginStationName: String, lineCode: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))], muni: Bool) {
+    func didReceiveGoogleResults(results: [Route]) {
+        // we can assume that the routes coming in are uniq
+        // we want to get all possible departure times for each route - different EOL stations
+        // But we only want to do one api request for each origin station
         
-        self.muniApiHandler.searchMuniFor(results)
+        // TODO: make this handle both bart and muni in same set of results
+        // as well as different origin stations
+        // we will also need to keep track of the requests made, and not transition until they all come back-- allowing for errors
+        
+        var bartResults = [Route]()
+        var muniResults = [Route]()
+        
+    
+        if results[0].agency == "bart" {
+            self.bartApiHandler.searchBartFor(results)
+        } else if results[0].agency == "muni" {
+            self.muniApiHandler.searchMuniFor(results)
+        }
+        
+
     }
+    
+
     
     
     // Conform to BartApiControllerProtocol by implementing this method
-    func didReceiveBartResults(results: [(String, Int)]) {
+    func didReceiveBartResults(results: [Route]) {
         
-        //filter bart results based on google's EOL stations
-        var goog = self.googleResults!
-        
-        var filteredBartResults:[(String, Int)] = []
-        
-        for var i = 2; i < goog.count; ++i {
-            var stationName = goog[i]
-            for trip in results {
-                if trip.0 == stationName {
-                    filteredBartResults += trip
-                }
-            }
-        }
-        
-        self.bartResults = filteredBartResults
+        self.resultsRoutes = results
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
-    func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))]) {
+    func didReceiveMuniResults(results: [Route]) {
         
-        self.muniResults = results
+        self.resultsRoutes = results
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
@@ -204,19 +206,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         if segue.identifier == "ResultsSegue" {
             var destinationController = segue.destinationViewController as ResultViewController
             
-            //if we have muni data, pass it in
-            if let muniData = self.muniResults {
-                destinationController.muniResults = muniData
-                //stuff as appropriate
-                
-                //otherwise assuming we have bart
-            } else {
-                var goog = self.googleResults!
-                destinationController.bartOriginStationLocation = (lat: goog[goog.count - 2], lon: goog[goog.count - 1])
-                destinationController.distanceToOrigin = self.distanceToStart
-                destinationController.departureStationName = bartLookupReverse[self.departureStationName.lowercaseString]!
-                destinationController.departures = self.bartResults!
-            }
+            destinationController.resultsRoutes = self.resultsRoutes
         } else if segue.identifier == "ErrorUnwindSegue" {
             
         }

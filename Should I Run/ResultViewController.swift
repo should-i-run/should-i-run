@@ -126,11 +126,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
 
                     }
                 }
-            } else {
-                //error, no results
             }
-
-            
         }
 
         
@@ -283,7 +279,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if segue.identifier {
+        if (segue.identifier != nil) {
             if segue.identifier == "AlarmSegue" {
                 var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
                 dest.walkTime = self.alarmTime

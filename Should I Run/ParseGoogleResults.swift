@@ -122,11 +122,11 @@ class ParseGoogleHelper {
         
         if let endLocation = step.objectForKey("start_location") as? NSDictionary {
             
-            if var lat = (endLocation.objectForKey("lat") as NSNumber).stringValue {
+            if var lat = (endLocation.objectForKey("lat") as NSNumber).stringValue as String? {
                 
                 result.lat = lat
             }
-            if let lon = (endLocation.objectForKey("lng") as NSNumber).stringValue  {
+            if let lon = (endLocation.objectForKey("lng") as NSNumber).stringValue as String? {
                 result.lon = lon
             }
             var latDouble = (result.lat as NSString).doubleValue
@@ -282,6 +282,8 @@ class ParseGoogleHelper {
             }
         }
         
+        
+        //main loop. Checks that allRoutes is valid, and then iterares through each route to scrape out bart or muni
         if let allRoutes = googleResults.objectForKey("routes") as? [AnyObject] {
             for route in allRoutes {
                 if let bartResult:Route = self.getBartResultFromGoogleRoute(route as NSDictionary) {

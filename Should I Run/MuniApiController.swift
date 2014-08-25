@@ -83,7 +83,8 @@ class MuniApiController: NSObject{
         // build up url
         let baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
         let escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        let url = NSURL(string: baseUrl + escapedStationName)
+            //stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        let url = NSURL(string: baseUrl + escapedStationName!)
         
         var request = NSURLRequest(URL: url)
         
@@ -125,7 +126,7 @@ class MuniApiController: NSObject{
                 
                 for datum in data {
                     if route.objectForKey("Code") as? String == datum.lineCode {
-                        if let departureTimeList  = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection")?.objectForKey("StopList").objectForKey("Stop").objectForKey("DepartureTimeList") as? NSDictionary {
+                        if let departureTimeList  = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection")?.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
                             
                             //what's left should be an array of departure times or a dictionary of a single time
                             var departureTimesArray:[NSDictionary] = []

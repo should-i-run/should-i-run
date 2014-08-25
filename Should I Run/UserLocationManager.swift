@@ -68,7 +68,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     // This method is executed whenever a location is not found.
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         self.hasLocation = false
-        if error {
+        if (error != nil) {
             println("location fail error:")
             println(error)
         }

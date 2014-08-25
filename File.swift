@@ -41,12 +41,12 @@ class FileManager: NSObject {
     }
     
     func saveToCache(newData:NSMutableArray) {
-        newData.writeToFile(cachePlistPath, atomically: false)
+        newData.writeToFile(self.cachePlistPath!, atomically: false)
 
     }
     
     func readFromCache() -> NSMutableArray {
-        var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: cachePlistPath)
+        var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.cachePlistPath!)
         if let res = resultsArray? {
             return res
         } else {
@@ -56,12 +56,12 @@ class FileManager: NSObject {
     }
     
     func saveToDestinationsList(newData:NSMutableArray ) {
-        newData.writeToFile(self.destinationsPlistPath, atomically: false)
+        newData.writeToFile(self.destinationsPlistPath!, atomically: false)
         
     }
     
     func readFromDestinationsList() -> NSMutableArray {
-        var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.destinationsPlistPath)
+        var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.destinationsPlistPath!)
         if let res = resultsArray? {
             return res
         } else {

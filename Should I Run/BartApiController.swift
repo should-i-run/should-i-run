@@ -75,11 +75,11 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
-        let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+        let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
         let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
         // Trim off unneeded data inside the dictionary
-        let stations: NSDictionary = parsed.objectForKey("root").objectForKey("station") as NSDictionary
+        let stations: NSDictionary = parsed.objectForKey("root")?.objectForKey("station") as NSDictionary
         
         // Create an array of tuples to store our destination stations (termini) and their estimated arrival time to our closest BART  station
         var bartRouteResults = [Route]()

@@ -212,7 +212,6 @@ class ParseGoogleHelper {
                 for var i = 0; i < steps.count && i < 4; ++i {
                     
                     if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
-                    println("----------------------------- step---------------- \(steps[i])")
                         if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
                             
                             if let agencies = line.objectForKey("agencies") as? NSArray {
@@ -236,7 +235,6 @@ class ParseGoogleHelper {
                                                     // if so, return nil: the distance is too far to walk, and the person will have to take a bus, 
                                                     // and we don't support busses
                                                     if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
-                                                        println("non tram muni directions are too long")
                                                         if dist > 2000 {
                                                             return nil
                                                         }
@@ -251,7 +249,6 @@ class ParseGoogleHelper {
                                         
                                         
                                         if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
-                                            println("transit directions are too long")
                                             if dist > 2000 {
                                                 return nil
                                             }

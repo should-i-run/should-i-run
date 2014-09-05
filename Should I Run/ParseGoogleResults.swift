@@ -91,7 +91,7 @@ class ParseGoogleHelper {
             return code
         }
         
-        return "error getting bar station code"
+        return "error getting bart station code"
 
     }
     
@@ -149,45 +149,29 @@ class ParseGoogleHelper {
     }
     
     func processMuniResultFromStep(steps: NSArray, index: Int, line: NSDictionary) -> Route? {
-
-        if let vehicle = line.objectForKey("vehicle") as? NSDictionary {
-            
-            if let type = vehicle.objectForKey("type") as? String {
-                
-                if type == "TRAM" {
-
-                    
-                    // now that we have the step, get the data
-                    
-                    
-                    var thisStep = steps[index] as NSDictionary
-                    
-                    var distanceToStation = 0
-                    if index != 0 {
-                        var walkingStep = steps[index - 1] as NSDictionary
-                        if let dist = getDistanceFromWalkingStep(walkingStep) {
-                            distanceToStation = dist
-                        }
-                    }
-                    
-                    let muniOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
-                    
-                    let lineName = self.getLineNameFromTransitStep(thisStep)
-                    let lineCode = self.getLineCodeFromMuniStep(thisStep)
-                    let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
-                    
-                    let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
-                    
-                    let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil, lineCode: lineCode)
-                    
-                    return thisResult
-
-                }
+    
+        var thisStep = steps[index] as NSDictionary
+        
+        var distanceToStation = 0
+        if index != 0 {
+            var walkingStep = steps[index - 1] as NSDictionary
+            if let dist = getDistanceFromWalkingStep(walkingStep) {
+                distanceToStation = dist
             }
         }
+        
+        let muniOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
+        
+        let lineName = self.getLineNameFromTransitStep(thisStep)
+        let lineCode = self.getLineCodeFromMuniStep(thisStep)
+        let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
+        
+        let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
+        
+        let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil, lineCode: lineCode)
+        
+        return thisResult
 
-
-        return nil
     }
     
     func processBartResultFromStep(steps: NSArray, index: Int) -> Route? {
@@ -216,6 +200,7 @@ class ParseGoogleHelper {
     
     func getResultFromRoute(route: NSDictionary) -> Route? {
         if let legs = route.objectForKey("legs") as? [NSDictionary] {
+            
             // for whatever reason legs is always an array with only one element
             if let steps = legs[0].objectForKey("steps") as? [NSDictionary] {
                 
@@ -238,7 +223,26 @@ class ParseGoogleHelper {
                                     }
                                     
                                     if name == "San Francisco Municipal Transportation Agency" {
-                                        return self.processMuniResultFromStep(steps, index: i, line: line)
+                                        if let vehicle = line.objectForKey("vehicle") as? NSDictionary {
+                                            
+                                            if let type = vehicle.objectForKey("type") as? String {
+                                                
+                                                if type == "TRAM" {
+
+                                                    return self.processMuniResultFromStep(steps, index: i, line: line)
+                                                } else {
+                                                    
+                                                    // here we can check that the bus directions aren't longer than a reasonable walking distance
+                                                    // if so, return nil: the distance is too far to walk, and the person will have to take a bus, 
+                                                    // and we don't support busses
+                                                    if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSString {
+                                                        if Int(dist) > 1500 {
+                                                            return nil
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                         
                                     }
                                 }
@@ -253,7 +257,6 @@ class ParseGoogleHelper {
     }
     
     func parser (googleResults: NSDictionary) {
-        println(googleResults)
         var results = [Route]()
         
         func addToResultsIfUniq (thisRoute:Route) {

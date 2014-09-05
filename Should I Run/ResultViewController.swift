@@ -168,7 +168,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //line and destination station label
         if self.currentBestRoute!.agency == "bart" {
             let destinationStation = bartLookupReverse[self.currentBestRoute!.eolStationName.lowercaseString]!
-            self.destinationLabel!.text = "\(self.currentBestRoute!.lineName) / \(destinationStation)"
+            self.destinationLabel!.text = "towards \(destinationStation)"
         } else if self.currentBestRoute!.agency == "muni" {
             self.destinationLabel!.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
         }
@@ -206,7 +206,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //following destination station name label
         if self.currentSecondRoute!.agency == "bart" {
             let followingDestinationStation = bartLookupReverse[self.currentSecondRoute!.eolStationName.lowercaseString]!
-            self.followingDepartureDestinationLabel!.text = "\(self.currentSecondRoute!.lineName) / \(followingDestinationStation)"
+            self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
         } else if self.currentSecondRoute!.agency == "muni" {
             self.followingDepartureDestinationLabel!.text = "\(self.currentSecondRoute!.lineName) / \(self.currentSecondRoute!.eolStationName)"
         }

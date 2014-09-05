@@ -148,76 +148,82 @@ class ParseGoogleHelper {
         
     }
     
-    func getMuniResultFromGoogleRoute(route: NSDictionary) -> Route? {
-        if let legs = route.objectForKey("legs") as? [NSDictionary] {
-            //for whatever reason legs is always an array with only one element
-            if let steps = legs[0].objectForKey("steps") as? [NSDictionary] {
-                for var i = 1; i < steps.count; ++i {
-                    if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
-                        
-                        if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
-                            
-                            if let agencies = line.objectForKey("agencies") as? NSArray {
-                                
-                                if let name = agencies[0].objectForKey("name") as? String {
-                                    
-                                    if name == "San Francisco Municipal Transportation Agency" {
-                                        
-                                        //For now, limiting to light rail by checking the vehicle type
-                                        //comment out this block to remove the limitation
-                                        if let vehicle = line.objectForKey("vehicle") as? NSDictionary {
-                                            
-                                            if let type = vehicle.objectForKey("type") as? String {
-                                                
-                                                if type == "TRAM" {
-                                                    //but keep this part
-                                                    
-                                                    // now that we have the step, get the data
-                                                    
-                                                    
-                                                    var thisStep = steps[i] as NSDictionary
-                                                    
-                                                    var distanceToStation = 0
-                                                    if i != 0 {
-                                                        var walkingStep = steps[i - 1] as NSDictionary
-                                                        if let dist = getDistanceFromWalkingStep(walkingStep) {
-                                                            distanceToStation = dist
-                                                        }
-                                                    }
-                                                    
-                                                    let muniOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
-                                                    
-                                                    let lineName = self.getLineNameFromTransitStep(thisStep)
-                                                    let lineCode = self.getLineCodeFromMuniStep(thisStep)
-                                                    let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
-                                                    
-                                                    let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
-                                                    
-                                                    let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil, lineCode: lineCode)
-                                                    
-                                                    return thisResult
-                                                    //return to commenting
-                                                }
-                                            }
-                                        }
-                                        //end commenting
-                                    }
-                                }
-                            }
+    func processMuniResultFromStep(steps: NSArray, index: Int, line: NSDictionary) -> Route? {
+
+        if let vehicle = line.objectForKey("vehicle") as? NSDictionary {
+            
+            if let type = vehicle.objectForKey("type") as? String {
+                
+                if type == "TRAM" {
+
+                    
+                    // now that we have the step, get the data
+                    
+                    
+                    var thisStep = steps[index] as NSDictionary
+                    
+                    var distanceToStation = 0
+                    if index != 0 {
+                        var walkingStep = steps[index - 1] as NSDictionary
+                        if let dist = getDistanceFromWalkingStep(walkingStep) {
+                            distanceToStation = dist
                         }
                     }
+                    
+                    let muniOriginStationName =  getOriginStationNameFromTransitStep(thisStep)
+                    
+                    let lineName = self.getLineNameFromTransitStep(thisStep)
+                    let lineCode = self.getLineCodeFromMuniStep(thisStep)
+                    let eolStationName = self.getEolStationNameFromMuniStep(thisStep)
+                    
+                    let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
+                    
+                    let thisResult = Route(distanceToStation: distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "muni", departureTime: nil, lineCode: lineCode)
+                    
+                    return thisResult
+
                 }
             }
         }
+
+
         return nil
     }
     
+    func processBartResultFromStep(steps: NSArray, index: Int) -> Route? {
+
+        var thisStep = steps[index] as NSDictionary
+        var distanceToStation = 0
+        if index != 0 {
+            var walkingStep = steps[index - 1] as NSDictionary
+            if let dist = getDistanceFromWalkingStep(walkingStep) {
+                distanceToStation = dist
+            }
+        }
+        
+        let bartOriginStationName =  bartLookup[getOriginStationNameFromTransitStep(thisStep)]!
+        
+        let lineName = self.getLineNameFromTransitStep(thisStep)
+        let eolStationName = self.getEolStationNameFromBartStep(thisStep)
+        
+        let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
+        
+        let thisResult = Route(distanceToStation: distanceToStation, originStationName: bartOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "bart", departureTime: nil, lineCode: nil)
+        
+        return thisResult
+    }
     
-    func getBartResultFromGoogleRoute(route: NSDictionary) -> Route? {
+    
+    func getResultFromRoute(route: NSDictionary) -> Route? {
         if let legs = route.objectForKey("legs") as? [NSDictionary] {
-            //for whatever reason legs is always an array with only one element
+            // for whatever reason legs is always an array with only one element
             if let steps = legs[0].objectForKey("steps") as? [NSDictionary] {
-                for var i = 1; i < steps.count; ++i {
+                
+                // iterate through each step. We only look at the first four steps.
+                // Why? because we don't want routes that involve more than one transit step before bart
+                // at most we're willing to consider a route that has a bus ride first
+                // this would put BART/MUNI at the fourth step: walking, bus, walking, BART
+                for var i = 1; i < steps.count && i < 4; ++i {
                     if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
                         
                         if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
@@ -227,32 +233,12 @@ class ParseGoogleHelper {
                                 if let name = agencies[0].objectForKey("name") as? String {
                                     
                                     if name == "Bay Area Rapid Transit" {
-                                        
-                                        
-                                        
-                                        // now that we have the step, get the data
-                                        
-                                        
-                                        var thisStep = steps[i] as NSDictionary
-                                        
-                                        var distanceToStation = 0
-                                        if i != 0 {
-                                            var walkingStep = steps[i - 1] as NSDictionary
-                                            if let dist = getDistanceFromWalkingStep(walkingStep) {
-                                                distanceToStation = dist
-                                            }
-                                        }
-                                        
-                                        let bartOriginStationName =  bartLookup[getOriginStationNameFromTransitStep(thisStep)]!
-                                        
-                                        let lineName = self.getLineNameFromTransitStep(thisStep)
-                                        let eolStationName = self.getEolStationNameFromBartStep(thisStep)
-                                        
-                                        let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
-                                        
-                                        let thisResult = Route(distanceToStation: distanceToStation, originStationName: bartOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "bart", departureTime: nil, lineCode: nil)
-                                        
-                                        return thisResult
+                                        return self.processBartResultFromStep(steps, index: i)
+                                      
+                                    }
+                                    
+                                    if name == "San Francisco Municipal Transportation Agency" {
+                                        return self.processMuniResultFromStep(steps, index: i, line: line)
                                         
                                     }
                                 }
@@ -267,6 +253,7 @@ class ParseGoogleHelper {
     }
     
     func parser (googleResults: NSDictionary) {
+        println(googleResults)
         var results = [Route]()
         
         func addToResultsIfUniq (thisRoute:Route) {
@@ -284,15 +271,14 @@ class ParseGoogleHelper {
         
         
         //main loop. Checks that allRoutes is valid, and then iterares through each route to scrape out bart or muni
+        
         if let allRoutes = googleResults.objectForKey("routes") as? [AnyObject] {
             for route in allRoutes {
-                if let bartResult:Route = self.getBartResultFromGoogleRoute(route as NSDictionary) {
-                    addToResultsIfUniq(bartResult)
-                    
-
-                } else if let muniResult:Route = self.getMuniResultFromGoogleRoute(route as NSDictionary) {
-                    addToResultsIfUniq(muniResult)
+                
+                if let result:Route = self.getResultFromRoute(route as NSDictionary) {
+                    addToResultsIfUniq(result)
                 }
+                
             }
         }
 

@@ -32,7 +32,6 @@ class MuniApiController: NSObject{
     
     // Cancel the MUNI API connection (on timeout)
     func cancelConnection() {
-        println("cancelling MUNI request")
         self.currentMuniConnection?.cancel()
     }
     
@@ -83,7 +82,7 @@ class MuniApiController: NSObject{
         // build up url
         let baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
         let escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            //stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        //stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let url = NSURL(string: baseUrl + escapedStationName!)
         
         var request = NSURLRequest(URL: url)
@@ -99,12 +98,15 @@ class MuniApiController: NSObject{
         
         var muniRouteResults = [Route]()
         
+        
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
         
         let html = NSString(data: rawMuniXML, encoding: NSUTF8StringEncoding)
         
+        
         let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
+        
         
         
         // Trim off unneeded headers
@@ -113,6 +115,7 @@ class MuniApiController: NSObject{
             //what's left should be an array of routes, but we'll check just in case
             var routesArray:[NSDictionary] = []
             
+            
             if let temp:[NSDictionary] = routes.objectForKey("Route") as? [NSDictionary] {
                 routesArray += temp
                 
@@ -120,53 +123,75 @@ class MuniApiController: NSObject{
                 routesArray.append(temp)
             }
             
+            
             let results:[String] = []
             
             for route in routesArray {
                 
+                
                 for datum in data {
                     if route.objectForKey("Code") as? String == datum.lineCode {
-                        if let departureTimeList  = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection")?.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
+                        
+                        if let routeDirections = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSArray {
                             
-                            //what's left should be an array of departure times or a dictionary of a single time
-                            var departureTimesArray:[NSDictionary] = []
-                            
-                            if let temp:[NSDictionary] = departureTimeList.objectForKey("DepartureTime") as? [NSDictionary] {
-                                departureTimesArray += temp
+                            for direction in routeDirections {
+                                let directionName = direction.objectForKey("Name") as String
+                                var shortName1 = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
+                                var shortName2 = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
                                 
-                            } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
-                                departureTimesArray.append(temp)
-                            }
-                            
-                            for departureTime in departureTimesArray {
-                                var text = departureTime.objectForKey("text") as String
-                                var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                                
-   
-                                var departureTime = trimmedText.toInt()!
-                                
-                                var muniOriginStationName = datum.originStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
-                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
-                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
-                                muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
-                                
-                             
-                                
-                                var lineName = "\(datum.lineCode!)—\(datum.lineName)"
- 
-                                
-                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: datum.lineCode)
-                                muniRouteResults.append(thisResult)
-                                
+                                if shortName1 == datum.eolStationName  || shortName2 == datum.eolStationName {
+
+                                    
+                                    if let departureTimeList  = direction.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
+                                        
+                                        
+                                        //what's left should be an array of departure times or a dictionary of a single time
+                                        var departureTimesArray:[NSDictionary] = []
+                                        
+                                        if let temp:[NSDictionary] = departureTimeList.objectForKey("DepartureTime") as? [NSDictionary] {
+                                            departureTimesArray += temp
+                                            
+                                        } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
+                                            departureTimesArray.append(temp)
+                                        }
+                                        println("6")
+                                        
+                                        
+                                        for departureTime in departureTimesArray {
+                                            var text = departureTime.objectForKey("text") as String
+                                            var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                                            
+                                            
+                                            var departureTime = trimmedText.toInt()!
+                                            
+                                            var muniOriginStationName = datum.originStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
+                                            
+                                            
+                                            
+                                            var lineName = "\(datum.lineCode!)—\(datum.lineName)"
+                                            
+                                            
+                                            var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: datum.lineCode)
+                                            muniRouteResults.append(thisResult)
+                                        }
+                                    }
+                                    
+                                }
                             }
                         }
                     }
                 }
+                
             }
             
             muniRouteResults.sort{$0.departureTime < $1.departureTime}
             
+            
             self.delegate!.didReceiveMuniResults(muniRouteResults)
+            
         } else {
             self.delegate!.handleError("There was a problem getting MUNI results...")
         }

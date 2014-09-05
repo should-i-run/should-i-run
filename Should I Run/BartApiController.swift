@@ -31,7 +31,6 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     
     // Cancel the connection the BART connection.
     func cancelConnection() {
-        println("cancelling BART request")
         self.currentBartConnection?.cancel()
     }
 

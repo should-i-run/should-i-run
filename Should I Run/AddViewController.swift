@@ -125,12 +125,11 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     var text = response[0].locality
                 
-                    println(response[0])
+
                     if response[0].thoroughfare? != nil   {
                         text = "\(response[0].thoroughfare), " + text
                     }
                     if response[0].subThoroughfare? != nil  {
-                        println("sub: \(response[0].subThoroughfare)")
                         text = "\(response[0].subThoroughfare) " + text
                     }
                     self.searchBar.text = text

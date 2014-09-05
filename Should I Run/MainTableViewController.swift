@@ -38,9 +38,9 @@ import Foundation
         // self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
         // Navigation and background colors
-        self.navigationController.navigationBar.tintColor = globalTintColor
+        self.navigationController?.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
-        self.navigationController.navigationBar.barStyle = globalBarStyle
+        self.navigationController?.navigationBar.barStyle = globalBarStyle
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +58,7 @@ import Foundation
         return locations.count + 1
     }
     
-    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         //loc is locations plist as an array
         var locations = fileManager.readFromDestinationsList()
         
@@ -68,7 +68,7 @@ import Foundation
         return true
     }
     
-    override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         //loc is locations plist as an array
         //check if editing style is delete
         
@@ -86,7 +86,7 @@ import Foundation
         
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         
@@ -94,37 +94,39 @@ import Foundation
         
         var locations = fileManager.readFromDestinationsList()
       
-        if let row = indexPath?.row {
+        let row = indexPath.row
 
-            // if the current row (zero indexed) is equal to that, we are on the add destination button
-            if row == locations.count {
-                
-                cell.textLabel.text = "Add Destination"
-                cell.backgroundColor = self.colors[4]
-                cell.accessoryType = UITableViewCellAccessoryType.None
-                
-            //retrieve from the collection of objects with key "row number"
-            } else if let location : AnyObject = locations[row] as AnyObject? {
-                cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                cell.textLabel.text = location["name"] as NSString
-                var index = row % self.colors.count
-                cell.backgroundColor = self.colors[index]
-            } else {
-                cell.textLabel.text = "Default"
-                var index = row % self.colors.count
-                cell.backgroundColor = self.colors[index]
-            }
+        // if the current row (zero indexed) is equal to that, we are on the add destination button
+        if row == locations.count {
             
+
+            
+            cell.textLabel?.text = "Add Destination"
+            cell.backgroundColor = self.colors[4]
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            
+        //retrieve from the collection of objects with key "row number"
+        } else if let location : AnyObject = locations[row] as AnyObject? {
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell.textLabel?.text = location["name"] as NSString
+            var index = row % self.colors.count
+            cell.backgroundColor = self.colors[index]
+        } else {
+            cell.textLabel?.text = "Default"
+            var index = row % self.colors.count
+            cell.backgroundColor = self.colors[index]
         }
+            
+        
 
         return cell
     }
     
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 101
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var locations = fileManager.readFromDestinationsList()
 
@@ -154,7 +156,7 @@ import Foundation
     
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "LoadingSegue" {
 

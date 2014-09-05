@@ -44,9 +44,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         // Navigation and background colors
         //        self.navigationController.navigationBar.barTintColor = globalNavigationBarColor
-        self.navigationController.navigationBar.tintColor = globalTintColor
+        self.navigationController?.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
-        self.navigationController.navigationBar.barStyle = globalBarStyle
+        self.navigationController?.navigationBar.barStyle = globalBarStyle
 
 
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
@@ -133,7 +133,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.currentAnnotation = marker
     }
 
-    override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if (sender as? UIBarButtonItem != self.saveBarButton) {
             return true
         }
@@ -176,7 +176,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
 
-        self.destinationNameAlertView!.textFieldAtIndex(0).delegate = self
+        self.destinationNameAlertView!.textFieldAtIndex(0)?.delegate = self
 
         self.destinationNameAlertView!.show()
     }
@@ -199,10 +199,13 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         if(sender is String){
             var savedLocations = self.fileManager.readFromDestinationsList()
+            
+            if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
 
-            savedLocations.setObject(["name": self.destinationNameAlertView!.textFieldAtIndex(0).text, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
-
-            self.fileManager.saveToDestinationsList(savedLocations)
+                savedLocations.setObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
+                self.fileManager.saveToDestinationsList(savedLocations)
+                
+            }
         }
         
     }

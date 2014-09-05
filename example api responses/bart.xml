@@ -1,0 +1,34 @@
+<root>
+  <uri>
+    <![CDATA[http://api.bart.gov/api/etd.aspx?cmd=etd&orig=rich]]>
+  </uri>
+  <date>09/04/2014</date>
+  <time>07:27:04 PM PDT</time>
+  <station>
+    <name>Richmond</name>
+    <abbr>RICH</abbr>
+    <etd>
+      <destination>Fremont</destination>
+      <abbreviation>FRMT</abbreviation>
+      <estimate>
+        <minutes>7</minutes>
+        <platform>2</platform>
+        <direction>South</direction>
+        <length>8</length>
+        <color>ORANGE</color>
+        <hexcolor>#ff9933</hexcolor>
+        <bikeflag>1</bikeflag>
+      </estimate>
+      <estimate>
+        <minutes>27</minutes>
+        <platform>2</platform>
+        <direction>South</direction>
+        <length>6</length>
+        <color>ORANGE</color>
+        <hexcolor>#ff9933</hexcolor>
+        <bikeflag>1</bikeflag>
+      </estimate>
+    </etd>
+  </station>
+  <message></message>
+</root>

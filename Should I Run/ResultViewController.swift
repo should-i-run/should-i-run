@@ -11,7 +11,6 @@ import MapKit
 
 class ResultViewController: UIViewController, CLLocationManagerDelegate, WalkingDirectionsDelegate {
     
-    var locationName: String?//temporary, this should be deleted
     let locationManager = SharedUserLocation
     
     var firstRun:Bool = false
@@ -71,6 +70,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var secondTimer: NSTimer = NSTimer()
     
     var updateResultTimer : NSTimer = NSTimer()
+    var currentSeconds = 0
+    var currentMinutes = 0
+    var followingCurrentMinutes = 0
     
     
     override func viewDidLoad() {
@@ -120,9 +122,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 if route.departureTime > runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     self.currentBestRoute = route
+                    self.currentMinutes = route.departureTime!
                     
+                    //set the following route if there is one
                     if i + 1 < self.resultsRoutes.count {
                         self.currentSecondRoute = self.resultsRoutes[i + 1]
+                        self.followingCurrentMinutes = self.resultsRoutes[i + 1].departureTime!
 
                     }
                 }
@@ -229,62 +234,72 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     func segueOfSeconds(timer: NSTimer) {
         //countdown for the next train
-        var tempString: NSString = self.secondsToNextTrainLabel!.text
-        tempString = tempString.substringFromIndex(1)
-        var currentSeconds:Int = tempString.integerValue
+//        var temp = self.secondsToNextTrainLabel?.text?
         
-        if currentSeconds == 0 {
-            var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
-            currentMinutes--
-            if currentMinutes == 0 {
-                currentSeconds = 0
+        
+//        var tempString = self.secondsToNextTrainLabel?.text?
+//        tempString = tempString?.substringFromIndex(1)
+//        var currentSeconds:Int = tempString.integerValue
+        
+        
+        if self.currentSeconds == 0 {
+//            var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
+            self.currentMinutes--
+            self.followingCurrentMinutes--
+            
+            if self.currentMinutes == 0 {
+                self.currentSeconds = 0
             } else {
-                currentSeconds = 59
+                self.currentSeconds = 59
             }
             
             self.timeToNextTrainLabel!.text = String(currentMinutes)
+            self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
+            
         } else {
-            currentSeconds--
+            self.currentSeconds--
         }
-        if currentSeconds < 10 {
+        if self.currentSeconds < 10 {
             self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
+            self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)
         } else {
             self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
+            self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
         }
         
         //countdown for the following train
-        tempString  = self.followingDepartureSecondsLabel!.text
-        tempString = tempString.substringFromIndex(1)
-        var followingSeconds:Int = tempString.integerValue
-        
-        if followingSeconds == 0 {
-            var followingMinutes:Int = self.followingDepartureLabel!.text.toInt()!
-            followingMinutes--
-            followingSeconds = 59
-            self.followingDepartureLabel!.text = String(followingMinutes)
-        } else {
-            followingSeconds--
-        }
-        if followingSeconds < 10 {
-            self.followingDepartureSecondsLabel!.text = ":0"+String(followingSeconds)
-        } else {
-            self.followingDepartureSecondsLabel!.text = ":"+String(followingSeconds)
-        }
+//        tempString  = self.followingDepartureSecondsLabel.text
+//        tempString = tempString.substringFromIndex(1)
+//        var followingSeconds:Int = tempString.integerValue
+//        
+//        if self.currentSeconds == 0 {
+//            var followingMinutes:Int = self.followingDepartureLabel!.text.toInt()!
+//            followingMinutes--
+//            followingSeconds = 59
+//            self.followingDepartureLabel!.text = String(followingMinutes)
+//        } else {
+//            followingSeconds--
+//        }
+//        if followingSeconds < 10 {
+//            self.followingDepartureSecondsLabel!.text = ":0" + String(followingSeconds)
+//        } else {
+//            self.followingDepartureSecondsLabel!.text = ":" + String(followingSeconds)
+//        }
         
     }
     
     @IBAction func returnToRoot(sender: UIButton) {
-        self.navigationController.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if (segue.identifier != nil) {
-            if segue.identifier == "AlarmSegue" {
-                var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
-                dest.walkTime = self.alarmTime
-            }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+
+        if segue.identifier == "AlarmSegue" {
+            var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
+            dest.walkTime = self.alarmTime
         }
+
     }
     
 }

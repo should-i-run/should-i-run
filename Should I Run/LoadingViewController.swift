@@ -96,7 +96,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             //Fetching data from Google and parsing it
             if(networkStatus == NOT_REACHABLE ){
-                self.navigationController.popViewControllerAnimated(true)
+                self.navigationController?.popViewControllerAnimated(true)
             }else{
                 if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                     
@@ -195,7 +195,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!)  {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
         
         // On segue, stop animating
         spinner!.stopAnimating()

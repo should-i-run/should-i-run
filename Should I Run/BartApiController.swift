@@ -145,12 +145,17 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
             }
         }
         
-        // Sort the tuple array of termini and estimated arrival in ascending order
-        bartRouteResults.sort{$0.departureTime < $1.departureTime}
+        if bartRouteResults.count == 0 {
+            self.delegate?.handleError("BART connection failed")
+            
+        } else {
         
-        self.delegate?.didReceiveBartResults(bartRouteResults)
+            // Sort the Routes array by termini and estimated arrival in ascending order
+            bartRouteResults.sort{$0.departureTime < $1.departureTime}
+            
+            self.delegate?.didReceiveBartResults(bartRouteResults)
 
-        
+        }
     }
 }
     

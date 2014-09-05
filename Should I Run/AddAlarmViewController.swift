@@ -36,9 +36,11 @@ class AddAlarmViewController: UIViewController {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if sender.valueForKey("title") as NSString == "Save" {
-            self.setAlarm(sender)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let title = sender?.valueForKey("title") as? NSString {
+            if title == "save" {
+                self.setAlarm(sender!)
+            }
         }
     }
 }

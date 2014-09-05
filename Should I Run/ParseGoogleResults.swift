@@ -199,6 +199,7 @@ class ParseGoogleHelper {
     
     
     func getResultFromRoute(route: NSDictionary) -> Route? {
+
         if let legs = route.objectForKey("legs") as? [NSDictionary] {
             
             // for whatever reason legs is always an array with only one element
@@ -208,9 +209,10 @@ class ParseGoogleHelper {
                 // Why? because we don't want routes that involve more than one transit step before bart
                 // at most we're willing to consider a route that has a bus ride first
                 // this would put BART/MUNI at the fourth step: walking, bus, walking, BART
-                for var i = 1; i < steps.count && i < 4; ++i {
+                for var i = 0; i < steps.count && i < 4; ++i {
+                    
                     if let transit_details = steps[i].objectForKey("transit_details") as? NSDictionary {
-                        
+                    println("----------------------------- step---------------- \(steps[i])")
                         if let line:NSDictionary = transit_details.objectForKey("line") as? NSDictionary {
                             
                             if let agencies = line.objectForKey("agencies") as? NSArray {
@@ -220,9 +222,7 @@ class ParseGoogleHelper {
                                     if name == "Bay Area Rapid Transit" {
                                         return self.processBartResultFromStep(steps, index: i)
                                       
-                                    }
-                                    
-                                    if name == "San Francisco Municipal Transportation Agency" {
+                                    } else if name == "San Francisco Municipal Transportation Agency" {
                                         if let vehicle = line.objectForKey("vehicle") as? NSDictionary {
                                             
                                             if let type = vehicle.objectForKey("type") as? String {
@@ -231,12 +231,31 @@ class ParseGoogleHelper {
 
                                                     return self.processMuniResultFromStep(steps, index: i, line: line)
                                                 } else {
-                                                    return nil
-
+                                                    
+                                                    // here we can check that the bus directions aren't longer than a reasonable walking distance
+                                                    // if so, return nil: the distance is too far to walk, and the person will have to take a bus, 
+                                                    // and we don't support busses
+                                                    if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
+                                                        println("non tram muni directions are too long")
+                                                        if dist > 1500 {
+                                                            return nil
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                         
+                                    } else {
+                                        // some other transit agency. Here we're just doing the same distance check 
+                                        // to make sure we're not making the user walk too far
+                                        
+                                        
+                                        if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
+                                            println("transit directions are too long")
+                                            if dist > 1500 {
+                                                return nil
+                                            }
+                                        }
                                     }
                                 }
                             }

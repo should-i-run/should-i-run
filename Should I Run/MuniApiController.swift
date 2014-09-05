@@ -193,7 +193,7 @@ class MuniApiController: NSObject{
             self.delegate!.didReceiveMuniResults(muniRouteResults)
             
         } else {
-            self.delegate!.handleError("There was a problem getting MUNI results...")
+            self.delegate!.handleError("Couldn't find any Muni Light Rail directions...")
         }
     }
 }

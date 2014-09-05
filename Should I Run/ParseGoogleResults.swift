@@ -231,15 +231,8 @@ class ParseGoogleHelper {
 
                                                     return self.processMuniResultFromStep(steps, index: i, line: line)
                                                 } else {
-                                                    
-                                                    // here we can check that the bus directions aren't longer than a reasonable walking distance
-                                                    // if so, return nil: the distance is too far to walk, and the person will have to take a bus, 
-                                                    // and we don't support busses
-                                                    if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSString {
-                                                        if Int(dist) > 1500 {
-                                                            return nil
-                                                        }
-                                                    }
+                                                    return nil
+
                                                 }
                                             }
                                         }

@@ -237,7 +237,7 @@ class ParseGoogleHelper {
                                                     // and we don't support busses
                                                     if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
                                                         println("non tram muni directions are too long")
-                                                        if dist > 1500 {
+                                                        if dist > 2000 {
                                                             return nil
                                                         }
                                                     }
@@ -252,7 +252,7 @@ class ParseGoogleHelper {
                                         
                                         if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
                                             println("transit directions are too long")
-                                            if dist > 1500 {
+                                            if dist > 2000 {
                                                 return nil
                                             }
                                         }

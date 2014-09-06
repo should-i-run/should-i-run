@@ -10,9 +10,10 @@ import UIKit
 
 import MapKit
 
-class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UITextFieldDelegate {
-
-    @IBOutlet var textField : UITextField?
+class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UISearchBarDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
 
     var lat: Float = 0.00
     var lng: Float = 0.00
@@ -39,11 +40,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.textField!.delegate = self;
-        self.textField!.returnKeyType = UIReturnKeyType.Go
-
-        // Navigation and background colors
-        //        self.navigationController.navigationBar.barTintColor = globalNavigationBarColor
+        self.searchBar.delegate = self;
+        
         self.navigationController?.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
         self.navigationController?.navigationBar.barStyle = globalBarStyle
@@ -69,18 +67,23 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
     }
+    
+    func geocodeAddress(sender: AnyObject) {
 
-    @IBAction func geocodeAddress(sender: AnyObject) {
-
-        self.textField?.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         var currentRegion = CLCircularRegion(circularRegionWithCenter: self.locationManager.currentLocation2d!, radius: 1000.0, identifier: nil)
-        geocoder.geocodeAddressString(textField?.text, inRegion: currentRegion, completionHandler:{
+        geocoder.geocodeAddressString(searchBar.text, inRegion: currentRegion, completionHandler:{
             (response: Array?, error: NSError!) -> Void in
 
             var marker:MKPointAnnotation = MKPointAnnotation()
 
             if let res = response? {
+                //get the location for the address and save it
                 var resultsLocation = (res[0] as CLPlacemark).location
+                self.lat = Float(resultsLocation.coordinate.latitude)
+                self.lng = Float(resultsLocation.coordinate.longitude)
+                
+                //set the map view to show the current location and this address
                 var distanceBetweenPoints = resultsLocation.distanceFromLocation(self.locationManager.currentLocation)
 
                 let mapCenterlatitude = (resultsLocation.coordinate.latitude + self.locationManager.currentLocation2d!.latitude)/2
@@ -104,7 +107,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     @IBAction func tapOnMap(sender: UIGestureRecognizer) {
-        self.textField?.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
 
         var tapLocation: CGPoint = sender.locationInView(self.mapView)
         var geographicLocaction = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
@@ -119,7 +122,17 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         geocoder.reverseGeocodeLocation(touchCLLLocation, completionHandler: {
             (response: [AnyObject]!, error: NSError!) -> Void in
                 if(response.count > 0){
-                    self.textField!.text = "\(response[0].subThoroughfare) \(response[0].thoroughfare), \(response[0].locality)"
+                    
+                    var text = response[0].locality
+                
+
+                    if response[0].thoroughfare? != nil   {
+                        text = "\(response[0].thoroughfare), " + text
+                    }
+                    if response[0].subThoroughfare? != nil  {
+                        text = "\(response[0].subThoroughfare) " + text
+                    }
+                    self.searchBar.text = text
                 }
             })
 
@@ -142,7 +155,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             message.show()
             return false
         }
-        if self.textField!.text == "" {
+        if self.searchBar.text == "" {
             var message: UIAlertView = UIAlertView(title: "Location", message: "Please add a destination", delegate: nil, cancelButtonTitle: "Ok")
             message.show()
             return false
@@ -176,23 +189,15 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
 
-        self.destinationNameAlertView!.textFieldAtIndex(0)?.delegate = self
-
         self.destinationNameAlertView!.show()
     }
-
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
-
-        if(textField.tag == 1){
-            self.geocodeAddress(textField)
-        }else{
-            destinationNameAlertView!.dismissWithClickedButtonIndex(1, animated: true)
-        }
-
-
-
-        return true
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.geocodeAddress(searchBar)
+        
     }
+
+
 
     override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
         //loc is locations plist as an array

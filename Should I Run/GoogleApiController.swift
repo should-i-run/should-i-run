@@ -74,7 +74,6 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     // Cancel the Google API connection (on timeout)
     func cancelConnection() {
-        println("cancelling Google API request")
         self.currentGoogleConnection?.cancel()
     }
     

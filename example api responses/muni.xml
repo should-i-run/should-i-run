@@ -1,0 +1,50 @@
+<RTT>
+<AgencyList>
+<Agency Name="SF-MUNI" HasDirection="True" Mode="Bus">
+<RouteList>
+<Route Name="N-Judah" Code="N">
+<RouteDirectionList>
+<RouteDirection Code="Outbound" Name="Outbound to Ocean Beach via Downtown">...</RouteDirection>
+<RouteDirection Code="Inbound" Name="Inbound to Caltrain via Downtown">...</RouteDirection>
+</RouteDirectionList>
+</Route>
+<Route Name="N-Owl" Code="N_OWL">
+<RouteDirectionList>
+<RouteDirection Code="Outbound" Name="Outbound to Ocean Beach">
+<StopList>
+<Stop name="Judah St and 46th Ave" StopCode="15215">
+<DepartureTimeList/>
+</Stop>
+</StopList>
+</RouteDirection>
+<RouteDirection Code="Inbound" Name="Inbound to Ocean Beach">
+<StopList>
+<Stop name="Judah St and 46th Ave" StopCode="15216">
+<DepartureTimeList/>
+</Stop>
+</StopList>
+</RouteDirection>
+</RouteDirectionList>
+</Route>
+<Route Name="NX-N Express" Code="NX">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Downtown">
+<StopList>
+<Stop name="Judah St and 46th Ave" StopCode="15216">
+<DepartureTimeList/>
+</Stop>
+</StopList>
+</RouteDirection>
+<RouteDirection Code="Outbound" Name="Outbound to Judah Ocean Beach">
+<StopList>
+<Stop name="Judah St and 46th Ave" StopCode="15215">
+<DepartureTimeList/>
+</Stop>
+</StopList>
+</RouteDirection>
+</RouteDirectionList>
+</Route>
+</RouteList>
+</Agency>
+</AgencyList>
+</RTT>

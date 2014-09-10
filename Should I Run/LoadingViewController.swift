@@ -59,7 +59,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         spinner!.startAnimating()
         
         // Set background color
-        self.view.backgroundColor = globalBackgroundColor
+        self.view.backgroundColor = colorize(0x068F86)
         
         //get the internet going
         self.internetReachability.connectionRequired()

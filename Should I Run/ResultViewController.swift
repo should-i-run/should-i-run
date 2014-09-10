@@ -78,6 +78,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.view.backgroundColor = globalBackgroundColor
         
         self.walkingDirectionsManager.delegate = self
         
@@ -141,7 +142,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.instructionLabel!.text = "Nah, take it easy"
             self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
-            let walkUIColor = colorize(0x90D4D4)
+            let walkUIColor = colorize(0x6FD57F)
             
             self.resultArea!.backgroundColor = walkUIColor
             
@@ -150,7 +151,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             
         } else {
             
-            let runUIColor = colorize(0xF05A28)
+            let runUIColor = colorize(0xFC5B3F)
             self.resultArea!.backgroundColor = runUIColor
             
             self.instructionLabel!.text = "Run!"

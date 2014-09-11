@@ -20,7 +20,7 @@ func colorize (hex: Int, alpha: Double = 1.0) -> UIColor {
 }
 
 // Background color of view controllers
-let globalBackgroundColor: UIColor = colorize(0x646464, alpha: 1.0)
+let globalBackgroundColor: UIColor = colorize(0x000000, alpha: 1.0)
 let globalNavigationBarColor: UIColor = UIColor.blackColor()
 let globalTintColor: UIColor = UIColor.whiteColor()
 let globalBarStyle: UIBarStyle = UIBarStyle.BlackTranslucent

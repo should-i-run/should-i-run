@@ -97,7 +97,8 @@ import Foundation
             
 
             
-            cell.textLabel?.text = "add destination"
+            cell.textLabel?.text = "add a destination"
+            cell.textLabel?.font = UIFont(name: "HelveticaNeue-LightItalic", size: 36)
             cell.backgroundColor = self.colors[4]
             cell.accessoryType = UITableViewCellAccessoryType.None
             

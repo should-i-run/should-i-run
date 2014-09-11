@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H3J-Mj-aFw">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -268,7 +269,7 @@
                                             <constraint firstItem="2f1-7V-QXh" firstAttribute="leading" secondItem="rRS-un-cKv" secondAttribute="trailing" constant="8" id="EnC-pj-D5g"/>
                                             <constraint firstItem="rRS-un-cKv" firstAttribute="trailing" secondItem="rbf-ts-B4g" secondAttribute="trailing" id="G1t-e2-0lQ"/>
                                             <constraint firstItem="qlH-FH-Xqs" firstAttribute="top" secondItem="GCm-oj-xbF" secondAttribute="top" constant="12" id="ITX-8t-xyQ"/>
-                                            <constraint firstItem="qlH-FH-Xqs" firstAttribute="leading" secondItem="GCm-oj-xbF" secondAttribute="leading" constant="56" id="SWc-hh-Wm1"/>
+                                            <constraint firstItem="qlH-FH-Xqs" firstAttribute="trailing" secondItem="GCm-oj-xbF" secondAttribute="leading" constant="66" id="SWc-hh-Wm1"/>
                                             <constraint firstItem="9ph-3c-53d" firstAttribute="centerY" secondItem="Ln9-0H-tPC" secondAttribute="centerY" id="SZo-ka-u7s"/>
                                             <constraint firstItem="YNz-e1-zim" firstAttribute="centerY" secondItem="rbf-ts-B4g" secondAttribute="centerY" id="TsO-9H-VsW"/>
                                             <constraint firstItem="rRS-un-cKv" firstAttribute="trailing" secondItem="Ln9-0H-tPC" secondAttribute="trailing" id="VLT-DU-CmX"/>

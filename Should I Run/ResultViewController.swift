@@ -13,7 +13,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     let locationManager = SharedUserLocation
     
-    var firstRun:Bool = false
+//    var firstRun:Bool = false
     
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
@@ -27,11 +27,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     
     var distanceToOrigin:Int?
-
-    var departures:[(String, Int)] = []
-
-    
-
     
     //alarm
     var alarmTime = 0
@@ -134,6 +129,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 }
             }
         }
+        
+        // if there is no viable route, error
+        if self.currentBestRoute == nil {
+            self.handleError("sorry, couldn't find any routes")
+        }
 
         
         //result area things
@@ -191,18 +191,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         
         //timer Labels
-        if !firstRun {
-          
-            // time for the next train
-            self.timeToNextTrainLabel!.text = String(self.currentBestRoute!.departureTime!)
-            self.secondsToNextTrainLabel!.text = ":00"
-            
-            //time for the following departure time
-            self.followingDepartureLabel!.text = "\(self.currentSecondRoute!.departureTime!)"
-            self.followingDepartureSecondsLabel!.text = ":00"
-            
-            firstRun = true
-        }
+        
+        // time for the next train
+        self.timeToNextTrainLabel!.text = String(self.currentBestRoute!.departureTime!)
+        self.secondsToNextTrainLabel!.text = ":00"
+        
+        //time for the following departure time
+        self.followingDepartureLabel!.text = "\(self.currentSecondRoute!.departureTime!)"
+        self.followingDepartureSecondsLabel!.text = ":00"
+
         
         //following destination station name label
         if self.currentSecondRoute!.agency == "bart" {
@@ -229,22 +226,17 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     func handleWalkingDistance(distance:Int){
         self.distanceToOrigin = distance
+        
         self.displayResults()
         
     }
     
     func segueOfSeconds(timer: NSTimer) {
         //countdown for the next train
-//        var temp = self.secondsToNextTrainLabel?.text?
-        
-        
-//        var tempString = self.secondsToNextTrainLabel?.text?
-//        tempString = tempString?.substringFromIndex(1)
-//        var currentSeconds:Int = tempString.integerValue
+
         
         
         if self.currentSeconds == 0 {
-//            var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
             self.currentMinutes--
             self.followingCurrentMinutes--
             
@@ -268,28 +260,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
         }
         
-        //countdown for the following train
-//        tempString  = self.followingDepartureSecondsLabel.text
-//        tempString = tempString.substringFromIndex(1)
-//        var followingSeconds:Int = tempString.integerValue
-//        
-//        if self.currentSeconds == 0 {
-//            var followingMinutes:Int = self.followingDepartureLabel!.text.toInt()!
-//            followingMinutes--
-//            followingSeconds = 59
-//            self.followingDepartureLabel!.text = String(followingMinutes)
-//        } else {
-//            followingSeconds--
-//        }
-//        if followingSeconds < 10 {
-//            self.followingDepartureSecondsLabel!.text = ":0" + String(followingSeconds)
-//        } else {
-//            self.followingDepartureSecondsLabel!.text = ":" + String(followingSeconds)
-//        }
-        
     }
     
-    @IBAction func returnToRoot(sender: UIButton) {
+    @IBAction func returnToRoot(sender: UIButton?) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
@@ -301,6 +274,23 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             dest.walkTime = self.alarmTime
         }
 
+    }
+    
+    // Error handling-----------------------------------------------------
+    
+    
+    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
+    // It performs the unwind segue when done.
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
+        self.returnToRoot(nil)
+    }
+    
+    func handleError(errorMessage: String) {
+        // Create and show error message
+        // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
+        var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        message.show()
+        
     }
     
 }

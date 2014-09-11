@@ -79,7 +79,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
         
-        displayResults()
+//        displayResults()
+        self.updateResults(nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -214,12 +215,17 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     
-    func updateResults(timer: NSTimer){
+    func updateResults(timer: NSTimer?){
         
         //call entire reload of display in this function
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+        
+        if self.currentBestRoute != nil {
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
+        } else {
+             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+        }
 
-        self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
 
 
     }

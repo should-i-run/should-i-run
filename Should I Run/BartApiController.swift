@@ -129,7 +129,7 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
                                 let departureTimeDict = estimateItem["minutes"] as NSDictionary
                                 let departureTimeString = departureTimeDict.valueForKey("text") as NSString
                                 let departureTime = departureTimeString.integerValue
-                                let trainTime:Double = NSTimeIntervalSince1970 + NSTimeInterval(departureTime * 60)
+                                let trainTime:Double = NSDate.timeIntervalSinceReferenceDate() + NSTimeInterval(departureTime * 60)
 
                                 
 

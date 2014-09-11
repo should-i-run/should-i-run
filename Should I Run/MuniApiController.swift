@@ -174,7 +174,7 @@ class MuniApiController: NSObject{
                                             let lineName = "\(datum.lineCode!)—\(datum.lineName)"
                                             
                                             let departureTime = trimmedText.toInt()!
-                                            let trainTime:Double = NSTimeIntervalSince1970 + NSTimeInterval(departureTime * 60)
+                                            let trainTime:Double = NSDate.timeIntervalSinceReferenceDate() + NSTimeInterval(departureTime * 60)
 
                                             
                                             var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: trainTime, lineCode: datum.lineCode)

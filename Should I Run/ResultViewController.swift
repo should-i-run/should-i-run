@@ -25,6 +25,10 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var currentBestRoute:Route?
     var currentSecondRoute:Route?
     
+    var currentSeconds = 0
+    var currentMinutes = 0
+    var followingCurrentMinutes = 0
+    
     
     var distanceToOrigin:Int?
     
@@ -65,9 +69,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var secondTimer: NSTimer = NSTimer()
     
     var updateResultTimer : NSTimer = NSTimer()
-    var currentSeconds = 0
-    var currentMinutes = 0
-    var followingCurrentMinutes = 0
     
     
     override func viewDidLoad() {
@@ -77,7 +78,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         self.walkingDirectionsManager.delegate = self
         
-        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
+        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
         
 //        displayResults()
         self.updateResults(nil)
@@ -116,17 +117,18 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
                 runningTime = (distanceToStation/runningSpeed) + self.stationTime
                 
-                let departingIn: Int = (route.departureTime! - NSTimeIntervalSince1970) * 60
+                let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
                 
                 if departingIn > runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     self.currentBestRoute = route
-                    self.currentMinutes = route.departureTime!
+                    self.currentMinutes = departingIn
+                    self.currentSeconds = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
                     
                     //set the following route if there is one
                     if i + 1 < self.resultsRoutes.count {
                         self.currentSecondRoute = self.resultsRoutes[i + 1]
-                        self.followingCurrentMinutes = self.resultsRoutes[i + 1].departureTime!
+                        self.followingCurrentMinutes = Int(self.resultsRoutes[i + 1].departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
 
                     }
                 }
@@ -141,7 +143,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         //result area things
         // run or not?
-        if self.currentBestRoute!.departureTime! >= walkingTime {
+        if self.currentMinutes >= walkingTime {
             self.instructionLabel!.text = "Nah, take it easy"
             self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
@@ -150,7 +152,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.resultArea!.backgroundColor = walkUIColor
             
             self.alarmButton!.hidden = false
-            self.alarmTime = self.currentBestRoute!.departureTime! - walkingTime
+            self.alarmTime = self.currentMinutes - walkingTime
             
         } else {
             
@@ -194,14 +196,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         
         //timer Labels
-        
-        // time for the next train
-        self.timeToNextTrainLabel!.text = String(self.currentBestRoute!.departureTime!)
-        self.secondsToNextTrainLabel!.text = ":00"
-        
-        //time for the following departure time
-        self.followingDepartureLabel!.text = "\(self.currentSecondRoute!.departureTime!)"
-        self.followingDepartureSecondsLabel!.text = ":00"
+        self.updateTimes(nil)
 
         
         //following destination station name label
@@ -239,27 +234,18 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
     }
     
-    func segueOfSeconds(timer: NSTimer) {
+    func updateTimes(timer: NSTimer?) {
         //countdown for the next train
 
+        self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
         
+        self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
         
-        if self.currentSeconds == 0 {
-            self.currentMinutes--
-            self.followingCurrentMinutes--
-            
-            if self.currentMinutes == 0 {
-                self.currentSeconds = 0
-            } else {
-                self.currentSeconds = 59
-            }
-            
-            self.timeToNextTrainLabel!.text = String(currentMinutes)
-            self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
-            
-        } else {
-            self.currentSeconds--
-        }
+        self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+
+        self.timeToNextTrainLabel!.text = String(currentMinutes)
+        self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
+        
         if self.currentSeconds < 10 {
             self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
             self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)

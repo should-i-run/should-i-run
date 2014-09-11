@@ -126,14 +126,16 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
                             }
                             
                             for estimateItem in estimateList as [AnyObject] {
-                                var departureTimeDict = estimateItem["minutes"] as NSDictionary
-                                var departureTimeString = departureTimeDict.valueForKey("text") as NSString
-                                var departureTime = departureTimeString.integerValue
+                                let departureTimeDict = estimateItem["minutes"] as NSDictionary
+                                let departureTimeString = departureTimeDict.valueForKey("text") as NSString
+                                let departureTime = departureTimeString.integerValue
+                                let trainTime:Double = NSTimeIntervalSince1970 + NSTimeInterval(departureTime * 60)
+
                                 
 
                                 
                                 // Create the terminus and estimated arrival tuple and push into our results
-                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: datum.originStationName, lineName: datum.lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: nil)
+                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: datum.originStationName, lineName: datum.lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: trainTime, lineCode: nil)
                                 bartRouteResults.append(thisResult)
                             }
 

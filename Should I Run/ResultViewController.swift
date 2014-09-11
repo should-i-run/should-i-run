@@ -116,7 +116,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
                 runningTime = (distanceToStation/runningSpeed) + self.stationTime
                 
-                if route.departureTime > runningTime { //if time to departure is less than time to get to station
+                let departingIn: Int = (route.departureTime! - NSTimeIntervalSince1970) * 60
+                
+                if departingIn > runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     self.currentBestRoute = route
                     self.currentMinutes = route.departureTime!

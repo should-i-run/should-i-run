@@ -74,7 +74,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         self.walkingDirectionsManager.delegate = self
         
-        self.updateResults(nil)
+        self.updateWalkingDistance(nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -208,9 +208,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     
-    func updateResults(timer: NSTimer?){
+    func updateWalkingDistance(timer: NSTimer?){
         
-        //call entire reload of display in this function
+        //in the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
+        if self.locationManager.currentLocation2d == nil {
+            return
+        }
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
         if self.currentBestRoute != nil {

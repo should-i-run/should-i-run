@@ -78,12 +78,14 @@ class MuniApiController: NSObject{
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbound", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtown", withString: " Inbound")
         
         // build up url
         let baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
         let escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         //stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let url = NSURL(string: baseUrl + escapedStationName!)
+        println(url)
         
         var request = NSURLRequest(URL: url)
         
@@ -95,7 +97,6 @@ class MuniApiController: NSObject{
     }
     
     func processMuniData(rawMuniXML:NSData, data: [Route]){
-        println(data[0])
         
         var muniRouteResults = [Route]()
         
@@ -107,6 +108,8 @@ class MuniApiController: NSObject{
         
         
         let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
+        
+        println(parsedXML)
         
         
         

@@ -95,6 +95,7 @@ class MuniApiController: NSObject{
     }
     
     func processMuniData(rawMuniXML:NSData, data: [Route]){
+        println(data[0])
         
         var muniRouteResults = [Route]()
         
@@ -128,13 +129,23 @@ class MuniApiController: NSObject{
             
             for route in routesArray {
                 
-                
                 for datum in data {
+
                     if route.objectForKey("Code") as? String == datum.lineCode {
                         
-                        if let routeDirections = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSArray {
+                        var routeDirections:NSArray?
+                        
+                        if let routeDirectionsArray = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSArray  {
+                            routeDirections = routeDirectionsArray
                             
-                            for direction in routeDirections {
+                        } else if let routeDirectionsDictionary = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSDictionary  {
+                            routeDirections = [routeDirectionsDictionary]
+                        }
+                        
+                        if routeDirections != nil {
+                            
+                            for direction in routeDirections! {
+
                                 let directionName = direction.objectForKey("Name") as String
                                 var shortName1 = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
                                 var shortName2 = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
@@ -143,7 +154,6 @@ class MuniApiController: NSObject{
 
                                     
                                     if let departureTimeList  = direction.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
-                                        
                                         
                                         //what's left should be an array of departure times or a dictionary of a single time
                                         var departureTimesArray:[NSDictionary] = []
@@ -154,12 +164,12 @@ class MuniApiController: NSObject{
                                         } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
                                             departureTimesArray.append(temp)
                                         }
-                                        println("6")
-                                        
-                                        
+
                                         for departureTime in departureTimesArray {
                                             let text = departureTime.objectForKey("text") as String
+
                                             let trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+
                                             
                                             
                                             
@@ -188,6 +198,11 @@ class MuniApiController: NSObject{
                     }
                 }
                 
+            }
+            
+            if muniRouteResults.count == 0 {
+                self.delegate!.handleError("Couldn't find any Muni Light Rail directions...")
+                return
             }
             
             muniRouteResults.sort{$0.departureTime < $1.departureTime}

@@ -85,7 +85,6 @@ class MuniApiController: NSObject{
         let escapedStationName = muniOriginStationName.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         //stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let url = NSURL(string: baseUrl + escapedStationName!)
-        println(url)
         
         var request = NSURLRequest(URL: url)
         
@@ -109,16 +108,11 @@ class MuniApiController: NSObject{
         
         let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
-        println(parsedXML)
-        
-        
-        
         // Trim off unneeded headers
         if let routes: NSDictionary = parsedXML.objectForKey("RTT")?.objectForKey("AgencyList")?.objectForKey("Agency")?.objectForKey("RouteList")? as? NSDictionary {
             
             //what's left should be an array of routes, but we'll check just in case
             var routesArray:[NSDictionary] = []
-            
             
             if let temp:[NSDictionary] = routes.objectForKey("Route") as? [NSDictionary] {
                 routesArray += temp

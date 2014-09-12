@@ -27,7 +27,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     var currentSeconds = 0
     var currentMinutes = 0
-    var followingCurrentMinutes = 0
+    var followingCurrentMinutes:Int? = 0
     
     
     var distanceToOrigin:Int?
@@ -199,14 +199,18 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
 
         
         //following destination station name label
-        if self.currentSecondRoute!.agency == "bart" {
-            if let followingDestinationStation = bartLookupReverse[self.currentSecondRoute!.eolStationName.lowercaseString] {
-                self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
-            } else {
-                self.followingDepartureDestinationLabel.text = "towards \(self.currentSecondRoute!.eolStationName)"
+        if let following:Route = self.currentSecondRoute {
+            if following.agency == "bart" {
+                if let followingDestinationStation = bartLookupReverse[following.eolStationName.lowercaseString] {
+                    self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
+                } else {
+                    self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
+                }
+            } else if following.agency == "muni" {
+                self.followingDepartureDestinationLabel.text = "\(following.lineName) / \(following.eolStationName)"
             }
-        } else if self.currentSecondRoute!.agency == "muni" {
-            self.followingDepartureDestinationLabel.text = "\(self.currentSecondRoute!.lineName) / \(self.currentSecondRoute!.eolStationName)"
+        } else {
+            self.followingDepartureDestinationLabel.text = "----"
         }
         
         self.followingDepartureDestinationLabel.adjustsFontSizeToFitWidth = true
@@ -245,10 +249,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             
             self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
             
-            self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+            if self.currentSecondRoute != nil {
+                self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                self.followingDepartureLabel.text = String(self.followingCurrentMinutes!)
+            } else {
+                self.followingDepartureLabel.text = "--"
+            }
+            
 
             self.timeToNextTrainLabel.text = String(currentMinutes)
-            self.followingDepartureLabel.text = String(self.followingCurrentMinutes)
             
             if self.currentSeconds < 10 {
                 self.secondsToNextTrainLabel.text = ":0" + String(currentSeconds)

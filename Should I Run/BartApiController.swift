@@ -67,14 +67,22 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     }
     
     func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){
-        if let err = error? {
+        
+        if error != nil {
+            self.delegate?.handleError("BART connection failed")
+            return
+        }
+
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        let html: String? = NSString(data: data!, encoding: NSUTF8StringEncoding)
+
+        if html == nil {
             self.delegate?.handleError("BART connection failed")
             return
         }
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        
-        let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
         let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
         // Trim off unneeded data inside the dictionary
@@ -126,14 +134,16 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
                             }
                             
                             for estimateItem in estimateList as [AnyObject] {
-                                var departureTimeDict = estimateItem["minutes"] as NSDictionary
-                                var departureTimeString = departureTimeDict.valueForKey("text") as NSString
-                                var departureTime = departureTimeString.integerValue
+                                let departureTimeDict = estimateItem["minutes"] as NSDictionary
+                                let departureTimeString = departureTimeDict.valueForKey("text") as NSString
+                                let departureTime = departureTimeString.integerValue
+                                let trainTime:Double = NSDate.timeIntervalSinceReferenceDate() + NSTimeInterval(departureTime * 60)
+
                                 
 
                                 
                                 // Create the terminus and estimated arrival tuple and push into our results
-                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: datum.originStationName, lineName: datum.lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: nil)
+                                var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: datum.originStationName, lineName: datum.lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: trainTime, lineCode: nil)
                                 bartRouteResults.append(thisResult)
                             }
 

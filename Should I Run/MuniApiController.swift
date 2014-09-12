@@ -158,11 +158,11 @@ class MuniApiController: NSObject{
                                         
                                         
                                         for departureTime in departureTimesArray {
-                                            var text = departureTime.objectForKey("text") as String
-                                            var trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                                            let text = departureTime.objectForKey("text") as String
+                                            let trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                                             
                                             
-                                            var departureTime = trimmedText.toInt()!
+                                            
                                             
                                             var muniOriginStationName = datum.originStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
                                             muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
@@ -171,10 +171,13 @@ class MuniApiController: NSObject{
                                             
                                             
                                             
-                                            var lineName = "\(datum.lineCode!)—\(datum.lineName)"
+                                            let lineName = "\(datum.lineCode!)—\(datum.lineName)"
                                             
+                                            let departureTime = trimmedText.toInt()!
+                                            let trainTime:Double = NSDate.timeIntervalSinceReferenceDate() + NSTimeInterval(departureTime * 60)
+
                                             
-                                            var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: departureTime, lineCode: datum.lineCode)
+                                            var thisResult = Route(distanceToStation: datum.distanceToStation, originStationName: muniOriginStationName, lineName: lineName, eolStationName: datum.eolStationName, originCoord2d: datum.originLatLon, agency: datum.agency, departureTime: trainTime, lineCode: datum.lineCode)
                                             muniRouteResults.append(thisResult)
                                         }
                                     }

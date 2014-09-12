@@ -13,11 +13,12 @@ import Foundation
 @objc (MainTableViewController) class MainTableViewController: UITableViewController {
     
 
-    var colors:Array<UIColor> = []
+    var colors = [UIColor]()
 
     var locName:String = ""
     var locLat:Float = 0.0
     var locLong:Float = 0.0
+    var colorForChosenLocation = UIColor()
     
     let fileManager = SharedFileManager
     
@@ -26,16 +27,12 @@ import Foundation
       
         super.viewDidLoad()
         
-        //setting color scheme
-        self.colors.append(UIColor(red: CGFloat(239.0/255), green: CGFloat(201.0/255), blue: CGFloat(76.0/255), alpha: CGFloat(1.0)))
-        self.colors.append(UIColor(red: CGFloat(69.0/255), green: CGFloat(178.0/255), blue: CGFloat(157.0/255), alpha: CGFloat(1.0)))
-        self.colors.append(UIColor(red: CGFloat(223.0/255), green: CGFloat(73.0/255), blue: CGFloat(73.0/255), alpha: CGFloat(1.0)))
-        self.colors.append(UIColor(red: CGFloat(226.0/255), green: CGFloat(122.0/255), blue: CGFloat(63.0/255), alpha: CGFloat(1.0)))
-        self.colors.append(UIColor(red: CGFloat(51.0/255), green: CGFloat(77.0/255), blue: CGFloat(92.0/255), alpha: CGFloat(1.0)))
-        
-
-        // uncomment this line to get the edit button back
-        // self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        //setting color scheme: https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/
+        self.colors.append(colorize(0xFC5B3F))
+        self.colors.append(colorize(0xFCB03C))
+        self.colors.append(colorize(0x6FD57F))
+        self.colors.append(colorize(0x068F86))
+        self.colors.append(colorize(0x1A4F63))
         
         // Navigation and background colors
         self.navigationController?.navigationBar.tintColor = globalTintColor
@@ -101,7 +98,8 @@ import Foundation
             
 
             
-            cell.textLabel?.text = "Add Destination"
+            cell.textLabel?.text = "add a destination"
+//            cell.textLabel?.font = UIFont(name: "HelveticaNeue-LightItalic", size: 36)
             cell.backgroundColor = self.colors[4]
             cell.accessoryType = UITableViewCellAccessoryType.None
             
@@ -139,6 +137,7 @@ import Foundation
             self.locName = locationSelected["name"] as NSString
             self.locLat = locationSelected["latitude"] as Float
             self.locLong = locationSelected["longitude"] as Float
+            self.colorForChosenLocation = self.colors[row]
 
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
 
@@ -166,6 +165,8 @@ import Foundation
             //37.784923, -122.408396
             dest.destinationLatitude = self.locLat
             dest.destinationLongitude = self.locLong
+            
+            dest.backgroundColor = self.colorForChosenLocation
             
             
         }

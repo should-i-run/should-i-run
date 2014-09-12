@@ -13,7 +13,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     let locationManager = SharedUserLocation
     
-    var firstRun:Bool = false
+//    var firstRun:Bool = false
     
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
@@ -25,13 +25,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var currentBestRoute:Route?
     var currentSecondRoute:Route?
     
+    var currentSeconds = 0
+    var currentMinutes = 0
+    var followingCurrentMinutes = 0
+    
     
     var distanceToOrigin:Int?
-
-    var departures:[(String, Int)] = []
-
-    
-
     
     //alarm
     var alarmTime = 0
@@ -42,9 +41,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     @IBOutlet var instructionLabel: UILabel?
     @IBOutlet var alarmButton: UIButton?
     
-    //    @IBOutlet weak var backButton: UIBarButtonItem!
-    
-    
     //detial area things
     @IBOutlet var timeToNextTrainLabel: UILabel?
     @IBOutlet var distanceToStationLabel: UILabel?
@@ -54,45 +50,42 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     @IBOutlet var timeRunningLabel: UILabel?
     @IBOutlet var timeWalkingLabel: UILabel?
-    
-    
     @IBOutlet var secondsToNextTrainLabel: UILabel?
     
     //following departure area things
     @IBOutlet var followingDepartureLabel: UILabel?
     @IBOutlet var followingDepartureDestinationLabel: UILabel?
-    
-    //    @IBOutlet var followingDepartureSecondsLabel: UILabel!
-    
     @IBOutlet var followingDepartureSecondsLabel: UILabel?
     
     
     var secondTimer: NSTimer = NSTimer()
-    
     var updateResultTimer : NSTimer = NSTimer()
-    var currentSeconds = 0
-    var currentMinutes = 0
-    var followingCurrentMinutes = 0
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.view.backgroundColor = globalBackgroundColor
+        
+        self.instructionLabel!.hidden = true
+        self.alarmButton!.hidden = true
+        
+        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
         
         self.walkingDirectionsManager.delegate = self
         
-        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("segueOfSeconds:"), userInfo: nil, repeats: true)
-        
-        displayResults()
+        self.updateResults(nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
 
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.updateResultTimer.invalidate()
+        self.secondTimer.invalidate()
 
     }
     
@@ -119,42 +112,51 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
                 runningTime = (distanceToStation/runningSpeed) + self.stationTime
                 
-                if route.departureTime > runningTime { //if time to departure is less than time to get to station
+                let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                
+                if departingIn > runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     self.currentBestRoute = route
-                    self.currentMinutes = route.departureTime!
+                    self.currentMinutes = departingIn
+                    self.currentSeconds = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
                     
                     //set the following route if there is one
                     if i + 1 < self.resultsRoutes.count {
                         self.currentSecondRoute = self.resultsRoutes[i + 1]
-                        self.followingCurrentMinutes = self.resultsRoutes[i + 1].departureTime!
+                        self.followingCurrentMinutes = Int(self.resultsRoutes[i + 1].departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
 
                     }
                 }
             }
         }
-
+        
+        // if there is no viable route, error
+        if self.currentBestRoute == nil {
+            self.handleError("sorry, couldn't find any routes")
+        }
+        
         
         //result area things
         // run or not?
-        if self.currentBestRoute!.departureTime! >= walkingTime {
+        if self.currentMinutes >= walkingTime {
+            self.instructionLabel!.hidden = false
             self.instructionLabel!.text = "Nah, take it easy"
             self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
-            let walkUIColor = colorize(0x90D4D4)
+            let walkUIColor = colorize(0x6FD57F)
             
             self.resultArea!.backgroundColor = walkUIColor
             
             self.alarmButton!.hidden = false
-            self.alarmTime = self.currentBestRoute!.departureTime! - walkingTime
+            self.alarmTime = self.currentMinutes - walkingTime
             
         } else {
-            
-            let runUIColor = colorize(0xF05A28)
+            self.instructionLabel!.hidden = false
+            let runUIColor = colorize(0xFC5B3F)
             self.resultArea!.backgroundColor = runUIColor
             
             self.instructionLabel!.text = "Run!"
-            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
+            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
             self.alarmButton!.hidden = true
             
         }
@@ -190,18 +192,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         
         //timer Labels
-        if !firstRun {
-          
-            // time for the next train
-            self.timeToNextTrainLabel!.text = String(self.currentBestRoute!.departureTime!)
-            self.secondsToNextTrainLabel!.text = ":00"
-            
-            //time for the following departure time
-            self.followingDepartureLabel!.text = "\(self.currentSecondRoute!.departureTime!)"
-            self.followingDepartureSecondsLabel!.text = ":00"
-            
-            firstRun = true
-        }
+        self.updateTimes(nil)
+
         
         //following destination station name label
         if self.currentSecondRoute!.agency == "bart" {
@@ -216,12 +208,17 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     
-    func updateResults(timer: NSTimer){
+    func updateResults(timer: NSTimer?){
         
         //call entire reload of display in this function
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+        
+        if self.currentBestRoute != nil {
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
+        } else {
+             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+        }
 
-        self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
 
 
     }
@@ -232,63 +229,36 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
     }
     
-    func segueOfSeconds(timer: NSTimer) {
-        //countdown for the next train
-//        var temp = self.secondsToNextTrainLabel?.text?
-        
-        
-//        var tempString = self.secondsToNextTrainLabel?.text?
-//        tempString = tempString?.substringFromIndex(1)
-//        var currentSeconds:Int = tempString.integerValue
-        
-        
-        if self.currentSeconds == 0 {
-//            var currentMinutes:Int = self.timeToNextTrainLabel!.text.toInt()!
-            self.currentMinutes--
-            self.followingCurrentMinutes--
+    func updateTimes(timer: NSTimer?) {
+
+        if self.currentBestRoute != nil {
+            self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
             
-            if self.currentMinutes == 0 {
-                self.currentSeconds = 0
-            } else {
-                self.currentSeconds = 59
-            }
+            self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
             
+            self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+
             self.timeToNextTrainLabel!.text = String(currentMinutes)
             self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
             
+            if self.currentSeconds < 10 {
+                self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
+                self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)
+            } else {
+                self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
+                self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
+            }
         } else {
-            self.currentSeconds--
+            self.timeToNextTrainLabel!.text = "-"
+            self.followingDepartureLabel!.text = "-"
+            self.secondsToNextTrainLabel!.text = ":--"
+            self.followingDepartureSecondsLabel!.text = ":--"
+            
         }
-        if self.currentSeconds < 10 {
-            self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
-            self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)
-        } else {
-            self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
-            self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
-        }
-        
-        //countdown for the following train
-//        tempString  = self.followingDepartureSecondsLabel.text
-//        tempString = tempString.substringFromIndex(1)
-//        var followingSeconds:Int = tempString.integerValue
-//        
-//        if self.currentSeconds == 0 {
-//            var followingMinutes:Int = self.followingDepartureLabel!.text.toInt()!
-//            followingMinutes--
-//            followingSeconds = 59
-//            self.followingDepartureLabel!.text = String(followingMinutes)
-//        } else {
-//            followingSeconds--
-//        }
-//        if followingSeconds < 10 {
-//            self.followingDepartureSecondsLabel!.text = ":0" + String(followingSeconds)
-//        } else {
-//            self.followingDepartureSecondsLabel!.text = ":" + String(followingSeconds)
-//        }
         
     }
     
-    @IBAction func returnToRoot(sender: UIButton) {
+    @IBAction func returnToRoot(sender: UIButton?) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
@@ -300,6 +270,23 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             dest.walkTime = self.alarmTime
         }
 
+    }
+    
+    // Error handling-----------------------------------------------------
+    
+    
+    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
+    // It performs the unwind segue when done.
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
+        self.returnToRoot(nil)
+    }
+    
+    func handleError(errorMessage: String) {
+        // Create and show error message
+        // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
+        var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        message.show()
+        
     }
     
 }

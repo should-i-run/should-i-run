@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class Route {
-    var departureTime: Int?
+    var departureTime: Double?
     var distanceToStation: Int
     var originStationName: String
     var lineName: String
@@ -19,7 +19,7 @@ class Route {
     var originLatLon:CLLocationCoordinate2D
     var agency: String
     
-    init (distanceToStation: Int, originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Int?, lineCode: String?) {
+    init (distanceToStation: Int, originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Double?, lineCode: String?) {
         
         self.distanceToStation = distanceToStation
         self.originStationName = originStationName

@@ -10,29 +10,24 @@ import UIKit
 
 class AddAlarmViewController: UIViewController {
     
-    @IBOutlet var alarmPicker: UIDatePicker?
+    @IBOutlet var alarmPicker: UIDatePicker!
     var walkTime: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        alarmPicker!.setValue(walkTime! * 60, forKey: "countDownDuration")
+        alarmPicker.setValue(walkTime! * 60, forKey: "countDownDuration")
         
         // Set background color
-        self.view.backgroundColor = globalBackgroundColor
+        self.view.backgroundColor = UIColor.whiteColor()
 
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func setAlarm(sender: AnyObject) {
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
         localNotification.alertBody = "Should I Run?"
-        localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmPicker!.countDownDuration)
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmPicker.countDownDuration)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 

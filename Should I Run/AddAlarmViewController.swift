@@ -19,7 +19,7 @@ class AddAlarmViewController: UIViewController {
         alarmPicker.setValue(walkTime! * 60, forKey: "countDownDuration")
         
         // Set background color
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = colorize(0x6FD57F)
 
     }
     

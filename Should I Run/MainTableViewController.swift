@@ -99,7 +99,6 @@ import Foundation
 
             
             cell.textLabel?.text = "add a destination"
-//            cell.textLabel?.font = UIFont(name: "HelveticaNeue-LightItalic", size: 36)
             cell.backgroundColor = self.colors[4]
             cell.accessoryType = UITableViewCellAccessoryType.None
             
@@ -137,7 +136,7 @@ import Foundation
             self.locName = locationSelected["name"] as NSString
             self.locLat = locationSelected["latitude"] as Float
             self.locLong = locationSelected["longitude"] as Float
-            self.colorForChosenLocation = self.colors[row]
+            self.colorForChosenLocation = self.colors[row % self.colors.count]
 
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
 

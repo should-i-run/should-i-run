@@ -37,25 +37,25 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     
     //result area things
-    @IBOutlet var resultArea: UIView?
-    @IBOutlet var instructionLabel: UILabel?
-    @IBOutlet var alarmButton: UIButton?
+    @IBOutlet var resultArea: UIView!
+    @IBOutlet var instructionLabel: UILabel!
+    @IBOutlet var alarmButton: UIButton!
     
     //detial area things
-    @IBOutlet var timeToNextTrainLabel: UILabel?
-    @IBOutlet var distanceToStationLabel: UILabel?
-    @IBOutlet var stationNameLabel: UILabel?
-    @IBOutlet var departureStationLabel: UILabel?
-    @IBOutlet var destinationLabel: UILabel?
+    @IBOutlet var timeToNextTrainLabel: UILabel!
+    @IBOutlet var distanceToStationLabel: UILabel!
+    @IBOutlet var stationNameLabel: UILabel!
+    @IBOutlet var departureStationLabel: UILabel!
+    @IBOutlet var destinationLabel: UILabel!
     
-    @IBOutlet var timeRunningLabel: UILabel?
-    @IBOutlet var timeWalkingLabel: UILabel?
-    @IBOutlet var secondsToNextTrainLabel: UILabel?
+    @IBOutlet var timeRunningLabel: UILabel!
+    @IBOutlet var timeWalkingLabel: UILabel!
+    @IBOutlet var secondsToNextTrainLabel: UILabel!
     
     //following departure area things
-    @IBOutlet var followingDepartureLabel: UILabel?
-    @IBOutlet var followingDepartureDestinationLabel: UILabel?
-    @IBOutlet var followingDepartureSecondsLabel: UILabel?
+    @IBOutlet var followingDepartureLabel: UILabel!
+    @IBOutlet var followingDepartureDestinationLabel: UILabel!
+    @IBOutlet var followingDepartureSecondsLabel: UILabel!
     
     
     var secondTimer: NSTimer = NSTimer()
@@ -78,7 +78,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateWalkingDistance:"), userInfo: nil, repeats: true)
         self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
 
     }
@@ -139,25 +139,25 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //result area things
         // run or not?
         if self.currentMinutes >= walkingTime {
-            self.instructionLabel!.hidden = false
-            self.instructionLabel!.text = "Nah, take it easy"
-            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
+            self.instructionLabel.hidden = false
+            self.instructionLabel.text = "Nah, take it easy"
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
             let walkUIColor = colorize(0x6FD57F)
             
-            self.resultArea!.backgroundColor = walkUIColor
+            self.resultArea.backgroundColor = walkUIColor
             
-            self.alarmButton!.hidden = false
+            self.alarmButton.hidden = false
             self.alarmTime = self.currentMinutes - walkingTime
             
         } else {
-            self.instructionLabel!.hidden = false
+            self.instructionLabel.hidden = false
             let runUIColor = colorize(0xFC5B3F)
             self.resultArea!.backgroundColor = runUIColor
             
-            self.instructionLabel!.text = "Run!"
-            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
-            self.alarmButton!.hidden = true
+            self.instructionLabel.text = "Run!"
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
+            self.alarmButton.hidden = true
             
         }
         
@@ -165,30 +165,33 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         
         //distance to station label
-        self.distanceToStationLabel!.text = String(distanceToStation)
+        self.distanceToStationLabel.text = String(distanceToStation)
     
         //line and destination station label
         if self.currentBestRoute!.agency == "bart" {
             let destinationStation = bartLookupReverse[self.currentBestRoute!.eolStationName.lowercaseString]!
-            self.destinationLabel!.text = "towards \(destinationStation)"
+            self.destinationLabel.text = "towards \(destinationStation)"
         } else if self.currentBestRoute!.agency == "muni" {
-            self.destinationLabel!.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
+            self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
         }
         self.destinationLabel!.adjustsFontSizeToFitWidth = true
         
         
         //departure station name label
         if self.currentBestRoute!.agency == "bart" {
-            let name = bartLookupReverse[self.currentBestRoute!.originStationName]!
-            self.stationNameLabel!.text = "meters to \(name) station"
+            if let name = bartLookupReverse[self.currentBestRoute!.originStationName] {
+                self.stationNameLabel.text = "meters to \(name) station"
+            } else {
+                self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+            }
         } else if self.currentBestRoute!.agency == "muni" {
-            self.stationNameLabel!.text = "meters to \(self.currentBestRoute!.originStationName) station"
+            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
         }
-        self.stationNameLabel!.adjustsFontSizeToFitWidth = true
+        self.stationNameLabel.adjustsFontSizeToFitWidth = true
         
         //running and walking time labels
-        self.timeRunningLabel!.text = String(runningTime)
-        self.timeWalkingLabel!.text = String(walkingTime)
+        self.timeRunningLabel.text = String(runningTime)
+        self.timeWalkingLabel.text = String(walkingTime)
         
         
         //timer Labels
@@ -197,13 +200,16 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         //following destination station name label
         if self.currentSecondRoute!.agency == "bart" {
-            let followingDestinationStation = bartLookupReverse[self.currentSecondRoute!.eolStationName.lowercaseString]!
-            self.followingDepartureDestinationLabel!.text = "towards \(followingDestinationStation)"
+            if let followingDestinationStation = bartLookupReverse[self.currentSecondRoute!.eolStationName.lowercaseString] {
+                self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
+            } else {
+                self.followingDepartureDestinationLabel.text = "towards \(self.currentSecondRoute!.eolStationName)"
+            }
         } else if self.currentSecondRoute!.agency == "muni" {
-            self.followingDepartureDestinationLabel!.text = "\(self.currentSecondRoute!.lineName) / \(self.currentSecondRoute!.eolStationName)"
+            self.followingDepartureDestinationLabel.text = "\(self.currentSecondRoute!.lineName) / \(self.currentSecondRoute!.eolStationName)"
         }
         
-        self.followingDepartureDestinationLabel!.adjustsFontSizeToFitWidth = true
+        self.followingDepartureDestinationLabel.adjustsFontSizeToFitWidth = true
         
     }
     
@@ -241,21 +247,21 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             
             self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
 
-            self.timeToNextTrainLabel!.text = String(currentMinutes)
-            self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
+            self.timeToNextTrainLabel.text = String(currentMinutes)
+            self.followingDepartureLabel.text = String(self.followingCurrentMinutes)
             
             if self.currentSeconds < 10 {
-                self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
-                self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)
+                self.secondsToNextTrainLabel.text = ":0" + String(currentSeconds)
+                self.followingDepartureSecondsLabel.text = ":0" + String(currentSeconds)
             } else {
-                self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
-                self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
+                self.secondsToNextTrainLabel.text = ":" + String(currentSeconds)
+                self.followingDepartureSecondsLabel.text = ":" + String(currentSeconds)
             }
         } else {
-            self.timeToNextTrainLabel!.text = "-"
-            self.followingDepartureLabel!.text = "-"
-            self.secondsToNextTrainLabel!.text = ":--"
-            self.followingDepartureSecondsLabel!.text = ":--"
+            self.timeToNextTrainLabel.text = "-"
+            self.followingDepartureLabel.text = "-"
+            self.secondsToNextTrainLabel.text = ":--"
+            self.followingDepartureSecondsLabel.text = ":--"
             
         }
         

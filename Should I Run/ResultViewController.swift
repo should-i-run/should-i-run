@@ -76,6 +76,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         super.viewDidLoad()
         self.view.backgroundColor = globalBackgroundColor
         
+        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
+        
+        
         self.walkingDirectionsManager.delegate = self
         
         self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
@@ -160,7 +163,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.resultArea!.backgroundColor = runUIColor
             
             self.instructionLabel!.text = "Run!"
-            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 30), size: 30)
+            self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
             self.alarmButton!.hidden = true
             
         }
@@ -236,22 +239,29 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     func updateTimes(timer: NSTimer?) {
         //countdown for the next train
+        if self.currentBestRoute != nil {
+            self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+            
+            self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
+            
+            self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
 
-        self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-        
-        self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
-        
-        self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-
-        self.timeToNextTrainLabel!.text = String(currentMinutes)
-        self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
-        
-        if self.currentSeconds < 10 {
-            self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
-            self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)
+            self.timeToNextTrainLabel!.text = String(currentMinutes)
+            self.followingDepartureLabel!.text = String(self.followingCurrentMinutes)
+            
+            if self.currentSeconds < 10 {
+                self.secondsToNextTrainLabel!.text = ":0" + String(currentSeconds)
+                self.followingDepartureSecondsLabel!.text = ":0" + String(currentSeconds)
+            } else {
+                self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
+                self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
+            }
         } else {
-            self.secondsToNextTrainLabel!.text = ":" + String(currentSeconds)
-            self.followingDepartureSecondsLabel!.text = ":" + String(currentSeconds)
+            self.timeToNextTrainLabel!.text = "-"
+            self.followingDepartureLabel!.text = "-"
+            self.secondsToNextTrainLabel!.text = ":--"
+            self.followingDepartureSecondsLabel!.text = ":--"
+            
         }
         
     }

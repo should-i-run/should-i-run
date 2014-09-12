@@ -20,6 +20,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     var viewHasAlreadyAppeared = false
     
+    var backgroundColor = UIColor()
+    
     
     
     var locationName = String()
@@ -59,7 +61,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         spinner!.startAnimating()
         
         // Set background color
-        self.view.backgroundColor = colorize(0x068F86)
+        self.view.backgroundColor = self.backgroundColor
         
         //get the internet going
         self.internetReachability.connectionRequired()

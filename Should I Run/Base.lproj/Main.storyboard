@@ -125,7 +125,7 @@
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Run!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VWP-lz-GQI">
                                                 <rect key="frame" x="20" y="79" width="560" height="46"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="43"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="60"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -201,7 +201,7 @@
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="to next train" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4h-A2-S0j">
                                                 <rect key="frame" x="107" y="22" width="476" height="21"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -210,7 +210,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="123" id="BF8-SH-2dR"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact">
@@ -239,7 +239,7 @@
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="meters to station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ph-3c-53d">
                                                 <rect key="frame" x="79" y="121" width="498" height="21"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -251,7 +251,7 @@
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="minutes walking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f1-7V-QXh">
                                                 <rect key="frame" x="79" y="179" width="123" height="21"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -346,7 +346,7 @@
                                                     <constraint firstAttribute="height" constant="21" id="JXB-Pg-Hd6"/>
                                                     <constraint firstAttribute="width" constant="39" id="adR-f2-Eb4"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact">
@@ -361,7 +361,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="Lcc-0U-Fil"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact">
@@ -370,9 +370,9 @@
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for the following train" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbu-Pp-tmw">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="to the following train" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbu-Pp-tmw">
                                                 <rect key="frame" x="103" y="67" width="460" height="21"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -430,13 +430,13 @@
                                     <constraint firstAttribute="bottom" secondItem="5gf-Vd-CBp" secondAttribute="bottom" id="AQO-xE-AXP"/>
                                     <constraint firstItem="GCm-oj-xbF" firstAttribute="bottom" secondItem="5gf-Vd-CBp" secondAttribute="top" id="EpJ-Ui-nap"/>
                                     <constraint firstItem="KwT-He-R3e" firstAttribute="bottom" secondItem="GCm-oj-xbF" secondAttribute="top" id="OyZ-HG-kKr"/>
+                                    <constraint firstItem="KwT-He-R3e" firstAttribute="top" secondItem="rvH-Go-UYd" secondAttribute="top" id="PbN-OE-PZq"/>
                                     <constraint firstItem="GCm-oj-xbF" firstAttribute="leading" secondItem="rvH-Go-UYd" secondAttribute="leading" id="Q13-mW-i43"/>
                                     <constraint firstItem="aGx-0V-D0e" firstAttribute="trailing" secondItem="rbf-ts-B4g" secondAttribute="trailing" id="RPU-qb-MRN"/>
                                     <constraint firstItem="KwT-He-R3e" firstAttribute="leading" secondItem="rvH-Go-UYd" secondAttribute="leading" id="UQb-wV-t8d"/>
                                     <constraint firstAttribute="centerX" secondItem="KwT-He-R3e" secondAttribute="centerX" id="bgD-UU-dfW"/>
                                     <constraint firstAttribute="trailing" secondItem="KwT-He-R3e" secondAttribute="trailing" id="kGT-tz-56K"/>
                                     <constraint firstAttribute="trailing" secondItem="GCm-oj-xbF" secondAttribute="trailing" id="tKR-b5-13z"/>
-                                    <constraint firstItem="KwT-He-R3e" firstAttribute="top" secondItem="rvH-Go-UYd" secondAttribute="top" id="tUz-ED-ukX"/>
                                     <constraint firstAttribute="trailing" secondItem="5gf-Vd-CBp" secondAttribute="trailing" id="zTS-Ic-BNQ"/>
                                 </constraints>
                                 <variation key="default">
@@ -447,10 +447,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="OyZ-HG-kKr"/>
+                                        <exclude reference="PbN-OE-PZq"/>
                                         <exclude reference="UQb-wV-t8d"/>
                                         <exclude reference="bgD-UU-dfW"/>
                                         <exclude reference="kGT-tz-56K"/>
-                                        <exclude reference="tUz-ED-ukX"/>
                                         <exclude reference="EpJ-Ui-nap"/>
                                         <exclude reference="Q13-mW-i43"/>
                                         <exclude reference="tKR-b5-13z"/>
@@ -468,10 +468,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="OyZ-HG-kKr"/>
+                                        <include reference="PbN-OE-PZq"/>
                                         <include reference="UQb-wV-t8d"/>
                                         <include reference="bgD-UU-dfW"/>
                                         <include reference="kGT-tz-56K"/>
-                                        <include reference="tUz-ED-ukX"/>
                                         <include reference="EpJ-Ui-nap"/>
                                         <include reference="Q13-mW-i43"/>
                                         <include reference="tKR-b5-13z"/>
@@ -558,20 +558,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
-                                <rect key="frame" x="20" y="135" width="227" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
                                 <rect key="frame" x="0.0" y="166" width="320" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="alB-L6-8E4"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="427344271.65988499">
                                     <!--2014-07-18 02:44:31 +0000-->
                                 </date>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="alB-L6-8E4"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="alB-L6-8E4"/>
+                                    </mask>
+                                </variation>
                             </datePicker>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
+                                <rect key="frame" x="20" y="135" width="227" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="yog-Os-ERm" secondAttribute="trailing" id="09E-vX-sOT"/>
+                            <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="Oa3-LW-1et" secondAttribute="bottom" constant="27" id="F6o-cu-dnd"/>
+                            <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="sIK-xg-Gqa" secondAttribute="bottom" constant="102" id="glP-Af-hQ7"/>
+                            <constraint firstItem="Oa3-LW-1et" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" id="r1t-Zs-PUR"/>
+                            <constraint firstItem="yog-Os-ERm" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" id="vlR-fp-1gg"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="r1t-Zs-PUR"/>
+                                <exclude reference="09E-vX-sOT"/>
+                                <exclude reference="F6o-cu-dnd"/>
+                                <exclude reference="glP-Af-hQ7"/>
+                                <exclude reference="vlR-fp-1gg"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="r1t-Zs-PUR"/>
+                                <include reference="09E-vX-sOT"/>
+                                <include reference="F6o-cu-dnd"/>
+                                <include reference="glP-Af-hQ7"/>
+                                <include reference="vlR-fp-1gg"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="hmx-zy-7aK">
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Bs2-Pa-RyS">

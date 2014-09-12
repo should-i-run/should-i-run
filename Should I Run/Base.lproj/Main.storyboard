@@ -145,7 +145,7 @@
                                                     </mask>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="UkY-Fi-fDv" kind="push" identifier="AlarmSegue" id="GqH-Qf-3FW"/>
+                                                    <segue destination="UkY-Fi-fDv" kind="show" identifier="AlarmSegue" id="GqH-Qf-3FW"/>
                                                 </connections>
                                             </button>
                                         </subviews>

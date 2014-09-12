@@ -10,7 +10,7 @@ import UIKit
 
 import MapKit
 
-class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UISearchBarDelegate {
+class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UISearchBarDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -177,7 +177,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
-    func alertView(alertView: UIAlertView!, willDismissWithButtonIndex buttonIndex: Int) {
+    func alertView(alertView: UIAlertView!, didDismissWithButtonIndex buttonIndex: Int) {
         if(buttonIndex == 1){
             self.performSegueWithIdentifier("backToMain", sender: "saveButton")
         }
@@ -188,12 +188,25 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.destinationNameAlertView = UIAlertView(title: "Destination name", message: "Please choose a desination name", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Done")
 
         self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        
+        self.destinationNameAlertView?.textFieldAtIndex(0)?.delegate = self
 
         self.destinationNameAlertView!.show()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.geocodeAddress(searchBar)
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if(self.destinationNameAlertView?.textFieldAtIndex(0)?.text.utf16Count < 1){
+            return false
+        }
+        
+        self.destinationNameAlertView?.dismissWithClickedButtonIndex(1, animated: true)
+        
+        return true
         
     }
 

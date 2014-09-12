@@ -41,9 +41,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     @IBOutlet var instructionLabel: UILabel?
     @IBOutlet var alarmButton: UIButton?
     
-    //    @IBOutlet weak var backButton: UIBarButtonItem!
-    
-    
     //detial area things
     @IBOutlet var timeToNextTrainLabel: UILabel?
     @IBOutlet var distanceToStationLabel: UILabel?
@@ -53,21 +50,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     @IBOutlet var timeRunningLabel: UILabel?
     @IBOutlet var timeWalkingLabel: UILabel?
-    
-    
     @IBOutlet var secondsToNextTrainLabel: UILabel?
     
     //following departure area things
     @IBOutlet var followingDepartureLabel: UILabel?
     @IBOutlet var followingDepartureDestinationLabel: UILabel?
-    
-    //    @IBOutlet var followingDepartureSecondsLabel: UILabel!
-    
     @IBOutlet var followingDepartureSecondsLabel: UILabel?
     
     
     var secondTimer: NSTimer = NSTimer()
-    
     var updateResultTimer : NSTimer = NSTimer()
     
     
@@ -76,24 +67,25 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         super.viewDidLoad()
         self.view.backgroundColor = globalBackgroundColor
         
-        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
+        self.instructionLabel!.hidden = true
+        self.alarmButton!.hidden = true
         
+        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
         
         self.walkingDirectionsManager.delegate = self
         
-        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
-        
-//        displayResults()
         self.updateResults(nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateResults:"), userInfo: nil, repeats: true)
+        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
 
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.updateResultTimer.invalidate()
+        self.secondTimer.invalidate()
 
     }
     
@@ -142,11 +134,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         if self.currentBestRoute == nil {
             self.handleError("sorry, couldn't find any routes")
         }
-
+        
         
         //result area things
         // run or not?
         if self.currentMinutes >= walkingTime {
+            self.instructionLabel!.hidden = false
             self.instructionLabel!.text = "Nah, take it easy"
             self.instructionLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
             
@@ -158,7 +151,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.alarmTime = self.currentMinutes - walkingTime
             
         } else {
-            
+            self.instructionLabel!.hidden = false
             let runUIColor = colorize(0xFC5B3F)
             self.resultArea!.backgroundColor = runUIColor
             
@@ -232,13 +225,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     func handleWalkingDistance(distance:Int){
         self.distanceToOrigin = distance
-        
         self.displayResults()
         
     }
     
     func updateTimes(timer: NSTimer?) {
-        //countdown for the next train
+
         if self.currentBestRoute != nil {
             self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
             

@@ -67,14 +67,22 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
     }
     
     func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){
-        if let err = error? {
+        
+        if error != nil {
+            self.delegate?.handleError("BART connection failed")
+            return
+        }
+
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        let html: String? = NSString(data: data!, encoding: NSUTF8StringEncoding)
+
+        if html == nil {
             self.delegate?.handleError("BART connection failed")
             return
         }
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        
-        let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
         let parsed: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
         // Trim off unneeded data inside the dictionary

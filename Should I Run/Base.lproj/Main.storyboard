@@ -145,7 +145,7 @@
                                                     </mask>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="UkY-Fi-fDv" kind="show" identifier="AlarmSegue" id="GqH-Qf-3FW"/>
+                                                    <segue destination="UkY-Fi-fDv" kind="push" identifier="AlarmSegue" id="GqH-Qf-3FW"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -558,7 +558,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
+                            <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
                                 <rect key="frame" x="0.0" y="166" width="320" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="alB-L6-8E4"/>
@@ -577,10 +577,9 @@
                                     </mask>
                                 </variation>
                             </datePicker>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
                                 <rect key="frame" x="20" y="135" width="227" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

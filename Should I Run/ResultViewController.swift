@@ -65,6 +65,12 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        //double check that we have some results
+        if self.resultsRoutes.count == 0 {
+            self.handleError("sorry, couldn't find any routes")
+        }
+        
         self.view.backgroundColor = globalBackgroundColor
         
         self.instructionLabel!.hidden = true
@@ -226,7 +232,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
-        if self.currentBestRoute != nil {
+        if self.currentBestRoute != nil && self.resultsRoutes.count > 0 {
             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
         } else {
              self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)

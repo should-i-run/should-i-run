@@ -1,0 +1,27 @@
+{
+    Code = Outbound;
+    Name = "Outbound to Ocean Beach via Downtown";
+    StopList =     {
+        Stop =         {
+            DepartureTimeList =             {
+                DepartureTime =                 (
+                                        {
+                        text = "\n\n\n\n\n\n\n\n4";
+                    },
+                                        {
+                        text = "\n12";
+                    },
+                                        {
+                        text = "\n25";
+                    }
+                );
+                text = "\n";
+            };
+            StopCode = 16995;
+            name = "Powell Station Outbound";
+            text = "\n";
+        };
+        text = "\n\n";
+    };
+    text = "\n";
+}

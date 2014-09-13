@@ -78,6 +78,7 @@ class MuniApiController: NSObject{
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbound", withString: " Inbound")
         muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
+        muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtown", withString: " Inbound")
         
         // build up url
         let baseUrl = "http://services.my511.org/Transit2.0/GetNextDeparturesByStopName.aspx?token=83d1f7f4-1d1e-4fc0-a070-162a95bd106f&agencyName=SF-MUNI&stopName="
@@ -107,14 +108,11 @@ class MuniApiController: NSObject{
         
         let parsedXML: NSDictionary = XMLReader.dictionaryForXMLString(html, error: nil)
         
-        
-        
         // Trim off unneeded headers
         if let routes: NSDictionary = parsedXML.objectForKey("RTT")?.objectForKey("AgencyList")?.objectForKey("Agency")?.objectForKey("RouteList")? as? NSDictionary {
             
             //what's left should be an array of routes, but we'll check just in case
             var routesArray:[NSDictionary] = []
-            
             
             if let temp:[NSDictionary] = routes.objectForKey("Route") as? [NSDictionary] {
                 routesArray += temp
@@ -128,13 +126,23 @@ class MuniApiController: NSObject{
             
             for route in routesArray {
                 
-                
                 for datum in data {
+
                     if route.objectForKey("Code") as? String == datum.lineCode {
                         
-                        if let routeDirections = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSArray {
+                        var routeDirections:NSArray?
+                        
+                        if let routeDirectionsArray = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSArray  {
+                            routeDirections = routeDirectionsArray
                             
-                            for direction in routeDirections {
+                        } else if let routeDirectionsDictionary = route.objectForKey("RouteDirectionList")?.objectForKey("RouteDirection") as? NSDictionary  {
+                            routeDirections = [routeDirectionsDictionary]
+                        }
+                        
+                        if routeDirections != nil {
+                            
+                            for direction in routeDirections! {
+
                                 let directionName = direction.objectForKey("Name") as String
                                 var shortName1 = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
                                 var shortName2 = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
@@ -143,7 +151,6 @@ class MuniApiController: NSObject{
 
                                     
                                     if let departureTimeList  = direction.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
-                                        
                                         
                                         //what's left should be an array of departure times or a dictionary of a single time
                                         var departureTimesArray:[NSDictionary] = []
@@ -154,20 +161,23 @@ class MuniApiController: NSObject{
                                         } else if let temp:NSDictionary = departureTimeList.objectForKey("DepartureTime") as? NSDictionary {
                                             departureTimesArray.append(temp)
                                         }
-                                        println("6")
-                                        
-                                        
+
                                         for departureTime in departureTimesArray {
                                             let text = departureTime.objectForKey("text") as String
+
                                             let trimmedText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+
                                             
                                             
                                             
                                             
                                             var muniOriginStationName = datum.originStationName.stringByReplacingOccurrencesOfString("Metro ", withString: "")
-                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: "")
-                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: "")
-                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: "")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbd", withString: " Outbound")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Outbound", withString: " Outbound")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbd", withString: " Inbound")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Inbound", withString: " Inbound")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtn", withString: " Inbound")
+                                            muniOriginStationName = muniOriginStationName.stringByReplacingOccurrencesOfString("/Downtown", withString: " Inbound")
                                             
                                             
                                             
@@ -188,6 +198,11 @@ class MuniApiController: NSObject{
                     }
                 }
                 
+            }
+            
+            if muniRouteResults.count == 0 {
+                self.delegate!.handleError("Couldn't find any Muni Light Rail directions...")
+                return
             }
             
             muniRouteResults.sort{$0.departureTime < $1.departureTime}

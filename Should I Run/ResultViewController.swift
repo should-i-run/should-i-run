@@ -137,8 +137,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         
         // if there is no viable route, error
-        if self.currentBestRoute == nil {
+        if self.currentBestRoute == nil || foundResult == false {
             self.handleError("sorry, couldn't find any routes")
+            return
         }
         
         

@@ -149,6 +149,9 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             self.bartApiHandler.searchBartFor(results)
         } else if results[0].agency == "muni" {
             self.muniApiHandler.searchMuniFor(results)
+        } else if results[0].agency == "caltrain" {
+            self.resultsRoutes = results
+            self.performSegueWithIdentifier("ResultsSegue", sender: self)
         }
         
 

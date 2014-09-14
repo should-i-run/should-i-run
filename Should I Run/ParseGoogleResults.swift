@@ -35,7 +35,7 @@ class ParseGoogleHelper {
                 return shortName
             }
         }
-        self.handleError(message:"There was a problem getting BART results...")
+        self.handleError(message:"There was a problem parsing results...")
         return "error"
         
     }
@@ -47,7 +47,7 @@ class ParseGoogleHelper {
                 return lineName
             }
         }
-        self.handleError(message:"There was a problem getting BART results...")
+        self.handleError(message:"There was a problem parsing results...")
         return "error"
         
     }
@@ -95,6 +95,22 @@ class ParseGoogleHelper {
 
     }
     
+    func getEolStationNameFromCaltrainStep(step: NSDictionary) -> String {
+        //"html_instructions" = "Train towards San Jose Caltrain Station";
+        
+        var instructions:NSString = step.objectForKey("html_instructions") as NSString
+        
+        
+        var eolStationName = "error" // if it's not a bus or light rail, send back an error
+        
+        eolStationName = instructions.substringFromIndex(13).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+        return eolStationName
+        
+    }
+    
+    
+    
     func getOriginStationNameFromTransitStep(step: NSDictionary) -> String {
         
         if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
@@ -103,7 +119,7 @@ class ParseGoogleHelper {
                 return stationName
             }
         } else {
-            self.handleError(message:"There was a problem getting MUNI results...")
+            self.handleError(message:"There was a problem parsing results...")
             return "error"
         }
         return "error"
@@ -146,6 +162,29 @@ class ParseGoogleHelper {
             return nil
         }
         
+    }
+    
+    func getDepartureTimeFromCaltrainStep(step: NSDictionary) -> Double {
+        
+        if let transit_details = step.objectForKey("transit_details") as? NSDictionary {
+        
+            if let departure_time = transit_details.objectForKey("departure_time") as? NSDictionary {
+                if let time = departure_time.objectForKey("value")?.integerValue as Int! {
+                
+                    var diff = 978307200 // difference between unix and ios reference date
+                    return Double(time - diff)
+                }
+            
+            }
+        }
+        
+        return 0
+        
+//        "departure_time" =                                 {
+//            text = "10:15am";
+//            "time_zone" = "America/Los_Angeles";
+//            value = 1410714900;
+//        };
     }
     
     func processMuniResultFromStep(steps: NSArray, index: Int, line: NSDictionary) -> Route? {
@@ -197,6 +236,33 @@ class ParseGoogleHelper {
         return thisResult
     }
     
+    func processCaltrainResultsFromStep(steps: NSArray, index: Int) -> Route? {
+        
+        var thisStep = steps[index] as NSDictionary
+        var distanceToStation = 0
+        if index != 0 {
+            var walkingStep = steps[index - 1] as NSDictionary
+            if let dist = getDistanceFromWalkingStep(walkingStep) {
+                distanceToStation = dist
+            }
+        }
+        
+        let caltrainOriginStationName = getOriginStationNameFromTransitStep(thisStep)
+        
+        let lineName = self.getLineNameFromTransitStep(thisStep)
+        let eolStationName = self.getEolStationNameFromCaltrainStep(thisStep)
+        
+        let originCoord = self.getOriginStationLocationFromTransitStep(thisStep)
+        
+        let departureTime = self.getDepartureTimeFromCaltrainStep(thisStep)
+        
+        
+        let thisResult = Route(distanceToStation: distanceToStation, originStationName: caltrainOriginStationName, lineName: lineName, eolStationName: eolStationName, originCoord2d: originCoord!, agency: "caltrain", departureTime: departureTime, lineCode: nil)
+        
+        return thisResult
+        
+    }
+    
     
     func getResultFromRoute(route: NSDictionary) -> Route? {
 
@@ -242,6 +308,8 @@ class ParseGoogleHelper {
                                                 }
                                             }
                                         }
+                                    } else if name == "Caltrain" {
+                                        return self.processCaltrainResultsFromStep(steps, index: i)
                                         
                                     } else {
                                         // some other transit agency. Here we're just doing the same distance check 
@@ -266,7 +334,6 @@ class ParseGoogleHelper {
     }
     
     func parser (googleResults: NSDictionary) {
-        println(googleResults)
         var results = [Route]()
         
         func addToResultsIfUniq (thisRoute:Route) {
@@ -300,6 +367,28 @@ class ParseGoogleHelper {
         if results.count == 0 {
             self.handleError()
         } else {
+            
+            //check if any results are caltrain - if so remove others! {
+            var caltrain = false
+            var indiciesToRemove = [Int]()
+            
+            for result in results {
+                if result.agency == "caltrain" {
+                    caltrain = true
+                }
+            }
+            
+            if caltrain == true {
+                for var i = 0; i < results.count; ++i {
+                    if results[i].agency != "caltrain" {
+                        indiciesToRemove.insert(i, atIndex: 0)
+                    }
+                }
+                for index in indiciesToRemove {
+                    results.removeAtIndex(index)
+                }
+            }
+            
             self.delegate?.didReceiveGoogleResults(results)
         }
         

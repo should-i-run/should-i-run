@@ -547,6 +547,7 @@
                         <outlet property="followingDepartureDestinationLabel" destination="p5I-L2-Vwd" id="qdd-vK-3Ut"/>
                         <outlet property="followingDepartureLabel" destination="aGx-0V-D0e" id="B3W-tE-O7r"/>
                         <outlet property="followingDepartureSecondsLabel" destination="ja3-aO-08F" id="YCP-5u-dKV"/>
+                        <outlet property="followingTimeTextLabel" destination="rbu-Pp-tmw" id="WUR-HO-MHv"/>
                         <outlet property="instructionLabel" destination="VWP-lz-GQI" id="foq-lW-Mp4"/>
                         <outlet property="resultArea" destination="KwT-He-R3e" id="5AI-jU-uEe"/>
                         <outlet property="secondsToNextTrainLabel" destination="u2n-wi-cKw" id="zNL-sI-9jM"/>

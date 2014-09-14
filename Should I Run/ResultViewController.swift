@@ -57,6 +57,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     @IBOutlet var followingDepartureDestinationLabel: UILabel!
     @IBOutlet var followingDepartureSecondsLabel: UILabel!
     
+    @IBOutlet weak var followingTimeTextLabel: UILabel!
     
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
@@ -174,24 +175,24 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //distance to station label
         self.distanceToStationLabel.text = String(distanceToStation)
     
-        //line and destination station label
+        //line and destination station label, departure station label
         if self.currentBestRoute!.agency == "bart" {
+            
             let destinationStation = bartLookupReverse[self.currentBestRoute!.eolStationName.lowercaseString]!
             self.destinationLabel.text = "towards \(destinationStation)"
-        } else if self.currentBestRoute!.agency == "muni" {
-            self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
-        }
-        self.destinationLabel!.adjustsFontSizeToFitWidth = true
-        
-        
-        //departure station name label
-        if self.currentBestRoute!.agency == "bart" {
+            
             if let name = bartLookupReverse[self.currentBestRoute!.originStationName] {
                 self.stationNameLabel.text = "meters to \(name) station"
             } else {
                 self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
             }
+            
         } else if self.currentBestRoute!.agency == "muni" {
+            self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
+            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+            
+        } else if self.currentBestRoute!.agency == "caltrain" {
+            self.destinationLabel.text = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"
             self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
         }
         
@@ -216,7 +217,10 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 self.followingDepartureDestinationLabel.text = "\(following.lineName) / \(following.eolStationName)"
             }
         } else {
-            self.followingDepartureDestinationLabel.text = "----"
+            self.followingDepartureDestinationLabel.text = "No other departures found"
+            self.followingDepartureSecondsLabel.hidden = true
+            self.followingDepartureLabel.hidden = true
+            self.followingTimeTextLabel.hidden = true
         }
         
     }
@@ -256,9 +260,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             if self.currentSecondRoute != nil {
                 self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
                 self.followingDepartureLabel.text = String(self.followingCurrentMinutes!)
-            } else {
-                self.followingDepartureLabel.text = "--"
             }
+            
             
 
             self.timeToNextTrainLabel.text = String(currentMinutes)
@@ -270,13 +273,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 self.secondsToNextTrainLabel.text = ":" + String(currentSeconds)
                 self.followingDepartureSecondsLabel.text = ":" + String(currentSeconds)
             }
-        } else {
-            self.timeToNextTrainLabel.text = "-"
-            self.followingDepartureLabel.text = "-"
-            self.secondsToNextTrainLabel.text = ":--"
-            self.followingDepartureSecondsLabel.text = ":--"
-            
-        }
+        } 
         
     }
     

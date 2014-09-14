@@ -190,6 +190,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
         
         self.destinationNameAlertView?.textFieldAtIndex(0)?.delegate = self
+        
+        self.destinationNameAlertView?.textFieldAtIndex(0)?.keyboardAppearance = UIKeyboardAppearance.Dark
+        self.destinationNameAlertView?.textFieldAtIndex(0)?.returnKeyType = UIReturnKeyType.Go
 
         self.destinationNameAlertView!.show()
     }

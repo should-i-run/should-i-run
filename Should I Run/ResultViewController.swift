@@ -293,6 +293,10 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
 
     }
     
+    @IBAction func unwindToResults(segue: UIStoryboardSegue) {
+        
+    }
+    
     // Error handling-----------------------------------------------------
     
     

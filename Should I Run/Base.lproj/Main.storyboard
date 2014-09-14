@@ -290,26 +290,26 @@
                                                 <exclude reference="SWc-hh-Wm1"/>
                                                 <exclude reference="1Gy-h1-esn"/>
                                                 <exclude reference="izM-iG-g3y"/>
-                                                <exclude reference="7jH-Qz-LbE"/>
-                                                <exclude reference="u8U-0l-R8A"/>
-                                                <exclude reference="kAC-aD-zrb"/>
-                                                <exclude reference="yUN-nC-v55"/>
-                                                <exclude reference="SZo-ka-u7s"/>
-                                                <exclude reference="YSb-8e-EVF"/>
-                                                <exclude reference="nlO-G6-4Ea"/>
-                                                <exclude reference="7iA-2m-B0I"/>
-                                                <exclude reference="G1t-e2-0lQ"/>
-                                                <exclude reference="VLT-DU-CmX"/>
                                                 <exclude reference="5qX-tM-ki5"/>
                                                 <exclude reference="A4n-iU-wHi"/>
                                                 <exclude reference="AB1-hn-UMV"/>
                                                 <exclude reference="FJH-qt-yKy"/>
                                                 <exclude reference="urL-j5-J5F"/>
-                                                <exclude reference="4G5-Py-IdW"/>
-                                                <exclude reference="EnC-pj-D5g"/>
+                                                <exclude reference="kAC-aD-zrb"/>
+                                                <exclude reference="yUN-nC-v55"/>
+                                                <exclude reference="7jH-Qz-LbE"/>
+                                                <exclude reference="u8U-0l-R8A"/>
+                                                <exclude reference="SZo-ka-u7s"/>
+                                                <exclude reference="YSb-8e-EVF"/>
+                                                <exclude reference="nlO-G6-4Ea"/>
                                                 <exclude reference="n0z-P2-zhp"/>
                                                 <exclude reference="2rw-ML-CQS"/>
                                                 <exclude reference="TsO-9H-VsW"/>
+                                                <exclude reference="7iA-2m-B0I"/>
+                                                <exclude reference="G1t-e2-0lQ"/>
+                                                <exclude reference="VLT-DU-CmX"/>
+                                                <exclude reference="4G5-Py-IdW"/>
+                                                <exclude reference="EnC-pj-D5g"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -319,26 +319,26 @@
                                                 <include reference="SWc-hh-Wm1"/>
                                                 <include reference="1Gy-h1-esn"/>
                                                 <include reference="izM-iG-g3y"/>
-                                                <include reference="7jH-Qz-LbE"/>
-                                                <include reference="u8U-0l-R8A"/>
-                                                <include reference="kAC-aD-zrb"/>
-                                                <include reference="yUN-nC-v55"/>
-                                                <include reference="SZo-ka-u7s"/>
-                                                <include reference="YSb-8e-EVF"/>
-                                                <exclude reference="nlO-G6-4Ea"/>
-                                                <include reference="7iA-2m-B0I"/>
-                                                <include reference="G1t-e2-0lQ"/>
-                                                <include reference="VLT-DU-CmX"/>
                                                 <include reference="5qX-tM-ki5"/>
                                                 <include reference="A4n-iU-wHi"/>
                                                 <include reference="AB1-hn-UMV"/>
                                                 <include reference="FJH-qt-yKy"/>
                                                 <include reference="urL-j5-J5F"/>
-                                                <include reference="4G5-Py-IdW"/>
-                                                <include reference="EnC-pj-D5g"/>
+                                                <include reference="kAC-aD-zrb"/>
+                                                <include reference="yUN-nC-v55"/>
+                                                <include reference="7jH-Qz-LbE"/>
+                                                <include reference="u8U-0l-R8A"/>
+                                                <include reference="SZo-ka-u7s"/>
+                                                <include reference="YSb-8e-EVF"/>
+                                                <exclude reference="nlO-G6-4Ea"/>
                                                 <include reference="n0z-P2-zhp"/>
                                                 <include reference="2rw-ML-CQS"/>
                                                 <include reference="TsO-9H-VsW"/>
+                                                <include reference="7iA-2m-B0I"/>
+                                                <include reference="G1t-e2-0lQ"/>
+                                                <include reference="VLT-DU-CmX"/>
+                                                <include reference="4G5-Py-IdW"/>
+                                                <include reference="EnC-pj-D5g"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -412,11 +412,11 @@
                                                 <exclude reference="GEU-m4-UWI"/>
                                                 <exclude reference="g9c-ma-ToW"/>
                                                 <exclude reference="jgS-Zj-EoK"/>
-                                                <exclude reference="gnf-Zu-D7S"/>
                                                 <exclude reference="1GY-kb-0nx"/>
                                                 <exclude reference="2bk-5r-sKf"/>
                                                 <exclude reference="EYn-EW-AhK"/>
                                                 <exclude reference="hNG-kt-UQP"/>
+                                                <exclude reference="gnf-Zu-D7S"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -427,11 +427,11 @@
                                                 <include reference="GEU-m4-UWI"/>
                                                 <include reference="g9c-ma-ToW"/>
                                                 <exclude reference="jgS-Zj-EoK"/>
-                                                <include reference="gnf-Zu-D7S"/>
                                                 <include reference="1GY-kb-0nx"/>
                                                 <include reference="2bk-5r-sKf"/>
                                                 <include reference="EYn-EW-AhK"/>
                                                 <include reference="hNG-kt-UQP"/>
+                                                <include reference="gnf-Zu-D7S"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -625,12 +625,12 @@
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Bs2-Pa-RyS">
                             <connections>
                                 <action selector="saveBarButtonPress:" destination="UkY-Fi-fDv" id="RNJ-uN-AkK"/>
-                                <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="TQB-IX-NaG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="alarmPicker" destination="yog-Os-ERm" id="knl-UZ-Rty"/>
+                        <segue destination="s5l-Yx-r0J" kind="unwind" identifier="backToResults" unwindAction="unwindToResults:" id="x9I-HX-PhU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ru9-wH-Bap" userLabel="First Responder" sceneMemberID="firstResponder"/>

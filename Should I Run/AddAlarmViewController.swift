@@ -15,12 +15,16 @@ class AddAlarmViewController: UIViewController {
     
     
     @IBAction func saveBarButtonPress(sender: AnyObject) {
+
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.alertBody = "Should I Run?"
+        localNotification.alertBody = "Time to go"
+        localNotification.alertAction = "Should I Run?"
         localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmPicker.countDownDuration)
+
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        self.performSegueWithIdentifier("backToResults", sender: self)
     }
     
     override func viewDidLoad() {
@@ -31,9 +35,9 @@ class AddAlarmViewController: UIViewController {
         // Set background color
         self.view.backgroundColor = colorize(0x6FD57F)
         
-        //#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+        // request user notification permissions        
         if  NSString(string: UIDevice.currentDevice().systemVersion).doubleValue >= 8.0 {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound, categories: nil))
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert, categories: nil))
         }
         
         

@@ -19,6 +19,7 @@ enum NetworkStatusStruct: Int {
 class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, ParseGoogleHelperDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
     
     var viewHasAlreadyAppeared = false
+    var locationObserver:AnyObject?
     
     var backgroundColor = UIColor()
     
@@ -108,7 +109,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     
                 } else {
                     
-                    self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+                    self.locationObserver = self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
                         
                         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                             
@@ -199,6 +200,10 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
+        
+        if self.locationObserver != nil {
+            self.notificationCenter.removeObserver(self.locationObserver!)
+        }
         
         // On segue, stop animating
         spinner!.stopAnimating()

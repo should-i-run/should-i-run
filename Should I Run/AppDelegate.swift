@@ -20,12 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         
-//these lines should be uncommented when building for ios 8
-        
-        
-        //registering for sending user various kinds of notifications
-//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
-//*******************
         
         return true
     }
@@ -34,10 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         var state: UIApplicationState = application.applicationState;
         
         // This looks like "if state == UIApplicationStateActive" in Obj-C
-        if state.hashValue == 0 {
+//        if state.hashValue == 0 {
             var alert = UIAlertView(title:"Reminder", message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
             alert.show();
-        }
+//        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -60,6 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.locationManager.locationManager.startUpdatingLocation()
+        
+        //request GPS authorization on iOS 8
+        if  NSString(string: UIDevice.currentDevice().systemVersion).doubleValue >= 8.0 {
+            self.locationManager.locationManager.requestWhenInUseAuthorization()
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

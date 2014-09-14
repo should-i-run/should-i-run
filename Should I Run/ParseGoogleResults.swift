@@ -368,7 +368,8 @@ class ParseGoogleHelper {
             self.handleError()
         } else {
             
-            //check if any results are caltrain - if so remove others! {
+            //check if any results are caltrain - if so remove others! 
+            // we do this because google often provides bart or muni before caltrain - but we're going to assume they will walk to caltrain
             var caltrain = false
             var indiciesToRemove = [Int]()
             
@@ -394,7 +395,7 @@ class ParseGoogleHelper {
         
     }
     
-    func handleError(message:String="Couldn't find any BART or MUNI trips between those locations...") {
+    func handleError(message:String="Couldn't find any BART, MUNI, or Caltrain trips between those locations...") {
         self.delegate?.handleError(message)
         
     }

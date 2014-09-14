@@ -29,7 +29,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var currentMinutes = 0
     var followingCurrentMinutes:Int? = 0
     
-    
     var distanceToOrigin:Int?
     
     //alarm
@@ -87,8 +86,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func viewDidAppear(animated: Bool) {
         self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateWalkingDistance:"), userInfo: nil, repeats: true)
         self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
-
     }
+    
     
     override func viewWillDisappear(animated: Bool) {
         self.updateResultTimer.invalidate()
@@ -193,7 +192,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             
         } else if self.currentBestRoute!.agency == "caltrain" {
             self.destinationLabel.text = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"
-            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
         }
         
         //running and walking time labels
@@ -225,7 +224,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
     }
     
-    
     func updateWalkingDistance(timer: NSTimer?){
         
         //in the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
@@ -255,6 +253,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         if self.currentBestRoute != nil {
             self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
             
+            // check that we haven't run out of time
+            // if so, call display results right away -- display results will segue back if there aren't any viable results
+            if self.currentMinutes < -1 {
+                self.displayResults()
+                return
+            }
+            
             self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
             
             if self.currentSecondRoute != nil {
@@ -277,10 +282,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
     }
     
+    // Segues and unwinds-----------------------------------------------------
+    
     @IBAction func returnToRoot(sender: UIButton?) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    @IBAction func unwindToResults(segue: UIStoryboardSegue) {
+        
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
 
@@ -291,9 +301,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
 
     }
     
-    @IBAction func unwindToResults(segue: UIStoryboardSegue) {
-        
-    }
+
     
     // Error handling-----------------------------------------------------
     

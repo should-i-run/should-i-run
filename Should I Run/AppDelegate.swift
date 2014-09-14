@@ -25,13 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-//        var state: UIApplicationState = application.applicationState;
         
-        // This looks like "if state == UIApplicationStateActive" in Obj-C
-//        if state.hashValue == 0 {
-            var alert = UIAlertView(title:"Reminder", message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
-            alert.show();
-//        }
+        var alert = UIAlertView(title:"Reminder", message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
+        alert.show();
+
     }
 
     func applicationWillResignActive(application: UIApplication) {

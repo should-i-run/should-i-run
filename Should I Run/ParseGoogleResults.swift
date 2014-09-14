@@ -266,6 +266,7 @@ class ParseGoogleHelper {
     }
     
     func parser (googleResults: NSDictionary) {
+        println(googleResults)
         var results = [Route]()
         
         func addToResultsIfUniq (thisRoute:Route) {

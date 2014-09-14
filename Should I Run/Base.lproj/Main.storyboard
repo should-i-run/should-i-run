@@ -242,7 +242,7 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="to Pittsburg/Bay Point" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huy-5W-OZJ">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="to Pittsburg/Bay Point" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="huy-5W-OZJ">
                                                 <rect key="frame" x="79" y="49" width="498" height="53"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -263,9 +263,11 @@
                                             <constraint firstItem="huy-5W-OZJ" firstAttribute="top" secondItem="o4h-A2-S0j" secondAttribute="bottom" constant="6" id="5qX-tM-ki5"/>
                                             <constraint firstItem="rRS-un-cKv" firstAttribute="top" secondItem="Ln9-0H-tPC" secondAttribute="bottom" constant="6" id="7iA-2m-B0I"/>
                                             <constraint firstItem="Ln9-0H-tPC" firstAttribute="trailing" secondItem="qlH-FH-Xqs" secondAttribute="trailing" id="7jH-Qz-LbE"/>
+                                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="huy-5W-OZJ" secondAttribute="trailing" id="A4n-iU-wHi"/>
                                             <constraint firstAttribute="centerX" secondItem="huy-5W-OZJ" secondAttribute="centerX" id="AB1-hn-UMV"/>
                                             <constraint firstAttribute="height" constant="200" id="BIX-S2-5AA"/>
                                             <constraint firstItem="2f1-7V-QXh" firstAttribute="leading" secondItem="rRS-un-cKv" secondAttribute="trailing" constant="8" id="EnC-pj-D5g"/>
+                                            <constraint firstItem="huy-5W-OZJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GCm-oj-xbF" secondAttribute="leadingMargin" id="FJH-qt-yKy"/>
                                             <constraint firstItem="rRS-un-cKv" firstAttribute="trailing" secondItem="rbf-ts-B4g" secondAttribute="trailing" id="G1t-e2-0lQ"/>
                                             <constraint firstItem="qlH-FH-Xqs" firstAttribute="top" secondItem="GCm-oj-xbF" secondAttribute="top" constant="12" id="ITX-8t-xyQ"/>
                                             <constraint firstItem="qlH-FH-Xqs" firstAttribute="trailing" secondItem="GCm-oj-xbF" secondAttribute="leading" constant="66" id="SWc-hh-Wm1"/>
@@ -288,24 +290,26 @@
                                                 <exclude reference="SWc-hh-Wm1"/>
                                                 <exclude reference="1Gy-h1-esn"/>
                                                 <exclude reference="izM-iG-g3y"/>
-                                                <exclude reference="5qX-tM-ki5"/>
-                                                <exclude reference="AB1-hn-UMV"/>
-                                                <exclude reference="urL-j5-J5F"/>
-                                                <exclude reference="kAC-aD-zrb"/>
-                                                <exclude reference="yUN-nC-v55"/>
                                                 <exclude reference="7jH-Qz-LbE"/>
                                                 <exclude reference="u8U-0l-R8A"/>
+                                                <exclude reference="kAC-aD-zrb"/>
+                                                <exclude reference="yUN-nC-v55"/>
                                                 <exclude reference="SZo-ka-u7s"/>
                                                 <exclude reference="YSb-8e-EVF"/>
                                                 <exclude reference="nlO-G6-4Ea"/>
-                                                <exclude reference="n0z-P2-zhp"/>
-                                                <exclude reference="2rw-ML-CQS"/>
-                                                <exclude reference="TsO-9H-VsW"/>
                                                 <exclude reference="7iA-2m-B0I"/>
                                                 <exclude reference="G1t-e2-0lQ"/>
                                                 <exclude reference="VLT-DU-CmX"/>
+                                                <exclude reference="5qX-tM-ki5"/>
+                                                <exclude reference="A4n-iU-wHi"/>
+                                                <exclude reference="AB1-hn-UMV"/>
+                                                <exclude reference="FJH-qt-yKy"/>
+                                                <exclude reference="urL-j5-J5F"/>
                                                 <exclude reference="4G5-Py-IdW"/>
                                                 <exclude reference="EnC-pj-D5g"/>
+                                                <exclude reference="n0z-P2-zhp"/>
+                                                <exclude reference="2rw-ML-CQS"/>
+                                                <exclude reference="TsO-9H-VsW"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -315,24 +319,26 @@
                                                 <include reference="SWc-hh-Wm1"/>
                                                 <include reference="1Gy-h1-esn"/>
                                                 <include reference="izM-iG-g3y"/>
-                                                <include reference="5qX-tM-ki5"/>
-                                                <include reference="AB1-hn-UMV"/>
-                                                <include reference="urL-j5-J5F"/>
-                                                <include reference="kAC-aD-zrb"/>
-                                                <include reference="yUN-nC-v55"/>
                                                 <include reference="7jH-Qz-LbE"/>
                                                 <include reference="u8U-0l-R8A"/>
+                                                <include reference="kAC-aD-zrb"/>
+                                                <include reference="yUN-nC-v55"/>
                                                 <include reference="SZo-ka-u7s"/>
                                                 <include reference="YSb-8e-EVF"/>
                                                 <exclude reference="nlO-G6-4Ea"/>
-                                                <include reference="n0z-P2-zhp"/>
-                                                <include reference="2rw-ML-CQS"/>
-                                                <include reference="TsO-9H-VsW"/>
                                                 <include reference="7iA-2m-B0I"/>
                                                 <include reference="G1t-e2-0lQ"/>
                                                 <include reference="VLT-DU-CmX"/>
+                                                <include reference="5qX-tM-ki5"/>
+                                                <include reference="A4n-iU-wHi"/>
+                                                <include reference="AB1-hn-UMV"/>
+                                                <include reference="FJH-qt-yKy"/>
+                                                <include reference="urL-j5-J5F"/>
                                                 <include reference="4G5-Py-IdW"/>
                                                 <include reference="EnC-pj-D5g"/>
+                                                <include reference="n0z-P2-zhp"/>
+                                                <include reference="2rw-ML-CQS"/>
+                                                <include reference="TsO-9H-VsW"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -375,7 +381,7 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dublin Pleasonton" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5I-L2-Vwd">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dublin Pleasonton" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="p5I-L2-Vwd">
                                                 <rect key="frame" x="81" y="88" width="499" height="21"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -384,9 +390,11 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.97254901960784312" green="0.96862745098039216" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="p5I-L2-Vwd" secondAttribute="trailingMargin" id="1GY-kb-0nx"/>
                                             <constraint firstItem="p5I-L2-Vwd" firstAttribute="top" secondItem="rbu-Pp-tmw" secondAttribute="bottom" constant="7.5" id="2bk-5r-sKf"/>
                                             <constraint firstItem="ja3-aO-08F" firstAttribute="leading" secondItem="aGx-0V-D0e" secondAttribute="trailing" id="566-Dc-k6z"/>
                                             <constraint firstAttribute="height" constant="84" id="8kb-hW-3mj"/>
+                                            <constraint firstItem="p5I-L2-Vwd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5gf-Vd-CBp" secondAttribute="leadingMargin" id="EYn-EW-AhK"/>
                                             <constraint firstItem="ja3-aO-08F" firstAttribute="bottom" secondItem="aGx-0V-D0e" secondAttribute="bottom" id="GEU-m4-UWI"/>
                                             <constraint firstItem="aGx-0V-D0e" firstAttribute="top" secondItem="5gf-Vd-CBp" secondAttribute="top" constant="18" id="bGk-e5-90J"/>
                                             <constraint firstItem="ja3-aO-08F" firstAttribute="bottom" secondItem="rbu-Pp-tmw" secondAttribute="bottom" id="g9c-ma-ToW"/>
@@ -404,9 +412,11 @@
                                                 <exclude reference="GEU-m4-UWI"/>
                                                 <exclude reference="g9c-ma-ToW"/>
                                                 <exclude reference="jgS-Zj-EoK"/>
-                                                <exclude reference="2bk-5r-sKf"/>
-                                                <exclude reference="hNG-kt-UQP"/>
                                                 <exclude reference="gnf-Zu-D7S"/>
+                                                <exclude reference="1GY-kb-0nx"/>
+                                                <exclude reference="2bk-5r-sKf"/>
+                                                <exclude reference="EYn-EW-AhK"/>
+                                                <exclude reference="hNG-kt-UQP"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -417,9 +427,11 @@
                                                 <include reference="GEU-m4-UWI"/>
                                                 <include reference="g9c-ma-ToW"/>
                                                 <exclude reference="jgS-Zj-EoK"/>
-                                                <include reference="2bk-5r-sKf"/>
-                                                <include reference="hNG-kt-UQP"/>
                                                 <include reference="gnf-Zu-D7S"/>
+                                                <include reference="1GY-kb-0nx"/>
+                                                <include reference="2bk-5r-sKf"/>
+                                                <include reference="EYn-EW-AhK"/>
+                                                <include reference="hNG-kt-UQP"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -612,6 +624,7 @@
                     <navigationItem key="navigationItem" id="hmx-zy-7aK">
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Bs2-Pa-RyS">
                             <connections>
+                                <action selector="saveBarButtonPress:" destination="UkY-Fi-fDv" id="RNJ-uN-AkK"/>
                                 <segue destination="s5l-Yx-r0J" kind="unwind" unwindAction="unwindToList:" id="TQB-IX-NaG"/>
                             </connections>
                         </barButtonItem>

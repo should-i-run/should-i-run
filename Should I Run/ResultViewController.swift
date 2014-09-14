@@ -193,7 +193,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         } else if self.currentBestRoute!.agency == "muni" {
             self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
         }
-        self.stationNameLabel.adjustsFontSizeToFitWidth = true
         
         //running and walking time labels
         self.timeRunningLabel.text = String(runningTime)
@@ -218,8 +217,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         } else {
             self.followingDepartureDestinationLabel.text = "----"
         }
-        
-        self.followingDepartureDestinationLabel.adjustsFontSizeToFitWidth = true
         
     }
     

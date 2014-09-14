@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         
 //these lines should be uncommented when building for ios 8
+        
+        
         //registering for sending user various kinds of notifications
 //        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
 //*******************

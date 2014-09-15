@@ -70,11 +70,14 @@ class ParseGoogleHelper {
             
         } else if instructions.characterAtIndex(0) == 76 {
             eolStationName = instructions.substringFromIndex(18).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            
+
         }
         
         // other issues we need to address:
         // `Fisherman's Wharf via Downtown`
+        eolStationName = eolStationName.stringByReplacingOccurrencesOfString(" via Downtown", withString: "")
+        eolStationName = eolStationName.stringByReplacingOccurrencesOfString("'", withString: "")
+        
         
         return eolStationName
     }
@@ -337,7 +340,6 @@ class ParseGoogleHelper {
     }
     
     func parser (googleResults: NSDictionary) {
-        println(googleResults)
         var results = [Route]()
         
         func addToResultsIfUniq (thisRoute:Route) {

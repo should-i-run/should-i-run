@@ -127,8 +127,10 @@ class MuniApiController: NSObject{
             for route in routesArray {
                 
                 for datum in data {
+                    println(1)
 
                     if route.objectForKey("Code") as? String == datum.lineCode {
+                        println(2)
                         
                         var routeDirections:NSArray?
                         
@@ -139,18 +141,27 @@ class MuniApiController: NSObject{
                             routeDirections = [routeDirectionsDictionary]
                         }
                         
+                        println(3)
+                        
                         if routeDirections != nil {
+                            println(4)
                             
                             for direction in routeDirections! {
+                                println(5)
+                                println(direction)
 
                                 let directionName = direction.objectForKey("Name") as String
                                 var shortName1 = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
                                 var shortName2 = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
                                 
+                                println("short names: \(shortName1 + shortName2), looking for \(datum.eolStationName)")
+                                
                                 if shortName1 == datum.eolStationName  || shortName2 == datum.eolStationName {
+                                    println(6)
 
                                     
                                     if let departureTimeList  = direction.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
+                                        println(7)
                                         
                                         //what's left should be an array of departure times or a dictionary of a single time
                                         var departureTimesArray:[NSDictionary] = []

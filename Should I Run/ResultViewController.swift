@@ -13,8 +13,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     let locationManager = SharedUserLocation
     
-//    var firstRun:Bool = false
-    
     let walkingSpeed = 80 //meters per minute
     let runningSpeed = 200 //meters per minute
     let stationTime = 2 //minutes in station
@@ -139,6 +137,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         // if there is no viable route, error
         if self.currentBestRoute == nil || foundResult == false {
             self.handleError("sorry, couldn't find any routes")
+            self.updateResultTimer.invalidate()
+            self.secondTimer.invalidate()
             return
         }
         
@@ -254,9 +254,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.currentMinutes = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
             
             // check that we haven't run out of time
-            // if so, call display results right away -- display results will segue back if there aren't any viable results
+            // if so, segue back
             if self.currentMinutes < -1 {
-                self.displayResults()
+                self.returnToRoot(nil)
+                self.updateResultTimer.invalidate()
+                self.secondTimer.invalidate()
                 return
             }
             

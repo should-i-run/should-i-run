@@ -70,7 +70,6 @@
 		2508AF651975B54900E48B37 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2508AF671975B54E00E48B37 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2508AF691975C07100E48B37 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		2508AF6B1975C07100E48B37 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		2508AF6C1975C07100E48B37 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		2508AF741975C10800E48B37 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		252ADD871978357600ED0C3F /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +146,6 @@
 				1E4875E31978445E0079C53E /* AddAlarmViewController.swift */,
 				2508AF431975B4CE00E48B37 /* Main.storyboard */,
 				2508AF461975B4CE00E48B37 /* Images.xcassets */,
-				2508AF6B1975C07100E48B37 /* MainTableViewController.h */,
 				2508AF3D1975B4CE00E48B37 /* Supporting Files */,
 				2536F76E197702CA00A2CE2B /* UserLocationManager.swift */,
 				25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */,

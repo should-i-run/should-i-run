@@ -101,7 +101,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         self.delegate?.didReceiveGoogleData(jsonDict)
     }
     
-    func handleError(message:String="Couldn't find any BART or MUNI trips between here and there...") {
+    func handleError(message:String="Couldn't find any BART, MUNI, or Caltrain trips between here and there...") {
         self.delegate?.handleError(message)
         
     }

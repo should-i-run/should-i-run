@@ -190,6 +190,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
         
         self.destinationNameAlertView?.textFieldAtIndex(0)?.delegate = self
+        
+        self.destinationNameAlertView?.textFieldAtIndex(0)?.keyboardAppearance = UIKeyboardAppearance.Dark
+        self.destinationNameAlertView?.textFieldAtIndex(0)?.returnKeyType = UIReturnKeyType.Go
 
         self.destinationNameAlertView!.show()
     }
@@ -217,8 +220,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if(sender is String){
             // Dispatch the saving asynchronous and to another queue to prevent blocking the interface
-            let queue = dispatch_queue_create("saving", nil)
-            dispatch_async(queue, { () -> Void in
+//            let queue = dispatch_queue_create("saving", nil)
+//            dispatch_async(queue, { () -> Void in
                 if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
                     var savedLocations = self.fileManager.readFromDestinationsList()
                     
@@ -226,7 +229,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.fileManager.saveToDestinationsList(savedLocations)
                     
                 }
-            })
+//            })
             
         }
         

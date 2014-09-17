@@ -143,12 +143,11 @@ class MuniApiController: NSObject{
                             
                             for direction in routeDirections! {
 
-                                let directionName = direction.objectForKey("Name") as String
-                                var shortName1 = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
-                                var shortName2 = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
+                                var directionName = direction.objectForKey("Name") as String
+                                directionName = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
+                                directionName = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
                                 
-                                if shortName1 == datum.eolStationName  || shortName2 == datum.eolStationName {
-
+                                if directionName == datum.eolStationName {
                                     
                                     if let departureTimeList  = direction.objectForKey("StopList")?.objectForKey("Stop")?.objectForKey("DepartureTimeList") as? NSDictionary {
                                         

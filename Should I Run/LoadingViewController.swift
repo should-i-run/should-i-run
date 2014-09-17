@@ -87,7 +87,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             
             // Set timer to segue back (by calling segueFromView) back to the main table view
             var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
-            self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
+            self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
             
             
             //set this class as the delegate for the api controllers
@@ -186,6 +186,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func handleError(errorMessage: String) {
+        self.timeoutTimer.invalidate()
         self.googleApiHandler.cancelConnection()
         self.bartApiHandler.cancelConnection()
         self.muniApiHandler.cancelConnection()

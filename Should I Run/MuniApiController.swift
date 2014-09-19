@@ -121,11 +121,10 @@ class MuniApiController: NSObject{
                 routesArray.append(temp)
             }
             
-            
             let results:[String] = []
             
             for route in routesArray {
-                
+
                 for datum in data {
 
                     if route.objectForKey("Code") as? String == datum.lineCode {
@@ -146,6 +145,7 @@ class MuniApiController: NSObject{
                                 var directionName = direction.objectForKey("Name") as String
                                 directionName = directionName.stringByReplacingOccurrencesOfString("Inbound to ", withString: "")
                                 directionName = directionName.stringByReplacingOccurrencesOfString("Outbound to ", withString: "")
+                                directionName = directionName.stringByReplacingOccurrencesOfString(" via Downtown", withString: "")
                                 
                                 if directionName == datum.eolStationName {
                                     

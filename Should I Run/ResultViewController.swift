@@ -188,7 +188,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             
         } else if self.currentBestRoute!.agency == "muni" {
             self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
-            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
             
         } else if self.currentBestRoute!.agency == "caltrain" {
             self.destinationLabel.text = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"

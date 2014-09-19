@@ -142,8 +142,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         
         var bartResults = [Route]()
         var muniResults = [Route]()
-
-        
     
         if results[0].agency == "bart" {
             self.bartApiHandler.searchBartFor(results)

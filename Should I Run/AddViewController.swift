@@ -120,21 +120,22 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
         geocoder.reverseGeocodeLocation(touchCLLLocation, completionHandler: {
-            (response: [AnyObject]!, error: NSError!) -> Void in
-                if(response.count > 0){
+            (response: [AnyObject]?, error: NSError?) -> Void in
+            if let resp = response? {
+                if(resp.count > 0){
                     
-                    var text = response[0].locality
-                
-
-                    if response[0].thoroughfare? != nil   {
-                        text = "\(response[0].thoroughfare), " + text
+                    var text = resp[0].locality
+                    
+                    if let tfare = resp[0].thoroughfare?  {
+                        text = "\(tfare), " + text
                     }
-                    if response[0].subThoroughfare? != nil  {
-                        text = "\(response[0].subThoroughfare) " + text
+                    if let subtfare = resp[0].subThoroughfare?  {
+                        text = "\(subtfare) " + text
                     }
                     self.searchBar.text = text
                 }
-            })
+            }
+        })
 
         if let mk = self.currentAnnotation {
             self.mapView!.removeAnnotation(self.currentAnnotation)
@@ -225,6 +226,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
                     var savedLocations = self.fileManager.readFromDestinationsList()
                     savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
+                    println(savedLocations)
                     
 //                    savedLocations.setObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
                     self.fileManager.saveToDestinationsList(savedLocations)

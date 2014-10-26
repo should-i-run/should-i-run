@@ -16,9 +16,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     var window: UIWindow?
     
     let locationManager = SharedUserLocation
+    let fileManager = SharedFileManager
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+        var myDict: NSMutableDictionary?
+        if let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist") {
+            myDict = NSMutableDictionary(contentsOfFile: path)
+        }
+        if var dict = myDict {
+            println(dict["FirstLaunch"] )
+            if dict["FirstLaunch"] as Bool == true {
+                let defaultLocations:NSMutableArray = [
+                    ["latitude": "37.70811462402344",
+                        "longitude": "-122.4604339599609",
+                        "name": "tap to get times"
+                    ],
+                    ["latitude": "37.87351989746094",
+                        "longitude": "-122.2653198242188",
+                        "name": "swipe to delete"
+                    ],
+                    ["latitude": "37.73842239379883",
+                        "longitude": "-122.4604339599609",
+                        "name": "BART, MUNI metro,"
+                    ],
+                    ["latitude": "37.38831",
+                        "longitude": "-122.0872",
+                        "name": "Caltrain only"
+                    ]]
+                self.fileManager.saveToDestinationsList(defaultLocations)
+                dict["FirstLaunch"] = false
+                dict.writeToFile(NSBundle.mainBundle().pathForResource("Info", ofType: "plist")!, atomically: false)
+                
+            }
+            
+        }
         
         
         return true

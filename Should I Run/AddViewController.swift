@@ -146,7 +146,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.currentAnnotation = marker
     }
 
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if (sender as? UIBarButtonItem != self.saveBarButton) {
             return true
         }
@@ -224,8 +224,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //            dispatch_async(queue, { () -> Void in
                 if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
                     var savedLocations = self.fileManager.readFromDestinationsList()
+                    savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
                     
-                    savedLocations.setObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
+//                    savedLocations.setObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
                     self.fileManager.saveToDestinationsList(savedLocations)
                     
                 }

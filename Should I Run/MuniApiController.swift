@@ -86,12 +86,12 @@ class MuniApiController: NSObject{
         //stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         let url = NSURL(string: baseUrl + escapedStationName!)
         
-        var request = NSURLRequest(URL: url)
+        var request = NSURLRequest(URL: url!)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         // Make a request to the MUNI API if no cached results are found
-        self.currentMuniConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
+        self.currentMuniConnection = NSURLConnection(request: request, delegate: self)
         
     }
     

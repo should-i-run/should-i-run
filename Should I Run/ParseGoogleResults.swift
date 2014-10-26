@@ -306,7 +306,7 @@ class ParseGoogleHelper {
                                                     // here we can check that the bus directions aren't longer than a reasonable walking distance
                                                     // if so, return nil: the distance is too far to walk, and the person will have to take a bus, 
                                                     // and we don't support busses
-                                                    if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
+                                                    if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? Int {
                                                         if dist > 2000 {
                                                             return nil
                                                         }
@@ -322,7 +322,7 @@ class ParseGoogleHelper {
                                         // to make sure we're not making the user walk too far
                                         
                                         
-                                        if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? NSNumber {
+                                        if let dist = steps[i].objectForKey("distance")?.objectForKey("value") as? Int {
                                             if dist > 2000 {
                                                 return nil
                                             }

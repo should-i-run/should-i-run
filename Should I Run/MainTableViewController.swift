@@ -99,18 +99,18 @@ import Foundation
             
 
             
-            cell.textLabel?.text = "add a destination"
+            cell.textLabel.text = "add a destination"
             cell.backgroundColor = self.colors[4]
             cell.accessoryType = UITableViewCellAccessoryType.None
             
         //retrieve from the collection of objects with key "row number"
         } else if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            cell.textLabel?.text = location["name"] as NSString
+            cell.textLabel.text = location["name"] as NSString
             var index = row % self.colors.count
             cell.backgroundColor = self.colors[index]
         } else {
-            cell.textLabel?.text = "Default"
+            cell.textLabel.text = "Default"
             var index = row % self.colors.count
             cell.backgroundColor = self.colors[index]
         }

@@ -55,15 +55,14 @@ class WalkingDirectionsManager: NSObject {
     }
     
     func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
+        println("get dist from dir")
 
         response.routes[0].distance.hashValue
         var temp = Int(response.routes[0].distance)
+        println(temp);
         self.delegate?.handleWalkingDistance(temp)
 
     }
-    
-    
-    
 }
 
 

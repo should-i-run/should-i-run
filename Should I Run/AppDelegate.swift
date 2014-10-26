@@ -25,23 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
             myDict = NSMutableDictionary(contentsOfFile: path)
         }
         if var dict = myDict {
-            println(dict["FirstLaunch"] )
+            println("first launch")
+            println(dict["FirstLaunch"] as Bool)
             if dict["FirstLaunch"] as Bool == true {
                 let defaultLocations:NSMutableArray = [
-                    ["latitude": "37.70811462402344",
-                        "longitude": "-122.4604339599609",
+                    ["latitude": 37.70811462402344,
+                        "longitude": -122.4604339599609,
                         "name": "tap to get times"
                     ],
-                    ["latitude": "37.87351989746094",
-                        "longitude": "-122.2653198242188",
+                    ["latitude": 37.87351989746094,
+                        "longitude": -122.2653198242188,
                         "name": "swipe to delete"
                     ],
-                    ["latitude": "37.73842239379883",
-                        "longitude": "-122.4604339599609",
+                    ["latitude": 37.73842239379883,
+                        "longitude": -122.4604339599609,
                         "name": "BART, MUNI metro,"
                     ],
-                    ["latitude": "37.38831",
-                        "longitude": "-122.0872",
+                    ["latitude": 37.38831,
+                        "longitude": -122.0872,
                         "name": "Caltrain only"
                     ]]
                 self.fileManager.saveToDestinationsList(defaultLocations)

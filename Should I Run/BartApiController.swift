@@ -58,12 +58,12 @@ class BartApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataD
         //we can assume that for the set of routes being passed in, there is only one origin station.
         let url = NSURL(string: "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + data[0].originStationName + "&key=ZELI-U2UY-IBKQ-DT35")
         
-        var request = NSURLRequest(URL: url)
+        var request = NSURLRequest(URL: url!)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         // Initiate the request and save the reference so we can do operations on it later
-        self.currentBartConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
+        self.currentBartConnection = NSURLConnection(request: request, delegate: self)
     }
     
     func handleConnectionCallbackWithData(data:NSData?, andError error:NSError?){

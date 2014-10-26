@@ -60,11 +60,11 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         
         var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
         
-        var request = NSURLRequest(URL: url)
+        var request = NSURLRequest(URL: url!)
         if !cachedLocationFound {
             
             // Make a request to the Google API if no cached results are found
-            self.currentGoogleConnection = NSURLConnection.connectionWithRequest(request, delegate: self)
+            self.currentGoogleConnection = NSURLConnection(request: request, delegate: self)
             
         }
         

@@ -78,7 +78,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         self.walkingDirectionsManager.delegate = self
         
-        self.updateWalkingDistance(nil)
+        self.displayResults()
     }
     
     override func viewDidAppear(animated: Bool) {

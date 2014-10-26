@@ -16,7 +16,7 @@ enum NetworkStatusStruct: Int {
     case ReachableViaWWAN
 }
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, ParseGoogleHelperDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate {
+class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, ParseGoogleHelperDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate, WalkingDirectionsDelegate {
     
     var viewHasAlreadyAppeared = false
     var locationObserver:AnyObject?
@@ -41,6 +41,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     let locationManager = SharedUserLocation
+    var walkingDirectionsManager = SharedWalkingDirectionsManager
     
     // Create controller to handle BART API queries
     var bartApiHandler = BartApiController()
@@ -56,6 +57,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     var timeoutTimer: NSTimer = NSTimer()
     
     override func viewDidLoad() {
+        self.walkingDirectionsManager.delegate = self
         super.viewDidLoad()
         
         // Start spinner animation
@@ -67,6 +69,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         //get the internet going
         self.internetReachability.connectionRequired()
         self.internetReachability.startNotifier()
+        
         
     }
     
@@ -155,19 +158,29 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
 
     }
     
-
-    
-    
-    // Conform to BartApiControllerProtocol by implementing this method
     func didReceiveBartResults(results: [Route]) {
         
         self.resultsRoutes = results
-        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        self.getWalkingDistance()
     }
     
     func didReceiveMuniResults(results: [Route]) {
         
         self.resultsRoutes = results
+        self.getWalkingDistance()
+    }
+    
+    func getWalkingDistance() {
+        println("get walking")
+        let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+        self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+    }
+    
+    func handleWalkingDistance(distance:Int){
+        println("handle walking")
+        for route in self.resultsRoutes {
+            route.distanceToStation = distance
+        }
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     

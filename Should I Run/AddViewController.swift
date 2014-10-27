@@ -226,7 +226,6 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
                     var savedLocations = self.fileManager.readFromDestinationsList()
                     savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
-                    println(savedLocations)
                     
 //                    savedLocations.setObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndexedSubscript: savedLocations.count)
                     self.fileManager.saveToDestinationsList(savedLocations)

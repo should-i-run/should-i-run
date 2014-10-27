@@ -171,13 +171,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func getWalkingDistance() {
-        println("get walking")
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
     }
     
     func handleWalkingDistance(distance:Int){
-        println("handle walking")
         for route in self.resultsRoutes {
             route.distanceToStation = distance
         }

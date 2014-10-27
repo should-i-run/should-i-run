@@ -20,40 +20,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        var myDict: NSMutableDictionary?
-        if let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist") {
-            myDict = NSMutableDictionary(contentsOfFile: path)
+        if NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce") != true {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
+            let defaultLocations:NSMutableArray = [
+                ["latitude": 37.70811462402344,
+                    "longitude": -122.4604339599609,
+                    "name": "tap to get times."
+                ],
+                ["latitude": 37.87351989746094,
+                    "longitude": -122.2653198242188,
+                    "name": "swipe to delete."
+                ],
+                ["latitude": 37.73842239379883,
+                    "longitude": -122.4604339599609,
+                    "name": "bart, muni metro,"
+                ],
+                ["latitude": 37.38831,
+                    "longitude": -122.0872,
+                    "name": "or Caltrain only."
+                ]]
+            self.fileManager.saveToDestinationsList(defaultLocations)
         }
-        if var dict = myDict {
-            println("first launch")
-            println(dict["FirstLaunch"] as Bool)
-            if dict["FirstLaunch"] as Bool == true {
-                let defaultLocations:NSMutableArray = [
-                    ["latitude": 37.70811462402344,
-                        "longitude": -122.4604339599609,
-                        "name": "tap to get times"
-                    ],
-                    ["latitude": 37.87351989746094,
-                        "longitude": -122.2653198242188,
-                        "name": "swipe to delete"
-                    ],
-                    ["latitude": 37.73842239379883,
-                        "longitude": -122.4604339599609,
-                        "name": "BART, MUNI metro,"
-                    ],
-                    ["latitude": 37.38831,
-                        "longitude": -122.0872,
-                        "name": "Caltrain only"
-                    ]]
-                self.fileManager.saveToDestinationsList(defaultLocations)
-                dict["FirstLaunch"] = false
-                dict.writeToFile(NSBundle.mainBundle().pathForResource("Info", ofType: "plist")!, atomically: false)
-                
-            }
-            
-        }
-        
-        
         return true
     }
     

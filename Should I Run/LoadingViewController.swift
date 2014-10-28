@@ -9,7 +9,6 @@
 import UIKit
 import MapKit
 
-
 enum NetworkStatusStruct: Int {
     case NotReachable = 0
     case ReachableViaWiFi
@@ -23,20 +22,15 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     var backgroundColor = UIColor()
     
-    
-    
     var locationName = String()
     var destinationLatitude = Float()
     var destinationLongitude = Float()
-    
-    
+
     var startLatitude = Float()
     var startLongitude = Float()
     var resultsRoutes = [Route]()
     
     @IBOutlet var spinner: UIActivityIndicatorView?
-    
-
     
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
@@ -69,11 +63,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         //get the internet going
         self.internetReachability.connectionRequired()
         self.internetReachability.startNotifier()
-        
-        
     }
-    
-    
     
     override func viewDidAppear(animated: Bool){
         
@@ -92,13 +82,11 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
             self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
             
-            
             //set this class as the delegate for the api controllers
             self.googleApiHandler.delegate = self
             self.bartApiHandler.delegate = self
             self.muniApiHandler.delegate = self
             self.parseGoogleHelper.delegate = self
-            
             
             //Fetching data from Google and parsing it
             if(networkStatus == NOT_REACHABLE ){
@@ -128,10 +116,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     }
     
     func didReceiveGoogleData(data: NSDictionary)  {
-        
         self.parseGoogleHelper.parser(data)
-        
-        
     }
     
     func didReceiveGoogleResults(results: [Route]) {
@@ -152,10 +137,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             self.muniApiHandler.searchMuniFor(results)
         } else if results[0].agency == "caltrain" {
             self.resultsRoutes = results
-            self.performSegueWithIdentifier("ResultsSegue", sender: self)
+            self.getWalkingDistance()
         }
-        
-
     }
     
     func didReceiveBartResults(results: [Route]) {
@@ -182,10 +165,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
-    
-    
     // Error handling-----------------------------------------------------
-    
     
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
     // It performs the unwind segue when done.
@@ -211,25 +191,20 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         handleError("Request timed out")
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
         
         if self.locationObserver != nil {
             self.notificationCenter.removeObserver(self.locationObserver!)
         }
-        
-        // On segue, stop animating
+
         spinner!.stopAnimating()
-        
-        // Invalidate the timeout timer when we leave the view
+
         timeoutTimer.invalidate()
         
         if segue.identifier == "ResultsSegue" {
             var destinationController = segue.destinationViewController as ResultViewController
             
             destinationController.resultsRoutes = self.resultsRoutes
-        } else if segue.identifier == "ErrorUnwindSegue" {
-            
         }
     }
 }

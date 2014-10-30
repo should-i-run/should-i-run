@@ -43,6 +43,7 @@
                     <connections>
                         <segue destination="3gf-Kz-iQM" kind="show" identifier="LoadingSegue" id="NRz-u3-g7B"/>
                         <segue destination="bNB-m3-407" kind="show" identifier="AddSegue" id="52L-eT-HMy"/>
+                        <segue destination="nhn-Pt-3eE" kind="show" identifier="InstructionsSegue" id="WnV-Bv-gds"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCN-DA-DIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -103,7 +104,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d54-Ma-yhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oFy-wY-InO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3223.125" y="237.67605633802816"/>
+            <point key="canvasLocation" x="3217" y="540"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="TJz-jA-Xk3">
@@ -560,7 +561,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wny-FK-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4021.5" y="232"/>
+            <point key="canvasLocation" x="3987" y="540"/>
         </scene>
         <!--Add Alarm View Controller-->
         <scene sceneID="0cD-t1-03O">
@@ -650,7 +651,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ru9-wH-Bap" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="s5l-Yx-r0J" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5056.875" y="240.8450704225352"/>
+            <point key="canvasLocation" x="4816" y="540"/>
+        </scene>
+        <!--Instructions View Controller-->
+        <scene sceneID="eMH-3b-txy">
+            <objects>
+                <viewController storyboardIdentifier="instructions" id="nhn-Pt-3eE" customClass="InstructionsViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZeE-DK-Xqz"/>
+                        <viewControllerLayoutGuide type="bottom" id="7nz-g2-9yu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6gP-j6-hkI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-ky-8QQ">
+                                <rect key="frame" x="36" y="126" width="510.5" height="67.5"/>
+                                <string key="text">If your plans include BART, MUNI metro, or Caltrain, then we have you covered. Otherwise, let us know what transit system you'd like to us to include so we can add it!</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Twitter: @shouldIRunSF" translatesAutoresizingMaskIntoConstraints="NO" id="zYS-TR-Oqh">
+                                <rect key="frame" x="30" y="207" width="240" height="30"/>
+                                <color key="backgroundColor" red="0.023529411760000001" green="0.56078431370000004" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7uC-x1-g05"/>
+                                    <constraint firstAttribute="width" constant="240" id="khy-EQ-uNQ"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To delete a destination, swipe it towards the left." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmB-iS-Bw5">
+                                <rect key="frame" x="36" y="84" width="393" height="22.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.023529411764705882" green="0.5607843137254902" blue="0.52549019607843139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pkJ-ky-8QQ" firstAttribute="leading" secondItem="jmB-iS-Bw5" secondAttribute="leading" id="45V-je-hVp"/>
+                            <constraint firstItem="jmB-iS-Bw5" firstAttribute="top" secondItem="ZeE-DK-Xqz" secondAttribute="bottom" constant="20" id="B0g-HE-PbK"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pkJ-ky-8QQ" secondAttribute="trailing" constant="20" id="GMe-wj-Q4H"/>
+                            <constraint firstItem="pkJ-ky-8QQ" firstAttribute="top" secondItem="jmB-iS-Bw5" secondAttribute="bottom" constant="20" id="OTR-aQ-wU0"/>
+                            <constraint firstItem="zYS-TR-Oqh" firstAttribute="leading" secondItem="6gP-j6-hkI" secondAttribute="leadingMargin" constant="14" id="Vcg-YW-Nuc"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zYS-TR-Oqh" secondAttribute="trailing" constant="20" id="ZbF-tk-WL8"/>
+                            <constraint firstItem="zYS-TR-Oqh" firstAttribute="top" secondItem="pkJ-ky-8QQ" secondAttribute="bottom" constant="14" id="ZeY-RZ-klm"/>
+                            <constraint firstItem="jmB-iS-Bw5" firstAttribute="leading" secondItem="6gP-j6-hkI" secondAttribute="leadingMargin" constant="20" id="lun-qb-tYA"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="jmB-iS-Bw5" secondAttribute="trailing" constant="20" id="szl-N7-ChQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fGS-WX-OrU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Jm-xf-39s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2313" y="1462"/>
         </scene>
         <!--Add Destination-->
         <scene sceneID="Cna-dX-z1h">
@@ -758,7 +815,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3594.375" y="939.08450704225345"/>
+            <point key="canvasLocation" x="4022" y="1468"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="28Y-KD-qFE">

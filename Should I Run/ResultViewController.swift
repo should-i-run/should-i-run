@@ -74,7 +74,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         self.alarmButton!.hidden = true
         
         self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
-        
+        self.extendedLayoutIncludesOpaqueBars = true
         self.walkingDirectionsManager.delegate = self
         
         self.displayResults()

@@ -9,7 +9,7 @@
         <!--Should I Run?-->
         <scene sceneID="3fy-5f-oTr">
             <objects>
-                <tableViewController id="w1f-Mq-beW" customClass="MainTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="main" id="w1f-Mq-beW" customClass="MainTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" id="WW5-xV-1fW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
         <!--Loading View Controller-->
         <scene sceneID="6pi-4x-WDs">
             <objects>
-                <viewController id="3gf-Kz-iQM" customClass="LoadingViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loading" id="3gf-Kz-iQM" customClass="LoadingViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xog-ML-QOd"/>
                         <viewControllerLayoutGuide type="bottom" id="T9T-o1-wLW"/>
@@ -108,7 +108,7 @@
         <!--Result View Controller-->
         <scene sceneID="TJz-jA-Xk3">
             <objects>
-                <viewController id="8qB-Tw-PfR" customClass="ResultViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="result" id="8qB-Tw-PfR" customClass="ResultViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ixe-pM-wp7"/>
                         <viewControllerLayoutGuide type="bottom" id="svA-2S-M0p"/>
@@ -565,7 +565,7 @@
         <!--Add Alarm View Controller-->
         <scene sceneID="0cD-t1-03O">
             <objects>
-                <viewController id="UkY-Fi-fDv" customClass="AddAlarmViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addalarm" id="UkY-Fi-fDv" customClass="AddAlarmViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sIK-xg-Gqa"/>
                         <viewControllerLayoutGuide type="bottom" id="fSE-mq-6iZ"/>
@@ -574,7 +574,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
                                 <rect key="frame" x="0.0" y="166" width="320" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="alB-L6-8E4"/>
@@ -593,8 +593,12 @@
                                     </mask>
                                 </variation>
                             </datePicker>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
                                 <rect key="frame" x="20" y="135" width="227" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="227" id="gmn-ZR-YJp"/>
+                                    <constraint firstAttribute="height" constant="21" id="n1l-LL-jWo"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="24"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -603,8 +607,13 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="yog-Os-ERm" secondAttribute="trailing" id="09E-vX-sOT"/>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="Oa3-LW-1et" secondAttribute="bottom" constant="27" id="F6o-cu-dnd"/>
+                            <constraint firstItem="yog-Os-ERm" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leading" id="OkM-Qa-DTu"/>
+                            <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="Oa3-LW-1et" secondAttribute="bottom" constant="10" id="V3j-iV-Ozi"/>
+                            <constraint firstItem="Oa3-LW-1et" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" constant="4" id="XhE-zB-CIr"/>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="sIK-xg-Gqa" secondAttribute="bottom" constant="102" id="glP-Af-hQ7"/>
+                            <constraint firstItem="Oa3-LW-1et" firstAttribute="top" secondItem="sIK-xg-Gqa" secondAttribute="bottom" constant="71" id="jMh-5C-80j"/>
                             <constraint firstItem="Oa3-LW-1et" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" id="r1t-Zs-PUR"/>
+                            <constraint firstItem="fSE-mq-6iZ" firstAttribute="top" secondItem="yog-Os-ERm" secondAttribute="bottom" constant="254" id="u5Q-Qr-D3H"/>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" id="vlR-fp-1gg"/>
                         </constraints>
                         <variation key="default">
@@ -646,7 +655,7 @@
         <!--Add Destination-->
         <scene sceneID="Cna-dX-z1h">
             <objects>
-                <viewController id="bNB-m3-407" customClass="AddViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="adddest" id="bNB-m3-407" customClass="AddViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5UL-ho-8Bx"/>
                         <viewControllerLayoutGuide type="bottom" id="Hvc-j8-NrX"/>
@@ -655,16 +664,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="YLj-iU-rb8"/>
+                                    <constraint firstAttribute="width" id="pca-ZD-Yqy"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="bNB-m3-407" id="swL-m6-ssZ"/>
                                     <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="6jF-o1-0PI"/>
                                 </connections>
                             </mapView>
-                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" searchBarStyle="minimal" placeholder="Enter address or tap on map" translatesAutoresizingMaskIntoConstraints="NO" id="doG-ag-Kx8">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Enter address or tap on map" translatesAutoresizingMaskIntoConstraints="NO" id="doG-ag-Kx8">
+                                <rect key="frame" x="0.0" y="64" width="584" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="FME-pY-OMu"/>
                                 </constraints>
@@ -683,10 +695,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="doG-ag-Kx8" secondAttribute="trailing" id="3pu-64-ntM"/>
                             <constraint firstItem="qVv-dt-hy6" firstAttribute="centerX" secondItem="doG-ag-Kx8" secondAttribute="centerX" id="5vv-LI-I7R"/>
                             <constraint firstItem="qVv-dt-hy6" firstAttribute="top" secondItem="doG-ag-Kx8" secondAttribute="bottom" constant="-108" id="Gdb-WL-bbB"/>
                             <constraint firstAttribute="centerY" secondItem="qVv-dt-hy6" secondAttribute="centerY" id="Jnq-yV-OrR"/>
+                            <constraint firstItem="doG-ag-Kx8" firstAttribute="top" secondItem="5UL-ho-8Bx" secondAttribute="bottom" id="PSv-5q-rjK"/>
+                            <constraint firstItem="doG-ag-Kx8" firstAttribute="leading" secondItem="qVv-dt-hy6" secondAttribute="leading" id="lR0-lw-IuJ"/>
                             <constraint firstItem="Hvc-j8-NrX" firstAttribute="top" secondItem="qVv-dt-hy6" secondAttribute="bottom" id="m0Q-83-FIc"/>
+                            <constraint firstItem="qVv-dt-hy6" firstAttribute="leading" secondItem="4Eo-l2-a5A" secondAttribute="leading" id="odJ-k9-DIx"/>
+                            <constraint firstItem="qVv-dt-hy6" firstAttribute="top" secondItem="4Eo-l2-a5A" secondAttribute="top" id="qUc-NP-6x9"/>
                             <constraint firstAttribute="centerX" secondItem="qVv-dt-hy6" secondAttribute="centerX" id="qds-zK-oSb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qVv-dt-hy6" secondAttribute="trailing" constant="-18" id="vdq-CS-EDa"/>
                             <constraint firstItem="qVv-dt-hy6" firstAttribute="centerX" secondItem="doG-ag-Kx8" secondAttribute="centerX" id="wLp-gQ-rFa"/>
@@ -746,7 +763,7 @@
         <!--Navigation Controller-->
         <scene sceneID="28Y-KD-qFE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H3J-Mj-aFw" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navc" automaticallyAdjustsScrollViewInsets="NO" id="H3J-Mj-aFw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ofz-nZ-0xz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -760,23 +777,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5P-9A-7hb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1381.875" y="502.81690140845069"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Z0p-Y4-xsl">
-            <objects>
-                <viewController id="mAe-Xc-rtS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4Sl-jk-i68"/>
-                        <viewControllerLayoutGuide type="bottom" id="4gP-q2-ZH1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="l2K-UD-pHt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tdP-r1-xEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
 </document>

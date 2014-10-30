@@ -23,6 +23,7 @@
 		25C31ED919803C780000E7BC /* MuniApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C31ED819803C780000E7BC /* MuniApiController.swift */; };
 		25D41CA01982DA89004473EB /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */; };
 		25D8FBEC1982193400FA9FA0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D8FBEB1982193400FA9FA0 /* File.swift */; };
+		25F188581A01EDB9004A7450 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25F188571A01EDB9004A7450 /* LaunchScreen.storyboard */; };
 		25FCB2E6198EC16900F18ADD /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCB2E5198EC16900F18ADD /* Route.swift */; };
 		25FCB2E8198EC80D00F18ADD /* ParseGoogleResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FCB2E7198EC80D00F18ADD /* ParseGoogleResults.swift */; };
 		283F960E1978A04000A554CD /* GoogleApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283F960D1978A04000A554CD /* GoogleApiController.swift */; };
@@ -81,6 +82,7 @@
 		25C31ED819803C780000E7BC /* MuniApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuniApiController.swift; sourceTree = "<group>"; };
 		25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkingDirectionsManager.swift; path = ../WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		25D8FBEB1982193400FA9FA0 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../File.swift; sourceTree = "<group>"; };
+		25F188571A01EDB9004A7450 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25FCB2E5198EC16900F18ADD /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		25FCB2E7198EC80D00F18ADD /* ParseGoogleResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseGoogleResults.swift; sourceTree = "<group>"; };
 		283F960D1978A04000A554CD /* GoogleApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				252ADD871978357600ED0C3F /* ResultViewController.swift */,
 				1E4875E31978445E0079C53E /* AddAlarmViewController.swift */,
 				2508AF431975B4CE00E48B37 /* Main.storyboard */,
+				25F188571A01EDB9004A7450 /* LaunchScreen.storyboard */,
 				2508AF461975B4CE00E48B37 /* Images.xcassets */,
 				2508AF3D1975B4CE00E48B37 /* Supporting Files */,
 				2536F76E197702CA00A2CE2B /* UserLocationManager.swift */,
@@ -293,6 +296,7 @@
 				28B17423198075220090F129 /* Locations.plist in Resources */,
 				28FACEC61980C50B00D12A6D /* Cache.plist in Resources */,
 				2508AF451975B4CE00E48B37 /* Main.storyboard in Resources */,
+				25F188581A01EDB9004A7450 /* LaunchScreen.storyboard in Resources */,
 				2508AF471975B4CE00E48B37 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

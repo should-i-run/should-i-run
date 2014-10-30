@@ -653,10 +653,10 @@
             </objects>
             <point key="canvasLocation" x="4816" y="540"/>
         </scene>
-        <!--Instructions View Controller-->
+        <!--View Controller-->
         <scene sceneID="eMH-3b-txy">
             <objects>
-                <viewController storyboardIdentifier="instructions" id="nhn-Pt-3eE" customClass="InstructionsViewController" customModule="Should_I_Run_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="instructions" id="nhn-Pt-3eE" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZeE-DK-Xqz"/>
                         <viewControllerLayoutGuide type="bottom" id="7nz-g2-9yu"/>
@@ -722,11 +722,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
+                                <rect key="frame" x="0.0" y="64" width="584" height="536"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="YLj-iU-rb8"/>
-                                    <constraint firstAttribute="width" id="pca-ZD-Yqy"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="bNB-m3-407" id="swL-m6-ssZ"/>
                                     <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="6jF-o1-0PI"/>
@@ -734,59 +731,19 @@
                             </mapView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Enter address or tap on map" translatesAutoresizingMaskIntoConstraints="NO" id="doG-ag-Kx8">
                                 <rect key="frame" x="0.0" y="64" width="584" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="FME-pY-OMu"/>
-                                </constraints>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="FME-pY-OMu"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="FME-pY-OMu"/>
-                                    </mask>
-                                </variation>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="doG-ag-Kx8" secondAttribute="trailing" id="3pu-64-ntM"/>
-                            <constraint firstItem="qVv-dt-hy6" firstAttribute="centerX" secondItem="doG-ag-Kx8" secondAttribute="centerX" id="5vv-LI-I7R"/>
-                            <constraint firstItem="qVv-dt-hy6" firstAttribute="top" secondItem="doG-ag-Kx8" secondAttribute="bottom" constant="-108" id="Gdb-WL-bbB"/>
-                            <constraint firstAttribute="centerY" secondItem="qVv-dt-hy6" secondAttribute="centerY" id="Jnq-yV-OrR"/>
+                            <constraint firstItem="doG-ag-Kx8" firstAttribute="leading" secondItem="4Eo-l2-a5A" secondAttribute="leadingMargin" constant="-16" id="8zO-7g-AUe"/>
                             <constraint firstItem="doG-ag-Kx8" firstAttribute="top" secondItem="5UL-ho-8Bx" secondAttribute="bottom" id="PSv-5q-rjK"/>
-                            <constraint firstItem="doG-ag-Kx8" firstAttribute="leading" secondItem="qVv-dt-hy6" secondAttribute="leading" id="lR0-lw-IuJ"/>
-                            <constraint firstItem="Hvc-j8-NrX" firstAttribute="top" secondItem="qVv-dt-hy6" secondAttribute="bottom" id="m0Q-83-FIc"/>
-                            <constraint firstItem="qVv-dt-hy6" firstAttribute="leading" secondItem="4Eo-l2-a5A" secondAttribute="leading" id="odJ-k9-DIx"/>
-                            <constraint firstItem="qVv-dt-hy6" firstAttribute="top" secondItem="4Eo-l2-a5A" secondAttribute="top" id="qUc-NP-6x9"/>
-                            <constraint firstAttribute="centerX" secondItem="qVv-dt-hy6" secondAttribute="centerX" id="qds-zK-oSb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qVv-dt-hy6" secondAttribute="trailing" constant="-18" id="vdq-CS-EDa"/>
-                            <constraint firstItem="qVv-dt-hy6" firstAttribute="centerX" secondItem="doG-ag-Kx8" secondAttribute="centerX" id="wLp-gQ-rFa"/>
+                            <constraint firstItem="qVv-dt-hy6" firstAttribute="top" secondItem="5UL-ho-8Bx" secondAttribute="top" id="UtK-n5-EDD"/>
+                            <constraint firstItem="Hvc-j8-NrX" firstAttribute="top" secondItem="qVv-dt-hy6" secondAttribute="bottom" id="bVa-0u-RlQ"/>
+                            <constraint firstItem="qVv-dt-hy6" firstAttribute="leading" secondItem="4Eo-l2-a5A" secondAttribute="leadingMargin" constant="-16" id="hOM-DM-pd1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qVv-dt-hy6" secondAttribute="trailing" id="myg-EA-IO8"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="5vv-LI-I7R"/>
-                                <exclude reference="Gdb-WL-bbB"/>
-                                <exclude reference="Jnq-yV-OrR"/>
-                                <exclude reference="qds-zK-oSb"/>
-                                <exclude reference="vdq-CS-EDa"/>
-                                <exclude reference="wLp-gQ-rFa"/>
-                                <exclude reference="m0Q-83-FIc"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="5vv-LI-I7R"/>
-                                <include reference="Gdb-WL-bbB"/>
-                                <include reference="Jnq-yV-OrR"/>
-                                <include reference="qds-zK-oSb"/>
-                                <include reference="vdq-CS-EDa"/>
-                                <include reference="wLp-gQ-rFa"/>
-                                <include reference="m0Q-83-FIc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Destination" id="Mr5-RA-NYH">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="G4M-yo-wkO">

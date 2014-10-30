@@ -511,9 +511,9 @@
                                 <exclude reference="rvH-Go-UYd"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ARl-qV-9dh"/>
                                 <exclude reference="pgN-7q-sDW"/>
                                 <exclude reference="wbt-0k-9T0"/>
-                                <exclude reference="ARl-qV-9dh"/>
                                 <exclude reference="Vqr-AX-FM7"/>
                             </mask>
                         </variation>
@@ -522,9 +522,9 @@
                                 <include reference="rvH-Go-UYd"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ARl-qV-9dh"/>
                                 <include reference="pgN-7q-sDW"/>
                                 <include reference="wbt-0k-9T0"/>
-                                <include reference="ARl-qV-9dh"/>
                                 <include reference="Vqr-AX-FM7"/>
                             </mask>
                         </variation>
@@ -676,16 +676,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-ky-8QQ">
-                                <rect key="frame" x="36" y="126" width="510.5" height="67.5"/>
-                                <string key="text">If your plans include BART, MUNI metro, or Caltrain, then we have you covered. Otherwise, let us know what transit system you'd like to us to include so we can add it!</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Twitter: @shouldIRunSF" translatesAutoresizingMaskIntoConstraints="NO" id="zYS-TR-Oqh">
                                 <rect key="frame" x="30" y="207" width="240" height="30"/>
-                                <color key="backgroundColor" red="0.023529411760000001" green="0.56078431370000004" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.023529411760000001" green="0.56078431370000004" blue="0.52549019610000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7uC-x1-g05"/>
                                     <constraint firstAttribute="width" constant="240" id="khy-EQ-uNQ"/>
@@ -700,19 +693,58 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Otherwise, let us know what transit system you'd like to us to include so we can add it!" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIb-h3-wws">
+                                <rect key="frame" x="36" y="126" width="510.5" height="67.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If your plans include BART, MUNI metro, or Caltrain, then we have you covered." lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-ky-8QQ">
+                                <rect key="frame" x="36" y="126" width="510.5" height="67.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.023529411764705882" green="0.5607843137254902" blue="0.52549019607843139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.023529411764705882" green="0.5607843137254902" blue="0.52549019607843139" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="AIb-h3-wws" firstAttribute="leading" secondItem="6gP-j6-hkI" secondAttribute="leadingMargin" constant="20" id="1SF-Ar-QIn"/>
                             <constraint firstItem="pkJ-ky-8QQ" firstAttribute="leading" secondItem="jmB-iS-Bw5" secondAttribute="leading" id="45V-je-hVp"/>
                             <constraint firstItem="jmB-iS-Bw5" firstAttribute="top" secondItem="ZeE-DK-Xqz" secondAttribute="bottom" constant="20" id="B0g-HE-PbK"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pkJ-ky-8QQ" secondAttribute="trailing" constant="20" id="GMe-wj-Q4H"/>
-                            <constraint firstItem="pkJ-ky-8QQ" firstAttribute="top" secondItem="jmB-iS-Bw5" secondAttribute="bottom" constant="20" id="OTR-aQ-wU0"/>
+                            <constraint firstItem="pkJ-ky-8QQ" firstAttribute="top" secondItem="jmB-iS-Bw5" secondAttribute="bottom" constant="20" id="IeE-px-V3r"/>
+                            <constraint firstItem="AIb-h3-wws" firstAttribute="top" secondItem="pkJ-ky-8QQ" secondAttribute="bottom" constant="20" id="Knb-SY-Arn"/>
                             <constraint firstItem="zYS-TR-Oqh" firstAttribute="leading" secondItem="6gP-j6-hkI" secondAttribute="leadingMargin" constant="14" id="Vcg-YW-Nuc"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zYS-TR-Oqh" secondAttribute="trailing" constant="20" id="ZbF-tk-WL8"/>
-                            <constraint firstItem="zYS-TR-Oqh" firstAttribute="top" secondItem="pkJ-ky-8QQ" secondAttribute="bottom" constant="14" id="ZeY-RZ-klm"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="AIb-h3-wws" secondAttribute="trailing" constant="20" id="h9i-61-Dwe"/>
                             <constraint firstItem="jmB-iS-Bw5" firstAttribute="leading" secondItem="6gP-j6-hkI" secondAttribute="leadingMargin" constant="20" id="lun-qb-tYA"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="jmB-iS-Bw5" secondAttribute="trailing" constant="20" id="szl-N7-ChQ"/>
+                            <constraint firstItem="zYS-TR-Oqh" firstAttribute="top" secondItem="AIb-h3-wws" secondAttribute="bottom" constant="20" id="tCO-rj-bAI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="AIb-h3-wws"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="IeE-px-V3r"/>
+                                <exclude reference="1SF-Ar-QIn"/>
+                                <exclude reference="Knb-SY-Arn"/>
+                                <exclude reference="h9i-61-Dwe"/>
+                                <exclude reference="tCO-rj-bAI"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="AIb-h3-wws"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="IeE-px-V3r"/>
+                                <include reference="1SF-Ar-QIn"/>
+                                <include reference="Knb-SY-Arn"/>
+                                <include reference="h9i-61-Dwe"/>
+                                <include reference="tCO-rj-bAI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="fGS-WX-OrU"/>
                 </viewController>

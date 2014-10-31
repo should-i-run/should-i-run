@@ -60,19 +60,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         //double check that we have some results
         if self.resultsRoutes.count == 0 {
             self.handleError("Couldn't find any routes")
         }
-        
         self.view.backgroundColor = globalBackgroundColor
-        
         self.instructionLabel!.hidden = true
         self.alarmButton!.hidden = true
-        
         self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
         self.extendedLayoutIncludesOpaqueBars = true
         self.walkingDirectionsManager.delegate = self
@@ -113,7 +109,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 runningTime = (distanceToStation/runningSpeed) + self.stationTime
                 
                 let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                
                 if departingIn > runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     self.currentBestRoute = route

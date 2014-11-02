@@ -48,10 +48,7 @@ class WalkingDirectionsManager: NSObject {
     }
     
     func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
-        
-        response.routes[0].distance.hashValue
         var temp = Int(response.routes[0].distance)
         self.delegate?.handleWalkingDistance(temp)
-        
     }
 }

@@ -20,35 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        if NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce") != true {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
-            let defaultLocations:NSMutableArray = [
-                ["latitude": 37.70811462402344,
-                    "longitude": -122.4604339599609,
-                    "name": "Tap to get times."
-                ],
-                ["latitude": 37.87351989746094,
-                    "longitude": -122.2653198242188,
-                    "name": "Swipe to delete."
-                ],
-                ["latitude": 37.73842239379883,
-                    "longitude": -122.4604339599609,
-                    "name": "Bart, muni metro,"
-                ],
-                ["latitude": 37.38831,
-                    "longitude": -122.0872,
-                    "name": "or Caltrain only."
-                ]]
-            self.fileManager.saveToDestinationsList(defaultLocations)
-        }
         return true
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        
         var alert = UIAlertView(title:"Reminder", message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
         alert.show();
-
     }
 
     func applicationWillResignActive(application: UIApplication) {

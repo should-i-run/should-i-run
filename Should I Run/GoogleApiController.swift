@@ -83,10 +83,9 @@ class apiController: NSObject {
         let lonDouble : Double = route["originStationLatLon"]["lon"].double!
         let loc = CLLocationCoordinate2DMake(CLLocationDegrees(latDouble), CLLocationDegrees(lonDouble))
         
-        let unixTime = NSDate(timeIntervalSince1970: route["departureTime"].doubleValue)
-        let macData = NSDate(timeIntervalSince1970: <#NSTimeInterval#>)
+        let time = Double((route["departureTime"].doubleValue / 1000) - 978307200) // difference between unix and ios reference date
 
-        return Route(originStationName: route["originStationName"].stringValue, lineName: route["lineName"].stringValue, eolStationName: route["eolStationName"].stringValue, originCoord2d: loc, agency: route["agency"].stringValue, departureTime: route["departureTime"].doubleValue, lineCode: nil, distanceToStation: nil)
+        return Route(originStationName: route["originStationName"].stringValue, lineName: route["lineName"].stringValue, eolStationName: route["eolStationName"].stringValue, originCoord2d: loc, agency: route["agency"].stringValue, departureTime: time, lineCode: nil, distanceToStation: nil)
 
     }
     

@@ -133,7 +133,7 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     
     func handleError(errorMessage: String) {
         self.timeoutTimer.invalidate()
-        self.apiHandler.cancelConnection()
+//        self.apiHandler.cancelConnection()
         // Create and show error message
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")

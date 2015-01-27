@@ -102,7 +102,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 if let dist = self.distanceToOrigin? {
                     distanceToStation = dist
                 } else {
-                    distanceToStation = route.distanceToStation
+                    distanceToStation = route.distanceToStation!
                 }
                 
                 walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
@@ -164,14 +164,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //line and destination station label, departure station label
         if self.currentBestRoute!.agency == "bart" {
             
-            let destinationStation = bartLookupReverse[self.currentBestRoute!.eolStationName.lowercaseString]!
+            let destinationStation = self.currentBestRoute!.eolStationName
             self.destinationLabel.text = "towards \(destinationStation)"
             
-            if let name = bartLookupReverse[self.currentBestRoute!.originStationName] {
-                self.stationNameLabel.text = "meters to \(name) station"
-            } else {
-                self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
-            }
+            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+
             
         } else if self.currentBestRoute!.agency == "muni" {
             self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
@@ -192,11 +189,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //following destination station name label
         if let following:Route = self.currentSecondRoute {
             if following.agency == "bart" {
-                if let followingDestinationStation = bartLookupReverse[following.eolStationName.lowercaseString] {
-                    self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
-                } else {
-                    self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
-                }
+                self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
             } else if following.agency == "muni" {
                 self.followingDepartureDestinationLabel.text = "\(following.lineName) / \(following.eolStationName)"
             }

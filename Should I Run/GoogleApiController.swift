@@ -8,23 +8,18 @@
 
 import UIKit
 import MapKit
-
+import Alamofire
 
 protocol ApiControllerProtocol {
     func didReceiveData([Route])
     func handleError(errorMessage: String)
 }
 
-
-class apiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
+class apiController: NSObject {
     
     var delegate : ApiControllerProtocol?
     
     let fileManager = SharedFileManager
-    
-    // Create a reference to our Google API connection so we can cancel it later
-    var currentConnection: NSURLConnection?
-    var currentData: NSMutableData = NSMutableData()
     
     var cachedLocationFound = false
     
@@ -35,7 +30,6 @@ class apiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDeleg
         
         self.locationUserData["locName"] = locName as String
         self.locationUserData["latStart"] = latStart as Float
-        
         
         //opening the local cache where we are caching google results to prevent repeated API calls in a short time
         var cache = fileManager.readFromCache()
@@ -57,62 +51,42 @@ class apiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDeleg
             }
         }
         
-        
-        var url = NSURL(string: "http://localhost:3000/?startLat=\(latStart),startLon=\(lngStart)&destLat=\(latDest),destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG")
-        
-        var request = NSURLRequest(URL: url!)
         if !cachedLocationFound {
+            var url = "http://localhost:3000/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
             
-            // Make a request to the Google API if no cached results are found
-            self.currentConnection = NSURLConnection(request: request, delegate: self)
-            
+            Alamofire.request(.POST, url)
+                .responseJSON { (req, res, jsonData, err) in
+                    self.cacheData(jsonData)
+                    let json = JSON(jsonData!)
+                    var resArray = [Route]()
+                    for (var i = 0; i < json.count; ++i) {
+                        var x = self.parseRoute(json[i])
+                        resArray.append(x)
+                    }
+                    self.delegate!.didReceiveData(resArray)
+                }
         }
+    }
+    
+    func cacheData (data: AnyObject?){
         
-    }
-    
-    // MARK: Google API Connection Methods
-    
-    // Cancel the Google API connection (on timeout)
-    func cancelConnection() {
-        self.currentConnection?.cancel()
-    }
-    
-    // If Google API connection fails, handle error here
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        self.delegate?.handleError("Google API connection failed")
-    }
-    
-    // Append data as we receive it from the Google API
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.currentData.appendData(data)
-    }
-    
-    // On connection success, handle data we get from the Google API
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
-        
-        let jsonDict = NSJSONSerialization.JSONObjectWithData(self.currentData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-        println(jsonDict)
         var time = Int(NSDate().timeIntervalSince1970)
-        
-        //saving the fetched results to the local cache
-        var cache = self.fileManager.readFromCache()
-        cache.insertObject(["time" : time, "location" : self.locationUserData["locName"] as String, "position" : self.locationUserData["latStart"] as Float, "results" : jsonDict], atIndex: cache.count)
-        self.fileManager.saveToCache(cache)
 
-        let results = self.parseData(jsonDict)
-        
-        self.delegate?.didReceiveData(results)
+//        var cache = self.fileManager.readFromCache()
+//        cache.insertObject(["time" : time, "location" : self.locationUserData["locName"] as String, "position" : self.locationUserData["latStart"] as Float, "results" : data], atIndex: cache.count)
+//        self.fileManager.saveToCache(cache)
+
     }
 
-    func parseData(data: NSDictionary) -> [Route] {
-        var x: [Route] = []
-        var latDouble = ("234523452" as NSString).doubleValue
-        var lonDouble = ("23452435345" as NSString).doubleValue
+    func parseRoute(route: JSON) -> Route {
+        let latDouble : Double = route["originStationLatLon"]["lat"].double!
+        let lonDouble : Double = route["originStationLatLon"]["lon"].double!
+        let loc = CLLocationCoordinate2DMake(CLLocationDegrees(latDouble), CLLocationDegrees(lonDouble))
         
-        var loc = CLLocationCoordinate2DMake(CLLocationDegrees(latDouble), CLLocationDegrees(lonDouble))
+        let unixTime = NSDate(timeIntervalSince1970: route["departureTime"].doubleValue)
+        let macData = NSDate(timeIntervalSince1970: <#NSTimeInterval#>)
 
-        x.append(Route(distanceToStation: 6, originStationName: "dsfg", lineName: "fgsdfg", eolStationName: "asdf asdf", originCoord2d: loc, agency: "caltrain", departureTime: 3523453452345234, lineCode: nil))
-        return x
+        return Route(originStationName: route["originStationName"].stringValue, lineName: route["lineName"].stringValue, eolStationName: route["eolStationName"].stringValue, originCoord2d: loc, agency: route["agency"].stringValue, departureTime: route["departureTime"].doubleValue, lineCode: nil, distanceToStation: nil)
 
     }
     

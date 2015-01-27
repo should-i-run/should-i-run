@@ -18,6 +18,7 @@
 		2508AF751975C10800E48B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508AF741975C10800E48B37 /* AppDelegate.swift */; };
 		25091A3B1A7778B800D3C18F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25091A361A7778A100D3C18F /* Alamofire.framework */; };
 		25091A3F1A77792100D3C18F /* Alamofire.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 25091A361A7778A100D3C18F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		25091A411A777EB400D3C18F /* SwiftlyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25091A401A777EB400D3C18F /* SwiftlyJson.swift */; };
 		252ADD881978357600ED0C3F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252ADD871978357600ED0C3F /* ResultViewController.swift */; };
 		252ADD8A19784C1800ED0C3F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252ADD8919784C1800ED0C3F /* LoadingViewController.swift */; };
 		2536F76D1976EC7D00A2CE2B /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2536F76C1976EC7D00A2CE2B /* XMLReader.m */; };
@@ -116,6 +117,7 @@
 		2508AF6C1975C07100E48B37 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		2508AF741975C10800E48B37 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25091A2F1A7778A100D3C18F /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		25091A401A777EB400D3C18F /* SwiftlyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftlyJson.swift; sourceTree = "<group>"; };
 		252ADD871978357600ED0C3F /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		252ADD8919784C1800ED0C3F /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2536F76A1976EC6600A2CE2B /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				2536F76C1976EC7D00A2CE2B /* XMLReader.m */,
 				289A05AB197767650044E6B7 /* bartLookup.swift */,
 				8A3A980E197F131200D23741 /* ColorHelper.swift */,
+				25091A401A777EB400D3C18F /* SwiftlyJson.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				25811C5A1A05B161005501E6 /* InstructionsTableViewController.swift in Sources */,
 				8A3A980F197F131200D23741 /* ColorHelper.swift in Sources */,
 				289A05AC197767650044E6B7 /* bartLookup.swift in Sources */,
+				25091A411A777EB400D3C18F /* SwiftlyJson.swift in Sources */,
 				2536F76F197702CA00A2CE2B /* UserLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

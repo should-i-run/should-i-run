@@ -15,7 +15,7 @@ enum NetworkStatusStruct: Int {
     case ReachableViaWWAN
 }
 
-class LoadingViewController: UIViewController, BartApiControllerDelegate, GoogleAPIControllerProtocol, ParseGoogleHelperDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, MuniAPIControllerDelegate, WalkingDirectionsDelegate {
+class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocationManagerDelegate, UIAlertViewDelegate, WalkingDirectionsDelegate {
     
     var viewHasAlreadyAppeared = false
     var locationObserver:AnyObject?
@@ -37,13 +37,8 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     let locationManager = SharedUserLocation
     var walkingDirectionsManager = SharedWalkingDirectionsManager
     
-    // Create controller to handle BART API queries
-    var bartApiHandler = BartApiController()
-    var muniApiHandler = MuniApiController()
     
-    //Create controller to handle Google API queries
-    var googleApiHandler : GoogleApiController = GoogleApiController()
-    var parseGoogleHelper:ParseGoogleHelper = ParseGoogleHelper()
+    var apiHandler = apiController()
     
     var internetReachability: Reachability = Reachability.reachabilityForInternetConnection()
     
@@ -68,6 +63,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     override func viewDidAppear(animated: Bool){
         
         if !self.viewHasAlreadyAppeared {
+            self.apiHandler.delegate = self
             
             self.viewHasAlreadyAppeared = true
             
@@ -82,12 +78,6 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
             var timeoutText: Dictionary = ["titleString": "Time Out","messageString": "Sorry! Your request took too long."]
             self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
             
-            //set this class as the delegate for the api controllers
-            self.googleApiHandler.delegate = self
-            self.bartApiHandler.delegate = self
-            self.muniApiHandler.delegate = self
-            self.parseGoogleHelper.delegate = self
-            
             //Fetching data from Google and parsing it
             if(networkStatus == NOT_REACHABLE ){
                 self.navigationController?.popViewControllerAnimated(true)
@@ -96,7 +86,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                     
                     self.startLatitude = Float(loc2d.latitude)
                     self.startLongitude = Float(loc2d.longitude)
-                    self.googleApiHandler.fetchGoogleData(self.locationName, latDest: self.destinationLatitude, lngDest: self.destinationLongitude,latStart: self.startLatitude,lngStart: self.startLongitude)
+                    self.apiHandler.fetchData(self.locationName, latDest: self.destinationLatitude, lngDest: self.destinationLongitude,latStart: self.startLatitude,lngStart: self.startLongitude)
                     
                 } else {
                     
@@ -106,7 +96,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
                             
                             self.startLatitude = Float(loc2d.latitude)
                             self.startLongitude = Float(loc2d.longitude)
-                            self.googleApiHandler.fetchGoogleData(self.locationName, latDest:self.destinationLatitude,lngDest: self.destinationLongitude,latStart: self.startLatitude,lngStart: self.startLongitude)
+                            self.apiHandler.fetchData(self.locationName, latDest:self.destinationLatitude,lngDest: self.destinationLongitude,latStart: self.startLatitude,lngStart: self.startLongitude)
                             self.locationManager.hasLocation = true
                         }
                     }
@@ -115,40 +105,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
         }
     }
     
-    func didReceiveGoogleData(data: NSDictionary)  {
-        self.parseGoogleHelper.parser(data)
-    }
-    
-    func didReceiveGoogleResults(results: [Route]) {
-        // we can assume that the routes coming in are uniq
-        // we want to get all possible departure times for each route - different EOL stations
-        // But we only want to do one api request for each origin station
-        
-        // TODO: make this handle both bart and muni in same set of results
-        // as well as different origin stations
-        // we will also need to keep track of the requests made, and not transition until they all come back-- allowing for errors
-        
-        var bartResults = [Route]()
-        var muniResults = [Route]()
-    
-        if results[0].agency == "bart" {
-            self.bartApiHandler.searchBartFor(results)
-        } else if results[0].agency == "muni" {
-            self.muniApiHandler.searchMuniFor(results)
-        } else if results[0].agency == "caltrain" {
-            self.resultsRoutes = results
-            self.getWalkingDistance()
-        }
-    }
-    
-    func didReceiveBartResults(results: [Route]) {
-        
-        self.resultsRoutes = results
-        self.getWalkingDistance()
-    }
-    
-    func didReceiveMuniResults(results: [Route]) {
-        
+    func didReceiveData(results: [Route])  {
         self.resultsRoutes = results
         self.getWalkingDistance()
     }
@@ -176,9 +133,7 @@ class LoadingViewController: UIViewController, BartApiControllerDelegate, Google
     
     func handleError(errorMessage: String) {
         self.timeoutTimer.invalidate()
-        self.googleApiHandler.cancelConnection()
-        self.bartApiHandler.cancelConnection()
-        self.muniApiHandler.cancelConnection()
+        self.apiHandler.cancelConnection()
         // Create and show error message
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")

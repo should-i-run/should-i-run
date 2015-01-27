@@ -7,31 +7,31 @@
 //
 
 import UIKit
+import MapKit
 
 
-
-protocol GoogleAPIControllerProtocol {
-    func didReceiveGoogleData(data: NSDictionary)
+protocol ApiControllerProtocol {
+    func didReceiveData([Route])
     func handleError(errorMessage: String)
 }
 
 
-class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
+class apiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
     
-    var delegate : GoogleAPIControllerProtocol?
+    var delegate : ApiControllerProtocol?
     
     let fileManager = SharedFileManager
     
     // Create a reference to our Google API connection so we can cancel it later
-    var currentGoogleConnection: NSURLConnection?
-    var currentGoogleData: NSMutableData = NSMutableData()
+    var currentConnection: NSURLConnection?
+    var currentData: NSMutableData = NSMutableData()
     
     var cachedLocationFound = false
     
-    // Store user location data in this variable so we can use it once the Google API data is downloaded
+    // Store user location data so we can cache it with the server data
     var locationUserData = [String: Any]()
     
-    func fetchGoogleData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
+    func fetchData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
         
         self.locationUserData["locName"] = locName as String
         self.locationUserData["latStart"] = latStart as Float
@@ -50,21 +50,21 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             var cachedTime = item["time"] as Int
             if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 600) ) {
                 cachedLocationFound = true
-                var cachedResults = item["results"] as NSDictionary
+                var cachedResults = item["results"] as [Route]
                 
-                self.delegate?.didReceiveGoogleData(cachedResults)
+                self.delegate?.didReceiveData(cachedResults)
                 return
             }
         }
         
         
-        var url = NSURL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(latStart),\(lngStart)&destination=\(latDest),\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOGT75KVp-dg&departure_time=\(time)&mode=transit&alternatives=true")
+        var url = NSURL(string: "http://localhost:3000/?startLat=\(latStart),startLon=\(lngStart)&destLat=\(latDest),destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG")
         
         var request = NSURLRequest(URL: url!)
         if !cachedLocationFound {
             
             // Make a request to the Google API if no cached results are found
-            self.currentGoogleConnection = NSURLConnection(request: request, delegate: self)
+            self.currentConnection = NSURLConnection(request: request, delegate: self)
             
         }
         
@@ -74,7 +74,7 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     // Cancel the Google API connection (on timeout)
     func cancelConnection() {
-        self.currentGoogleConnection?.cancel()
+        self.currentConnection?.cancel()
     }
     
     // If Google API connection fails, handle error here
@@ -84,21 +84,36 @@ class GoogleApiController: NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     // Append data as we receive it from the Google API
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.currentGoogleData.appendData(data)
+        self.currentData.appendData(data)
     }
     
     // On connection success, handle data we get from the Google API
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         
-        let jsonDict = NSJSONSerialization.JSONObjectWithData(self.currentGoogleData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        let jsonDict = NSJSONSerialization.JSONObjectWithData(self.currentData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        println(jsonDict)
         var time = Int(NSDate().timeIntervalSince1970)
         
         //saving the fetched results to the local cache
         var cache = self.fileManager.readFromCache()
         cache.insertObject(["time" : time, "location" : self.locationUserData["locName"] as String, "position" : self.locationUserData["latStart"] as Float, "results" : jsonDict], atIndex: cache.count)
         self.fileManager.saveToCache(cache)
+
+        let results = self.parseData(jsonDict)
         
-        self.delegate?.didReceiveGoogleData(jsonDict)
+        self.delegate?.didReceiveData(results)
+    }
+
+    func parseData(data: NSDictionary) -> [Route] {
+        var x: [Route] = []
+        var latDouble = ("234523452" as NSString).doubleValue
+        var lonDouble = ("23452435345" as NSString).doubleValue
+        
+        var loc = CLLocationCoordinate2DMake(CLLocationDegrees(latDouble), CLLocationDegrees(lonDouble))
+
+        x.append(Route(distanceToStation: 6, originStationName: "dsfg", lineName: "fgsdfg", eolStationName: "asdf asdf", originCoord2d: loc, agency: "caltrain", departureTime: 3523453452345234, lineCode: nil))
+        return x
+
     }
     
     func handleError(message:String="Couldn't find any BART, MUNI, or Caltrain trips between here and there...") {

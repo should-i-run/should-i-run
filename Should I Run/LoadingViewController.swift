@@ -124,7 +124,7 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     
     // Error handling-----------------------------------------------------
     
-    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
+    // This function gets called when the user clicks on the alertView button to dismiss it
     // It performs the unwind segue when done.
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
         timeoutTimer.invalidate()

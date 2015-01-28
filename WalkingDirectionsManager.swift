@@ -11,13 +11,15 @@ import MapKit
 let SharedWalkingDirectionsManager = WalkingDirectionsManager()
 
 protocol WalkingDirectionsDelegate {
-    func handleWalkingDistance(distance:Int)
+    func handleWalkingDistance(distance:Int, routeTemplate: Route?)
     
 }
 
 class WalkingDirectionsManager: NSObject {
     
     var delegate : WalkingDirectionsDelegate?
+    
+    var thisRoute : Route?
     
     class var manager: WalkingDirectionsManager {
         return SharedWalkingDirectionsManager
@@ -30,7 +32,10 @@ class WalkingDirectionsManager: NSObject {
         
     }
     
-    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D) {
+    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D, route: Route?) {
+        if let r = route {
+            self.thisRoute = r
+        }
         
         var walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
@@ -49,6 +54,6 @@ class WalkingDirectionsManager: NSObject {
     
     func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
         var temp = Int(response.routes[0].distance)
-        self.delegate?.handleWalkingDistance(temp)
+        self.delegate?.handleWalkingDistance(temp, routeTemplate: self.thisRoute)
     }
 }

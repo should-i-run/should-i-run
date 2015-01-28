@@ -210,13 +210,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
         if self.currentBestRoute != nil {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon, route: nil)
         } else if self.resultsRoutes.count != 0 {
-             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon, route: nil)
         }
     }
     
-    func handleWalkingDistance(distance:Int){
+    func handleWalkingDistance(distance:Int, routeTemplate: Route?){
         self.distanceToOrigin = distance
         self.displayResults()
     }

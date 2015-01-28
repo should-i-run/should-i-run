@@ -49,6 +49,7 @@ class apiController: NSObject {
             
             Alamofire.request(.POST, url)
                 .responseJSON { (req, res, jsonData, err) in
+                    //TODO handle errors, no results
                     let json = JSON(jsonData!)
                     self.cacheData(json.object)
                     let routes = self.buildRoutes(json)

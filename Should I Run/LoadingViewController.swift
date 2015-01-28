@@ -36,6 +36,7 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     let locationManager = SharedUserLocation
     var walkingDirectionsManager = SharedWalkingDirectionsManager
+    var walkingRequestsCount = 0
     
     
     var apiHandler = apiController()
@@ -109,17 +110,67 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
         self.resultsRoutes = results
         self.getWalkingDistance()
     }
-    
-    func getWalkingDistance() {
-        let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
-        self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+   
+    func routesAreSame(routeA: Route, routeB: Route) -> Bool {
+        println("a: \(routeA), routeB: \(routeB)")
+        return (routeA.originStationName == routeB.originStationName) &&
+            (routeA.lineName == routeB.lineName)
     }
     
-    func handleWalkingDistance(distance:Int){
-        for route in self.resultsRoutes {
-            route.distanceToStation = distance
+    func routeInSet(routesSet: [Route], routeA: Route) -> Bool {
+        return routesSet.reduce(Bool(), combine: {
+            (initBool, thisRoute) -> Bool in
+            if (self.routesAreSame(thisRoute, routeB: routeA)) {
+                return true
+            } else {
+                return initBool
+            }
+        })
+    }
+    
+    func makeUniqRoutes(routes: [Route]) -> [Route] {
+        func addIfNew(collector: [Route], routeA: Route) -> [Route] {
+            println("collector: \(collector), routeA: \(routeA)")
+            return collector.reduce([Route](), combine: {
+                (collector: [Route], routeToCompare: Route) -> [Route] in
+                println("inner collector: \(collector), routeToCompare: \(routeToCompare)")
+                if (self.routeInSet(collector, routeA: routeToCompare)) {
+                    return collector
+                } else {
+                    var temp = collector
+                    temp.append(routeToCompare)
+                    return temp
+                }
+            })
         }
-        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        return routes.reduce([routes[0]], combine: addIfNew)
+    }
+    
+    func getWalkingDistance() {
+        let uniqRoutes = self.makeUniqRoutes(self.resultsRoutes)
+        let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
+        uniqRoutes.map({ (thisRoute) -> () in
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: self.resultsRoutes[0].originLatLon, route: thisRoute)
+            println("sending a request!")
+            self.walkingRequestsCount++
+            })
+    }
+    
+    func handleWalkingDistance(distance: Int, routeTemplate: Route?){
+                    println("got back a request!")
+        if let temp = routeTemplate {
+            self.walkingRequestsCount--
+            // iterate through each results route, and if the station matches, add the distance to the route
+            self.resultsRoutes.map({ (route) -> () in
+                if self.routesAreSame(route, routeB: temp) {
+                    route.distanceToStation = distance
+                }
+            })
+            
+            if self.walkingRequestsCount == 0 {
+                self.performSegueWithIdentifier("ResultsSegue", sender: self)
+            }
+        }
     }
     
     // Error handling-----------------------------------------------------
@@ -147,6 +198,8 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
+        println("result routes!")
+        println(self.resultsRoutes)
         
         if self.locationObserver != nil {
             self.notificationCenter.removeObserver(self.locationObserver!)

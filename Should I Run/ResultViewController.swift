@@ -209,10 +209,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
+        //TODO FIXME what route to send?
         if self.currentBestRoute != nil {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon, route: nil)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon, route: self.currentBestRoute!)
         } else if self.resultsRoutes.count != 0 {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon, route: nil)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon, route: self.currentSecondRoute!)
         }
     }
     

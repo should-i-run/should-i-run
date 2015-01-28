@@ -46,13 +46,17 @@ func routesAreSame(routeA: Route, routeB: Route) -> Bool {
         (routeA.lineName == routeB.lineName)
 }
 
+func originsAreSame(routeA: Route, routeB: Route) -> Bool {
+    return (routeA.originStationName == routeB.originStationName)
+}
+
 func routeInSet(routesSet: [Route], routeA: Route) -> Bool {
     return routesSet.reduce(false, combine: {
-        (initBool, thisRoute) -> Bool in
-        if (routesAreSame(thisRoute, routeA)) {
+        (collectorBool, thisRoute) -> Bool in
+        if (originsAreSame(thisRoute, routeA)) {
             return true
         } else {
-            return initBool
+            return collectorBool
         }
     })
 }

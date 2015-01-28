@@ -118,7 +118,6 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
         let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
         uniqRoutes.map({ (thisRoute) -> () in
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: self.resultsRoutes[0].originLatLon, route: thisRoute)
-            println("sending a request!")
             self.walkingRequestsCount++
             })
     }
@@ -128,13 +127,12 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
                     println("route back is: \(routeTemplate?.originStationName)")
         if let temp = routeTemplate {
             self.walkingRequestsCount--
+            
             // iterate through each results route, and if the station matches, add the distance to the route
             self.resultsRoutes.map({ (route) -> () in
-                if routesAreSame(route, temp) {
+                if originsAreSame(route, temp) {
                     route.distanceToStation = distance
                 }
-                println("dist: \(route.distanceToStation)")
-                println("dist from server: \(distance)")
             })
             
             if self.walkingRequestsCount == 0 {

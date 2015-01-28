@@ -32,10 +32,12 @@ class WalkingDirectionsManager: NSObject {
         
     }
     
-    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D, route: Route?) {
-        if let r = route {
-            self.thisRoute = r
-        }
+    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D, route: Route) {
+
+        self.thisRoute = route
+        
+        println("req dest lat: \(startLatLon.latitude)")
+        println("req route name \(route.originStationName)")
         
         var walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
@@ -53,6 +55,7 @@ class WalkingDirectionsManager: NSObject {
     }
     
     func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
+        println("response dest lat: \(response.destination.placemark)")
         var temp = Int(response.routes[0].distance)
         self.delegate?.handleWalkingDistance(temp, routeTemplate: self.thisRoute)
     }

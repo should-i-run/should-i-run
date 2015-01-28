@@ -67,12 +67,9 @@ class apiController: NSObject {
     }
     
     func buildRoutes(routes: JSON) -> [Route] {
-        var resArray = [Route]()
-        for (var i = 0; i < routes.count; ++i) {
-            var x = self.parseRoute(routes[i])
-            resArray.append(x)
-        }
-        return resArray
+        return (routes.arrayValue).map( { (rt) -> Route in
+            return self.parseRoute(rt)
+            })
     }
 
     func parseRoute(route: JSON) -> Route {

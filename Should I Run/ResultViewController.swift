@@ -217,6 +217,15 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     func handleWalkingDistance(distance:Int, routeTemplate: Route?){
+        if let temp = routeTemplate {
+            // iterate through each results route, and if the station matches, add the distance to the route
+            self.resultsRoutes.map({ (route) -> () in
+                if routesAreSame(route, temp) {
+                    route.distanceToStation = distance
+                }
+            })
+        }
+        //TODO remove this! Make it depend on the distance in the route, not here!
         self.distanceToOrigin = distance
         self.displayResults()
     }

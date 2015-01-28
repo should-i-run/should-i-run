@@ -111,43 +111,10 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
         self.getWalkingDistance()
     }
    
-    func routesAreSame(routeA: Route, routeB: Route) -> Bool {
-        println("a: \(routeA), routeB: \(routeB)")
-        return (routeA.originStationName == routeB.originStationName) &&
-            (routeA.lineName == routeB.lineName)
-    }
-    
-    func routeInSet(routesSet: [Route], routeA: Route) -> Bool {
-        return routesSet.reduce(Bool(), combine: {
-            (initBool, thisRoute) -> Bool in
-            if (self.routesAreSame(thisRoute, routeB: routeA)) {
-                return true
-            } else {
-                return initBool
-            }
-        })
-    }
-    
-    func makeUniqRoutes(routes: [Route]) -> [Route] {
-        func addIfNew(collector: [Route], routeA: Route) -> [Route] {
-            println("collector: \(collector), routeA: \(routeA)")
-            return collector.reduce([Route](), combine: {
-                (collector: [Route], routeToCompare: Route) -> [Route] in
-                println("inner collector: \(collector), routeToCompare: \(routeToCompare)")
-                if (self.routeInSet(collector, routeA: routeToCompare)) {
-                    return collector
-                } else {
-                    var temp = collector
-                    temp.append(routeToCompare)
-                    return temp
-                }
-            })
-        }
-        return routes.reduce([routes[0]], combine: addIfNew)
-    }
+
     
     func getWalkingDistance() {
-        let uniqRoutes = self.makeUniqRoutes(self.resultsRoutes)
+        let uniqRoutes = makeUniqRoutes(self.resultsRoutes)
         let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
         uniqRoutes.map({ (thisRoute) -> () in
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: self.resultsRoutes[0].originLatLon, route: thisRoute)
@@ -158,13 +125,16 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     
     func handleWalkingDistance(distance: Int, routeTemplate: Route?){
                     println("got back a request!")
+                    println("route back is: \(routeTemplate?.originStationName)")
         if let temp = routeTemplate {
             self.walkingRequestsCount--
             // iterate through each results route, and if the station matches, add the distance to the route
             self.resultsRoutes.map({ (route) -> () in
-                if self.routesAreSame(route, routeB: temp) {
+                if routesAreSame(route, temp) {
                     route.distanceToStation = distance
                 }
+                println("dist: \(route.distanceToStation)")
+                println("dist from server: \(distance)")
             })
             
             if self.walkingRequestsCount == 0 {
@@ -189,7 +159,6 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
         message.show()
-        
     }
     
     // Timeouts redirect here.
@@ -198,20 +167,14 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
-        println("result routes!")
-        println(self.resultsRoutes)
-        
         if self.locationObserver != nil {
             self.notificationCenter.removeObserver(self.locationObserver!)
         }
-
         spinner!.stopAnimating()
-
         timeoutTimer.invalidate()
         
         if segue.identifier == "ResultsSegue" {
             var destinationController = segue.destinationViewController as ResultViewController
-            
             destinationController.resultsRoutes = self.resultsRoutes
         }
     }

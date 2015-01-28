@@ -41,4 +41,30 @@ class Route {
     
 }
 
+func routesAreSame(routeA: Route, routeB: Route) -> Bool {
+    return (routeA.originStationName == routeB.originStationName) &&
+        (routeA.lineName == routeB.lineName)
+}
+
+func routeInSet(routesSet: [Route], routeA: Route) -> Bool {
+    return routesSet.reduce(false, combine: {
+        (initBool, thisRoute) -> Bool in
+        if (routesAreSame(thisRoute, routeA)) {
+            return true
+        } else {
+            return initBool
+        }
+    })
+}
+
+func makeUniqRoutes(routes: [Route]) -> [Route] {
+    var result = [Route]()
+    for aRoute in routes {
+        if !(routeInSet(result, aRoute)) {
+            result.append(aRoute)
+        }
+    }
+    return result
+}
+
 //func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))])

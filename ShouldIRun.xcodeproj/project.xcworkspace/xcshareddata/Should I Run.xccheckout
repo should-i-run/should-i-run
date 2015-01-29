@@ -5,27 +5,23 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9B37CD78-9682-48DD-9CB0-C69CD32EB04A</string>
+	<string>D9DD6AEA-CA3E-4B91-AC62-470DB4E5677D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>ShouldIRun</string>
+	<string>Should I Run</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>03C51FED3AE38418A7C5DEF5AE86593D1EBEAD8F</key>
-		<string>github.com:/rgoldfinger/should-i-run.git</string>
-		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>https://github.com/Alamofire/Alamofire.git</string>
+		<string>https://github.com/rgoldfinger/should-i-run.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ShouldIRun.xcodeproj</string>
+	<string>Should I Run.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>03C51FED3AE38418A7C5DEF5AE86593D1EBEAD8F</key>
 		<string>../..</string>
-		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>../../Alamofire/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:/rgoldfinger/should-i-run.git</string>
+	<string>https://github.com/rgoldfinger/should-i-run.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -36,17 +32,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>67620B5EFA902936DF04070AF595B76AB0333747</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Alamofire</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>03C51FED3AE38418A7C5DEF5AE86593D1EBEAD8F</string>
 			<key>IDESourceControlWCCName</key>
-			<string>should-i-run%20ios</string>
+			<string>should-i-run</string>
 		</dict>
 	</array>
 </dict>

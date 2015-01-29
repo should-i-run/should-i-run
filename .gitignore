@@ -6,6 +6,7 @@ ShouldIRun.xcodeproj/xcuserdata/LM.xcuserdatad/
 ShouldIRun.xcodeproj/project.xcworkspace/xcuserdata/neil.xcuserdatad/UserInterfaceState.xcuserstate
 ShouldIRun.xcodeproj/xcuserdata/neil.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 *.orig
+ShouldIRun.xcodeproj/project.xcworkspace/xcshareddata/
 *.playground
 .xcuserdatad
 xcuserdata/

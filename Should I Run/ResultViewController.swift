@@ -32,7 +32,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     //alarm
     var alarmTime = 0
     
-    
     //result area things
     @IBOutlet var resultArea: UIView!
     @IBOutlet var instructionLabel: UILabel!
@@ -61,21 +60,17 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         //double check that we have some results
         if self.resultsRoutes.count == 0 {
             self.handleError("Couldn't find any routes")
         }
-        
         self.view.backgroundColor = globalBackgroundColor
-        
         self.instructionLabel!.hidden = true
         self.alarmButton!.hidden = true
-        
         self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
-        
+        self.extendedLayoutIncludesOpaqueBars = true
         self.walkingDirectionsManager.delegate = self
         
         self.displayResults()
@@ -90,17 +85,14 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func viewWillDisappear(animated: Bool) {
         self.updateResultTimer.invalidate()
         self.secondTimer.invalidate()
-
     }
     
     func displayResults() {
-        //calculate
-        //logic for when to run
+        //calculate when to run
         var foundResult = false
         var walkingTime = 0
         var runningTime = 0
         var distanceToStation = 0
-        
         
         for var i = 0; i < self.resultsRoutes.count; ++i {
             if !foundResult {
@@ -110,14 +102,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 if let dist = self.distanceToOrigin? {
                     distanceToStation = dist
                 } else {
-                    distanceToStation = route.distanceToStation
+                    distanceToStation = route.distanceToStation!
                 }
                 
                 walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
                 runningTime = (distanceToStation/runningSpeed) + self.stationTime
                 
                 let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                
                 if departingIn > runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     self.currentBestRoute = route
@@ -128,7 +119,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                     if i + 1 < self.resultsRoutes.count {
                         self.currentSecondRoute = self.resultsRoutes[i + 1]
                         self.followingCurrentMinutes = Int(self.resultsRoutes[i + 1].departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-
                     }
                 }
             }
@@ -142,8 +132,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             return
         }
         
-        
-        //result area things
+        //------------------result area things
         // run or not?
         if self.currentMinutes >= walkingTime {
             self.instructionLabel.hidden = false
@@ -165,11 +154,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.instructionLabel.text = "Run!"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
             self.alarmButton.hidden = true
-            
         }
         
-        //detail area things
-        
+        //------------------detail area things
         
         //distance to station label
         self.distanceToStationLabel.text = String(distanceToStation)
@@ -177,14 +164,11 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         //line and destination station label, departure station label
         if self.currentBestRoute!.agency == "bart" {
             
-            let destinationStation = bartLookupReverse[self.currentBestRoute!.eolStationName.lowercaseString]!
+            let destinationStation = self.currentBestRoute!.eolStationName
             self.destinationLabel.text = "towards \(destinationStation)"
             
-            if let name = bartLookupReverse[self.currentBestRoute!.originStationName] {
-                self.stationNameLabel.text = "meters to \(name) station"
-            } else {
-                self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
-            }
+            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+
             
         } else if self.currentBestRoute!.agency == "muni" {
             self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
@@ -195,23 +179,17 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
         }
         
-        //running and walking time labels
+        //------------------running and walking time labels
         self.timeRunningLabel.text = String(runningTime)
         self.timeWalkingLabel.text = String(walkingTime)
-        
         
         //timer Labels
         self.updateTimes(nil)
 
-        
         //following destination station name label
         if let following:Route = self.currentSecondRoute {
             if following.agency == "bart" {
-                if let followingDestinationStation = bartLookupReverse[following.eolStationName.lowercaseString] {
-                    self.followingDepartureDestinationLabel.text = "towards \(followingDestinationStation)"
-                } else {
-                    self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
-                }
+                self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
             } else if following.agency == "muni" {
                 self.followingDepartureDestinationLabel.text = "\(following.lineName) / \(following.eolStationName)"
             }
@@ -221,7 +199,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.followingDepartureLabel.hidden = true
             self.followingTimeTextLabel.hidden = true
         }
-        
     }
     
     func updateWalkingDistance(timer: NSTimer?){
@@ -232,20 +209,27 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
+        //TODO FIXME what route to send?
         if self.currentBestRoute != nil {
             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
         } else if self.resultsRoutes.count != 0 {
-             self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
         }
-
-
-
     }
     
     func handleWalkingDistance(distance:Int){
+        // TODO
+//        if let temp = routeTemplate {
+//            // iterate through each results route, and if the station matches, add the distance to the route
+//            self.resultsRoutes.map({ (route) -> () in
+//                if routesAreSame(route, temp) {
+//                    route.distanceToStation = distance
+//                }
+//            })
+//        }
+        //TODO remove this! Make it depend on the distance in the route, not here!
         self.distanceToOrigin = distance
         self.displayResults()
-        
     }
     
     func updateTimes(timer: NSTimer?) {
@@ -268,8 +252,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
                 self.followingDepartureLabel.text = String(self.followingCurrentMinutes!)
             }
-            
-            
 
             self.timeToNextTrainLabel.text = String(currentMinutes)
             
@@ -280,8 +262,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
                 self.secondsToNextTrainLabel.text = ":" + String(currentSeconds)
                 self.followingDepartureSecondsLabel.text = ":" + String(currentSeconds)
             }
-        } 
-        
+        }
     }
     
     // Segues and unwinds-----------------------------------------------------
@@ -303,10 +284,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
 
     }
     
-
-    
     // Error handling-----------------------------------------------------
-    
     
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
     // It performs the unwind segue when done.
@@ -321,6 +299,5 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         message.show()
         
     }
-    
 }
 

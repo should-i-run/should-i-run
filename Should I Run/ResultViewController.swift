@@ -211,21 +211,22 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         
         //TODO FIXME what route to send?
         if self.currentBestRoute != nil {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon, route: self.currentBestRoute!)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
         } else if self.resultsRoutes.count != 0 {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon, route: self.currentSecondRoute!)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
         }
     }
     
-    func handleWalkingDistance(distance:Int, routeTemplate: Route?){
-        if let temp = routeTemplate {
-            // iterate through each results route, and if the station matches, add the distance to the route
-            self.resultsRoutes.map({ (route) -> () in
-                if routesAreSame(route, temp) {
-                    route.distanceToStation = distance
-                }
-            })
-        }
+    func handleWalkingDistance(distance:Int){
+        // TODO
+//        if let temp = routeTemplate {
+//            // iterate through each results route, and if the station matches, add the distance to the route
+//            self.resultsRoutes.map({ (route) -> () in
+//                if routesAreSame(route, temp) {
+//                    route.distanceToStation = distance
+//                }
+//            })
+//        }
         //TODO remove this! Make it depend on the distance in the route, not here!
         self.distanceToOrigin = distance
         self.displayResults()

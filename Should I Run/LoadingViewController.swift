@@ -36,8 +36,8 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     let locationManager = SharedUserLocation
     var walkingDirectionsManager = SharedWalkingDirectionsManager
-    var walkingRequestsCount = 0
-    
+    var walkingDistanceQueue = [Route]()
+    var currentWalkingRoute : Route?
     
     var apiHandler = apiController()
     
@@ -108,37 +108,34 @@ class LoadingViewController: UIViewController, ApiControllerProtocol, CLLocation
     
     func didReceiveData(results: [Route])  {
         self.resultsRoutes = results
-        self.getWalkingDistance()
+        self.walkingDistanceQueue = makeUniqRoutes(self.resultsRoutes)
+        self.queuer()
     }
    
 
-    
-    func getWalkingDistance() {
-        let uniqRoutes = makeUniqRoutes(self.resultsRoutes)
-        let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
-        uniqRoutes.map({ (thisRoute) -> () in
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: self.resultsRoutes[0].originLatLon, route: thisRoute)
-            self.walkingRequestsCount++
-            })
+    // getting walking distance for each route
+    // for each route, make a request, wait until it's back, then make next request
+    func queuer() {
+        if self.walkingDistanceQueue.count > 0 {
+            let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
+            var temp = self.walkingDistanceQueue.removeAtIndex(0)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: temp.originLatLon)
+            self.currentWalkingRoute = temp
+        } else {
+            self.performSegueWithIdentifier("ResultsSegue", sender: self)
+        }
     }
     
-    func handleWalkingDistance(distance: Int, routeTemplate: Route?){
-                    println("got back a request!")
-                    println("route back is: \(routeTemplate?.originStationName)")
-        if let temp = routeTemplate {
-            self.walkingRequestsCount--
-            
+    func handleWalkingDistance(distance: Int){
+        if let temp = self.currentWalkingRoute? {
             // iterate through each results route, and if the station matches, add the distance to the route
             self.resultsRoutes.map({ (route) -> () in
                 if originsAreSame(route, temp) {
                     route.distanceToStation = distance
                 }
             })
-            
-            if self.walkingRequestsCount == 0 {
-                self.performSegueWithIdentifier("ResultsSegue", sender: self)
-            }
         }
+        self.queuer()
     }
     
     // Error handling-----------------------------------------------------

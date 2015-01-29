@@ -46,14 +46,26 @@ class apiController: NSObject {
         
         if !cachedLocationFound {
             var url = "http://localhost:3000/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
+            println(url)
             
             Alamofire.request(.POST, url)
                 .responseJSON { (req, res, jsonData, err) in
                     //TODO handle errors, no results
-                    let json = JSON(jsonData!)
-                    self.cacheData(json.object)
-                    let routes = self.buildRoutes(json)
-                    self.delegate!.didReceiveData(routes)
+                    if let realJSON = jsonData? {
+                        let json = JSON(realJSON)
+                        if let jrray = json.array {
+                            if jrray.count == 0 {
+                                self.handleError()
+                            }
+                            self.cacheData(json.object)
+                            let routes = self.buildRoutes(json)
+                            self.delegate!.didReceiveData(routes)
+                        } else {
+                            self.handleError()
+                        }
+                    } else {
+                        self.handleError()
+                    }
                 }
         }
     }

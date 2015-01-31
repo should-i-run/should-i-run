@@ -18,6 +18,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     let stationTime = 2 //minutes in station
     
     var walkingDirectionsManager = SharedWalkingDirectionsManager
+    var walkingDistanceQueue = [Route]()
+    var currentWalkingRoute : Route?
     
     var resultsRoutes = [Route]()
     var currentBestRoute:Route?
@@ -26,8 +28,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var currentSeconds = 0
     var currentMinutes = 0
     var followingCurrentMinutes:Int? = 0
-    
-    var distanceToOrigin:Int?
     
     //alarm
     var alarmTime = 0
@@ -98,12 +98,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             if !foundResult {
                 
                 let route = self.resultsRoutes[i]
-
-                if let dist = self.distanceToOrigin? {
-                    distanceToStation = dist
-                } else {
-                    distanceToStation = route.distanceToStation!
-                }
+                distanceToStation = route.distanceToStation!
                 
                 walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
                 runningTime = (distanceToStation/runningSpeed) + self.stationTime
@@ -209,26 +204,31 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
-        //TODO FIXME what route to send?
-        if self.currentBestRoute != nil {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.currentBestRoute!.originLatLon)
-        } else if self.resultsRoutes.count != 0 {
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(start, endLatLon: self.resultsRoutes[0].originLatLon)
+        self.walkingDistanceQueue = makeUniqRoutes(self.resultsRoutes)
+        self.queuer()
+    }
+    
+    // getting walking distance for each route
+    // for each route, make a request, wait until it's back, then make next request
+    func queuer() {
+        if self.walkingDistanceQueue.count > 0 {
+            let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
+            var temp = self.walkingDistanceQueue.removeAtIndex(0)
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: temp.originLatLon)
+            self.currentWalkingRoute = temp
         }
     }
     
-    func handleWalkingDistance(distance:Int){
-        // TODO
-//        if let temp = routeTemplate {
-//            // iterate through each results route, and if the station matches, add the distance to the route
-//            self.resultsRoutes.map({ (route) -> () in
-//                if routesAreSame(route, temp) {
-//                    route.distanceToStation = distance
-//                }
-//            })
-//        }
-        //TODO remove this! Make it depend on the distance in the route, not here!
-        self.distanceToOrigin = distance
+    func handleWalkingDistance(distance: Int){
+        if let temp = self.currentWalkingRoute? {
+            // iterate through each results route, and if the station matches, add the distance to the route
+            self.resultsRoutes.map({ (route) -> () in
+                if originsAreSame(route, temp) {
+                    route.distanceToStation = distance
+                }
+            })
+        }
+        self.queuer()
         self.displayResults()
     }
     

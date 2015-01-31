@@ -35,7 +35,7 @@ class apiController: NSObject {
             var cachedLocaton = item["location"] as String
             var cachedPosition = item["position"] as Float
             var cachedTime = item["time"] as Int
-            if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 600) ) {
+            if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 100) ) {
                 cachedLocationFound = true
                 var cachedResults = JSON(item["results"] as AnyObject!)
                 let routes = self.buildRoutes(cachedResults)

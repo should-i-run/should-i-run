@@ -13,9 +13,7 @@ class AddAlarmViewController: UIViewController {
     @IBOutlet var alarmPicker: UIDatePicker!
     var walkTime: Int?
     
-    
     @IBAction func saveBarButtonPress(sender: AnyObject) {
-
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
         localNotification.alertBody = "Time to go"
@@ -39,7 +37,5 @@ class AddAlarmViewController: UIViewController {
         if  NSString(string: UIDevice.currentDevice().systemVersion).doubleValue >= 8.0 {
             UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert, categories: nil))
         }
-        
-        
     }
 }

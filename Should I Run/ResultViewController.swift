@@ -216,11 +216,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             var temp = self.walkingDistanceQueue.removeAtIndex(0)
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: temp.originLatLon)
             self.currentWalkingRoute = temp
+        } else {
+            self.displayResults()
         }
     }
     
     func handleWalkingDistance(distance: Int){
-        if let temp = self.currentWalkingRoute? {
+        if let temp = self.currentWalkingRoute {
             // iterate through each results route, and if the station matches, add the distance to the route
             self.resultsRoutes.map({ (route) -> () in
                 if originsAreSame(route, temp) {
@@ -229,7 +231,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             })
         }
         self.queuer()
-        self.displayResults()
+        
     }
     
     func updateTimes(timer: NSTimer?) {
@@ -278,10 +280,9 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
 
         if segue.identifier == "AlarmSegue" {
-            var dest: AddAlarmViewController = segue.destinationViewController as AddAlarmViewController
+            var dest: AddAlarmViewController = segue.destinationViewController as! AddAlarmViewController
             dest.walkTime = self.alarmTime
         }
-
     }
     
     // Error handling-----------------------------------------------------
@@ -297,7 +298,6 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
         message.show()
-        
     }
 }
 

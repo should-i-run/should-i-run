@@ -12,7 +12,6 @@ let SharedWalkingDirectionsManager = WalkingDirectionsManager()
 
 protocol WalkingDirectionsDelegate {
     func handleWalkingDistance(distance:Int)
-    
 }
 
 class WalkingDirectionsManager: NSObject {

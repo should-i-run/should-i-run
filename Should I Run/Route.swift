@@ -26,19 +26,11 @@ class Route {
         self.eolStationName = eolStationName
         self.agency = agency
         self.originLatLon = originCoord2d
-        
-        //initialise departure time, if it's around
-        if let time = departureTime? {
-            self.departureTime = time
-        }
-        if let code = lineCode? {
-            self.lineCode = code
-        }
-        if let dist = distanceToStation? {
-            self.distanceToStation = dist
-        }
+
+        self.departureTime = departureTime
+        self.lineCode = lineCode
+        self.distanceToStation = distanceToStation
     }
-    
 }
 
 func routesAreSame(routeA: Route, routeB: Route) -> Bool {
@@ -70,5 +62,3 @@ func makeUniqRoutes(routes: [Route]) -> [Route] {
     }
     return result
 }
-
-//func didReceiveMuniResults(results: [(departureTime: Int, distanceToStation: String, originStationName: String, lineName: String, eolStationName: String, originLatLon:(lat:String, lon:String))])

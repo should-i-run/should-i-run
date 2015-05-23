@@ -32,9 +32,9 @@ class apiController: NSObject {
         var time = Int(NSDate().timeIntervalSince1970)
         //checking if the location is cached && if the users location has not changed && if the results are not more than 5 min old
         for item in cache {
-            var cachedLocaton = item["location"] as String
-            var cachedPosition = item["position"] as Float
-            var cachedTime = item["time"] as Int
+            var cachedLocaton = item["location"] as! String
+            var cachedPosition = item["position"] as! Float
+            var cachedTime = item["time"] as! Int
             if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 100) ) {
                 cachedLocationFound = true
                 var cachedResults = JSON(item["results"] as AnyObject!)
@@ -45,13 +45,13 @@ class apiController: NSObject {
         }
         
         if !cachedLocationFound {
-            var url = "http://localhost:3000/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
+            var url = "http://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
             println(url)
             
             Alamofire.request(.POST, url)
                 .responseJSON { (req, res, jsonData, err) in
                     //TODO handle errors, no results
-                    if let realJSON = jsonData? {
+                    if let realJSON: AnyObject = jsonData {
                         let json = JSON(realJSON)
                         if let jrray = json.array {
                             if jrray.count == 0 {
@@ -73,17 +73,18 @@ class apiController: NSObject {
     func cacheData (data: AnyObject){
         var time = Int(NSDate().timeIntervalSince1970)
         var cache = self.fileManager.readFromCache()
-        let datum = ["time" : time, "location" : self.locationUserData["locName"] as String, "position" : self.locationUserData["latStart"] as Float, "results" : data]
+        let datum = ["time" : time, "location" : self.locationUserData["locName"] as! String, "position" : self.locationUserData["latStart"] as! Float, "results" : data]
         cache.insertObject(datum, atIndex: cache.count)
         self.fileManager.saveToCache(cache)
     }
     
     func buildRoutes(routes: JSON) -> [Route] {
-        return (routes.arrayValue).map( { (rt) -> Route in
+        return (routes.arrayValue).filter({ $0 != nil}).map( { (rt: JSON) -> Route in
             return self.parseRoute(rt)
-            })
+        })
     }
 
+    // Move this into an init function on the route
     func parseRoute(route: JSON) -> Route {
         let latDouble : Double = route["originStationLatLon"]["lat"].double!
         let lonDouble : Double = route["originStationLatLon"]["lon"].double!

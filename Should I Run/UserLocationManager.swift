@@ -36,7 +36,6 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
-
     
     class var manager: UserLocation {
         return SharedUserLocation
@@ -72,11 +71,5 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
             println("location fail error:")
             println(error)
         }
-
     }
-    
 }
-
-
-
-

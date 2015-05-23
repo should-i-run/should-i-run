@@ -25,51 +25,39 @@ class FileManager: NSObject {
     }
     
     override init () {
-
-        let directorys : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        let directorys = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
         
-        if let directories = directorys? {
-            let directory = directories[0]; //documents directory
-            
-            self.cachePlistPath = directory.stringByAppendingPathComponent(self.cachePlistFileName)
-            self.destinationsPlistPath = directory.stringByAppendingPathComponent(self.destinationsPlistFileName)
-
-        }
-        else {
-            println("directory is empty")
-        }
+        let directory = directorys!.first! //documents directory
+        self.cachePlistPath = directory.stringByAppendingPathComponent(self.cachePlistFileName)
+        self.destinationsPlistPath = directory.stringByAppendingPathComponent(self.destinationsPlistFileName)
+        
     }
     
     func saveToCache(newData:NSMutableArray) {
         newData.writeToFile(self.cachePlistPath!, atomically: false)
-
     }
     
     func readFromCache() -> NSMutableArray {
-        var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.cachePlistPath!)
-        if let res = resultsArray? {
+        let resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.cachePlistPath!)
+        if let res = resultsArray {
             return res
         } else {
-            var res:NSMutableArray = []
-            return res
+            return []
         }
+        
     }
     
     func saveToDestinationsList(newData:NSMutableArray ) {
         newData.writeToFile(self.destinationsPlistPath!, atomically: false)
-        
     }
     
     func readFromDestinationsList() -> NSMutableArray {
         var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.destinationsPlistPath!)
-        if let res = resultsArray? {
+        if let res = resultsArray {
             return res
         } else {
             var res:NSMutableArray = []
             return res
         }
-        
     }
-    
-
 }

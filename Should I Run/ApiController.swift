@@ -10,21 +10,17 @@ import UIKit
 import MapKit
 import Alamofire
 
-protocol ApiControllerProtocol {
-    func didReceiveData([Route])
-    func handleError(errorMessage: String)
-}
-
 class apiController: NSObject {
     
-    var delegate : ApiControllerProtocol?
+    static let instance = apiController()
+    
     let fileManager = SharedFileManager
     var cachedLocationFound = false
     
     // Store user location data so we can cache it with the server data
     var locationUserData = [String: Any]()
     
-    func fetchData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float) {
+    func fetchData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float, success: ([Route] -> ()), fail: String -> ()) {
         self.locationUserData["locName"] = locName as String
         self.locationUserData["latStart"] = latStart as Float
         
@@ -39,7 +35,7 @@ class apiController: NSObject {
                 cachedLocationFound = true
                 var cachedResults = JSON(item["results"] as AnyObject!)
                 let routes = self.buildRoutes(cachedResults)
-                self.delegate?.didReceiveData(routes)
+                success(routes)
                 return
             }
         }
@@ -55,16 +51,16 @@ class apiController: NSObject {
                         let json = JSON(realJSON)
                         if let jrray = json.array {
                             if jrray.count == 0 {
-                                self.handleError()
+                                self.handleError(fail)
                             }
                             self.cacheData(json.object)
                             let routes = self.buildRoutes(json)
-                            self.delegate!.didReceiveData(routes)
+                            success(routes)
                         } else {
-                            self.handleError()
+                            self.handleError(fail)
                         }
                     } else {
-                        self.handleError()
+                        self.handleError(fail)
                     }
                 }
         }
@@ -95,7 +91,8 @@ class apiController: NSObject {
         return Route(originStationName: route["originStationName"].stringValue, lineName: route["lineName"].stringValue, eolStationName: route["eolStationName"].stringValue, originCoord2d: loc, agency: route["agency"].stringValue, departureTime: time, lineCode: nil, distanceToStation: nil)
     }
     
-    func handleError(message:String="Couldn't find any BART, MUNI, or Caltrain trips between here and there...") {
-        self.delegate?.handleError(message)
+    func handleError(fail: String -> ()) {
+        let message = "Couldn't find any BART, MUNI, or Caltrain trips between here and there..."
+        fail(message)
     }
 }

@@ -7,14 +7,12 @@
 //
 
 import UIKit
+import MapKit
 import Foundation
 
 @objc (MainTableViewController) class MainTableViewController: UITableViewController {
     var colors = [UIColor]()
 
-    var locName:String = ""
-    var locLat:Float = 0.0
-    var locLong:Float = 0.0
     var colorForChosenLocation = UIColor()
     
     let fileManager = SharedFileManager
@@ -110,10 +108,14 @@ import Foundation
         // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
         if row < locations.count {
             let locationSelected:AnyObject = locations[row]
-            self.locName = locationSelected["name"] as! String
-            self.locLat = locationSelected["latitude"] as! Float
-            self.locLong = locationSelected["longitude"] as! Float
-            self.colorForChosenLocation = self.colors[row % self.colors.count]
+            let locName = locationSelected["name"] as! String
+            let locLat = locationSelected["latitude"] as! Float
+            let locLong = locationSelected["longitude"] as! Float
+            let color = self.colors[row % self.colors.count]
+
+            DataHandler.instance.loadTrip(locName, lat: locLat, lon: locLong, color: color)
+            
+            
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
 
         } else if row == locations.count {
@@ -131,10 +133,6 @@ import Foundation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "LoadingSegue" {
             var dest: LoadingViewController = segue.destinationViewController as! LoadingViewController
-            dest.locationName = self.locName
-            //37.784923, -122.408396
-            dest.destinationLatitude = self.locLat
-            dest.destinationLongitude = self.locLong
             dest.backgroundColor = self.colorForChosenLocation
         }
     }

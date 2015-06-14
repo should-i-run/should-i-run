@@ -61,6 +61,7 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.resultsRoutes = DataHandler.instance.getRoutes()
         
         //double check that we have some results
         if self.resultsRoutes.count == 0 {

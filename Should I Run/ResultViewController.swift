@@ -7,21 +7,10 @@
 //
 
 import UIKit
-import MapKit
 
-class ResultViewController: UIViewController, CLLocationManagerDelegate, WalkingDirectionsDelegate {
+class ResultViewController: UIViewController, DataHandlerDelegate {
     
-    let locationManager = SharedUserLocation
-    
-    let walkingSpeed = 80 //meters per minute
-    let runningSpeed = 200 //meters per minute
-    let stationTime = 2 //minutes in station
-    
-    var walkingDirectionsManager = SharedWalkingDirectionsManager
-    var walkingDistanceQueue = [Route]()
-    var currentWalkingRoute : Route?
-    
-    var resultsRoutes = [Route]()
+    var results = [Route]()
     var currentBestRoute:Route?
     var currentSecondRoute:Route?
     
@@ -58,21 +47,14 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.resultsRoutes = DataHandler.instance.getRoutes()
-        
-        //double check that we have some results
-        if self.resultsRoutes.count == 0 {
-            self.handleError("Couldn't find any routes")
-        }
         self.view.backgroundColor = globalBackgroundColor
         self.instructionLabel!.hidden = true
         self.alarmButton!.hidden = true
         self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
         self.extendedLayoutIncludesOpaqueBars = true
-        self.walkingDirectionsManager.delegate = self
+        DataHandler.instance.delegate = self
         
         self.displayResults()
     }
@@ -88,49 +70,42 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         self.secondTimer.invalidate()
     }
     
+    func handleDataSuccess() {
+        self.displayResults()
+    }
+    
     func displayResults() {
-        //calculate when to run
-        var foundResult = false
-        var walkingTime = 0
-        var runningTime = 0
-        var distanceToStation = 0
-        
-        for var i = 0; i < self.resultsRoutes.count; ++i {
-            if !foundResult {
-                
-                let route = self.resultsRoutes[i]
-                distanceToStation = route.distanceToStation!
-                
-                walkingTime = (distanceToStation/walkingSpeed) + self.stationTime
-                runningTime = (distanceToStation/runningSpeed) + self.stationTime
-                
-                let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                if departingIn > runningTime { //if time to departure is less than time to get to station
-                    foundResult = true
-                    self.currentBestRoute = route
-                    self.currentMinutes = departingIn
-                    self.currentSeconds = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
-                    
-                    //set the following route if there is one
-                    if i + 1 < self.resultsRoutes.count {
-                        self.currentSecondRoute = self.resultsRoutes[i + 1]
-                        self.followingCurrentMinutes = Int(self.resultsRoutes[i + 1].departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                    }
-                }
-            }
-        }
-        
-        // if there is no viable route, error
-        if self.currentBestRoute == nil || foundResult == false {
+        self.results = DataHandler.instance.getResults()
+        if (self.results.count > 0) {
+            let firstRoute = self.results[0]
+            self.currentBestRoute = firstRoute
+            let departingIn: Int = Int(firstRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+            self.currentMinutes = departingIn
+            self.currentSeconds = Int(firstRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
+        } else {
             self.handleError("sorry, couldn't find any routes")
             self.updateResultTimer.invalidate()
             self.secondTimer.invalidate()
             return
         }
         
+        if (self.results.count > 1) {
+            let secondRoute = self.results[1]
+            self.currentSecondRoute = secondRoute
+            self.followingCurrentMinutes = Int(secondRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+        }
+        
         //------------------result area things
         // run or not?
-        if self.currentMinutes >= walkingTime {
+        if currentBestRoute!.shouldRun {
+            self.instructionLabel.hidden = false
+            let runUIColor = colorize(0xFC5B3F)
+            self.resultArea!.backgroundColor = runUIColor
+            
+            self.instructionLabel.text = "Run!"
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
+            self.alarmButton.hidden = true
+        } else {
             self.instructionLabel.hidden = false
             self.instructionLabel.text = "Nah, take it easy"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
@@ -140,22 +115,13 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
             self.resultArea.backgroundColor = walkUIColor
             
             self.alarmButton.hidden = false
-            self.alarmTime = self.currentMinutes - walkingTime
-            
-        } else {
-            self.instructionLabel.hidden = false
-            let runUIColor = colorize(0xFC5B3F)
-            self.resultArea!.backgroundColor = runUIColor
-            
-            self.instructionLabel.text = "Run!"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
-            self.alarmButton.hidden = true
+            self.alarmTime = self.currentMinutes - self.currentBestRoute!.walkingTime
         }
         
         //------------------detail area things
         
         //distance to station label
-        self.distanceToStationLabel.text = String(distanceToStation)
+        self.distanceToStationLabel.text = String(stringInterpolationSegment: self.currentBestRoute!.distanceToStation)
     
         //line and destination station label, departure station label
         if self.currentBestRoute!.agency == "bart" {
@@ -176,8 +142,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
         }
         
         //------------------running and walking time labels
-        self.timeRunningLabel.text = String(runningTime)
-        self.timeWalkingLabel.text = String(walkingTime)
+        self.timeRunningLabel.text = String(self.currentBestRoute!.runningTime)
+        self.timeWalkingLabel.text = String(self.currentBestRoute!.walkingTime)
         
         //timer Labels
         self.updateTimes(nil)
@@ -198,41 +164,8 @@ class ResultViewController: UIViewController, CLLocationManagerDelegate, Walking
     }
     
     func updateWalkingDistance(timer: NSTimer?){
-        
-        //in the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
-        if self.locationManager.currentLocation2d == nil {
-            return
-        }
-        let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
-        
-        self.walkingDistanceQueue = makeUniqRoutes(self.resultsRoutes)
-        self.queuer()
-    }
-    
-    // getting walking distance for each route
-    // for each route, make a request, wait until it's back, then make next request
-    func queuer() {
-        if self.walkingDistanceQueue.count > 0 {
-            let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
-            var temp = self.walkingDistanceQueue.removeAtIndex(0)
-            self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: temp.originLatLon)
-            self.currentWalkingRoute = temp
-        } else {
-            self.displayResults()
-        }
-    }
-    
-    func handleWalkingDistance(distance: Int){
-        if let temp = self.currentWalkingRoute {
-            // iterate through each results route, and if the station matches, add the distance to the route
-            self.resultsRoutes.map({ (route) -> () in
-                if originsAreSame(route, temp) {
-                    route.distanceToStation = distance
-                }
-            })
-        }
-        self.queuer()
-        
+        DataHandler.instance.updateWalkingDistances()
+
     }
     
     func updateTimes(timer: NSTimer?) {

@@ -18,6 +18,11 @@ class Route {
     var eolStationName: String
     var originLatLon:CLLocationCoordinate2D
     var agency: String
+    var shouldRun: Bool
+    let stationTime = 2
+    
+    var walkingTime = 0
+    var runningTime = 0
     
     init (originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Double?, lineCode: String?, distanceToStation: Int?) {
 
@@ -30,6 +35,7 @@ class Route {
         self.departureTime = departureTime
         self.lineCode = lineCode
         self.distanceToStation = distanceToStation
+        self.shouldRun = false
     }
 }
 

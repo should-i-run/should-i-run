@@ -9,6 +9,14 @@ import UIKit
 import MapKit
 import Foundation
 
+let walkingSpeed = 80 //meters per minute
+let runningSpeed = 200 //meters per minute
+
+protocol DataHandlerDelegate {
+    func handleDataSuccess()
+    func handleError(String)
+}
+
 class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegate {
     let locationManager = SharedUserLocation
     var walkingDirectionsManager = SharedWalkingDirectionsManager
@@ -25,7 +33,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     var startLatitude = Float()
     var startLongitude = Float()
     
-    var loadingView: LoadingViewController?
+    var delegate:DataHandlerDelegate?
     
     var locationObserver:AnyObject?
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
@@ -61,8 +69,40 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         self.walkingDirectionsManager.delegate = self
     }
     
-    func getRoutes() -> [Route] {
-        return self.resultsRoutes;
+    func getResults() -> [Route] {
+        var results = [Route]()
+        var foundResult = false
+        var distanceToStation = 0
+        
+        for var i = 0; i < self.resultsRoutes.count; ++i {
+            if !foundResult {
+                
+                let route = self.resultsRoutes[i]
+                distanceToStation = route.distanceToStation!
+                
+                route.walkingTime = (distanceToStation/walkingSpeed) + route.stationTime
+                route.runningTime = (distanceToStation/runningSpeed) + route.stationTime
+                
+                let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                if departingIn > route.runningTime { //if time to departure is less than time to get to station
+                    foundResult = true
+                    let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                    if departingIn >= route.walkingTime {
+                        route.shouldRun = true
+                    }
+                    
+                    results.append(route)
+                    
+                    //set the following route if there is one
+                    if i + 1 < self.resultsRoutes.count {
+                        results.append(self.resultsRoutes[i + 1])
+
+                    }
+                }
+            }
+        }
+        
+        return results;
     }
     
     func receiveLocation(location2d: CLLocationCoordinate2D) {
@@ -90,7 +130,11 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: temp.originLatLon)
             self.currentWalkingRoute = temp
         } else {
-            self.loadingView!.performSegueWithIdentifier("ResultsSegue", sender: self.loadingView!)
+            if (self.resultsRoutes.count == 0) {
+                self.handleError("Sorry, no results")
+            } else {
+                self.handleDone()
+            }
         }
     }
     
@@ -106,7 +150,22 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         self.queuer()
     }
     
+    func updateWalkingDistances() {
+        //in the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
+        if self.locationManager.currentLocation2d == nil {
+            return
+        }
+        let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
+        
+        self.walkingDistanceQueue = makeUniqRoutes(self.resultsRoutes)
+        self.queuer()
+    }
+    
     func handleError(errorMessage: String) {
-        self.loadingView!.handleError(errorMessage)
+        self.delegate!.handleError(errorMessage)
+    }
+    
+    func handleDone() {
+        self.delegate!.handleDataSuccess()
     }
 }

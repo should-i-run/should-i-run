@@ -111,10 +111,9 @@ import Foundation
             let locName = locationSelected["name"] as! String
             let locLat = locationSelected["latitude"] as! Float
             let locLong = locationSelected["longitude"] as! Float
-            let color = self.colors[row % self.colors.count]
+            self.colorForChosenLocation = self.colors[row % self.colors.count]
 
-            DataHandler.instance.loadTrip(locName, lat: locLat, lon: locLong, color: color)
-            
+            DataHandler.instance.loadTrip(locName, lat: locLat, lon: locLong)
             
             self.performSegueWithIdentifier("LoadingSegue", sender: self)
 

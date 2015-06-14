@@ -27,6 +27,8 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate {
         
         super.viewDidLoad()
         
+        DataHandler.instance.loadingView = self
+        
         // Start spinner animation
         spinner!.startAnimating()
         
@@ -37,11 +39,12 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate {
     
     override func viewDidAppear(animated: Bool){
         if !self.viewHasAlreadyAppeared {
-            
+            DataHandler.instance.loadingView = self
             self.viewHasAlreadyAppeared = true
             // Set timer to segue back (by calling segueFromView) back to the main table view
             var timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
             self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
+
         }
     }
     
@@ -52,7 +55,6 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate {
     // This function gets called when the user clicks on the alertView button to dismiss it
     // It performs the unwind segue when done.
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        timeoutTimer.invalidate()
         self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
     }
     
@@ -64,7 +66,6 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate {
         message.show()
     }
     
-    // Timeouts redirect here.
     func timerTimeout(timer: NSTimer) {
         handleError("Request timed out")
     }

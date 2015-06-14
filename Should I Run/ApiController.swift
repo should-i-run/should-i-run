@@ -51,11 +51,12 @@ class apiController: NSObject {
                         let json = JSON(realJSON)
                         if let jrray = json.array {
                             if jrray.count == 0 {
-                                self.handleError(fail)
+                                self.handleError(fail, message: "Sorry, no results")
+                            } else {
+                                self.cacheData(json.object)
+                                let routes = self.buildRoutes(json)
+                                success(routes)
                             }
-                            self.cacheData(json.object)
-                            let routes = self.buildRoutes(json)
-                            success(routes)
                         } else {
                             self.handleError(fail)
                         }
@@ -91,8 +92,7 @@ class apiController: NSObject {
         return Route(originStationName: route["originStationName"].stringValue, lineName: route["lineName"].stringValue, eolStationName: route["eolStationName"].stringValue, originCoord2d: loc, agency: route["agency"].stringValue, departureTime: time, lineCode: nil, distanceToStation: nil)
     }
     
-    func handleError(fail: String -> ()) {
-        let message = "Couldn't find any BART, MUNI, or Caltrain trips between here and there..."
+    func handleError(fail: String -> (), message: String = "Couldn't find any BART, MUNI, or Caltrain trips between here and there...") {
         fail(message)
     }
 }

@@ -39,7 +39,9 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     
     static let instance = DataHandler()
     
-    func loadTrip(name: String, lat: Float, lon: Float, color: UIColor) {
+    func loadTrip(name: String, lat: Float, lon: Float) {
+        self.destinationLatitude = lat
+        self.destinationLongitude = lon
         var networkStatus = self.internetReachability.currentReachabilityStatus()
         if (networkStatus == NOT_REACHABLE ) {
             self.handleError("Sorry, no internet access")

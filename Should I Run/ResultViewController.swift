@@ -60,7 +60,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("updateWalkingDistance:"), userInfo: nil, repeats: true)
+        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: Selector("updateWalkingDistance:"), userInfo: nil, repeats: true)
         self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
     }
     
@@ -121,7 +121,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
         //------------------detail area things
         
         //distance to station label
-        self.distanceToStationLabel.text = String(stringInterpolationSegment: self.currentBestRoute!.distanceToStation)
+        self.distanceToStationLabel.text = String(self.currentBestRoute!.distanceToStation!)
     
         //line and destination station label, departure station label
         if self.currentBestRoute!.agency == "bart" {

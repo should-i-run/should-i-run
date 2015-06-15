@@ -22,7 +22,6 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     var alarmTime = 0
     
     //result area things
-    @IBOutlet var resultArea: UIView!
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet var alarmButton: UIButton!
     
@@ -100,7 +99,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
         if currentBestRoute!.shouldRun {
             self.instructionLabel.hidden = false
             let runUIColor = colorize(0xFC5B3F)
-            self.resultArea!.backgroundColor = runUIColor
+            self.instructionLabel.textColor = runUIColor
             
             self.instructionLabel.text = "Run!"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
@@ -112,7 +111,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
             
             let walkUIColor = colorize(0x6FD57F)
             
-            self.resultArea.backgroundColor = walkUIColor
+            self.instructionLabel.textColor = walkUIColor
             
             self.alarmButton.hidden = false
             self.alarmTime = self.currentMinutes - self.currentBestRoute!.walkingTime

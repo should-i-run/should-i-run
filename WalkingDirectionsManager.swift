@@ -33,8 +33,8 @@ class WalkingDirectionsManager: NSObject {
         
         let sourceMapItem = loc2dToMapItem(startLatLon)
         let endMapItem = loc2dToMapItem(endLatLon)
-        walkingRouteRequest.setSource(sourceMapItem)
-        walkingRouteRequest.setDestination(endMapItem)
+        walkingRouteRequest.setSource = sourceMapItem
+        walkingRouteRequest.setDestination = endMapItem
         
         var walkingRouteDirections = MKDirections(request: walkingRouteRequest)
         walkingRouteDirections.calculateDirectionsWithCompletionHandler(getDistanceFromDirections)

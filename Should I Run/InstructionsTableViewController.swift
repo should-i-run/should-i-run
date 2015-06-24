@@ -61,7 +61,7 @@ class InstructionsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsPC", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsPC", forIndexPath: indexPath) as UITableViewCell
         let row = indexPath.row
 
         cell.accessoryType = UITableViewCellAccessoryType.None

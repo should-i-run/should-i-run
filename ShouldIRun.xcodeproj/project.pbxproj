@@ -26,6 +26,7 @@
 		25811C5A1A05B161005501E6 /* InstructionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25811C591A05B161005501E6 /* InstructionsTableViewController.swift */; };
 		25835FCD1B2DDF2F00D8257B /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25835FCC1B2DDF2F00D8257B /* DataHandler.swift */; };
 		25835FD41B2DE0F800D8257B /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25835FD31B2DE0F800D8257B /* Destination.swift */; };
+		259DC2F31B3A68A9004B57A9 /* cell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259DC2F21B3A68A9004B57A9 /* cell1.swift */; };
 		25D41CA01982DA89004473EB /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */; };
 		25D8FBEC1982193400FA9FA0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D8FBEB1982193400FA9FA0 /* File.swift */; };
 		25F188581A01EDB9004A7450 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25F188571A01EDB9004A7450 /* LaunchScreen.storyboard */; };
@@ -136,6 +137,7 @@
 		25811C591A05B161005501E6 /* InstructionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewController.swift; sourceTree = "<group>"; };
 		25835FCC1B2DDF2F00D8257B /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		25835FD31B2DE0F800D8257B /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		259DC2F21B3A68A9004B57A9 /* cell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell1.swift; sourceTree = "<group>"; };
 		25D41C9F1982DA89004473EB /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkingDirectionsManager.swift; path = ../WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		25D8FBEB1982193400FA9FA0 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../File.swift; sourceTree = "<group>"; };
 		25F188571A01EDB9004A7450 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		2508AF3C1975B4CE00E48B37 /* Should I Run */ = {
 			isa = PBXGroup;
 			children = (
+				259DC2EE1B3A6871004B57A9 /* results */,
 				25C31EDB198041190000E7BC /* Helpers */,
 				25C31EDA198040FB0000E7BC /* APIHandlers */,
 				2508AF741975C10800E48B37 /* AppDelegate.swift */,
@@ -201,7 +204,6 @@
 				25835FCC1B2DDF2F00D8257B /* DataHandler.swift */,
 				252ADD8919784C1800ED0C3F /* LoadingViewController.swift */,
 				2508AF6C1975C07100E48B37 /* MainTableViewController.swift */,
-				252ADD871978357600ED0C3F /* ResultViewController.swift */,
 				1E4875E31978445E0079C53E /* AddAlarmViewController.swift */,
 				25811C591A05B161005501E6 /* InstructionsTableViewController.swift */,
 				2508AF431975B4CE00E48B37 /* Main.storyboard */,
@@ -253,6 +255,15 @@
 				25835FD21B2DDF3000D8257B /* Alamofire OSX Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		259DC2EE1B3A6871004B57A9 /* results */ = {
+			isa = PBXGroup;
+			children = (
+				259DC2F21B3A68A9004B57A9 /* cell1.swift */,
+				252ADD871978357600ED0C3F /* ResultViewController.swift */,
+			);
+			name = results;
 			sourceTree = "<group>";
 		};
 		25C31EDA198040FB0000E7BC /* APIHandlers */ = {
@@ -326,6 +337,7 @@
 		2508AF321975B4CD00E48B37 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Should I Run";
 				TargetAttributes = {
@@ -437,6 +449,7 @@
 				25FCB2E6198EC16900F18ADD /* Route.swift in Sources */,
 				25D8FBEC1982193400FA9FA0 /* File.swift in Sources */,
 				25811C5A1A05B161005501E6 /* InstructionsTableViewController.swift in Sources */,
+				259DC2F31B3A68A9004B57A9 /* cell1.swift in Sources */,
 				8A3A980F197F131200D23741 /* ColorHelper.swift in Sources */,
 				289A05AC197767650044E6B7 /* bartLookup.swift in Sources */,
 				25091A411A777EB400D3C18F /* SwiftlyJson.swift in Sources */,

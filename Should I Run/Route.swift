@@ -51,7 +51,7 @@ func originsAreSame(routeA: Route, routeB: Route) -> Bool {
 func routeInSet(routesSet: [Route], routeA: Route) -> Bool {
     return routesSet.reduce(false, combine: {
         (collectorBool, thisRoute) -> Bool in
-        if (originsAreSame(thisRoute, routeA)) {
+        if (originsAreSame(thisRoute, routeB: routeA)) {
             return true
         } else {
             return collectorBool
@@ -62,7 +62,7 @@ func routeInSet(routesSet: [Route], routeA: Route) -> Bool {
 func makeUniqRoutes(routes: [Route]) -> [Route] {
     var result = [Route]()
     for aRoute in routes {
-        if !(routeInSet(result, aRoute)) {
+        if !(routeInSet(result, routeA: aRoute)) {
             result.append(aRoute)
         }
     }

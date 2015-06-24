@@ -50,7 +50,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     func loadTrip(name: String, lat: Float, lon: Float) {
         self.destinationLatitude = lat
         self.destinationLongitude = lon
-        var networkStatus = self.internetReachability.currentReachabilityStatus()
+        let networkStatus = self.internetReachability.currentReachabilityStatus()
         if (networkStatus == NOT_REACHABLE ) {
             self.handleError("Sorry, no internet access")
         } else {
@@ -126,7 +126,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         if self.walkingDistanceQueue.count > 0 {
             self.currentWalkingRoute = nil
             let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
-            var temp = self.walkingDistanceQueue.removeAtIndex(0)
+            let temp = self.walkingDistanceQueue.removeAtIndex(0)
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: temp.originLatLon)
             self.currentWalkingRoute = temp
         } else {
@@ -142,7 +142,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         if let temp = self.currentWalkingRoute {
             // iterate through each results route, and if the station matches, add the distance to the route
             self.resultsRoutes.map({ (route) -> () in
-                if originsAreSame(route, temp) {
+                if originsAreSame(route, routeB: temp) {
                     route.distanceToStation = distance
                 }
             })

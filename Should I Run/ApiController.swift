@@ -42,7 +42,7 @@ class apiController: NSObject {
         
         if !cachedLocationFound {
             var url = "http://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
-            println(url)
+            print(url)
             
             Alamofire.request(.POST, url)
                 .responseJSON { (req, res, jsonData, err) in
@@ -68,8 +68,8 @@ class apiController: NSObject {
     }
     
     func cacheData (data: AnyObject){
-        var time = Int(NSDate().timeIntervalSince1970)
-        var cache = self.fileManager.readFromCache()
+        let time = Int(NSDate().timeIntervalSince1970)
+        let cache = self.fileManager.readFromCache()
         let datum = ["time" : time, "location" : self.locationUserData["locName"] as! String, "position" : self.locationUserData["latStart"] as! Float, "results" : data]
         cache.insertObject(datum, atIndex: cache.count)
         self.fileManager.saveToCache(cache)

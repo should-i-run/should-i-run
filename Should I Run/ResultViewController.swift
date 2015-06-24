@@ -23,7 +23,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     
     //result area things
     @IBOutlet var instructionLabel: UILabel!
-    @IBOutlet var alarmButton: UIButton!
+    @IBOutlet weak var alarmButton: UIButton!
     
     //detial area things
     @IBOutlet var timeToNextTrainLabel: UILabel!
@@ -213,7 +213,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
 
         if segue.identifier == "AlarmSegue" {
-            var dest: AddAlarmViewController = segue.destinationViewController as! AddAlarmViewController
+            let dest: AddAlarmViewController = segue.destinationViewController as! AddAlarmViewController
             dest.walkTime = self.alarmTime
         }
     }
@@ -229,7 +229,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     func handleError(errorMessage: String) {
         // Create and show error message
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
-        var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
         message.show()
     }
 }

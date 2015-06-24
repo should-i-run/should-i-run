@@ -52,11 +52,11 @@ class FileManager: NSObject {
     }
     
     func readFromDestinationsList() -> NSMutableArray {
-        var resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.destinationsPlistPath!)
+        let resultsArray:NSMutableArray? = NSMutableArray(contentsOfFile: self.destinationsPlistPath!)
         if let res = resultsArray {
             return res
         } else {
-            var res:NSMutableArray = []
+            let res:NSMutableArray = []
             return res
         }
     }

@@ -136,31 +136,31 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.currentAnnotation = marker
     }
 
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if (sender as? UIBarButtonItem != self.saveBarButton) {
             return true
         }
         if self.lng == 0.00 {
-            var message: UIAlertView = UIAlertView(title: "Location", message: "Please pick a location", delegate: nil, cancelButtonTitle: "Ok")
+            let message: UIAlertView = UIAlertView(title: "Location", message: "Please pick a location", delegate: nil, cancelButtonTitle: "Ok")
             message.show()
             return false
         }
         if self.searchBar.text == "" {
-            var message: UIAlertView = UIAlertView(title: "Location", message: "Please add a destination", delegate: nil, cancelButtonTitle: "Ok")
+            let message: UIAlertView = UIAlertView(title: "Location", message: "Please add a destination", delegate: nil, cancelButtonTitle: "Ok")
             message.show()
             return false
         }
         return true
     }
 
-    func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!) {
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
         for annView in views
         {
-            var endFrame: CGRect  = annView.frame;
-            (annView as! MKAnnotationView).frame = CGRectOffset(endFrame, 0, -500);
+            let endFrame: CGRect  = annView.frame;
+            (annView as MKAnnotationView).frame = CGRectOffset(endFrame, 0, -500);
             
             UIView.animateWithDuration(0.2, animations: {
-                    (annView as! MKAnnotationView).frame = endFrame;
+                    (annView as MKAnnotationView).frame = endFrame;
                 })
         }
     }
@@ -205,7 +205,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //            let queue = dispatch_queue_create("saving", nil)
 //            dispatch_async(queue, { () -> Void in
                 if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
-                    var savedLocations = self.fileManager.readFromDestinationsList()
+                    let savedLocations = self.fileManager.readFromDestinationsList()
                     savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
                     self.fileManager.saveToDestinationsList(savedLocations)
                     

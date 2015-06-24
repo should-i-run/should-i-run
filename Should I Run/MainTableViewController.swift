@@ -43,13 +43,13 @@ import Foundation
     
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
         //loc is locations plist as an array
-        var locations = fileManager.readFromDestinationsList()
+        let locations = fileManager.readFromDestinationsList()
         return locations.count + 2
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         //loc is locations plist as an array
-        var locations = fileManager.readFromDestinationsList()
+        let locations = fileManager.readFromDestinationsList()
         
         if indexPath.row == locations.count || indexPath.row == locations.count + 1 {
             return false
@@ -58,7 +58,7 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        var locations = fileManager.readFromDestinationsList()
+        let locations = fileManager.readFromDestinationsList()
         if editingStyle == .Delete && indexPath.row != locations.count {
             //get the index row of the delete and compare with the number of objects in the plist
             locations.removeObjectAtIndex(indexPath.row)
@@ -68,8 +68,8 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as! UITableViewCell
-        var locations = fileManager.readFromDestinationsList()
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
+        let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row
 
         //row is not zero indexed, locations is
@@ -87,11 +87,11 @@ import Foundation
         } else if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
-            var index = row % self.colors.count
+            let index = row % self.colors.count
             cell.backgroundColor = self.colors[index]
         } else {
             cell.textLabel!.text = "Default"
-            var index = row % self.colors.count
+            let index = row % self.colors.count
             cell.backgroundColor = self.colors[index]
         }
         return cell
@@ -102,7 +102,7 @@ import Foundation
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var locations = fileManager.readFromDestinationsList()
+        let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row as Int
         
         // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
@@ -131,7 +131,7 @@ import Foundation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "LoadingSegue" {
-            var dest: LoadingViewController = segue.destinationViewController as! LoadingViewController
+            let dest: LoadingViewController = segue.destinationViewController as! LoadingViewController
             dest.backgroundColor = self.colorForChosenLocation
         }
     }

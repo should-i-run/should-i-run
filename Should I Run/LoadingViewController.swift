@@ -41,7 +41,7 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
         if !self.viewHasAlreadyAppeared {
             self.viewHasAlreadyAppeared = true
             // Set timer to segue back (by calling segueFromView) back to the main table view
-            var timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
+            let timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
             self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
         }
     }
@@ -62,7 +62,7 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
         self.timeoutTimer.invalidate()
         // Create and show error message
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
-        var message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
         message.show()
     }
     

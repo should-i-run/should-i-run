@@ -24,16 +24,16 @@ class apiController: NSObject {
         self.locationUserData["locName"] = locName as String
         self.locationUserData["latStart"] = latStart as Float
         
-        var cache = fileManager.readFromCache()
-        var time = Int(NSDate().timeIntervalSince1970)
+        let cache = fileManager.readFromCache()
+        let time = Int(NSDate().timeIntervalSince1970)
         //checking if the location is cached && if the users location has not changed && if the results are not more than 5 min old
         for item in cache {
-            var cachedLocaton = item["location"] as! String
-            var cachedPosition = item["position"] as! Float
-            var cachedTime = item["time"] as! Int
+            let cachedLocaton = item["location"] as! String
+            let cachedPosition = item["position"] as! Float
+            let cachedTime = item["time"] as! Int
             if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 100) ) {
                 cachedLocationFound = true
-                var cachedResults = JSON(item["results"] as AnyObject!)
+                let cachedResults = JSON(item["results"] as AnyObject!)
                 let routes = self.buildRoutes(cachedResults)
                 success(routes)
                 return
@@ -41,10 +41,10 @@ class apiController: NSObject {
         }
         
         if !cachedLocationFound {
-            var url = "http://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
+            let url = "http://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
             print(url)
             
-            Alamofire.request(.POST, url)
+            Alamofire.request(.POST, URLString: url)
                 .responseJSON { (req, res, jsonData, err) in
                     //TODO handle errors, no results
                     if let realJSON: AnyObject = jsonData {

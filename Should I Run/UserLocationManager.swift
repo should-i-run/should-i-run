@@ -56,8 +56,8 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
 
     // didUpdateLocations
     // This method is executed whenever a location is found.
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]) {
-        self.currentLocation2d = manager.location.coordinate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.currentLocation2d = manager.location!.coordinate
         self.currentLocation =  manager.location
         self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
         self.hasLocation = true
@@ -67,9 +67,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     // This method is executed whenever a location is not found.
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         self.hasLocation = false
-        if (error != nil) {
-            print("location fail error:")
-            print(error)
-        }
+        print("location fail error:")
+        print(error)
     }
 }

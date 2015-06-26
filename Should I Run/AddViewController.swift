@@ -63,20 +63,20 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func geocodeAddress(sender: AnyObject) {
         self.searchBar.resignFirstResponder()
-        var currentRegion = CLCircularRegion(circularRegionWithCenter: self.locationManager.currentLocation2d!, radius: 1000.0, identifier: nil)
-        geocoder.geocodeAddressString(searchBar.text, inRegion: currentRegion, completionHandler:{
-            (response: Array?, error: NSError!) -> Void in
+        let currentRegion = CLCircularRegion(center: self.locationManager.currentLocation2d!, radius: 1000.0, identifier: "tap")
+        geocoder.geocodeAddressString(searchBar.text!, inRegion: currentRegion, completionHandler:{
+            (response: [CLPlacemark]?, error: NSError?) -> Void in
 
-            var marker:MKPointAnnotation = MKPointAnnotation()
+            let marker:MKPointAnnotation = MKPointAnnotation()
 
             if let res = response {
                 //get the location for the address and save it
-                var resultsLocation = (res[0] as! CLPlacemark).location
+                let resultsLocation = (res[0] as CLPlacemark).location
                 self.lat = Float(resultsLocation.coordinate.latitude)
                 self.lng = Float(resultsLocation.coordinate.longitude)
                 
                 //set the map view to show the current location and this address
-                var distanceBetweenPoints = resultsLocation.distanceFromLocation(self.locationManager.currentLocation)
+                let distanceBetweenPoints = resultsLocation.distanceFromLocation(self.locationManager.currentLocation!)
 
                 let mapCenterlatitude = (resultsLocation.coordinate.latitude + self.locationManager.currentLocation2d!.latitude)/2
                 let mapCenterlongitude = (resultsLocation.coordinate.longitude + self.locationManager.currentLocation2d!.longitude)/2
@@ -85,7 +85,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
                 self.mapView?.setRegion(self.mapView!.regionThatFits(region), animated: true)
 
-                marker.coordinate = (res[0] as! CLPlacemark).location.coordinate
+                marker.coordinate = (res[0] as CLPlacemark).location.coordinate
                 self.mapView!.removeAnnotations(self.mapView!.annotations)
                 self.mapView!.addAnnotation(marker)
                 self.currentAnnotation = marker
@@ -100,17 +100,16 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func tapOnMap(sender: UIGestureRecognizer) {
         self.searchBar.resignFirstResponder()
 
-        var tapLocation: CGPoint = sender.locationInView(self.mapView)
-        var geographicLocaction = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
+        let tapLocation: CGPoint = sender.locationInView(self.mapView)
+        let geographicLocaction = self.mapView!.convertPoint(tapLocation, toCoordinateFromView: self.mapView)
         self.lat = Float(geographicLocaction.latitude)
         self.lng = Float(geographicLocaction.longitude)
 
-        var location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
+        let location2d: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
 
         let touchCLLLocation = CLLocation(latitude: geographicLocaction.latitude, longitude: geographicLocaction.longitude)
-
         geocoder.reverseGeocodeLocation(touchCLLLocation, completionHandler: {
-            (response: [AnyObject]?, error: NSError?) -> Void in
+            (response: [CLPlacemark]?, error: NSError?) -> Void in
             if let resp = response {
                 if(resp.count > 0){
                     var text = resp[0].locality
@@ -127,10 +126,10 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
 
         if let mk = self.currentAnnotation {
-            self.mapView!.removeAnnotation(self.currentAnnotation)
+            self.mapView!.removeAnnotation(mk)
         }
 
-        var marker:MKPointAnnotation = MKPointAnnotation()
+        let marker:MKPointAnnotation = MKPointAnnotation()
         marker.coordinate = location2d
         self.mapView!.addAnnotation(marker)
         self.currentAnnotation = marker
@@ -189,7 +188,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if(self.destinationNameAlertView?.textFieldAtIndex(0)?.text.isEmpty != nil){
+        if(self.destinationNameAlertView?.textFieldAtIndex(0)?.text!.isEmpty != nil){
             return false
         }
         

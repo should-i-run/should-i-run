@@ -25,9 +25,9 @@ class FileManager: NSObject {
     }
     
     override init () {
-        let directorys = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        let directorys = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.AllDomainsMask, true) as [String]
         
-        let directory = directorys!.first! //documents directory
+        let directory = directorys.first! //documents directory
         self.cachePlistPath = directory.stringByAppendingPathComponent(self.cachePlistFileName)
         self.destinationsPlistPath = directory.stringByAppendingPathComponent(self.destinationsPlistFileName)
         

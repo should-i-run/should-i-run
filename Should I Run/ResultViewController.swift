@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultViewController: UIViewController, DataHandlerDelegate {
+class ResultViewController: UITableViewController, DataHandlerDelegate {
     
     var results = [Route]()
     var currentBestRoute:Route?
@@ -26,15 +26,14 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     @IBOutlet weak var alarmButton: UIButton!
     
     //detial area things
-    @IBOutlet var timeToNextTrainLabel: UILabel!
+    
     @IBOutlet var distanceToStationLabel: UILabel!
     @IBOutlet var stationNameLabel: UILabel!
     @IBOutlet var departureStationLabel: UILabel!
-    @IBOutlet var destinationLabel: UILabel!
     
     @IBOutlet var timeRunningLabel: UILabel!
     @IBOutlet var timeWalkingLabel: UILabel!
-    @IBOutlet var secondsToNextTrainLabel: UILabel!
+    
     
     //following departure area things
     @IBOutlet var followingDepartureLabel: UILabel!
@@ -71,6 +70,29 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     
     func handleDataSuccess() {
         self.displayResults()
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let rowNum = indexPath.row
+        var cell: UITableViewCell
+
+        
+        switch rowNum {
+        case 0:
+            cell = tableView.dequeueReusableCellWithIdentifier("cell1")
+            cell.t
+            
+        }
+        
+        
     }
     
     func displayResults() {

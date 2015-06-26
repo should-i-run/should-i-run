@@ -10,5 +10,8 @@ import Foundation
 import UIKit
 
 class Cell1ViewController: UITableViewCell {
+    @IBOutlet var timeToNextTrainLabel: UILabel!
+    @IBOutlet var secondsToNextTrainLabel: UILabel!
+    @IBOutlet var destinationLabel: UILabel!
     
 }

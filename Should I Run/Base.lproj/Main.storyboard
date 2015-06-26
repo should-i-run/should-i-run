@@ -217,7 +217,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="nextTrainCell" rowHeight="74" id="mvm-09-XKt">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell1" rowHeight="74" id="mvm-09-XKt" customClass="Cell1ViewController" customModule="ShouldIRun" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mvm-09-XKt" id="Z0X-aj-iRJ">
@@ -390,8 +390,13 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="destinationLabel" destination="huy-5W-OZJ" id="Tfv-DE-RLg"/>
+                                            <outlet property="secondsToNextTrainLabel" destination="u2n-wi-cKw" id="QXu-Kh-cXu"/>
+                                            <outlet property="timeToNextTrainLabel" destination="qlH-FH-Xqs" id="1KY-jx-WFr"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="116" id="Rt8-LM-vlE">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell2" rowHeight="116" id="Rt8-LM-vlE">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rt8-LM-vlE" id="tWI-7o-7BM">
@@ -448,7 +453,7 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2hY-6s-iFG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell3" id="2hY-6s-iFG">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2hY-6s-iFG" id="sEt-74-ixb">
@@ -505,7 +510,7 @@
                                         <animations/>
                                         <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="olc-VM-jKa">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell4" id="olc-VM-jKa">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="olc-VM-jKa" id="du7-Tc-XbM">
@@ -711,16 +716,16 @@
                                 <exclude reference="wrN-p2-QjT"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Izg-Qv-bpX"/>
-                                <exclude reference="UiB-x6-6f6"/>
-                                <exclude reference="llG-Fo-Vpq"/>
+                                <exclude reference="Xj6-ou-bzN"/>
                                 <exclude reference="U6L-0N-Gqs"/>
                                 <exclude reference="fPY-Cr-3T4"/>
                                 <exclude reference="ydE-GV-73c"/>
+                                <exclude reference="Izg-Qv-bpX"/>
+                                <exclude reference="UiB-x6-6f6"/>
+                                <exclude reference="llG-Fo-Vpq"/>
                                 <exclude reference="0oc-bH-7Lq"/>
                                 <exclude reference="WUM-tz-Bcr"/>
                                 <exclude reference="lZ0-ba-ZMq"/>
-                                <exclude reference="Xj6-ou-bzN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -730,16 +735,16 @@
                                 <include reference="wrN-p2-QjT"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Izg-Qv-bpX"/>
-                                <include reference="UiB-x6-6f6"/>
-                                <include reference="llG-Fo-Vpq"/>
+                                <include reference="Xj6-ou-bzN"/>
                                 <include reference="U6L-0N-Gqs"/>
                                 <include reference="fPY-Cr-3T4"/>
                                 <include reference="ydE-GV-73c"/>
+                                <include reference="Izg-Qv-bpX"/>
+                                <include reference="UiB-x6-6f6"/>
+                                <include reference="llG-Fo-Vpq"/>
                                 <include reference="0oc-bH-7Lq"/>
                                 <include reference="WUM-tz-Bcr"/>
                                 <include reference="lZ0-ba-ZMq"/>
-                                <include reference="Xj6-ou-bzN"/>
                             </mask>
                         </variation>
                     </view>
@@ -789,7 +794,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
                                 <rect key="frame" x="0.0" y="166" width="320" height="180"/>
                                 <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="427344271.65988499">

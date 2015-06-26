@@ -155,7 +155,6 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         if self.locationManager.currentLocation2d == nil {
             return
         }
-        let start: CLLocationCoordinate2D =  self.locationManager.currentLocation2d!
         
         self.walkingDistanceQueue = makeUniqRoutes(self.resultsRoutes)
         self.queuer()

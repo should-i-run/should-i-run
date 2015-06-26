@@ -28,19 +28,19 @@ class WalkingDirectionsManager: NSObject {
     }
     
     func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D) {
-        var walkingRouteRequest = MKDirectionsRequest()
+        let walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
         
         let sourceMapItem = loc2dToMapItem(startLatLon)
         let endMapItem = loc2dToMapItem(endLatLon)
-        walkingRouteRequest.setSource = sourceMapItem
-        walkingRouteRequest.setDestination = endMapItem
+        walkingRouteRequest.source = sourceMapItem
+        walkingRouteRequest.destination = endMapItem
         
-        var walkingRouteDirections = MKDirections(request: walkingRouteRequest)
+        let walkingRouteDirections = MKDirections(request: walkingRouteRequest)
         walkingRouteDirections.calculateDirectionsWithCompletionHandler(getDistanceFromDirections)
     }
     
-    func getDistanceFromDirections(response:MKDirectionsResponse!, error: NSError?) -> Void {
+    func getDistanceFromDirections(response:MKDirectionsResponse?, error: NSError?) -> Void {
         if let temp = response?.routes[0].distance {
             self.delegate?.handleWalkingDistance(Int(temp))
         }

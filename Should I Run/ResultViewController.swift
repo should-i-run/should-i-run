@@ -27,20 +27,9 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     
     //detial area things
     
-    @IBOutlet var distanceToStationLabel: UILabel!
-    @IBOutlet var stationNameLabel: UILabel!
-    @IBOutlet var departureStationLabel: UILabel!
-    
-    @IBOutlet var timeRunningLabel: UILabel!
-    @IBOutlet var timeWalkingLabel: UILabel!
-    
     
     //following departure area things
-    @IBOutlet var followingDepartureLabel: UILabel!
-    @IBOutlet var followingDepartureDestinationLabel: UILabel!
-    @IBOutlet var followingDepartureSecondsLabel: UILabel!
-    
-    @IBOutlet weak var followingTimeTextLabel: UILabel!
+
     
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
@@ -226,10 +215,6 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     
     @IBAction func returnToRoot(sender: UIButton?) {
         self.navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
-    @IBAction func unwindToResults(segue: UIStoryboardSegue) {
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

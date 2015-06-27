@@ -13,8 +13,9 @@ class Cell4ViewController: UITableViewCell {
     
     @IBOutlet weak var timeRunningLabel: UILabel!
     
-    func update(timeRunningLabelText: String) {
-        self.timeRunningLabel.text = timeRunningLabelText
+    func update(currentBestRoute: Route?) {
+        if let bestRoute = currentBestRoute {
+            self.timeRunningLabel.text = String(bestRoute.runningTime)
+        }
     }
-    
 }

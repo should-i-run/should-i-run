@@ -13,8 +13,9 @@ class Cell3ViewController: UITableViewCell {
     
     @IBOutlet weak var minutesWalkingLabel: UILabel!
     
-    func update(minutesWalkingLabelText: String) {
-        self.minutesWalkingLabel.text = minutesWalkingLabelText
+    func update(currentBestRoute: Route?) {
+        if let bestRoute = currentBestRoute {
+            self.minutesWalkingLabel.text = String(bestRoute.walkingTime)
+        }
     }
-    
 }

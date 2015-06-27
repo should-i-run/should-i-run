@@ -343,6 +343,7 @@
                                                 </view>
                                             </subviews>
                                             <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="zdH-Ld-Rm7" firstAttribute="leading" secondItem="njF-iO-iwO" secondAttribute="trailing" id="2WP-GV-1uS"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="zdH-Ld-Rm7" secondAttribute="bottom" id="bxE-Nk-rOf"/>
@@ -381,7 +382,6 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="destinationLabel" destination="huy-5W-OZJ" id="Tfv-DE-RLg"/>
                                             <outlet property="secondsToNextTrainLabel" destination="u2n-wi-cKw" id="QXu-Kh-cXu"/>
@@ -411,6 +411,7 @@
                                                 </label>
                                             </subviews>
                                             <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="Ln9-0H-tPC" firstAttribute="centerY" secondItem="9ph-3c-53d" secondAttribute="centerY" id="8Gm-uE-Tub"/>
                                                 <constraint firstItem="9ph-3c-53d" firstAttribute="leading" secondItem="Ln9-0H-tPC" secondAttribute="trailing" constant="16" id="COy-sA-G2r"/>
@@ -443,7 +444,6 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="distanceToStationLabel" destination="Ln9-0H-tPC" id="lHX-SO-xLh"/>
                                             <outlet property="stationNameLabel" destination="9ph-3c-53d" id="oSW-SK-Iu1"/>
@@ -472,6 +472,7 @@
                                                 </label>
                                             </subviews>
                                             <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="2f1-7V-QXh" firstAttribute="leading" secondItem="rRS-un-cKv" secondAttribute="trailing" constant="16" id="HJg-NE-snU"/>
                                                 <constraint firstAttribute="centerY" secondItem="rRS-un-cKv" secondAttribute="centerY" id="XQg-i8-SHF"/>
@@ -504,7 +505,6 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="minutesWalkingLabel" destination="rRS-un-cKv" id="7va-tm-3X6"/>
                                         </connections>
@@ -532,7 +532,7 @@
                                                 </label>
                                             </subviews>
                                             <animations/>
-                                            <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="rbf-ts-B4g" firstAttribute="leading" secondItem="du7-Tc-XbM" secondAttribute="leadingMargin" constant="16" id="7SO-71-RHo"/>
                                                 <constraint firstAttribute="centerY" secondItem="rbf-ts-B4g" secondAttribute="centerY" id="Gyp-7u-Tyn"/>
@@ -606,7 +606,7 @@
                                                 </label>
                                             </subviews>
                                             <animations/>
-                                            <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="rbu-Pp-tmw" firstAttribute="leading" secondItem="ja3-aO-08F" secondAttribute="trailing" constant="16" id="0Bd-O0-FfD"/>
                                                 <constraint firstItem="ja3-aO-08F" firstAttribute="leading" secondItem="aGx-0V-D0e" secondAttribute="trailing" constant="2" id="5Aq-qS-REg"/>
@@ -675,7 +675,7 @@
                                     </button>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="HPG-dJ-qAg"/>
                                     <constraint firstItem="NMi-1M-GF3" firstAttribute="centerY" secondItem="wrN-p2-QjT" secondAttribute="centerY" id="ghK-Hq-XJA"/>
@@ -773,6 +773,7 @@
                     <connections>
                         <outlet property="alarmButton" destination="NMi-1M-GF3" id="otA-wk-Prq"/>
                         <outlet property="instructionLabel" destination="VWP-lz-GQI" id="foq-lW-Mp4"/>
+                        <outlet property="tableView" destination="5Yj-38-auB" id="JiH-4h-4FF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wny-FK-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>

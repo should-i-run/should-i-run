@@ -14,13 +14,28 @@ class Cell1ViewController: UITableViewCell {
     @IBOutlet weak var secondsToNextTrainLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     
-    func update(destinationLabelText: String,
-        timeToNextTrainLabelText: String,
-        secondsToNextTrainLabelText: String) {
-            self.timeToNextTrainLabel.text = timeToNextTrainLabelText
-            self.secondsToNextTrainLabel.text =
-                secondsToNextTrainLabelText
-            self.destinationLabel.text = destinationLabelText
+    func update(currentBestRoute: Route?, seconds: Int) {
+        if let bestRoute = currentBestRoute {
+            let currentMinutes = Int(bestRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+            self.timeToNextTrainLabel.text = String(currentMinutes)
+            
+            if seconds < 10 {
+                self.secondsToNextTrainLabel.text = ":0" + String(seconds)
+            } else {
+                self.secondsToNextTrainLabel.text = ":" + String(seconds)
+            }
+            
+            switch bestRoute.agency {
+            case "bart":
+                self.destinationLabel.text = "towards \(bestRoute.eolStationName)"
+            case "muni":
+                self.destinationLabel.text = "\(bestRoute.lineName) towards \(bestRoute.eolStationName)"
+            case "caltrain":
+                self.destinationLabel.text = "\(bestRoute.lineName) towards \(bestRoute.eolStationName)"
+            default:
+                self.destinationLabel.text = bestRoute.eolStationName
+            }
+            
+        }
     }
-    
 }

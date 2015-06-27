@@ -26,19 +26,24 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     @IBOutlet weak var alarmButton: UIButton!
     
     //cell 1
-    var destinationLabelText: String
-    var timeToNextTrainLabelText: String
-    var secondsToNextTrainLabelText: String
+    var destinationLabelText: String = ""
+    var timeToNextTrainLabelText: String = ""
+    var secondsToNextTrainLabelText: String = ""
     
     //cell 2
-    var distanceToStationLabelText: String
-    var stationNameLabelText: String
+    var distanceToStationLabelText: String = ""
+    var stationNameLabelText: String = ""
     
     //cell 3
-    var minutesWalkingLabelText: String
+    var minutesWalkingLabelText: String = ""
     
-    //cell 3
-    var minutesRunningLabelText: String
+    //cell 4
+    var minutesRunningLabelText: String = ""
+    
+    //cell 5 
+    var followingDepartureLabelText: String = ""
+    var followingDepartureDestinationLabelText: String = ""
+    var followingDepartureSecondsLabelText: String = ""
     
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
@@ -75,7 +80,7 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO if there's no second departure, return 3
+        //TODO: if there's no second departure, return 3
         return 4
     }
     
@@ -101,7 +106,8 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier("cell4") as! Cell4ViewController
             cell.update(self.minutesRunningLabelText)
             return cell
-
+        default:
+            return UITableViewCell()
         }
     }
     
@@ -182,15 +188,14 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
         //following destination station name label
         if let following:Route = self.currentSecondRoute {
             if following.agency == "bart" {
-                self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
+                self.followingDepartureDestinationLabelText = "towards \(following.eolStationName)"
             } else if following.agency == "muni" {
-                self.followingDepartureDestinationLabel.text = "\(following.lineName) / \(following.eolStationName)"
+                self.followingDepartureDestinationLabelText = "\(following.lineName) / \(following.eolStationName)"
             }
         } else {
-            self.followingDepartureDestinationLabel.text = "No other departures found"
-            self.followingDepartureSecondsLabel.hidden = true
-            self.followingDepartureLabel.hidden = true
-            self.followingTimeTextLabel.hidden = true
+            self.followingDepartureDestinationLabelText = "No other departures found"
+            self.followingDepartureSecondsLabelText = ""
+            self.followingDepartureLabelText = ""
         }
     }
     
@@ -217,17 +222,17 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
             
             if self.currentSecondRoute != nil {
                 self.followingCurrentMinutes = Int(self.currentSecondRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                self.followingDepartureLabel.text = String(self.followingCurrentMinutes!)
+                self.followingDepartureLabelText = String(self.followingCurrentMinutes!)
             }
 
             self.timeToNextTrainLabelText = String(currentMinutes)
             
             if self.currentSeconds < 10 {
                 self.secondsToNextTrainLabelText = ":0" + String(currentSeconds)
-                self.followingDepartureSecondsLabel.text = ":0" + String(currentSeconds)
+                self.followingDepartureSecondsLabelText = ":0" + String(currentSeconds)
             } else {
                 self.secondsToNextTrainLabelText = ":" + String(currentSeconds)
-                self.followingDepartureSecondsLabel.text = ":" + String(currentSeconds)
+                self.followingDepartureSecondsLabelText = ":" + String(currentSeconds)
             }
         }
     }

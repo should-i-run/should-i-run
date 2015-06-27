@@ -14,4 +14,11 @@ class Cell5ViewController: UITableViewCell {
     @IBOutlet weak var followingDepartureLabel: UILabel!
     @IBOutlet weak var followingDepartureSecondsLabel: UILabel!
     @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
+    
+    func update(followingDepartureLabelText: String, followingDepartureSecondsLabelText: String, followingDepartureDestinationLabelText: String) {
+        self.followingDepartureLabel.text = followingDepartureDestinationLabelText
+        self.followingDepartureDestinationLabel.text = followingDepartureDestinationLabelText
+        self.followingDepartureSecondsLabel.text = followingDepartureSecondsLabelText
+    }
+    
 }

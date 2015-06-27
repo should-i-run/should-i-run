@@ -25,10 +25,11 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet weak var alarmButton: UIButton!
     
-    //detial area things
+    //class 1
+    var destinationLabelText: String
+    var timeToNextTrainLabelText: String
+    var secondsToNextTrainLabelText: String
     
-    
-    //following departure area things
 
     
     var secondTimer: NSTimer = NSTimer()
@@ -76,8 +77,10 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
         
         switch rowNum {
         case 0:
-            cell = tableView.dequeueReusableCellWithIdentifier("cell1")
-            cell.t
+            cell = tableView.dequeueReusableCellWithIdentifier("cell1")!
+            cell.update(self.destinationLabelText,
+                timeToNextTrainLabelText: self.timeToNextTrainLabelText,
+                secondsToNextTrainLabelText: self.secondsToNextTrainLabelText)
             
         }
         
@@ -137,17 +140,17 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
         if self.currentBestRoute!.agency == "bart" {
             
             let destinationStation = self.currentBestRoute!.eolStationName
-            self.destinationLabel.text = "towards \(destinationStation)"
+            self.destionationLabelText = "towards \(destinationStation)"
             
             self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
 
             
         } else if self.currentBestRoute!.agency == "muni" {
-            self.destinationLabel.text = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
+            self.destionationLabelText = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
             self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
             
         } else if self.currentBestRoute!.agency == "caltrain" {
-            self.destinationLabel.text = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"
+            self.destionationLabelText = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"
             self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
         }
         

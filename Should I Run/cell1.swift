@@ -10,8 +10,17 @@ import Foundation
 import UIKit
 
 class Cell1ViewController: UITableViewCell {
-    @IBOutlet var timeToNextTrainLabel: UILabel!
-    @IBOutlet var secondsToNextTrainLabel: UILabel!
-    @IBOutlet var destinationLabel: UILabel!
+    @IBOutlet weak var timeToNextTrainLabel: UILabel!
+    @IBOutlet weak var secondsToNextTrainLabel: UILabel!
+    @IBOutlet weak var destinationLabel: UILabel!
+    
+    func update(destinationLabelText: String,
+        timeToNextTrainLabelText: String,
+        secondsToNextTrainLabelText: String) {
+            self.timeToNextTrainLabel.text = timeToNextTrainLabelText
+            self.secondsToNextTrainLabel.text =
+                secondsToNextTrainLabelText
+            self.destinationLabel.text = destinationLabelText
+    }
     
 }

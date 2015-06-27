@@ -12,6 +12,6 @@ import UIKit
 class Cell5ViewController: UITableViewCell {
         
     @IBOutlet weak var followingDepartureLabel: UILabel!
-    @IBOutlet weak var followingDepartureSeconds: UILabel!
-    @IBOutlet weak var followingDepartureDestination: UILabel!
+    @IBOutlet weak var followingDepartureSecondsLabel: UILabel!
+    @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
 }

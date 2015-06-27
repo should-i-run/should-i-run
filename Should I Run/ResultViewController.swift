@@ -25,12 +25,20 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet weak var alarmButton: UIButton!
     
-    //class 1
+    //cell 1
     var destinationLabelText: String
     var timeToNextTrainLabelText: String
     var secondsToNextTrainLabelText: String
     
-
+    //cell 2
+    var distanceToStationLabelText: String
+    var stationNameLabelText: String
+    
+    //cell 3
+    var minutesWalkingLabelText: String
+    
+    //cell 3
+    var minutesRunningLabelText: String
     
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
@@ -67,24 +75,34 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //TODO if there's no second departure, return 3
         return 4
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let rowNum = indexPath.row
-        var cell: UITableViewCell
-
-        
         switch rowNum {
         case 0:
-            cell = tableView.dequeueReusableCellWithIdentifier("cell1")!
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! Cell1ViewController
             cell.update(self.destinationLabelText,
                 timeToNextTrainLabelText: self.timeToNextTrainLabelText,
                 secondsToNextTrainLabelText: self.secondsToNextTrainLabelText)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell2") as! Cell2ViewController
+            cell.update(self.distanceToStationLabelText, stationNameLabelText: self.stationNameLabelText)
+            return cell
             
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell3") as! Cell3ViewController
+            cell.update(self.minutesWalkingLabelText)
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell4") as! Cell4ViewController
+            cell.update(self.minutesRunningLabelText)
+            return cell
+
         }
-        
-        
     }
     
     func displayResults() {
@@ -134,29 +152,29 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
         //------------------detail area things
         
         //distance to station label
-        self.distanceToStationLabel.text = String(self.currentBestRoute!.distanceToStation!)
+        self.distanceToStationLabelText = String(self.currentBestRoute!.distanceToStation!)
     
         //line and destination station label, departure station label
         if self.currentBestRoute!.agency == "bart" {
             
             let destinationStation = self.currentBestRoute!.eolStationName
-            self.destionationLabelText = "towards \(destinationStation)"
+            self.destinationLabelText = "towards \(destinationStation)"
             
-            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName) station"
+            self.stationNameLabelText = "meters to \(self.currentBestRoute!.originStationName) station"
 
             
         } else if self.currentBestRoute!.agency == "muni" {
-            self.destionationLabelText = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
-            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
+            self.destinationLabelText = "\(self.currentBestRoute!.lineName) / \(self.currentBestRoute!.eolStationName)"
+            self.stationNameLabelText = "meters to \(self.currentBestRoute!.originStationName)"
             
         } else if self.currentBestRoute!.agency == "caltrain" {
-            self.destionationLabelText = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"
-            self.stationNameLabel.text = "meters to \(self.currentBestRoute!.originStationName)"
+            self.destinationLabelText = "\(self.currentBestRoute!.lineName) towards \(self.currentBestRoute!.eolStationName)"
+            self.stationNameLabelText = "meters to \(self.currentBestRoute!.originStationName)"
         }
         
         //------------------running and walking time labels
-        self.timeRunningLabel.text = String(self.currentBestRoute!.runningTime)
-        self.timeWalkingLabel.text = String(self.currentBestRoute!.walkingTime)
+        self.minutesRunningLabelText = String(self.currentBestRoute!.runningTime)
+        self.minutesWalkingLabelText = String(self.currentBestRoute!.walkingTime)
         
         //timer Labels
         self.updateTimes(nil)
@@ -202,13 +220,13 @@ class ResultViewController: UITableViewController, DataHandlerDelegate {
                 self.followingDepartureLabel.text = String(self.followingCurrentMinutes!)
             }
 
-            self.timeToNextTrainLabel.text = String(currentMinutes)
+            self.timeToNextTrainLabelText = String(currentMinutes)
             
             if self.currentSeconds < 10 {
-                self.secondsToNextTrainLabel.text = ":0" + String(currentSeconds)
+                self.secondsToNextTrainLabelText = ":0" + String(currentSeconds)
                 self.followingDepartureSecondsLabel.text = ":0" + String(currentSeconds)
             } else {
-                self.secondsToNextTrainLabel.text = ":" + String(currentSeconds)
+                self.secondsToNextTrainLabelText = ":" + String(currentSeconds)
                 self.followingDepartureSecondsLabel.text = ":" + String(currentSeconds)
             }
         }

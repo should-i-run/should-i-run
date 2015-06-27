@@ -13,4 +13,8 @@ class Cell4ViewController: UITableViewCell {
     
     @IBOutlet weak var timeRunningLabel: UILabel!
     
+    func update(timeRunningLabelText: String) {
+        self.timeRunningLabel.text = timeRunningLabelText
+    }
+    
 }

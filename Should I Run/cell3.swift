@@ -11,5 +11,10 @@ import UIKit
 
 class Cell3ViewController: UITableViewCell {
     
+    @IBOutlet weak var minutesWalkingLabel: UILabel!
+    
+    func update(minutesWalkingLabelText: String) {
+        self.minutesWalkingLabel.text = minutesWalkingLabelText
+    }
     
 }

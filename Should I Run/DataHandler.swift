@@ -39,6 +39,8 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     
+    var cancelled = false
+    
     override init() {
         //get the internet going
         self.internetReachability.connectionRequired()
@@ -48,6 +50,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     static let instance = DataHandler()
     
     func loadTrip(name: String, lat: Float, lon: Float) {
+        self.cancelled = false
         self.destinationLatitude = lat
         self.destinationLongitude = lon
         let networkStatus = self.internetReachability.currentReachabilityStatus()
@@ -67,6 +70,10 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         }
 
         self.walkingDirectionsManager.delegate = self
+    }
+    
+    func cancelLoad() {
+        self.cancelled = true
     }
     
     func getResults() -> [Route] {
@@ -123,6 +130,10 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     // getting walking distance for each route
     // for each route, make a request, wait until it's back, then make next request
     func queuer() {
+        if self.cancelled == true {
+            return self.handleDone()
+        }
+        
         if self.walkingDistanceQueue.count > 0 {
             self.currentWalkingRoute = nil
             let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
@@ -165,6 +176,8 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     }
     
     func handleDone() {
-        self.delegate!.handleDataSuccess()
+        if self.cancelled != true {
+            self.delegate!.handleDataSuccess()
+        }
     }
 }

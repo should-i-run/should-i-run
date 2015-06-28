@@ -50,7 +50,7 @@ class apiController: NSObject {
                     if let realJSON: AnyObject = jsonData {
                         let json = JSON(realJSON)
                         if let jrray = json.array {
-                            if jrray.count == 0 {
+                            if jrray.count == 0 || jrray[0] == nil {
                                 self.handleError(fail, message: "Sorry, no results")
                             } else {
                                 self.cacheData(json.object)

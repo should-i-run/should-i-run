@@ -40,6 +40,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
 //        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
 //        self.extendedLayoutIncludesOpaqueBars = true
         DataHandler.instance.delegate = self
+        self.results = DataHandler.instance.getResults()
         
         self.render()
     }
@@ -63,9 +64,9 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.currentSecondRoute != nil {
-            return 4
+            return 5
         } else {
-            return 3
+            return 4
         }
     }
     
@@ -116,7 +117,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func render() {
-        self.results = DataHandler.instance.getResults()
         if (self.results.count > 0) {
             let firstRoute = self.results[0]
             self.currentBestRoute = firstRoute
@@ -162,6 +162,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func handleDataSuccess() {
+        self.results = DataHandler.instance.getResults()
         self.render()
     }
     
@@ -185,6 +186,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     // Segues and unwinds-----------------------------------------------------
     
     @IBAction func returnToRoot(sender: UIButton?) {
+        DataHandler.instance.cancelLoad()
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     

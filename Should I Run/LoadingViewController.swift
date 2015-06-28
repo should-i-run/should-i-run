@@ -60,6 +60,7 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
     
     func handleError(errorMessage: String) {
         self.timeoutTimer.invalidate()
+        DataHandler.instance.cancelLoad()
         // Create and show error message
         // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")

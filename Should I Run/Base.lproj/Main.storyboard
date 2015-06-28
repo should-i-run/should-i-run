@@ -601,8 +601,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <outlet property="followingDepartureDestination" destination="p5I-L2-Vwd" id="vk1-CJ-66H"/>
-                                            <outlet property="followingDepartureDestinationLabel" destination="p5I-L2-Vwd" id="tZ0-h4-q9n"/>
+                                            <outlet property="followingDepartureDestinationLabel" destination="p5I-L2-Vwd" id="T4a-CY-gYi"/>
                                             <outlet property="followingDepartureLabel" destination="aGx-0V-D0e" id="sXt-Ur-PL2"/>
                                             <outlet property="followingDepartureSecondsLabel" destination="ja3-aO-08F" id="RFu-Wy-N0z"/>
                                         </connections>

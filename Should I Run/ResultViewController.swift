@@ -134,7 +134,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         
         //------------------result area things
         // run or not?
-        if currentBestRoute!.shouldRun {
+        if self.currentBestRoute!.shouldRun {
             self.instructionLabel.hidden = false
             let runUIColor = colorize(0xFC5B3F)
             self.resultArea.backgroundColor = runUIColor

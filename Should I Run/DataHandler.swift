@@ -94,7 +94,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
                 if departingIn > route.runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                    if departingIn >= route.walkingTime {
+                    if departingIn <= route.walkingTime {
                         route.shouldRun = true
                     }
                     

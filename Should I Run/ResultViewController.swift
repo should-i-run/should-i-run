@@ -23,6 +23,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet weak var alarmButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var resultArea: UIView!
     
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
@@ -34,6 +35,8 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         self.alarmButton!.hidden = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
+        self.tableView.backgroundColor = UIColor.blackColor()
 //        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
 //        self.extendedLayoutIncludesOpaqueBars = true
         DataHandler.instance.delegate = self
@@ -95,6 +98,23 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return 80
+        case 1:
+            return 100
+        case 2:
+            return 44
+        case 3:
+            return 44
+        case 4:
+            return 80
+        default:
+            return 60
+        }
+    }
+    
     func render() {
         self.results = DataHandler.instance.getResults()
         if (self.results.count > 0) {
@@ -117,7 +137,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         if currentBestRoute!.shouldRun {
             self.instructionLabel.hidden = false
             let runUIColor = colorize(0xFC5B3F)
-            self.instructionLabel.textColor = runUIColor
+            self.resultArea.backgroundColor = runUIColor
             
             self.instructionLabel.text = "Run!"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
@@ -129,7 +149,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             
             let walkUIColor = colorize(0x6FD57F)
             
-            self.instructionLabel.textColor = walkUIColor
+            self.resultArea.backgroundColor = walkUIColor
             
             self.alarmButton.hidden = false
             self.alarmTime = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - self.currentBestRoute!.walkingTime

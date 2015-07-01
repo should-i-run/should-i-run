@@ -13,10 +13,8 @@ class AddAlarmViewController: UIViewController {
     @IBOutlet var alarmPicker: UIDatePicker!
     var walkTime: Int?
     
-    
     @IBAction func saveBarButtonPress(sender: AnyObject) {
-
-        var localNotification:UILocalNotification = UILocalNotification()
+        let localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
         localNotification.alertBody = "Time to go"
         localNotification.alertAction = "Should I Run?"
@@ -37,9 +35,7 @@ class AddAlarmViewController: UIViewController {
         
         // request user notification permissions        
         if  NSString(string: UIDevice.currentDevice().systemVersion).doubleValue >= 8.0 {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert, categories: nil))
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
         }
-        
-        
     }
 }

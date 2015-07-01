@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2508AF391975B4CE00E48B37"
-               BuildableName = "Should I Run?.app"
-               BlueprintName = "Should I Run"
-               ReferencedContainer = "container:Should I Run.xcodeproj">
+               BuildableName = "ShouldIRun.app"
+               BlueprintName = "ShouldIRun"
+               ReferencedContainer = "container:ShouldIRun.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2508AF4B1975B4CE00E48B37"
-               BuildableName = "Should I RunTests.xctest"
-               BlueprintName = "Should I RunTests"
-               ReferencedContainer = "container:Should I Run.xcodeproj">
+               BuildableName = "ShouldIRunTests.xctest"
+               BlueprintName = "ShouldIRunTests"
+               ReferencedContainer = "container:ShouldIRun.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,11 +43,13 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2508AF391975B4CE00E48B37"
-            BuildableName = "Should I Run?.app"
-            BlueprintName = "Should I Run"
-            ReferencedContainer = "container:Should I Run.xcodeproj">
+            BuildableName = "ShouldIRun.app"
+            BlueprintName = "ShouldIRun"
+            ReferencedContainer = "container:ShouldIRun.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -57,14 +59,16 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2508AF391975B4CE00E48B37"
-            BuildableName = "Should I Run?.app"
-            BlueprintName = "Should I Run"
-            ReferencedContainer = "container:Should I Run.xcodeproj">
+            BuildableName = "ShouldIRun.app"
+            BlueprintName = "ShouldIRun"
+            ReferencedContainer = "container:ShouldIRun.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,13 +80,14 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2508AF391975B4CE00E48B37"
-            BuildableName = "Should I Run?.app"
-            BlueprintName = "Should I Run"
-            ReferencedContainer = "container:Should I Run.xcodeproj">
+            BuildableName = "ShouldIRun.app"
+            BlueprintName = "ShouldIRun"
+            ReferencedContainer = "container:ShouldIRun.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

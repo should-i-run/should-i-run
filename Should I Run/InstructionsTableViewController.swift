@@ -1,14 +1,6 @@
-//
-//  MainTableViewController.swift
-//  should I run? draft
-//
-//  Created by Roger Goldfinger on 7/11/14.
-//  Copyright (c) 2014 Roger Goldfinger. All rights reserved.
-//
 
 import UIKit
 import Foundation
-
 
 class InstructionsTableViewController: UITableViewController {
     
@@ -74,17 +66,17 @@ class InstructionsTableViewController: UITableViewController {
 
         cell.accessoryType = UITableViewCellAccessoryType.None
         cell.backgroundColor = self.colors[row]
-        cell.textLabel.text = self.instructions[row]
-        cell.textLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin", size: 30), size: 30)
+        cell.textLabel!.text = self.instructions[row]
+        cell.textLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin", size: 30), size: 30)
         if row == 7 {
-            cell.textLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 40), size: 40)
+            cell.textLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 40), size: 40)
         }
-        cell.textLabel.minimumScaleFactor = 0.5
-        cell.textLabel.numberOfLines = 2
+        cell.textLabel!.minimumScaleFactor = 0.5
+        cell.textLabel!.numberOfLines = 2
         if (row == 5) {
-            cell.textLabel.numberOfLines = 1
+            cell.textLabel!.numberOfLines = 1
         }
-        cell.textLabel.adjustsFontSizeToFitWidth = true
+        cell.textLabel!.adjustsFontSizeToFitWidth = true
 
         return cell
     }
@@ -92,5 +84,4 @@ class InstructionsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         return nil
     }
-
 }

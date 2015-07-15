@@ -38,7 +38,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
         self.tableView.backgroundColor = UIColor.blackColor()
 //        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
-//        self.extendedLayoutIncludesOpaqueBars = true
+        self.extendedLayoutIncludesOpaqueBars = true
         DataHandler.instance.delegate = self
         self.results = DataHandler.instance.getResults()
         
@@ -140,12 +140,12 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             self.resultArea.backgroundColor = runUIColor
             
             self.instructionLabel.text = "Run!"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 50), size: 50)
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
             self.alarmButton.hidden = true
         } else {
             self.instructionLabel.hidden = false
             self.instructionLabel.text = "Nah, take it easy"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 30), size: 30)
+            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
             
             let walkUIColor = colorize(0x6FD57F)
             

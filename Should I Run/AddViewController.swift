@@ -72,20 +72,20 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if let res = response {
                 //get the location for the address and save it
                 let resultsLocation = (res[0] as CLPlacemark).location
-                self.lat = Float(resultsLocation.coordinate.latitude)
-                self.lng = Float(resultsLocation.coordinate.longitude)
+                self.lat = Float(resultsLocation!.coordinate.latitude)
+                self.lng = Float(resultsLocation!.coordinate.longitude)
                 
                 //set the map view to show the current location and this address
-                let distanceBetweenPoints = resultsLocation.distanceFromLocation(self.locationManager.currentLocation!)
+                let distanceBetweenPoints = resultsLocation!.distanceFromLocation(self.locationManager.currentLocation!)
 
-                let mapCenterlatitude = (resultsLocation.coordinate.latitude + self.locationManager.currentLocation2d!.latitude)/2
-                let mapCenterlongitude = (resultsLocation.coordinate.longitude + self.locationManager.currentLocation2d!.longitude)/2
+                let mapCenterlatitude = (resultsLocation!.coordinate.latitude + self.locationManager.currentLocation2d!.latitude)/2
+                let mapCenterlongitude = (resultsLocation!.coordinate.longitude + self.locationManager.currentLocation2d!.longitude)/2
                 let center = CLLocationCoordinate2D(latitude: mapCenterlatitude, longitude: mapCenterlongitude)
                 let region = MKCoordinateRegionMakeWithDistance(center, distanceBetweenPoints + 1000, distanceBetweenPoints + 1000)
 
                 self.mapView?.setRegion(self.mapView!.regionThatFits(region), animated: true)
 
-                marker.coordinate = (res[0] as CLPlacemark).location.coordinate
+                marker.coordinate = (res[0] as CLPlacemark).location!.coordinate
                 self.mapView!.removeAnnotations(self.mapView!.annotations)
                 self.mapView!.addAnnotation(marker)
                 self.currentAnnotation = marker
@@ -112,7 +112,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             (response: [CLPlacemark]?, error: NSError?) -> Void in
             if let resp = response {
                 if(resp.count > 0){
-                    var text = resp[0].locality
+                    var text = resp[0].locality!
                     
                     if let tfare = resp[0].thoroughfare  {
                         text = "\(tfare), " + text

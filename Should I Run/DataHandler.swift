@@ -14,7 +14,7 @@ let runningSpeed = 200 //meters per minute
 
 protocol DataHandlerDelegate {
     func handleDataSuccess()
-    func handleError(String)
+    func handleError(_: String)
 }
 
 class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegate {

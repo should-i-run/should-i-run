@@ -43,11 +43,10 @@ class apiController: NSObject {
         if !cachedLocationFound {
             let url = "http://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
             print(url)
-            
-            Alamofire.request(.POST, URLString: url)
-                .responseJSON { (req, res, jsonData, err) in
+            Alamofire.request(.POST, url)
+                .responseJSON { (req, res, jsonData) in
                     //TODO handle errors, no results
-                    if let realJSON: AnyObject = jsonData {
+                    if let realJSON: AnyObject = jsonData.value! {
                         let json = JSON(realJSON)
                         if let jrray = json.array {
                             if jrray.count == 0 || jrray[0] == nil {

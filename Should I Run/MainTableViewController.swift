@@ -74,14 +74,14 @@ import Foundation
 
         //row is not zero indexed, locations is
         if row == locations.count {
-            cell.textLabel!.text = "add a destination"
+            cell.textLabel!.text = "+ add destination"
             cell.backgroundColor = self.colors[4]
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             
         } else if row == locations.count + 1 {
             cell.textLabel!.text = "instructions"
             cell.backgroundColor = colorize(0x068F86)
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         //retrieve from the collection of objects with key "row number"
         } else if let location : AnyObject = locations[row] as AnyObject? {

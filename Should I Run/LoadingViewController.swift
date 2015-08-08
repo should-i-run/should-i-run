@@ -23,11 +23,12 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
 
     var timeoutTimer: NSTimer = NSTimer()
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
         DataHandler.instance.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         // Start spinner animation
         spinner!.startAnimating()

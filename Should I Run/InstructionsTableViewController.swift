@@ -67,7 +67,7 @@ class InstructionsTableViewController: UITableViewController {
         cell.accessoryType = UITableViewCellAccessoryType.None
         cell.backgroundColor = self.colors[row]
         cell.textLabel!.text = self.instructions[row]
-        cell.textLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin", size: 30), size: 30)
+        cell.textLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light", size: 30), size: 30)
         if row == 7 {
             cell.textLabel!.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Light Italic", size: 40), size: 40)
         }
@@ -77,6 +77,7 @@ class InstructionsTableViewController: UITableViewController {
             cell.textLabel!.numberOfLines = 1
         }
         cell.textLabel!.adjustsFontSizeToFitWidth = true
+        cell.textLabel!.textColor = UIColor.whiteColor()
 
         return cell
     }

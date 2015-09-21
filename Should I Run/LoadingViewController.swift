@@ -1,4 +1,4 @@
-//
+    //
 //  LoadingViewController.swift
 //  Should I Run
 //
@@ -23,11 +23,12 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
 
     var timeoutTimer: NSTimer = NSTimer()
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
         DataHandler.instance.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         // Start spinner animation
         spinner!.startAnimating()
@@ -35,9 +36,6 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
         // Set background color
         self.view.backgroundColor = self.backgroundColor
         
-    }
-    
-    override func viewDidAppear(animated: Bool){
         if !self.viewHasAlreadyAppeared {
             self.viewHasAlreadyAppeared = true
             // Set timer to segue back (by calling segueFromView) back to the main table view
@@ -73,7 +71,7 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
         spinner!.stopAnimating()
-        timeoutTimer.invalidate()
+        self.timeoutTimer.invalidate()
     }
 }
 

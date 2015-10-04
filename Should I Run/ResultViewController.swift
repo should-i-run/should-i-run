@@ -31,11 +31,12 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = globalBackgroundColor
+        self.tableView.separatorColor = colorize(0x222222)
         self.instructionLabel!.hidden = true
         self.alarmButton!.hidden = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.backgroundColor = UIColor.blackColor()
 //        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
         self.extendedLayoutIncludesOpaqueBars = true

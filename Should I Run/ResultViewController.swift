@@ -32,6 +32,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         self.view.backgroundColor = globalBackgroundColor
         self.tableView.separatorColor = colorize(0x222222)
+        self.parentViewController?.view.backgroundColor = colorize(0x222222)
         self.instructionLabel!.hidden = true
         self.alarmButton!.hidden = true
         self.tableView.delegate = self

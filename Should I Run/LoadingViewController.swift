@@ -15,17 +15,13 @@ enum NetworkStatusStruct: Int {
     case ReachableViaWWAN
 }
 
-class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerDelegate {
+class LoadingViewController: UIViewController, UIAlertViewDelegate {
     
     var viewHasAlreadyAppeared = false
     var backgroundColor = UIColor()
     @IBOutlet var spinner: UIActivityIndicatorView?
 
     var timeoutTimer: NSTimer = NSTimer()
-    
-    override func viewWillAppear(animated: Bool) {
-        DataHandler.instance.delegate = self
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +38,6 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
             let timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
             self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("timerTimeout:"), userInfo: timeoutText, repeats: false)
         }
-    }
-    
-    func handleDataSuccess () {
-        self.performSegueWithIdentifier("ResultsSegue", sender: self)
     }
     
     // Error handling-----------------------------------------------------
@@ -72,6 +64,12 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate, DataHandlerD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
         spinner!.stopAnimating()
         self.timeoutTimer.invalidate()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        spinner!.stopAnimating()
+        self.timeoutTimer.invalidate()
+        super.viewDidDisappear(animated)
     }
 }
 

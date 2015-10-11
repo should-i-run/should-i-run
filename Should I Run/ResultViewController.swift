@@ -103,7 +103,16 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-       return 90
+        switch indexPath.row {
+        case 2, 3:
+            return 60
+        default:
+            return 90
+        }
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
     func render() {

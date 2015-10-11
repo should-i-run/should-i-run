@@ -668,7 +668,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="remind me when to go"/>
                                         <connections>
-                                            <segue destination="UkY-Fi-fDv" kind="show" identifier="AlarmSegue" id="L5O-AW-YSe"/>
+                                            <segue destination="UkY-Fi-fDv" kind="presentation" identifier="AlarmSegue" id="L5O-AW-YSe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -825,33 +825,52 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-Lq-xhA">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPress:" destination="UkY-Fi-fDv" eventType="touchUpInside" id="N9m-eL-8eu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.20999999999999999" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leading" id="3Fj-Ek-JYx"/>
+                            <constraint firstItem="LF2-Lq-xhA" firstAttribute="top" secondItem="yog-Os-ERm" secondAttribute="bottom" constant="21" id="5a8-D6-RgR"/>
                             <constraint firstItem="Oa3-LW-1et" firstAttribute="top" secondItem="sIK-xg-Gqa" secondAttribute="bottom" constant="71" id="AVG-gf-RGs"/>
                             <constraint firstItem="fSE-mq-6iZ" firstAttribute="top" secondItem="yog-Os-ERm" secondAttribute="bottom" constant="254" id="M6j-lV-SIq"/>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="Oa3-LW-1et" secondAttribute="bottom" constant="10" id="OEl-aJ-YKy"/>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leading" id="OkM-Qa-DTu"/>
                             <constraint firstItem="yog-Os-ERm" firstAttribute="top" secondItem="Oa3-LW-1et" secondAttribute="bottom" constant="10" id="V3j-iV-Ozi"/>
-                            <constraint firstItem="yog-Os-ERm" firstAttribute="trailing" secondItem="zfS-b1-tTb" secondAttribute="trailingMargin" id="XV7-4N-cxz"/>
+                            <constraint firstItem="yog-Os-ERm" firstAttribute="trailing" secondItem="zfS-b1-tTb" secondAttribute="trailing" id="XV7-4N-cxz"/>
                             <constraint firstItem="Oa3-LW-1et" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" constant="4" id="XhE-zB-CIr"/>
                             <constraint firstItem="Oa3-LW-1et" firstAttribute="top" secondItem="sIK-xg-Gqa" secondAttribute="bottom" constant="71" id="jMh-5C-80j"/>
                             <constraint firstItem="fSE-mq-6iZ" firstAttribute="top" secondItem="yog-Os-ERm" secondAttribute="bottom" constant="254" id="u5Q-Qr-D3H"/>
                             <constraint firstItem="Oa3-LW-1et" firstAttribute="leading" secondItem="zfS-b1-tTb" secondAttribute="leadingMargin" id="wtm-oQ-utP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LF2-Lq-xhA" secondAttribute="trailing" constant="66" id="z1Y-4I-bG1"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="LF2-Lq-xhA"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="AVG-gf-RGs"/>
                                 <exclude reference="wtm-oQ-utP"/>
                                 <exclude reference="3Fj-Ek-JYx"/>
                                 <exclude reference="OEl-aJ-YKy"/>
                                 <exclude reference="XV7-4N-cxz"/>
+                                <exclude reference="5a8-D6-RgR"/>
+                                <exclude reference="z1Y-4I-bG1"/>
                                 <exclude reference="M6j-lV-SIq"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="LF2-Lq-xhA"/>
+                            </mask>
                             <mask key="constraints">
                                 <include reference="AVG-gf-RGs"/>
                                 <exclude reference="XhE-zB-CIr"/>
@@ -862,6 +881,8 @@
                                 <exclude reference="OkM-Qa-DTu"/>
                                 <exclude reference="V3j-iV-Ozi"/>
                                 <include reference="XV7-4N-cxz"/>
+                                <include reference="5a8-D6-RgR"/>
+                                <include reference="z1Y-4I-bG1"/>
                                 <include reference="M6j-lV-SIq"/>
                                 <exclude reference="u5Q-Qr-D3H"/>
                             </mask>
@@ -876,13 +897,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="alarmPicker" destination="yog-Os-ERm" id="knl-UZ-Rty"/>
-                        <segue destination="s5l-Yx-r0J" kind="unwind" identifier="backToResults" unwindAction="unwindToResults:" id="x9I-HX-PhU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ru9-wH-Bap" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="s5l-Yx-r0J" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4816" y="540"/>
+            <point key="canvasLocation" x="4815" y="540"/>
         </scene>
         <!--Add Destination-->
         <scene sceneID="Cna-dX-z1h">

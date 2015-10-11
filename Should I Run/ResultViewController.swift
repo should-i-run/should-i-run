@@ -31,6 +31,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem
         self.view.backgroundColor = globalBackgroundColor
         self.tableView.separatorColor = colorize(0x222222)
         self.parentViewController?.view.backgroundColor = colorize(0x222222)
@@ -185,12 +186,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // Segues and unwinds-----------------------------------------------------
-    
-    @IBAction func returnToRoot(sender: UIButton?) {
-        DataHandler.instance.cancelLoad()
-        self.navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
 
         if segue.identifier == "AlarmSegue" {
@@ -199,12 +194,17 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        DataHandler.instance.cancelLoad()
+        super.viewDidDisappear(animated)
+    }
+    
     // Error handling-----------------------------------------------------
     
     // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
     // It performs the unwind segue when done.
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
-        self.returnToRoot(nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func handleError(errorMessage: String) {

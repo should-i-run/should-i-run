@@ -10,8 +10,8 @@
         <mutableArray key="HelveticaNeueLights.ttc">
             <string>HelveticaNeue-Light</string>
             <string>HelveticaNeue-LightItalic</string>
-            <string>HelveticaNeue-Light</string>
             <string>HelveticaNeue-ThinItalic</string>
+            <string>HelveticaNeue-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -57,9 +57,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Should I Run?" id="H38-Nd-7hy"/>
                     <connections>
-                        <segue destination="3gf-Kz-iQM" kind="show" identifier="LoadingSegue" id="NRz-u3-g7B"/>
+                        <segue destination="3gf-Kz-iQM" kind="presentation" identifier="LoadingSegue" modalTransitionStyle="crossDissolve" id="NRz-u3-g7B"/>
                         <segue destination="bNB-m3-407" kind="show" identifier="AddSegue" id="52L-eT-HMy"/>
                         <segue destination="lQk-9i-iDZ" kind="show" identifier="InstructionsSegue" id="Ir8-3K-UOL"/>
+                        <segue destination="8qB-Tw-PfR" kind="show" identifier="ResultsSegue" id="bLo-ye-C7Q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCN-DA-DIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -96,7 +97,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1OG-0W-VoC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2313" y="1343"/>
+            <point key="canvasLocation" x="1884" y="1468"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="6pi-4x-WDs">
@@ -149,14 +150,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="spinner" destination="dn2-ck-XGM" id="iG1-3l-GXH"/>
-                        <segue destination="8qB-Tw-PfR" kind="show" identifier="ResultsSegue" id="PoU-Ol-HGj"/>
                         <segue destination="oFy-wY-InO" kind="unwind" identifier="ErrorUnwindSegue" unwindAction="unwindToList:" id="Imb-5L-k74"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d54-Ma-yhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oFy-wY-InO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3217" y="540"/>
+            <point key="canvasLocation" x="3138" y="-20"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="TJz-jA-Xk3">
@@ -199,7 +199,8 @@
                                         <exclude reference="vCd-db-myW"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="154"/>
                                     <mask key="subviews">
                                         <include reference="VWP-lz-GQI"/>
                                     </mask>
@@ -658,6 +659,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="154" width="400" height="366"/>
+                                </variation>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrN-p2-QjT" userLabel="AlarmArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -778,7 +782,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wny-FK-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3987" y="540"/>
+            <point key="canvasLocation" x="3621" y="676"/>
         </scene>
         <!--Add Alarm View Controller-->
         <scene sceneID="0cD-t1-03O">
@@ -901,7 +905,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ru9-wH-Bap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4815" y="540"/>
+            <point key="canvasLocation" x="4464" y="676"/>
         </scene>
         <!--Add Destination-->
         <scene sceneID="Cna-dX-z1h">
@@ -968,7 +972,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4022" y="1468"/>
+            <point key="canvasLocation" x="2797.5" y="1468"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="28Y-KD-qFE">

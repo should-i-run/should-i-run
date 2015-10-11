@@ -10,12 +10,16 @@ import UIKit
 import MapKit
 import Foundation
 
-@objc (MainTableViewController) class MainTableViewController: UITableViewController {
+@objc (MainTableViewController) class MainTableViewController: UITableViewController, DataHandlerDelegate {
     var colors = [UIColor]()
 
     var colorForChosenLocation = UIColor()
     
     let fileManager = SharedFileManager
+    
+    override func viewWillAppear(animated: Bool) {
+        DataHandler.instance.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +126,18 @@ import Foundation
         } else if row == locations.count + 1 {
             self.performSegueWithIdentifier("InstructionsSegue", sender: self)
         }
+    }
+    
+    func handleDataSuccess () {
+        self.dismissViewControllerAnimated(false, completion: nil)
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+    }
+    
+    func handleError(errorMessage: String) {
+        DataHandler.instance.cancelLoad()
+        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        message.show()
+        //TODO: actually this should be passed to the loading modal
     }
     
     func unwindToList(segue:UIStoryboardSegue)  {

@@ -22,6 +22,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     //result area things
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet weak var alarmButton: UIButton!
+    @IBOutlet weak var alarmArea: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resultArea: UIView!
     
@@ -131,6 +132,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             self.instructionLabel.text = "Run!"
             self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
             self.alarmButton.hidden = true
+            self.alarmArea.hidden = true
         } else {
             self.instructionLabel.hidden = false
             self.instructionLabel.text = "Nah, take it easy"
@@ -141,6 +143,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             self.resultArea.backgroundColor = walkUIColor
             
             self.alarmButton.hidden = false
+            self.alarmArea.hidden = false
             self.alarmTime = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - self.currentBestRoute!.walkingTime
         }
         self.tableView.reloadData()

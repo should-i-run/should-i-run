@@ -15,6 +15,7 @@ class Cell2ViewController: UITableViewCell {
     @IBOutlet weak var stationNameLabel: UILabel!
     
     func update(currentBestRoute: Route?) {
+        self.stationNameLabel.numberOfLines = 2
         if let bestRoute = currentBestRoute {
             self.distanceToStationLabel.text = String(bestRoute.distanceToStation!)
             self.stationNameLabel.text = "meters to \(bestRoute.originStationName)"

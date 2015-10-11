@@ -16,13 +16,14 @@ class Cell5ViewController: UITableViewCell {
     @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
     
     func update(secondRoute: Route?, seconds: Int) {
+        self.followingDepartureDestinationLabel.numberOfLines = 2
         
         //following destination station name label
         if let following:Route = secondRoute {
             if following.agency == "bart" {
                 self.followingDepartureDestinationLabel.text = "towards \(following.eolStationName)"
             } else if following.agency == "muni" {
-                self.followingDepartureDestinationLabel.text = "\(following.lineName) / \(following.eolStationName)"
+                self.followingDepartureDestinationLabel.text = following.lineName
             }
             let followingCurrentMinutes = Int(following.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
             self.followingDepartureLabel.text = String(followingCurrentMinutes)

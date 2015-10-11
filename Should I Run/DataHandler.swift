@@ -53,6 +53,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         self.cancelled = false
         self.destinationLatitude = lat
         self.destinationLongitude = lon
+        self.locationName = name
         let networkStatus = self.internetReachability.currentReachabilityStatus()
         if (networkStatus == NOT_REACHABLE ) {
             self.handleError("Sorry, no internet access")

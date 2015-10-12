@@ -33,7 +33,7 @@ class Cell1ViewController: UITableViewCell {
             case "muni":
                 self.destinationLabel.text = bestRoute.lineName
             case "caltrain":
-                self.destinationLabel.text = "\(bestRoute.lineName) towards \(bestRoute.eolStationName)"
+                self.destinationLabel.text = "towards \(bestRoute.eolStationName)"
             default:
                 self.destinationLabel.text = bestRoute.eolStationName
             }

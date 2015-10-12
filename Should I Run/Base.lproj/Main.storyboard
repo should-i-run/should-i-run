@@ -173,7 +173,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qno-xn-loc" userLabel="ResultArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VWP-lz-GQI">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VWP-lz-GQI">
                                         <rect key="frame" x="20" y="79" width="560" height="46"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="50"/>
@@ -187,6 +187,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="154" id="RMu-9j-ohA"/>
                                     <constraint firstAttribute="bottom" secondItem="VWP-lz-GQI" secondAttribute="bottom" constant="20" id="VpH-uD-Pnr"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="VWP-lz-GQI" secondAttribute="trailing" id="j9M-b0-PaX"/>
+                                    <constraint firstItem="VWP-lz-GQI" firstAttribute="leading" secondItem="Qno-xn-loc" secondAttribute="leadingMargin" id="jre-3Z-4ad"/>
+                                    <constraint firstItem="VWP-lz-GQI" firstAttribute="top" secondItem="Qno-xn-loc" secondAttribute="top" constant="80" id="nNz-Hy-EBI"/>
                                     <constraint firstItem="VWP-lz-GQI" firstAttribute="centerX" secondItem="Qno-xn-loc" secondAttribute="centerX" id="vCd-db-myW"/>
                                 </constraints>
                                 <variation key="default">
@@ -196,6 +199,9 @@
                                     <mask key="constraints">
                                         <exclude reference="RMu-9j-ohA"/>
                                         <exclude reference="VpH-uD-Pnr"/>
+                                        <exclude reference="j9M-b0-PaX"/>
+                                        <exclude reference="jre-3Z-4ad"/>
+                                        <exclude reference="nNz-Hy-EBI"/>
                                         <exclude reference="vCd-db-myW"/>
                                     </mask>
                                 </variation>
@@ -206,6 +212,9 @@
                                     <mask key="constraints">
                                         <include reference="RMu-9j-ohA"/>
                                         <include reference="VpH-uD-Pnr"/>
+                                        <include reference="j9M-b0-PaX"/>
+                                        <include reference="jre-3Z-4ad"/>
+                                        <include reference="nNz-Hy-EBI"/>
                                         <include reference="vCd-db-myW"/>
                                     </mask>
                                 </variation>
@@ -214,8 +223,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell1" rowHeight="80" id="mvm-09-XKt" customClass="Cell1ViewController" customModule="ShouldIRun" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -228,9 +237,9 @@
                                                     <rect key="frame" x="75" y="19" width="31" height="24"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="NoC-Ar-9Kl"/>
+                                                        <constraint firstAttribute="width" constant="38" id="NoC-Ar-9Kl"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -251,7 +260,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="18" width="184" height="17"/>
+                                                        <rect key="frame" x="118" y="-2" width="264" height="29.5"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="to --------" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="huy-5W-OZJ">
@@ -260,14 +269,11 @@
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="37" width="184" height="21.5"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlH-FH-Xqs">
                                                     <rect key="frame" x="7" y="20" width="65" height="53"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -277,7 +283,7 @@
                                             <constraints>
                                                 <constraint firstItem="u2n-wi-cKw" firstAttribute="centerY" secondItem="qlH-FH-Xqs" secondAttribute="centerY" id="9bQ-AI-V8l"/>
                                                 <constraint firstItem="u2n-wi-cKw" firstAttribute="trailing" secondItem="Z0X-aj-iRJ" secondAttribute="leadingMargin" constant="100" id="EPP-Vu-d06"/>
-                                                <constraint firstAttribute="topMargin" secondItem="o4h-A2-S0j" secondAttribute="top" constant="-10" id="JCb-ui-7hP"/>
+                                                <constraint firstItem="huy-5W-OZJ" firstAttribute="centerY" secondItem="u2n-wi-cKw" secondAttribute="centerY" id="XDK-3i-aLA"/>
                                                 <constraint firstItem="huy-5W-OZJ" firstAttribute="top" secondItem="o4h-A2-S0j" secondAttribute="bottom" constant="2" id="ZfN-9m-3SR"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="o4h-A2-S0j" secondAttribute="trailing" constant="10" id="dxi-nc-YON"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="huy-5W-OZJ" secondAttribute="trailing" constant="10" id="i5W-I4-Rtp"/>
@@ -298,9 +304,9 @@
                                                     <exclude reference="9bQ-AI-V8l"/>
                                                     <exclude reference="EPP-Vu-d06"/>
                                                     <exclude reference="qH8-6X-g9S"/>
-                                                    <exclude reference="JCb-ui-7hP"/>
                                                     <exclude reference="dxi-nc-YON"/>
                                                     <exclude reference="ytV-wd-pHD"/>
+                                                    <exclude reference="XDK-3i-aLA"/>
                                                     <exclude reference="ZfN-9m-3SR"/>
                                                     <exclude reference="i5W-I4-Rtp"/>
                                                     <exclude reference="wMr-kK-mZn"/>
@@ -318,9 +324,9 @@
                                                     <include reference="9bQ-AI-V8l"/>
                                                     <include reference="EPP-Vu-d06"/>
                                                     <include reference="qH8-6X-g9S"/>
-                                                    <include reference="JCb-ui-7hP"/>
                                                     <include reference="dxi-nc-YON"/>
                                                     <include reference="ytV-wd-pHD"/>
+                                                    <include reference="XDK-3i-aLA"/>
                                                     <include reference="ZfN-9m-3SR"/>
                                                     <include reference="i5W-I4-Rtp"/>
                                                     <include reference="wMr-kK-mZn"/>
@@ -344,9 +350,12 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="243" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ln9-0H-tPC">
                                                     <rect key="frame" x="9" y="121" width="65" height="21"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="44" y="13" width="64" height="54"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="meters to station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ph-3c-53d">
                                                     <rect key="frame" x="79" y="121" width="498" height="21"/>
@@ -424,9 +433,12 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRS-un-cKv">
                                                     <rect key="frame" x="9" y="179" width="65" height="21"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="92" y="0.5" width="16" height="43"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -483,9 +495,12 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbf-ts-B4g">
                                                     <rect key="frame" x="9" y="150" width="65" height="21"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="92" y="0.5" width="16" height="43"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="minutes running" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNz-e1-zim">
                                                     <rect key="frame" x="79" y="150" width="123" height="21"/>
@@ -546,30 +561,17 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGx-0V-D0e">
                                                     <rect key="frame" x="33" y="67" width="39" height="21"/>
                                                     <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="32" id="0br-dW-QIJ"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="0br-dW-QIJ"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="widthClass=compact">
-                                                        <mask key="constraints">
-                                                            <exclude reference="0br-dW-QIJ"/>
-                                                        </mask>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text=":--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ja3-aO-08F">
                                                     <rect key="frame" x="75" y="66" width="26" height="24"/>
                                                     <animations/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="R7m-EK-V7F"/>
+                                                        <constraint firstAttribute="width" constant="38" id="R7m-EK-V7F"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -589,9 +591,6 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="18" width="184" height="17"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="-----------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="p5I-L2-Vwd">
                                                     <rect key="frame" x="81" y="88" width="499" height="21"/>
@@ -599,9 +598,6 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="37" width="184" height="21.5"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -615,6 +611,7 @@
                                                 <constraint firstItem="ja3-aO-08F" firstAttribute="trailing" secondItem="hI4-TJ-KYy" secondAttribute="leadingMargin" constant="100" id="Fwk-aR-gcg"/>
                                                 <constraint firstItem="ja3-aO-08F" firstAttribute="centerY" secondItem="hI4-TJ-KYy" secondAttribute="centerY" id="PdK-1P-rat"/>
                                                 <constraint firstItem="rbu-Pp-tmw" firstAttribute="top" secondItem="hI4-TJ-KYy" secondAttribute="topMargin" constant="10" id="df8-kJ-GEj"/>
+                                                <constraint firstItem="p5I-L2-Vwd" firstAttribute="baseline" secondItem="ja3-aO-08F" secondAttribute="baseline" id="i5U-Ks-DjL"/>
                                                 <constraint firstItem="aGx-0V-D0e" firstAttribute="centerY" secondItem="ja3-aO-08F" secondAttribute="centerY" id="lFR-uX-AgH"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="p5I-L2-Vwd" secondAttribute="bottom" constant="8.5" id="lx1-kK-fYv"/>
                                                 <constraint firstItem="ja3-aO-08F" firstAttribute="bottom" secondItem="p5I-L2-Vwd" secondAttribute="bottom" id="qBq-DH-fms"/>
@@ -638,6 +635,7 @@
                                                     <exclude reference="df8-kJ-GEj"/>
                                                     <exclude reference="2Xg-oC-Npl"/>
                                                     <exclude reference="4S3-I6-h9O"/>
+                                                    <exclude reference="i5U-Ks-DjL"/>
                                                     <exclude reference="lx1-kK-fYv"/>
                                                     <exclude reference="zH4-XV-tQa"/>
                                                 </mask>
@@ -660,6 +658,7 @@
                                                     <include reference="df8-kJ-GEj"/>
                                                     <include reference="2Xg-oC-Npl"/>
                                                     <include reference="4S3-I6-h9O"/>
+                                                    <include reference="i5U-Ks-DjL"/>
                                                     <exclude reference="lx1-kK-fYv"/>
                                                     <include reference="zH4-XV-tQa"/>
                                                 </mask>

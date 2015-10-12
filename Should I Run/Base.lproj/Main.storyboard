@@ -10,8 +10,8 @@
         <mutableArray key="HelveticaNeueLights.ttc">
             <string>HelveticaNeue-Light</string>
             <string>HelveticaNeue-LightItalic</string>
-            <string>HelveticaNeue-ThinItalic</string>
             <string>HelveticaNeue-Light</string>
+            <string>HelveticaNeue-ThinItalic</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -111,7 +111,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dn2-ck-XGM">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dn2-ck-XGM">
                                 <rect key="frame" x="282" y="265" width="37" height="37"/>
                                 <animations/>
                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
@@ -199,8 +199,7 @@
                                         <exclude reference="vCd-db-myW"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="154"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="VWP-lz-GQI"/>
                                     </mask>
@@ -659,9 +658,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="154" width="400" height="366"/>
-                                </variation>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrN-p2-QjT" userLabel="AlarmArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -796,14 +792,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yog-Os-ERm">
                                 <rect key="frame" x="0.0" y="122" width="320" height="224"/>
                                 <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="427344271.65988499">
                                     <!--2014-07-18 02:44:31 +0000-->
                                 </date>
                             </datePicker>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
                                 <rect key="frame" x="24" y="91" width="227" height="21"/>
                                 <animations/>
                                 <constraints>
@@ -861,13 +857,13 @@
                                 <exclude reference="LF2-Lq-xhA"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="5a8-D6-RgR"/>
+                                <exclude reference="z1Y-4I-bG1"/>
                                 <exclude reference="AVG-gf-RGs"/>
                                 <exclude reference="wtm-oQ-utP"/>
                                 <exclude reference="3Fj-Ek-JYx"/>
                                 <exclude reference="OEl-aJ-YKy"/>
                                 <exclude reference="XV7-4N-cxz"/>
-                                <exclude reference="5a8-D6-RgR"/>
-                                <exclude reference="z1Y-4I-bG1"/>
                                 <exclude reference="M6j-lV-SIq"/>
                             </mask>
                         </variation>
@@ -876,6 +872,8 @@
                                 <include reference="LF2-Lq-xhA"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="5a8-D6-RgR"/>
+                                <include reference="z1Y-4I-bG1"/>
                                 <include reference="AVG-gf-RGs"/>
                                 <exclude reference="XhE-zB-CIr"/>
                                 <exclude reference="jMh-5C-80j"/>
@@ -885,8 +883,6 @@
                                 <exclude reference="OkM-Qa-DTu"/>
                                 <exclude reference="V3j-iV-Ozi"/>
                                 <include reference="XV7-4N-cxz"/>
-                                <include reference="5a8-D6-RgR"/>
-                                <include reference="z1Y-4I-bG1"/>
                                 <include reference="M6j-lV-SIq"/>
                                 <exclude reference="u5Q-Qr-D3H"/>
                             </mask>
@@ -928,7 +924,7 @@
                                     <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="6jF-o1-0PI"/>
                                 </connections>
                             </mapView>
-                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Enter address or tap on map" translatesAutoresizingMaskIntoConstraints="NO" id="doG-ag-Kx8">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Enter address or tap on map" translatesAutoresizingMaskIntoConstraints="NO" id="doG-ag-Kx8">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <animations/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>

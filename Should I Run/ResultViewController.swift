@@ -33,16 +33,16 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem
         self.view.backgroundColor = globalBackgroundColor
-        self.tableView.separatorColor = colorize(0x222222)
-        self.parentViewController?.view.backgroundColor = colorize(0x222222)
+        self.tableView.backgroundColor = globalBackgroundColor
+        self.resultArea.backgroundColor = globalBackgroundColor
+
         self.instructionLabel!.hidden = true
-        self.alarmButton!.hidden = true
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.tableView.backgroundColor = UIColor.blackColor()
-//        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
         self.extendedLayoutIncludesOpaqueBars = true
+        
         DataHandler.instance.delegate = self
         self.results = DataHandler.instance.getResults()
         
@@ -137,23 +137,18 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         if self.currentBestRoute!.shouldRun {
             self.instructionLabel.hidden = false
             let runUIColor = colorize(0xFC5B3F)
-            self.resultArea.backgroundColor = runUIColor
-            
+            self.instructionLabel.textColor = runUIColor
             self.instructionLabel.text = "Run!"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
-            self.alarmButton.hidden = true
-            self.alarmArea.hidden = true
+            if let secondRoute = self.currentSecondRoute {
+                self.alarmTime = Int(secondRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - secondRoute.walkingTime
+            }
+
         } else {
             self.instructionLabel.hidden = false
-            self.instructionLabel.text = "Nah, take it easy"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
+            self.instructionLabel.text = "Take it easy"
             
             let walkUIColor = colorize(0x6FD57F)
-            
-            self.resultArea.backgroundColor = walkUIColor
-            
-            self.alarmButton.hidden = false
-            self.alarmArea.hidden = false
+            self.instructionLabel.textColor = walkUIColor
             self.alarmTime = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - self.currentBestRoute!.walkingTime
         }
         self.tableView.reloadData()
@@ -196,20 +191,17 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidDisappear(animated: Bool) {
         DataHandler.instance.cancelLoad()
+        self.updateResultTimer.invalidate()
+        self.secondTimer.invalidate()
         super.viewDidDisappear(animated)
     }
     
     // Error handling-----------------------------------------------------
-    
-    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
-    // It performs the unwind segue when done.
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func handleError(errorMessage: String) {
-        // Create and show error message
-        // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
         message.show()
     }

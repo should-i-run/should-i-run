@@ -22,7 +22,7 @@ class AddAlarmViewController: UIViewController {
         
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewDidLoad() {

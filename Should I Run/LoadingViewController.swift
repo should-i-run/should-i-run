@@ -41,31 +41,15 @@ class LoadingViewController: UIViewController, UIAlertViewDelegate {
     }
     
     // Error handling-----------------------------------------------------
-    
-    // This function gets called when the user clicks on the alertView button to dismiss it
-    // It performs the unwind segue when done.
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        self.performSegueWithIdentifier("ErrorUnwindSegue", sender: self)
-    }
-    
-    func handleError(errorMessage: String) {
-        self.timeoutTimer.invalidate()
-        DataHandler.instance.cancelLoad()
-        // Create and show error message
-        // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
-        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+
+    func timerTimeout(timer: NSTimer) {
+        let message: UIAlertView = UIAlertView(title: "Oops!", message: "Request timed out", delegate: self, cancelButtonTitle: "Ok")
         message.show()
     }
     
-    func timerTimeout(timer: NSTimer) {
-        handleError("Request timed out")
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)  {
-        spinner!.stopAnimating()
-        self.timeoutTimer.invalidate()
-    }
-    
     override func viewDidDisappear(animated: Bool) {
         spinner!.stopAnimating()
         self.timeoutTimer.invalidate()

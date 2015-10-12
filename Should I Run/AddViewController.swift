@@ -10,12 +10,16 @@ import UIKit
 
 import MapKit
 
-class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UISearchBarDelegate, UITextFieldDelegate {
+class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     var lat: Float = 0.00
     var lng: Float = 0.00
+    var destinationName: String?
+    
+    var alertController: UIAlertController?
+    var doneAction: UIAlertAction?
 
     @IBOutlet var saveBarButton: UIBarButtonItem?
 
@@ -163,54 +167,52 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 })
         }
     }
-
-    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
-        if(buttonIndex == 1){
-            self.performSegueWithIdentifier("backToMain", sender: "saveButton")
+    
+    func onTextFieldChange(textField: UITextField) {
+        if self.alertController!.textFields?.first?.text?.isEmpty != true {
+            self.doneAction?.enabled = true
+        } else {
+            self.doneAction?.enabled = false
         }
     }
 
     @IBAction func presentAlertAndSave(sender: AnyObject) {
-        self.destinationNameAlertView = UIAlertView(title: "Destination name", message: "Please choose a desination name", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Done")
-
-        self.destinationNameAlertView!.alertViewStyle = UIAlertViewStyle.PlainTextInput
         
-        self.destinationNameAlertView?.textFieldAtIndex(0)?.delegate = self
+        self.alertController = UIAlertController(title: "Destination name", message: "Please choose a destination name", preferredStyle: UIAlertControllerStyle.Alert)
         
-        self.destinationNameAlertView?.textFieldAtIndex(0)?.keyboardAppearance = UIKeyboardAppearance.Dark
-        self.destinationNameAlertView?.textFieldAtIndex(0)?.returnKeyType = UIReturnKeyType.Go
+        self.doneAction = UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            let name = self.alertController?.textFields?.first?.text!
+            self.destinationName = name
+            self.performSegueWithIdentifier("backToMain", sender: "saveButton")
+        })
+        
+        self.doneAction!.enabled = false
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        self.alertController!.addAction(self.doneAction!)
+        self.alertController!.addAction(cancelAction)
+        self.alertController!.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.placeholder = "Enter a name"
+            textField.addTarget(self, action: "onTextFieldChange:", forControlEvents: UIControlEvents.EditingChanged)
+            textField.enablesReturnKeyAutomatically = true
+        })
+        
+        self.presentViewController(self.alertController!, animated: true, completion: nil)
 
-        self.destinationNameAlertView!.show()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.geocodeAddress(searchBar)
     }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if(self.destinationNameAlertView?.textFieldAtIndex(0)?.text!.isEmpty != nil){
-            return false
-        }
-        
-        self.destinationNameAlertView?.dismissWithClickedButtonIndex(1, animated: true)
-        return true
-    }
 
     override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-        //loc is locations plist as an array
-        
         if(sender is String){
-            // Dispatch the saving asynchronous and to another queue to prevent blocking the interface
-//            let queue = dispatch_queue_create("saving", nil)
-//            dispatch_async(queue, { () -> Void in
-                if let name = self.destinationNameAlertView?.textFieldAtIndex(0)?.text {
-                    let savedLocations = self.fileManager.readFromDestinationsList()
-                    savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
-                    self.fileManager.saveToDestinationsList(savedLocations)
-                    
-                }
-//            })
-            
+            if let name = self.destinationName {
+                let savedLocations = self.fileManager.readFromDestinationsList()
+                savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
+                self.fileManager.saveToDestinationsList(savedLocations)
+            }
         }
     }
 }

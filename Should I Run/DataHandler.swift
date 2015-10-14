@@ -53,6 +53,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         self.cancelled = false
         self.destinationLatitude = lat
         self.destinationLongitude = lon
+        self.locationName = name
         let networkStatus = self.internetReachability.currentReachabilityStatus()
         if (networkStatus == NOT_REACHABLE ) {
             self.handleError("Sorry, no internet access")
@@ -152,7 +153,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     func handleWalkingDistance(distance: Int){
         if let temp = self.currentWalkingRoute {
             // iterate through each results route, and if the station matches, add the distance to the route
-            self.resultsRoutes.map({ (route) -> () in
+            self.resultsRoutes.forEach({ (route) -> () in
                 if originsAreSame(route, routeB: temp) {
                     route.distanceToStation = distance
                 }

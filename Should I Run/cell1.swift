@@ -15,6 +15,8 @@ class Cell1ViewController: UITableViewCell {
     @IBOutlet weak var destinationLabel: UILabel!
     
     func update(currentBestRoute: Route?, seconds: Int) {
+        self.destinationLabel.numberOfLines = 2
+        
         if let bestRoute = currentBestRoute {
             let currentMinutes = Int(bestRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
             self.timeToNextTrainLabel.text = String(currentMinutes)
@@ -29,9 +31,9 @@ class Cell1ViewController: UITableViewCell {
             case "bart":
                 self.destinationLabel.text = "towards \(bestRoute.eolStationName)"
             case "muni":
-                self.destinationLabel.text = "\(bestRoute.lineName) towards \(bestRoute.eolStationName)"
+                self.destinationLabel.text = bestRoute.lineName
             case "caltrain":
-                self.destinationLabel.text = "\(bestRoute.lineName) towards \(bestRoute.eolStationName)"
+                self.destinationLabel.text = "towards \(bestRoute.eolStationName)"
             default:
                 self.destinationLabel.text = bestRoute.eolStationName
             }

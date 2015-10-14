@@ -13,16 +13,16 @@ class AddAlarmViewController: UIViewController {
     @IBOutlet var alarmPicker: UIDatePicker!
     var walkTime: Int?
     
-    @IBAction func saveBarButtonPress(sender: AnyObject) {
+    @IBAction func saveButtonPress(sender: AnyObject) {
         let localNotification:UILocalNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
         localNotification.alertBody = "Time to go"
         localNotification.alertAction = "Should I Run?"
         localNotification.fireDate = NSDate(timeIntervalSinceNow: alarmPicker.countDownDuration)
-
+        
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        self.performSegueWithIdentifier("backToResults", sender: self)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func viewDidLoad() {

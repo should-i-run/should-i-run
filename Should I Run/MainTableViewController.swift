@@ -10,12 +10,18 @@ import UIKit
 import MapKit
 import Foundation
 
-@objc (MainTableViewController) class MainTableViewController: UITableViewController {
+@objc (MainTableViewController) class MainTableViewController: UITableViewController, DataHandlerDelegate {
     var colors = [UIColor]()
 
     var colorForChosenLocation = UIColor()
     
     let fileManager = SharedFileManager
+    
+    var timeoutTimer: NSTimer = NSTimer()
+    
+    override func viewWillAppear(animated: Bool) {
+        DataHandler.instance.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +39,6 @@ import Foundation
         self.navigationController?.navigationBar.barStyle = globalBarStyle
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
         return 1
     }
@@ -107,16 +109,8 @@ import Foundation
         
         // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
         if row < locations.count {
-            let locationSelected:AnyObject = locations[row]
-            let locName = locationSelected["name"] as! String
-            let locLat = locationSelected["latitude"] as! Float
-            let locLong = locationSelected["longitude"] as! Float
             self.colorForChosenLocation = self.colors[row % self.colors.count]
-
-            DataHandler.instance.loadTrip(locName, lat: locLat, lon: locLong)
-            
-            self.performSegueWithIdentifier("LoadingSegue", sender: self)
-
+            self.fetchData(locations[row])
         } else if row == locations.count {
             self.performSegueWithIdentifier("AddSegue", sender: self)
         } else if row == locations.count + 1 {
@@ -124,8 +118,52 @@ import Foundation
         }
     }
     
+    // Data fetching
+    
+    func fetchData(selectedLocation: AnyObject) {
+        let locName = selectedLocation["name"] as! String
+        let locLat = selectedLocation["latitude"] as! Float
+        let locLong = selectedLocation["longitude"] as! Float
+
+        DataHandler.instance.loadTrip(locName, lat: locLat, lon: locLong)
+        
+        self.performSegueWithIdentifier("LoadingSegue", sender: self)
+        
+        let timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("onTimeout:"), userInfo: timeoutText, repeats: false)
+    }
+    
+    func cleanupLoading() {
+        self.timeoutTimer.invalidate()
+        self.dismissViewControllerAnimated(false, completion: nil)
+        DataHandler.instance.cancelLoad()
+    }
+    
+    func handleDataSuccess() {
+        self.cleanupLoading()
+        self.performSegueWithIdentifier("ResultsSegue", sender: self)
+    }
+    
+    func handleError(errorMessage: String) {
+        self.cleanupLoading()
+        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
+        message.show()
+    }
+
+    func onTimeout(timer: NSTimer) {
+        self.cleanupLoading()
+        let message: UIAlertView = UIAlertView(title: "Oops!", message: "Request timed out", delegate: self, cancelButtonTitle: "Ok")
+        message.show()
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // Navigation
+    
     func unwindToList(segue:UIStoryboardSegue)  {
-        //reload the locations data on unwinding in case it has updated
+        // data may have updated
         self.tableView.reloadData()
     }
 

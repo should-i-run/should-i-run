@@ -15,7 +15,6 @@ class apiController: NSObject {
     static let instance = apiController()
     
     let fileManager = SharedFileManager
-    var cachedLocationFound = false
     
     // Store user location data so we can cache it with the server data
     var locationUserData = [String: Any]()
@@ -26,6 +25,7 @@ class apiController: NSObject {
         
         let cache = fileManager.readFromCache()
         let time = Int(NSDate().timeIntervalSince1970)
+        var cachedLocationFound = false
         //checking if the location is cached && if the users location has not changed && if the results are not more than 5 min old
         for item in cache {
             let cachedLocaton = item["location"] as! String
@@ -41,7 +41,7 @@ class apiController: NSObject {
         }
         
         if !cachedLocationFound {
-            let url = "http://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
+            let url = "https://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
             print(url)
             Alamofire.request(.POST, url)
                 .responseJSON { (req, res, jsonData) in

@@ -22,6 +22,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     //result area things
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet weak var alarmButton: UIButton!
+    @IBOutlet weak var alarmArea: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resultArea: UIView!
     
@@ -30,15 +31,18 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem
         self.view.backgroundColor = globalBackgroundColor
+        self.tableView.backgroundColor = globalBackgroundColor
+        self.resultArea.backgroundColor = globalBackgroundColor
+
         self.instructionLabel!.hidden = true
-        self.alarmButton!.hidden = true
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
-        self.tableView.backgroundColor = UIColor.blackColor()
-//        self.edgesForExtendedLayout = UIRectEdge() // so that the views are the same distance from the navbar in both ios 7 and 8
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.extendedLayoutIncludesOpaqueBars = true
+        
         DataHandler.instance.delegate = self
         self.results = DataHandler.instance.getResults()
         
@@ -101,19 +105,15 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0:
-            return 80
-        case 1:
-            return 100
-        case 2:
-            return 44
-        case 3:
-            return 44
-        case 4:
-            return 80
-        default:
+        case 2, 3:
             return 60
+        default:
+            return 90
         }
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
     func render() {
@@ -121,9 +121,10 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             let firstRoute = self.results[0]
             self.currentBestRoute = firstRoute
         } else {
-            self.handleError("sorry, couldn't find any routes")
+            self.handleError("No routes found")
             self.updateResultTimer.invalidate()
             self.secondTimer.invalidate()
+            self.navigationController?.popViewControllerAnimated(true)
             return
         }
         
@@ -137,21 +138,18 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         if self.currentBestRoute!.shouldRun {
             self.instructionLabel.hidden = false
             let runUIColor = colorize(0xFC5B3F)
-            self.resultArea.backgroundColor = runUIColor
-            
+            self.instructionLabel.textColor = runUIColor
             self.instructionLabel.text = "Run!"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
-            self.alarmButton.hidden = true
+            if let secondRoute = self.currentSecondRoute {
+                self.alarmTime = Int(secondRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - secondRoute.walkingTime
+            }
+
         } else {
             self.instructionLabel.hidden = false
-            self.instructionLabel.text = "Nah, take it easy"
-            self.instructionLabel.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica Neue Thin Italic", size: 40), size: 40)
+            self.instructionLabel.text = "Take it easy"
             
             let walkUIColor = colorize(0x6FD57F)
-            
-            self.resultArea.backgroundColor = walkUIColor
-            
-            self.alarmButton.hidden = false
+            self.instructionLabel.textColor = walkUIColor
             self.alarmTime = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - self.currentBestRoute!.walkingTime
         }
         self.tableView.reloadData()
@@ -184,31 +182,26 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // Segues and unwinds-----------------------------------------------------
-    
-    @IBAction func returnToRoot(sender: UIButton?) {
-        DataHandler.instance.cancelLoad()
-        self.navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-
         if segue.identifier == "AlarmSegue" {
             let dest: AddAlarmViewController = segue.destinationViewController as! AddAlarmViewController
             dest.walkTime = self.alarmTime
         }
     }
     
-    // Error handling-----------------------------------------------------
+    override func viewDidDisappear(animated: Bool) {
+        DataHandler.instance.cancelLoad()
+        self.updateResultTimer.invalidate()
+        self.secondTimer.invalidate()
+        super.viewDidDisappear(animated)
+    }
     
-    // This function gets called when the user clicks on the alertView button to dismiss it (see didReceiveGoogleResults)
-    // It performs the unwind segue when done.
+    // Error handling-----------------------------------------------------
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int) {
-        self.returnToRoot(nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func handleError(errorMessage: String) {
-        // Create and show error message
-        // delegates to the alertView function above when 'Ok' is clicked and then perform unwind segue to previous screen.
         let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
         message.show()
     }

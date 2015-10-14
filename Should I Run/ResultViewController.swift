@@ -121,9 +121,10 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             let firstRoute = self.results[0]
             self.currentBestRoute = firstRoute
         } else {
-            self.handleError("sorry, couldn't find any routes")
+            self.handleError("No routes found")
             self.updateResultTimer.invalidate()
             self.secondTimer.invalidate()
+            self.navigationController?.popViewControllerAnimated(true)
             return
         }
         
@@ -182,7 +183,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     // Segues and unwinds-----------------------------------------------------
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-
         if segue.identifier == "AlarmSegue" {
             let dest: AddAlarmViewController = segue.destinationViewController as! AddAlarmViewController
             dest.walkTime = self.alarmTime

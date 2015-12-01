@@ -45,22 +45,18 @@ class apiController: NSObject {
             let url = "https://tranquil-harbor-8717.herokuapp.com/?startLat=\(latStart)&startLon=\(lngStart)&destLat=\(latDest)&destLon=\(lngDest)&key=AIzaSyB9JV82Cy-GFPTAbYy3HgfZOG"
             print(url)
             Alamofire.request(.POST, url)
-                .responseJSON { (jsonData) in
-                    //TODO handle errors, no results
-                    if let realJSON: AnyObject = jsonData.data! {
-                        let json = JSON(realJSON)
-                        if let jrray = json.array {
-                            if jrray.count == 0 || jrray[0] == nil {
-                                self.handleError(fail, message: "Sorry, no results")
-                            } else {
-                                self.cacheData(json.object)
-                                let routes = self.buildRoutes(json)
-                                success(routes)
-                            }
+                .responseJSON { response in
+                    switch response.result {
+                    case .Success(let data):
+                        let json = JSON(data)
+                        if json.count == 0 || json[0] == nil {
+                            self.handleError(fail, message: "Sorry, no results")
                         } else {
-                            self.handleError(fail)
+                            self.cacheData(json.object)
+                            let routes = self.buildRoutes(json)
+                            success(routes)
                         }
-                    } else {
+                    case .Failure:
                         self.handleError(fail)
                     }
                 }

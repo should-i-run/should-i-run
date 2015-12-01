@@ -119,7 +119,6 @@ import Foundation
     }
     
     // Data fetching
-    
     func fetchData(selectedLocation: AnyObject) {
         let locName = selectedLocation["name"] as! String
         let locLat = selectedLocation["latitude"] as! Float
@@ -151,9 +150,7 @@ import Foundation
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         message.addAction(OKAction)
-        self.presentViewController(message, animated: true) {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        self.presentViewController(message, animated: true) {}
     }
 
     func onTimeout(timer: NSTimer) {
@@ -163,9 +160,7 @@ import Foundation
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         message.addAction(OKAction)
-        self.presentViewController(message, animated: true) {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        self.presentViewController(message, animated: true) {}
     }
     
     // Navigation

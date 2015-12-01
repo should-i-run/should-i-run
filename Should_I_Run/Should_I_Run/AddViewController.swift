@@ -62,6 +62,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.mapCenteredOnUser = true
             }
         }
+        self.saveBarButton?.enabled = false
     }
     
     func geocodeAddress(sender: AnyObject) {
@@ -92,6 +93,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.mapView!.removeAnnotations(self.mapView!.annotations)
                 self.mapView!.addAnnotation(marker)
                 self.currentAnnotation = marker
+                self.saveBarButton?.enabled = true
 
             } else {
                 let geocodeAlertView = UIAlertController(title: "Error", message: "We couldn't find that address.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -141,6 +143,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         marker.coordinate = location2d
         self.mapView!.addAnnotation(marker)
         self.currentAnnotation = marker
+        self.saveBarButton?.enabled = true
     }
 
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {

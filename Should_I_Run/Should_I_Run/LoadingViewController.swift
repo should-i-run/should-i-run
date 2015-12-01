@@ -15,7 +15,7 @@ enum NetworkStatusStruct: Int {
     case ReachableViaWWAN
 }
 
-class LoadingViewController: UIViewController, UIAlertViewDelegate {
+class LoadingViewController: UIViewController {
     
     var viewHasAlreadyAppeared = false
     var backgroundColor = UIColor()

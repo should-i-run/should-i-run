@@ -146,18 +146,26 @@ import Foundation
     
     func handleError(errorMessage: String) {
         self.cleanupLoading()
-        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
-        message.show()
+        let message = UIAlertController(title: "Oops!", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        message.addAction(OKAction)
+        self.presentViewController(message, animated: true) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
     func onTimeout(timer: NSTimer) {
         self.cleanupLoading()
-        let message: UIAlertView = UIAlertView(title: "Oops!", message: "Request timed out", delegate: self, cancelButtonTitle: "Ok")
-        message.show()
-    }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let message = UIAlertController(title: "Oops!", message: "Request timed out", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        message.addAction(OKAction)
+        self.presentViewController(message, animated: true) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     // Navigation

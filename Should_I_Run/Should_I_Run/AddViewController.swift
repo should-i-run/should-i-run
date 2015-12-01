@@ -17,8 +17,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var lat: Float = 0.00
     var lng: Float = 0.00
     var destinationName: String?
-    
-    var alertController: UIAlertController?
+
     var doneAction: UIAlertAction?
 
     @IBOutlet var saveBarButton: UIBarButtonItem?
@@ -35,9 +34,9 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let locationManager = SharedUserLocation
     let fileManager = SharedFileManager
 
-    var destinationNameAlertView:UIAlertView?
-
     let geocoder = CLGeocoder()
+    
+    var alertController = UIAlertController?()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,8 +94,13 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.currentAnnotation = marker
 
             } else {
-                let geocodeAlertView = UIAlertView(title: "Error", message: "We couldnt find the specified address", delegate: nil, cancelButtonTitle: "Ok")
-                geocodeAlertView.show()
+                let geocodeAlertView = UIAlertController(title: "Error", message: "We couldn't find that address.", preferredStyle: UIAlertControllerStyle.Alert)
+                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                geocodeAlertView.addAction(OKAction)
+                self.presentViewController(geocodeAlertView, animated: true) {}
+
             }
         })
     }
@@ -144,13 +148,21 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return true
         }
         if self.lng == 0.00 {
-            let message: UIAlertView = UIAlertView(title: "Location", message: "Please pick a location", delegate: nil, cancelButtonTitle: "Ok")
-            message.show()
+            let message = UIAlertController(title: "Location", message: "Please pick a location", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            message.addAction(OKAction)
+            self.presentViewController(message, animated: true) {}
             return false
         }
         if self.searchBar.text == "" {
-            let message: UIAlertView = UIAlertView(title: "Location", message: "Please add a destination", delegate: nil, cancelButtonTitle: "Ok")
-            message.show()
+            let message = UIAlertController(title: "Location", message: "Please add a destination", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            message.addAction(OKAction)
+            self.presentViewController(message, animated: true) {}
             return false
         }
         return true

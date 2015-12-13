@@ -33,10 +33,14 @@ import Foundation
         self.colors.append(colorize(0x068F86))
         self.colors.append(colorize(0x1A4F63))
         
-        // Navigation and background colors
-        self.navigationController?.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
-        self.navigationController?.navigationBar.barStyle = globalBarStyle
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let img = UIImage()
+        self.navigationController?.navigationBar.shadowImage = img
+        self.navigationController?.navigationBar.setBackgroundImage(img, forBarMetrics: UIBarMetrics.Default)
+        super.viewDidAppear(animated)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {

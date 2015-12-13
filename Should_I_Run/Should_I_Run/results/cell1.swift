@@ -18,7 +18,7 @@ class Cell1ViewController: UITableViewCell {
         self.destinationLabel.numberOfLines = 2
         
         if let bestRoute = currentBestRoute {
-            let currentMinutes = Int(bestRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+            let currentMinutes = bestRoute.getCurrentMinutes()
             self.timeToNextTrainLabel.text = String(currentMinutes)
             
             if seconds < 10 {

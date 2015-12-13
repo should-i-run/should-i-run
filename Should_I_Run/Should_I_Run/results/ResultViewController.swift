@@ -41,9 +41,9 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.extendedLayoutIncludesOpaqueBars = true
         
         DataHandler.instance.delegate = self
+        DataHandler.instance.cancelled = false
         self.results = DataHandler.instance.getResults()
         
         self.render()
@@ -55,11 +55,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         
         //get times rendered immediately
         self.updateTimes(nil)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        self.updateResultTimer.invalidate()
-        self.secondTimer.invalidate()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -141,7 +136,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             self.instructionLabel.textColor = runUIColor
             self.instructionLabel.text = "Run!"
             if let secondRoute = self.currentSecondRoute {
-                self.alarmTime = Int(secondRoute.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - secondRoute.walkingTime
+                self.alarmTime = secondRoute.getCurrentMinutes() - secondRoute.walkingTime
             }
 
         } else {
@@ -150,7 +145,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             
             let walkUIColor = colorize(0x6FD57F)
             self.instructionLabel.textColor = walkUIColor
-            self.alarmTime = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60 - self.currentBestRoute!.walkingTime
+            self.alarmTime = (currentBestRoute?.getCurrentMinutes())! - self.currentBestRoute!.walkingTime
         }
         self.tableView.reloadData()
     }
@@ -165,19 +160,12 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func updateTimes(timer: NSTimer?) {
-
-        if self.currentBestRoute != nil {
-            // TODO: check that there are still valid routes?
-//            if self.currentMinutes < -1 {
-//                self.returnToRoot(nil)
-//                self.updateResultTimer.invalidate()
-//                self.secondTimer.invalidate()
-//                return
-//            }
-            
+        if self.currentBestRoute != nil && self.currentBestRoute?.getCurrentMinutes() > -1 {
             self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
-            
             self.tableView.reloadData()
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+
         }
     }
     

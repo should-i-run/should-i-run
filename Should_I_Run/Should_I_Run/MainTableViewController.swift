@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Foundation
 
-@objc (MainTableViewController) class MainTableViewController: UITableViewController, DataHandlerDelegate {
+@objc (MainTableViewController) class MainTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
     var colors = [UIColor]()
 
     var colorForChosenLocation = UIColor()
@@ -19,9 +19,14 @@ import Foundation
     
     var timeoutTimer: NSTimer = NSTimer()
     
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyView: UIView!
+
     override func viewWillAppear(animated: Bool) {
         DataHandler.instance.delegate = self
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,95 +36,74 @@ import Foundation
         self.colors.append(colorize(0xFCB03C))
         self.colors.append(colorize(0x6FD57F))
         self.colors.append(colorize(0x068F86))
-        self.colors.append(colorize(0x1A4F63))
         
-        // Navigation and background colors
-        self.navigationController?.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
-        self.navigationController?.navigationBar.barStyle = globalBarStyle
+        self.tableView.backgroundColor = globalBackgroundColor
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
+    override func viewDidAppear(animated: Bool) {
+        let img = UIImage()
+        self.navigationController?.navigationBar.shadowImage = img
+        self.navigationController?.navigationBar.setBackgroundImage(img, forBarMetrics: UIBarMetrics.Default)
+        self.checkEmptyState()
+        super.viewDidAppear(animated)
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
-        //loc is locations plist as an array
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let locations = fileManager.readFromDestinationsList()
-        return locations.count + 2
+        return locations.count
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        //loc is locations plist as an array
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let locations = fileManager.readFromDestinationsList()
-        
-        if indexPath.row == locations.count || indexPath.row == locations.count + 1 {
-            return false
-        }
-        return true
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let locations = fileManager.readFromDestinationsList()
-        if editingStyle == .Delete && indexPath.row != locations.count {
-            //get the index row of the delete and compare with the number of objects in the plist
+        if editingStyle == .Delete {
             locations.removeObjectAtIndex(indexPath.row)
             fileManager.saveToDestinationsList(locations)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.checkEmptyState()
+            self.tableView.reloadData()
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row
 
-        //row is not zero indexed, locations is
-        if row == locations.count {
-            cell.textLabel!.text = "+ add destination"
-            cell.backgroundColor = self.colors[4]
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            
-        } else if row == locations.count + 1 {
-            cell.textLabel!.text = "instructions"
-            cell.backgroundColor = colorize(0x068F86)
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        
-        //retrieve from the collection of objects with key "row number"
-        } else if let location : AnyObject = locations[row] as AnyObject? {
+        if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
-            let index = row % self.colors.count
-            cell.backgroundColor = self.colors[index]
-        } else {
-            cell.textLabel!.text = "Default"
             let index = row % self.colors.count
             cell.backgroundColor = self.colors[index]
         }
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 101
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row as Int
         
-        // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
         if row < locations.count {
             self.colorForChosenLocation = self.colors[row % self.colors.count]
             self.fetchData(locations[row])
-        } else if row == locations.count {
-            self.performSegueWithIdentifier("AddSegue", sender: self)
-        } else if row == locations.count + 1 {
-            self.performSegueWithIdentifier("InstructionsSegue", sender: self)
         }
     }
     
-    // Data fetching
+    @IBAction func addDest(sender: AnyObject) {
+        self.performSegueWithIdentifier("AddSegue", sender: self)
+    }
     
+    // Data fetching
     func fetchData(selectedLocation: AnyObject) {
         let locName = selectedLocation["name"] as! String
         let locLat = selectedLocation["latitude"] as! Float
@@ -146,24 +130,40 @@ import Foundation
     
     func handleError(errorMessage: String) {
         self.cleanupLoading()
-        let message: UIAlertView = UIAlertView(title: "Oops!", message: errorMessage, delegate: self, cancelButtonTitle: "Ok")
-        message.show()
+        let message = UIAlertController(title: "Oops!", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        message.addAction(OKAction)
+        self.presentViewController(message, animated: true) {}
     }
 
     func onTimeout(timer: NSTimer) {
         self.cleanupLoading()
-        let message: UIAlertView = UIAlertView(title: "Oops!", message: "Request timed out", delegate: self, cancelButtonTitle: "Ok")
-        message.show()
+        let message = UIAlertController(title: "Oops!", message: "Request timed out", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        message.addAction(OKAction)
+        self.presentViewController(message, animated: true) {}
     }
     
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func checkEmptyState() {
+        let locations = fileManager.readFromDestinationsList()
+        if locations.count == 0 {
+            self.emptyView.hidden = false
+            self.tableView.backgroundView = self.emptyView
+        } else {
+            self.emptyView.hidden = true
+            self.tableView.backgroundView = nil
+        }
     }
     
     // Navigation
     
     func unwindToList(segue:UIStoryboardSegue)  {
         // data may have updated
+        self.checkEmptyState()
         self.tableView.reloadData()
     }
 

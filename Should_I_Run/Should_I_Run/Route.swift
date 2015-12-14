@@ -37,6 +37,10 @@ class Route {
         self.distanceToStation = distanceToStation
         self.shouldRun = false
     }
+    
+    func getCurrentMinutes() -> Int {
+      return Int(self.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+    }
 }
 
 func routesAreSame(routeA: Route, routeB: Route) -> Bool {

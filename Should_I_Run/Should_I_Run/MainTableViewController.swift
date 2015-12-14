@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Foundation
 
-@objc (MainTableViewController) class MainTableViewController: UITableViewController, DataHandlerDelegate {
+@objc (MainTableViewController) class MainTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
     var colors = [UIColor]()
 
     var colorForChosenLocation = UIColor()
@@ -18,6 +18,8 @@ import Foundation
     let fileManager = SharedFileManager
     
     var timeoutTimer: NSTimer = NSTimer()
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewWillAppear(animated: Bool) {
         DataHandler.instance.delegate = self
@@ -34,6 +36,9 @@ import Foundation
         self.colors.append(colorize(0x1A4F63))
         
         self.view.backgroundColor = globalBackgroundColor
+        self.tableView.backgroundColor = globalBackgroundColor
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -43,17 +48,17 @@ import Foundation
         super.viewDidAppear(animated)
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //loc is locations plist as an array
         let locations = fileManager.readFromDestinationsList()
-        return locations.count + 2
+        return locations.count + 1
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         //loc is locations plist as an array
         let locations = fileManager.readFromDestinationsList()
         
@@ -63,7 +68,7 @@ import Foundation
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let locations = fileManager.readFromDestinationsList()
         if editingStyle == .Delete && indexPath.row != locations.count {
             //get the index row of the delete and compare with the number of objects in the plist
@@ -73,7 +78,7 @@ import Foundation
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlacePrototypeCell", forIndexPath: indexPath) as UITableViewCell
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row
@@ -82,11 +87,6 @@ import Foundation
         if row == locations.count {
             cell.textLabel!.text = "+ add destination"
             cell.backgroundColor = self.colors[4]
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            
-        } else if row == locations.count + 1 {
-            cell.textLabel!.text = "instructions"
-            cell.backgroundColor = colorize(0x068F86)
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         //retrieve from the collection of objects with key "row number"
@@ -103,11 +103,11 @@ import Foundation
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 101
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row as Int
         
@@ -117,8 +117,6 @@ import Foundation
             self.fetchData(locations[row])
         } else if row == locations.count {
             self.performSegueWithIdentifier("AddSegue", sender: self)
-        } else if row == locations.count + 1 {
-            self.performSegueWithIdentifier("InstructionsSegue", sender: self)
         }
     }
     

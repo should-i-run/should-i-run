@@ -34,25 +34,37 @@
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started by adding a destination below" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtJ-vj-CoX">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started by adding a destination below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtJ-vj-CoX">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="8" y="0.0" width="424" height="44"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="GtJ-vj-CoX" firstAttribute="centerY" secondItem="Zlw-w4-fbd" secondAttribute="centerY" id="0YR-ca-FnN"/>
+                                        <constraint firstAttribute="trailing" secondItem="GtJ-vj-CoX" secondAttribute="trailing" constant="14" id="44Z-yt-F9K"/>
+                                        <constraint firstItem="GtJ-vj-CoX" firstAttribute="leading" secondItem="Zlw-w4-fbd" secondAttribute="leading" constant="8" id="UoH-Ib-9OC"/>
+                                    </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="GtJ-vj-CoX"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="0YR-ca-FnN"/>
+                                            <exclude reference="44Z-yt-F9K"/>
+                                            <exclude reference="UoH-Ib-9OC"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
                                         <mask key="subviews">
                                             <include reference="GtJ-vj-CoX"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="0YR-ca-FnN"/>
+                                            <include reference="44Z-yt-F9K"/>
+                                            <include reference="UoH-Ib-9OC"/>
                                         </mask>
                                     </variation>
                                 </view>

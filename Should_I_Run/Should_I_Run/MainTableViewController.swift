@@ -36,7 +36,6 @@ import Foundation
         self.colors.append(colorize(0xFCB03C))
         self.colors.append(colorize(0x6FD57F))
         self.colors.append(colorize(0x068F86))
-        self.colors.append(colorize(0x1A4F63))
         
         self.view.backgroundColor = globalBackgroundColor
         self.tableView.backgroundColor = globalBackgroundColor
@@ -152,8 +151,10 @@ import Foundation
     func checkEmptyState() {
         let locations = fileManager.readFromDestinationsList()
         if locations.count == 0 {
+            self.emptyView.hidden = false
             self.tableView.backgroundView = self.emptyView
         } else {
+            self.emptyView.hidden = true
             self.tableView.backgroundView = nil
         }
     }

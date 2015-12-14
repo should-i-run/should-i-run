@@ -60,18 +60,48 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rqh-nV-NfU">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-Bi-3mq">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="+ Add Destination">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addDest:" destination="KM8-VL-Jgc" eventType="touchUpInside" id="JvU-t5-tZO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.30980392156862746" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Zcf-YL-diu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bdo-Bi-3mq" secondAttribute="trailing" id="MvD-bN-cAR"/>
+                                    <constraint firstItem="Bdo-Bi-3mq" firstAttribute="leading" secondItem="Rqh-nV-NfU" secondAttribute="leading" id="N0K-i9-Sep"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bdo-Bi-3mq" secondAttribute="bottom" id="XEv-h4-6hQ"/>
+                                    <constraint firstAttribute="height" constant="100" id="Zcf-YL-diu"/>
+                                    <constraint firstItem="Bdo-Bi-3mq" firstAttribute="top" secondItem="Rqh-nV-NfU" secondAttribute="top" id="uay-4u-Atk"/>
                                 </constraints>
                                 <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Bdo-Bi-3mq"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <exclude reference="Zcf-YL-diu"/>
+                                        <exclude reference="MvD-bN-cAR"/>
+                                        <exclude reference="N0K-i9-Sep"/>
+                                        <exclude reference="XEv-h4-6hQ"/>
+                                        <exclude reference="uay-4u-Atk"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="Bdo-Bi-3mq"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <include reference="Zcf-YL-diu"/>
+                                        <include reference="MvD-bN-cAR"/>
+                                        <include reference="N0K-i9-Sep"/>
+                                        <include reference="XEv-h4-6hQ"/>
+                                        <include reference="uay-4u-Atk"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -127,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVA-7l-PYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2313" y="-143"/>
+            <point key="canvasLocation" x="2409" y="263"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="6pi-4x-WDs">
@@ -231,7 +261,8 @@
                                         <exclude reference="vCd-db-myW"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="154"/>
                                     <mask key="subviews">
                                         <include reference="VWP-lz-GQI"/>
                                     </mask>
@@ -283,18 +314,12 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="10" width="184" height="17"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="to --------" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="huy-5W-OZJ">
                                                     <rect key="frame" x="79" y="49" width="498" height="53"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="29" width="184" height="21.5"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlH-FH-Xqs">
                                                     <rect key="frame" x="7" y="20" width="65" height="53"/>
@@ -381,9 +406,6 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="29" width="184" height="21.5"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -512,9 +534,6 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="11" width="184" height="21.5"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -593,18 +612,12 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="18" width="184" height="17"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="-----------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="p5I-L2-Vwd">
                                                     <rect key="frame" x="81" y="88" width="499" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="37" width="184" height="21.5"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -677,6 +690,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="154" width="400" height="366"/>
+                                </variation>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrN-p2-QjT" userLabel="AlarmArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -793,7 +809,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wny-FK-IBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3621" y="676"/>
+            <point key="canvasLocation" x="3342" y="676"/>
         </scene>
         <!--Add Alarm View Controller-->
         <scene sceneID="0cD-t1-03O">
@@ -813,7 +829,7 @@
                                     <!--2014-07-18 02:44:31 +0000-->
                                 </date>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="122" width="400" height="224"/>
+                                    <rect key="frame" x="0.0" y="166" width="400" height="180"/>
                                 </variation>
                             </datePicker>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Get a reminder in..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa3-LW-1et">
@@ -833,7 +849,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="91" width="227" height="21"/>
+                                    <rect key="frame" x="20" y="135" width="227" height="21"/>
                                     <mask key="constraints">
                                         <include reference="0TM-61-wro"/>
                                         <include reference="b1d-CX-Loa"/>
@@ -913,6 +929,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVv-dt-hy6">
                                 <rect key="frame" x="4" y="64" width="592" height="536"/>
                                 <gestureRecognizers/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="4" y="64" width="392" height="536"/>
+                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="bNB-m3-407" id="swL-m6-ssZ"/>
                                     <outletCollection property="gestureRecognizers" destination="qzU-bv-yg7" appends="YES" id="6jF-o1-0PI"/>
@@ -921,6 +940,9 @@
                             <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Enter address or tap on map" translatesAutoresizingMaskIntoConstraints="NO" id="doG-ag-Kx8">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="44"/>
+                                </variation>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -960,14 +982,14 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2797.5" y="1468"/>
+            <point key="canvasLocation" x="2409" y="1064"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="28Y-KD-qFE">
             <objects>
                 <navigationController storyboardIdentifier="navc" automaticallyAdjustsScrollViewInsets="NO" id="H3J-Mj-aFw" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Ofz-nZ-0xz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Ofz-nZ-0xz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -978,7 +1000,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5P-9A-7hb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1381.875" y="502.81690140845069"/>
+            <point key="canvasLocation" x="1543.5" y="263"/>
         </scene>
     </scenes>
 </document>

@@ -19,6 +19,7 @@ import Foundation
     
     var timeoutTimer: NSTimer = NSTimer()
     
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewWillAppear(animated: Bool) {
@@ -55,7 +56,7 @@ import Foundation
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //loc is locations plist as an array
         let locations = fileManager.readFromDestinationsList()
-        return locations.count + 1
+        return locations.count
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -70,7 +71,7 @@ import Foundation
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let locations = fileManager.readFromDestinationsList()
-        if editingStyle == .Delete && indexPath.row != locations.count {
+        if editingStyle == .Delete {
             //get the index row of the delete and compare with the number of objects in the plist
             locations.removeObjectAtIndex(indexPath.row)
             fileManager.saveToDestinationsList(locations)
@@ -83,14 +84,8 @@ import Foundation
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row
 
-        //row is not zero indexed, locations is
-        if row == locations.count {
-            cell.textLabel!.text = "+ add destination"
-            cell.backgroundColor = self.colors[4]
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        
-        //retrieve from the collection of objects with key "row number"
-        } else if let location : AnyObject = locations[row] as AnyObject? {
+
+        if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
             let index = row % self.colors.count
@@ -115,9 +110,11 @@ import Foundation
         if row < locations.count {
             self.colorForChosenLocation = self.colors[row % self.colors.count]
             self.fetchData(locations[row])
-        } else if row == locations.count {
-            self.performSegueWithIdentifier("AddSegue", sender: self)
         }
+    }
+    
+    @IBAction func addDest(sender: AnyObject) {
+        self.performSegueWithIdentifier("AddSegue", sender: self)
     }
     
     // Data fetching

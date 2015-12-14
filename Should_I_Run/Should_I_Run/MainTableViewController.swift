@@ -21,10 +21,12 @@ import Foundation
     
 
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var emptyView: UIView!
+
     override func viewWillAppear(animated: Bool) {
         DataHandler.instance.delegate = self
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,7 @@ import Foundation
         let img = UIImage()
         self.navigationController?.navigationBar.shadowImage = img
         self.navigationController?.navigationBar.setBackgroundImage(img, forBarMetrics: UIBarMetrics.Default)
+        self.checkEmptyState()
         super.viewDidAppear(animated)
     }
     
@@ -54,28 +57,18 @@ import Foundation
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //loc is locations plist as an array
         let locations = fileManager.readFromDestinationsList()
         return locations.count
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        //loc is locations plist as an array
-        let locations = fileManager.readFromDestinationsList()
-        
-        if indexPath.row == locations.count || indexPath.row == locations.count + 1 {
-            return false
-        }
-        return true
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let locations = fileManager.readFromDestinationsList()
         if editingStyle == .Delete {
-            //get the index row of the delete and compare with the number of objects in the plist
             locations.removeObjectAtIndex(indexPath.row)
             fileManager.saveToDestinationsList(locations)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.checkEmptyState()
+            self.tableView.reloadData()
         }
     }
     
@@ -84,14 +77,9 @@ import Foundation
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row
 
-
         if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
-            let index = row % self.colors.count
-            cell.backgroundColor = self.colors[index]
-        } else {
-            cell.textLabel!.text = "Default"
             let index = row % self.colors.count
             cell.backgroundColor = self.colors[index]
         }
@@ -106,7 +94,6 @@ import Foundation
         let locations = fileManager.readFromDestinationsList()
         let row = indexPath.row as Int
         
-        // if the current row (zero indexed) is equal to that, we are on the add destination button else we are on a location and can move on to the next step
         if row < locations.count {
             self.colorForChosenLocation = self.colors[row % self.colors.count]
             self.fetchData(locations[row])
@@ -162,10 +149,20 @@ import Foundation
         self.presentViewController(message, animated: true) {}
     }
     
+    func checkEmptyState() {
+        let locations = fileManager.readFromDestinationsList()
+        if locations.count == 0 {
+            self.tableView.backgroundView = self.emptyView
+        } else {
+            self.tableView.backgroundView = nil
+        }
+    }
+    
     // Navigation
     
     func unwindToList(segue:UIStoryboardSegue)  {
         // data may have updated
+        self.checkEmptyState()
         self.tableView.reloadData()
     }
 

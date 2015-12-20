@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 class Cell5ViewController: UITableViewCell {
-        
-    @IBOutlet weak var followingDepartureLabel: UILabel!
+    
     @IBOutlet weak var followingDepartureSecondsLabel: UILabel!
     @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
     
@@ -25,19 +24,13 @@ class Cell5ViewController: UITableViewCell {
             } else if following.agency == "muni" {
                 self.followingDepartureDestinationLabel.text = following.lineName
             }
-            let followingCurrentMinutes = Int(following.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-            self.followingDepartureLabel.text = String(followingCurrentMinutes)
             
-            if seconds < 10 {
-                self.followingDepartureSecondsLabel.text = ":0" + String(seconds)
-            } else {
-                self.followingDepartureSecondsLabel.text = ":" + String(seconds)
-            }
+            self.followingDepartureSecondsLabel.text = following.getFormattedTime()
+            self.followingDepartureSecondsLabel.font = UIFont.monospacedDigitSystemFontOfSize(24, weight: UIFontWeightRegular)
             
         } else {
             self.followingDepartureDestinationLabel.text = "No other departures found"
             self.followingDepartureSecondsLabel.hidden = true
-            self.followingDepartureLabel.hidden = true
         }
     }
 }

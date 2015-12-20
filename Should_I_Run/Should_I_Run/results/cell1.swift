@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class Cell1ViewController: UITableViewCell {
-    @IBOutlet weak var timeToNextTrainLabel: UILabel!
+//    @IBOutlet weak var timeToNextTrainLabel: UILabel!
     @IBOutlet weak var secondsToNextTrainLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     
@@ -18,14 +18,9 @@ class Cell1ViewController: UITableViewCell {
         self.destinationLabel.numberOfLines = 2
         
         if let bestRoute = currentBestRoute {
-            let currentMinutes = bestRoute.getCurrentMinutes()
-            self.timeToNextTrainLabel.text = String(currentMinutes)
             
-            if seconds < 10 {
-                self.secondsToNextTrainLabel.text = ":0" + String(seconds)
-            } else {
-                self.secondsToNextTrainLabel.text = ":" + String(seconds)
-            }
+            self.secondsToNextTrainLabel.text = bestRoute.getFormattedTime()
+            self.secondsToNextTrainLabel.font = UIFont.monospacedDigitSystemFontOfSize(24, weight: UIFontWeightRegular)
             
             switch bestRoute.agency {
             case "bart":

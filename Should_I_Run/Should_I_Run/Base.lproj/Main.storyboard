@@ -712,17 +712,18 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="remind me when to go"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="60.5" y="30.5" width="219" height="39"/>
-                                        </variation>
                                         <connections>
                                             <segue destination="UkY-Fi-fDv" kind="show" identifier="AlarmSegue" id="L5O-AW-YSe"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.30980392159999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="NMi-1M-GF3" secondAttribute="trailing" id="2S0-l8-bbA"/>
+                                    <constraint firstAttribute="bottom" secondItem="NMi-1M-GF3" secondAttribute="bottom" id="EIg-aB-9y9"/>
                                     <constraint firstAttribute="height" constant="100" id="HPG-dJ-qAg"/>
+                                    <constraint firstItem="NMi-1M-GF3" firstAttribute="leading" secondItem="wrN-p2-QjT" secondAttribute="leading" id="spW-dC-Qe8"/>
+                                    <constraint firstItem="NMi-1M-GF3" firstAttribute="top" secondItem="wrN-p2-QjT" secondAttribute="top" id="y8i-7Q-KDO"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -730,6 +731,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="HPG-dJ-qAg"/>
+                                        <exclude reference="2S0-l8-bbA"/>
+                                        <exclude reference="EIg-aB-9y9"/>
+                                        <exclude reference="spW-dC-Qe8"/>
+                                        <exclude reference="y8i-7Q-KDO"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -738,21 +743,25 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="HPG-dJ-qAg"/>
+                                        <include reference="2S0-l8-bbA"/>
+                                        <include reference="EIg-aB-9y9"/>
+                                        <include reference="spW-dC-Qe8"/>
+                                        <include reference="y8i-7Q-KDO"/>
                                     </mask>
                                 </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wrN-p2-QjT" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leadingMargin" constant="10" id="0oc-bH-7Lq"/>
+                            <constraint firstItem="wrN-p2-QjT" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leading" id="0oc-bH-7Lq"/>
                             <constraint firstAttribute="trailing" secondItem="Qno-xn-loc" secondAttribute="trailing" id="Izg-Qv-bpX"/>
                             <constraint firstAttribute="trailing" secondItem="5Yj-38-auB" secondAttribute="trailing" id="U6L-0N-Gqs"/>
                             <constraint firstItem="Qno-xn-loc" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leading" id="UiB-x6-6f6"/>
                             <constraint firstItem="wrN-p2-QjT" firstAttribute="top" secondItem="5Yj-38-auB" secondAttribute="bottom" id="WUM-tz-Bcr"/>
-                            <constraint firstItem="svA-2S-M0p" firstAttribute="top" secondItem="wrN-p2-QjT" secondAttribute="bottom" constant="20" id="Xj6-ou-bzN"/>
+                            <constraint firstItem="svA-2S-M0p" firstAttribute="top" secondItem="wrN-p2-QjT" secondAttribute="bottom" id="Xj6-ou-bzN"/>
                             <constraint firstItem="Qno-xn-loc" firstAttribute="top" secondItem="Ixe-pM-wp7" secondAttribute="bottom" constant="-64" id="eet-h2-KG2"/>
                             <constraint firstItem="5Yj-38-auB" firstAttribute="top" secondItem="Qno-xn-loc" secondAttribute="bottom" id="fPY-Cr-3T4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wrN-p2-QjT" secondAttribute="trailing" constant="10" id="lZ0-ba-ZMq"/>
+                            <constraint firstAttribute="trailing" secondItem="wrN-p2-QjT" secondAttribute="trailing" id="lZ0-ba-ZMq"/>
                             <constraint firstItem="5Yj-38-auB" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leading" id="ydE-GV-73c"/>
                         </constraints>
                         <variation key="default">

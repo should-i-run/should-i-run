@@ -37,6 +37,7 @@
 		2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */; };
 		2599C78A1C0CBCA40018DB65 /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */; };
 		2599C78B1C0CBCA40018DB65 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7641C0CBCA40018DB65 /* Destination.swift */; };
+		25B8ECA91C275DDD00121C67 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8ECA81C275DDD00121C67 /* Styles.swift */; };
 		B51C47266A41BC47920155F7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDDB5DF0AFA58D9F03C185C /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		2599C7641C0CBCA40018DB65 /* Destination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		2599C78C1C0CBD200018DB65 /* Should_I_Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should_I_Run-Bridging-Header.h"; sourceTree = "<group>"; };
+		25B8ECA81C275DDD00121C67 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		74BF1B1E16D8725F3206C97E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DE267F3A1510D0B85BB6D2BD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EEDDB5DF0AFA58D9F03C185C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				2560D6DC1C0D1B77009CB756 /* Reachability.m */,
 				2599C7401C0CBCA40018DB65 /* bartLookup.swift */,
 				2599C7411C0CBCA40018DB65 /* ColorHelper.swift */,
+				25B8ECA81C275DDD00121C67 /* Styles.swift */,
 				2599C78C1C0CBD200018DB65 /* Should_I_Run-Bridging-Header.h */,
 			);
 			path = Helpers;
@@ -449,6 +452,7 @@
 				2599C76C1C0CBCA40018DB65 /* bartLookup.swift in Sources */,
 				2599C7881C0CBCA40018DB65 /* Route.swift in Sources */,
 				2599C7851C0CBCA40018DB65 /* AddViewController.swift in Sources */,
+				25B8ECA91C275DDD00121C67 /* Styles.swift in Sources */,
 				2599C77C1C0CBCA40018DB65 /* ResultViewController.swift in Sources */,
 				2599C7861C0CBCA40018DB65 /* File.swift in Sources */,
 				2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */,

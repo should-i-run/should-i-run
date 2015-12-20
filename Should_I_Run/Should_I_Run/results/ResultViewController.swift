@@ -14,8 +14,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     var currentBestRoute:Route?
     var currentSecondRoute:Route?
     
-    var currentSeconds = 0
-    
     //alarm
     var alarmTime = 0
     
@@ -74,7 +72,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         switch rowNum {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! Cell1ViewController
-            cell.update(self.currentBestRoute, seconds: self.currentSeconds)
+            cell.update(self.currentBestRoute)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell2") as! Cell2ViewController
@@ -91,7 +89,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             return cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell5") as! Cell5ViewController
-            cell.update(self.currentSecondRoute, seconds: self.currentSeconds)
+            cell.update(self.currentSecondRoute)
             return cell
         default:
             return UITableViewCell()
@@ -161,7 +159,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func updateTimes(timer: NSTimer?) {
         if self.currentBestRoute != nil && self.currentBestRoute?.getCurrentMinutes() > -1 {
-            self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
             self.tableView.reloadData()
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)

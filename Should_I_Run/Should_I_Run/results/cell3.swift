@@ -13,6 +13,15 @@ class Cell3ViewController: UITableViewCell {
     
     @IBOutlet weak var minutesWalkingLabel: UILabel!
     
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        self.minutesWalkingLabel.font = globalNumberStyle
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     func update(currentBestRoute: Route?) {
         if let bestRoute = currentBestRoute {
             self.minutesWalkingLabel.text = String(bestRoute.walkingTime)

@@ -11,10 +11,19 @@ import UIKit
 
 class Cell5ViewController: UITableViewCell {
     
-    @IBOutlet weak var followingDepartureSecondsLabel: UILabel!
+    @IBOutlet weak var followingDepartureTimeLabel: UILabel!
     @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
     
-    func update(secondRoute: Route?, seconds: Int) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        self.followingDepartureTimeLabel.font = globalNumberStyle
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    func update(secondRoute: Route?) {
         self.followingDepartureDestinationLabel.numberOfLines = 2
         
         //following destination station name label
@@ -25,12 +34,11 @@ class Cell5ViewController: UITableViewCell {
                 self.followingDepartureDestinationLabel.text = following.lineName
             }
             
-            self.followingDepartureSecondsLabel.text = following.getFormattedTime()
-            self.followingDepartureSecondsLabel.font = UIFont.monospacedDigitSystemFontOfSize(24, weight: UIFontWeightRegular)
+            self.followingDepartureTimeLabel.text = following.getFormattedTime()
             
         } else {
             self.followingDepartureDestinationLabel.text = "No other departures found"
-            self.followingDepartureSecondsLabel.hidden = true
+            self.followingDepartureTimeLabel.hidden = true
         }
     }
 }

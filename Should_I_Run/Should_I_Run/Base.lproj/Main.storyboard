@@ -278,7 +278,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="VWP-lz-GQI" firstAttribute="leading" secondItem="Qno-xn-loc" secondAttribute="leading" constant="110" id="LFA-wL-Vx8"/>
+                                    <constraint firstItem="VWP-lz-GQI" firstAttribute="leading" secondItem="Qno-xn-loc" secondAttribute="leading" constant="10" id="LFA-wL-Vx8"/>
                                     <constraint firstAttribute="height" constant="154" id="RMu-9j-ohA"/>
                                     <constraint firstAttribute="bottom" secondItem="VWP-lz-GQI" secondAttribute="bottom" constant="20" id="VpH-uD-Pnr"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="VWP-lz-GQI" secondAttribute="trailing" id="j9M-b0-PaX"/>
@@ -411,7 +411,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="destinationLabel" destination="huy-5W-OZJ" id="Tfv-DE-RLg"/>
-                                            <outlet property="secondsToNextTrainLabel" destination="u2n-wi-cKw" id="QXu-Kh-cXu"/>
+                                            <outlet property="timeToNextTrainLabel" destination="u2n-wi-cKw" id="QXu-Kh-cXu"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell2" rowHeight="80" id="Rt8-LM-vlE" customClass="Cell2ViewController" customModule="Should_I_Run" customModuleProvider="target">
@@ -433,7 +433,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="118" y="29.5" width="184" height="21.5"/>
+                                                        <rect key="frame" x="118" y="29" width="184" height="21.5"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -700,7 +700,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="followingDepartureDestinationLabel" destination="p5I-L2-Vwd" id="T4a-CY-gYi"/>
-                                            <outlet property="followingDepartureSecondsLabel" destination="ja3-aO-08F" id="RFu-Wy-N0z"/>
+                                            <outlet property="followingDepartureTimeLabel" destination="ja3-aO-08F" id="RFu-Wy-N0z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -712,6 +712,9 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="remind me when to go"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="60.5" y="30.5" width="219" height="39"/>
+                                        </variation>
                                         <connections>
                                             <segue destination="UkY-Fi-fDv" kind="show" identifier="AlarmSegue" id="L5O-AW-YSe"/>
                                         </connections>
@@ -719,9 +722,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="HPG-dJ-qAg"/>
-                                    <constraint firstItem="NMi-1M-GF3" firstAttribute="centerY" secondItem="wrN-p2-QjT" secondAttribute="centerY" id="ghK-Hq-XJA"/>
-                                    <constraint firstItem="NMi-1M-GF3" firstAttribute="centerX" secondItem="wrN-p2-QjT" secondAttribute="centerX" id="w1U-ey-W6M"/>
+                                    <constraint firstAttribute="height" constant="100" id="HPG-dJ-qAg"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -729,8 +730,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="HPG-dJ-qAg"/>
-                                        <exclude reference="ghK-Hq-XJA"/>
-                                        <exclude reference="w1U-ey-W6M"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -739,8 +738,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="HPG-dJ-qAg"/>
-                                        <include reference="ghK-Hq-XJA"/>
-                                        <include reference="w1U-ey-W6M"/>
                                     </mask>
                                 </variation>
                             </view>

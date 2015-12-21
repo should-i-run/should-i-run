@@ -34,7 +34,7 @@ class FileManager: NSObject {
     }
     
     func saveToCache(newData:NSMutableArray) {
-        let success = newData.writeToFile(self.cachePlistPath!, atomically: false)
+        let success = newData.writeToFile(self.cachePlistPath!, atomically: true)
         print(success)
     }
     
@@ -45,7 +45,10 @@ class FileManager: NSObject {
         } else {
             return []
         }
-        
+    }
+    
+    func clearCache() -> Void {
+        NSMutableArray().writeToFile(self.cachePlistPath!, atomically: true)
     }
     
     func saveToDestinationsList(newData:NSMutableArray ) {

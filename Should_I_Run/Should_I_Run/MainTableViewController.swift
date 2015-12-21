@@ -165,6 +165,12 @@ import Foundation
         }
     }
     
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == .MotionShake {
+            apiController.instance.logApiResponse()
+        }
+    }
+    
     // Navigation
     
     func unwindToList(segue:UIStoryboardSegue)  {

@@ -19,6 +19,7 @@ class apiController: NSObject {
 
     // Store user location data so we can cache it with the server data
     var locationUserData = [String: Any]()
+    var mostRecentApiResponse: Any?
 
     func fetchData(locName: String, latDest:Float, lngDest:Float, latStart:Float, lngStart:Float, success: ([Route] -> ()), fail: String -> ()) {
         self.locationUserData["locName"] = locName as String
@@ -72,6 +73,7 @@ class apiController: NSObject {
         
         let cache = self.fileManager.readFromCache()
         let datum = ["time" : time, "location" : self.locationUserData["locName"] as! String, "position" : self.locationUserData["latStart"] as! Float, "results" : stringData]
+        self.mostRecentApiResponse = datum
         cache.insertObject(datum, atIndex: cache.count)
         self.fileManager.saveToCache(cache)
     }
@@ -95,5 +97,9 @@ class apiController: NSObject {
 
     func handleError(fail: String -> (), message: String = "Couldn't find any BART, MUNI, or Caltrain trips between here and there...") {
         fail(message)
+    }
+    
+    func logApiResponse() {
+        print(self.mostRecentApiResponse)
     }
 }

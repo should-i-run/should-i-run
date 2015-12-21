@@ -44,15 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.locationManager.locationManager.startUpdatingLocation()
-        
-        //request GPS authorization on iOS 8
-        if  NSString(string: UIDevice.currentDevice().systemVersion).doubleValue >= 8.0 {
-            self.locationManager.locationManager.requestWhenInUseAuthorization()
-        }
+
+        self.locationManager.locationManager.requestWhenInUseAuthorization()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // This is maybe not the best place for this, but all that matters is that the cache is cleared occasionally
+        SharedFileManager.clearCache()
     }
 }
-

@@ -113,6 +113,21 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         cell.backgroundColor = globalBackgroundColor
     }
     
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == .MotionShake {
+            apiController.instance.logApiResponse()
+            if let bestRoute = self.currentBestRoute {
+                print("--- Current Best Route:")
+                print(bestRoute.toString())
+            }
+            if let secondRoute = self.currentSecondRoute {
+                print("--- Second BestRoute:")
+                print(secondRoute.toString())
+            }
+
+        }
+    }
+    
     func render() {
         if (self.results.count > 0) {
             let firstRoute = self.results[0]

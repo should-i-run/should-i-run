@@ -53,6 +53,18 @@ class Route {
         self.dateComponent.second = sec
         return self.formatter.stringFromDateComponents(self.dateComponent)!
     }
+    
+    func toString() -> String {
+        return "self.originStationName \(self.originStationName)\n" +
+        "self.lineName \(self.lineName)\n" +
+        "self.eolStationName \(self.eolStationName)\n" +
+        "self.agency \(self.agency)\n" +
+        "self.originLatLon \(self.originLatLon)\n" +
+        "self.departureTime \(self.departureTime)\n" +
+        "self.lineCode \(self.lineCode)\n" +
+        "self.distanceToStation \(self.distanceToStation)\n" +
+        "self.shouldRun \(self.shouldRun)\n"
+    }
 }
 
 func routesAreSame(routeA: Route, routeB: Route) -> Bool {

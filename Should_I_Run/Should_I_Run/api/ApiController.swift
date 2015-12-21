@@ -34,10 +34,13 @@ class apiController: NSObject {
             let cachedTime = item["time"] as! Int
             if ( cachedLocaton == locName && cachedPosition == latStart && (time - cachedTime < 100) ) {
                 cachedLocationFound = true
-                let cachedResults = JSON(item["results"] as AnyObject!)
-                let routes = self.buildRoutes(cachedResults)
-                success(routes)
-                return
+                let cachedResults = item["results"] as! String
+                if let dataFromString = cachedResults.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                    let json = JSON(data: dataFromString)
+                    let routes = self.buildRoutes(json)
+                    success(routes)
+                    return
+                }
             }
         }
 
@@ -48,11 +51,11 @@ class apiController: NSObject {
                 .responseJSON { response in
                     switch response.result {
                     case .Success(let data):
-                        let json = JSON(data)
+                        let json: JSON = JSON(data)
                         if json.count == 0 || json[0] == nil {
                             self.handleError(fail, message: "Sorry, no results")
                         } else {
-                            self.cacheData(json.object)
+                            self.cacheData(json)
                             let routes = self.buildRoutes(json)
                             success(routes)
                         }
@@ -63,10 +66,12 @@ class apiController: NSObject {
         }
     }
 
-    func cacheData (data: AnyObject){
+    func cacheData (data: JSON){
         let time = Int(NSDate().timeIntervalSince1970)
+        let stringData: String = data.rawString(NSUTF8StringEncoding)!
+        
         let cache = self.fileManager.readFromCache()
-        let datum = ["time" : time, "location" : self.locationUserData["locName"] as! String, "position" : self.locationUserData["latStart"] as! Float, "results" : data]
+        let datum = ["time" : time, "location" : self.locationUserData["locName"] as! String, "position" : self.locationUserData["latStart"] as! Float, "results" : stringData]
         cache.insertObject(datum, atIndex: cache.count)
         self.fileManager.saveToCache(cache)
     }

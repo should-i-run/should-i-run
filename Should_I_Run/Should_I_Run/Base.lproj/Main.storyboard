@@ -104,7 +104,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-Bi-3mq">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="+ Add Destination">
+                                        <state key="normal" title="Add Destination">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -720,7 +720,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMi-1M-GF3">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <state key="normal" title="remind me when to go">
+                                        <state key="normal" title="Set an alarm">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -962,6 +962,12 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on your destination" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAt-ub-Kbj">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="32"/>
+                                <color key="textColor" red="0.1019607843" green="0.30980392159999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -969,10 +975,30 @@
                             <constraint firstItem="doG-ag-Kx8" firstAttribute="leading" secondItem="4Eo-l2-a5A" secondAttribute="leading" id="8zO-7g-AUe"/>
                             <constraint firstItem="doG-ag-Kx8" firstAttribute="top" secondItem="5UL-ho-8Bx" secondAttribute="bottom" id="PSv-5q-rjK"/>
                             <constraint firstItem="qVv-dt-hy6" firstAttribute="top" secondItem="5UL-ho-8Bx" secondAttribute="top" id="UtK-n5-EDD"/>
+                            <constraint firstItem="EAt-ub-Kbj" firstAttribute="centerX" secondItem="4Eo-l2-a5A" secondAttribute="centerX" id="YFq-aY-vac"/>
                             <constraint firstItem="Hvc-j8-NrX" firstAttribute="top" secondItem="qVv-dt-hy6" secondAttribute="bottom" id="bVa-0u-RlQ"/>
                             <constraint firstItem="qVv-dt-hy6" firstAttribute="leading" secondItem="4Eo-l2-a5A" secondAttribute="leadingMargin" constant="-16" id="hOM-DM-pd1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qVv-dt-hy6" secondAttribute="trailing" constant="-16" id="myg-EA-IO8"/>
+                            <constraint firstItem="Hvc-j8-NrX" firstAttribute="top" secondItem="EAt-ub-Kbj" secondAttribute="bottom" constant="20" id="zcJ-hS-6ab"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="EAt-ub-Kbj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="YFq-aY-vac"/>
+                                <exclude reference="zcJ-hS-6ab"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="EAt-ub-Kbj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="YFq-aY-vac"/>
+                                <include reference="zcJ-hS-6ab"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Destination" id="Mr5-RA-NYH">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="G4M-yo-wkO">

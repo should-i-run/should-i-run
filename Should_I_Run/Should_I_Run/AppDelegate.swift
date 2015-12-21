@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-//        let alert = UIAlertView(title:"Reminder", message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
-//        alert.show();
     }
 
     func applicationWillResignActive(application: UIApplication) {

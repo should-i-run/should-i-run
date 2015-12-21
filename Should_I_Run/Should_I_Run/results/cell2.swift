@@ -15,8 +15,8 @@ class Cell2ViewController: UITableViewCell {
     @IBOutlet weak var stationNameLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.distanceToStationLabel.font = globalNumberStyle
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.distanceToStationLabel.font = globalNumberStyle
     }
 
     required init?(coder aDecoder: NSCoder) {

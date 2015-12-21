@@ -32,7 +32,6 @@
 		2599C7841C0CBCA40018DB65 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */; };
 		2599C7851C0CBCA40018DB65 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75E1C0CBCA40018DB65 /* AddViewController.swift */; };
 		2599C7861C0CBCA40018DB65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75F1C0CBCA40018DB65 /* File.swift */; };
-		2599C7871C0CBCA40018DB65 /* InstructionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7601C0CBCA40018DB65 /* InstructionsTableViewController.swift */; };
 		2599C7881C0CBCA40018DB65 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7611C0CBCA40018DB65 /* Route.swift */; };
 		2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */; };
 		2599C78A1C0CBCA40018DB65 /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */; };
@@ -91,7 +90,6 @@
 		2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		2599C75E1C0CBCA40018DB65 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		2599C75F1C0CBCA40018DB65 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		2599C7601C0CBCA40018DB65 /* InstructionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewController.swift; sourceTree = "<group>"; };
 		2599C7611C0CBCA40018DB65 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkingDirectionsManager.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */,
 				2599C75E1C0CBCA40018DB65 /* AddViewController.swift */,
 				2599C75F1C0CBCA40018DB65 /* File.swift */,
-				2599C7601C0CBCA40018DB65 /* InstructionsTableViewController.swift */,
 				2599C7611C0CBCA40018DB65 /* Route.swift */,
 				2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */,
 				2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */,
@@ -466,7 +463,6 @@
 				2599C7831C0CBCA40018DB65 /* LoadingViewController.swift in Sources */,
 				2599C7841C0CBCA40018DB65 /* AddAlarmViewController.swift in Sources */,
 				2599C7091C0CBBA90018DB65 /* ViewController.swift in Sources */,
-				2599C7871C0CBCA40018DB65 /* InstructionsTableViewController.swift in Sources */,
 				2599C7721C0CBCA40018DB65 /* MainTableViewController.swift in Sources */,
 				2599C7071C0CBBA90018DB65 /* AppDelegate.swift in Sources */,
 				2599C7791C0CBCA40018DB65 /* cell3.swift in Sources */,

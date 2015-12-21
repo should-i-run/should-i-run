@@ -14,8 +14,8 @@ class Cell4ViewController: UITableViewCell {
     @IBOutlet weak var timeRunningLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.timeRunningLabel.font = globalNumberStyle
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.timeRunningLabel.font = globalNumberStyle
     }
     
     required init?(coder aDecoder: NSCoder) {

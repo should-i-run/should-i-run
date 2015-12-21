@@ -15,8 +15,8 @@ class Cell5ViewController: UITableViewCell {
     @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.followingDepartureTimeLabel.font = globalNumberStyle
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.followingDepartureTimeLabel.font = globalNumberStyle
     }
     
     required init?(coder aDecoder: NSCoder) {

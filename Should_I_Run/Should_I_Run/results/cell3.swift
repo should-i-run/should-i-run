@@ -14,8 +14,8 @@ class Cell3ViewController: UITableViewCell {
     @IBOutlet weak var minutesWalkingLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.minutesWalkingLabel.font = globalNumberStyle
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.minutesWalkingLabel.font = globalNumberStyle
     }
     
     required init?(coder aDecoder: NSCoder) {

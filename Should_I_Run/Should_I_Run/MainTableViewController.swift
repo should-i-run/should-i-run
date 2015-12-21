@@ -47,6 +47,10 @@ import Foundation
         let img = UIImage()
         self.navigationController?.navigationBar.shadowImage = img
         self.navigationController?.navigationBar.setBackgroundImage(img, forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+        
         self.checkEmptyState()
         super.viewDidAppear(animated)
     }
@@ -80,7 +84,9 @@ import Foundation
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
             let index = row % self.colors.count
-            cell.backgroundColor = self.colors[index]
+            cell.backgroundColor = globalBackgroundColor
+            cell.textLabel?.textColor = self.colors[index]
+            cell.accessoryView?.tintColor = self.colors[index]
         }
         return cell
     }

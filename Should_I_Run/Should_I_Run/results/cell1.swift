@@ -15,8 +15,8 @@ class Cell1ViewController: UITableViewCell {
     @IBOutlet weak var destinationLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        self.timeToNextTrainLabel.font = globalNumberStyle
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.timeToNextTrainLabel.font = globalNumberStyle
     }
 
     required init?(coder aDecoder: NSCoder) {

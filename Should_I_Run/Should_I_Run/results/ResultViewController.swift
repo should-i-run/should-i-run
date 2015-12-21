@@ -109,6 +109,10 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         return false
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = globalBackgroundColor
+    }
+    
     func render() {
         if (self.results.count > 0) {
             let firstRoute = self.results[0]

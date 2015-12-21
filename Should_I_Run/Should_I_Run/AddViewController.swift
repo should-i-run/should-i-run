@@ -42,10 +42,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
 
         self.searchBar.delegate = self;
-        
-        self.navigationController?.navigationBar.tintColor = globalTintColor
         self.view.backgroundColor = globalBackgroundColor
-        self.navigationController?.navigationBar.barStyle = globalBarStyle
 
         if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
             let reg = MKCoordinateRegionMakeWithDistance(loc2d, 20000, 20000)

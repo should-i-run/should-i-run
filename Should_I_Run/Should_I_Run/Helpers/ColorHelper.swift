@@ -18,9 +18,3 @@ func colorize (hex: Int, alpha: Double = 1.0) -> UIColor {
     let color: UIColor = UIColor( red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha:CGFloat(alpha) )
     return color
 }
-
-// Background color of view controllers
-let globalBackgroundColor: UIColor = colorize(0x222222, alpha: 1.0)
-let globalNavigationBarColor: UIColor = colorize(0x222222, alpha: 1.0)
-let globalTintColor: UIColor = UIColor.whiteColor()
-let globalBarStyle: UIBarStyle = UIBarStyle.BlackTranslucent

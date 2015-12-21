@@ -24,6 +24,9 @@ class Route {
     var walkingTime = 0
     var runningTime = 0
     
+    let formatter = NSDateComponentsFormatter()
+    let dateComponent = NSDateComponents()
+    
     init (originStationName: String, lineName: String, eolStationName: String, originCoord2d: CLLocationCoordinate2D, agency: String, departureTime: Double?, lineCode: String?, distanceToStation: Int?) {
 
         self.originStationName = originStationName
@@ -36,10 +39,31 @@ class Route {
         self.lineCode = lineCode
         self.distanceToStation = distanceToStation
         self.shouldRun = false
+        self.formatter.unitsStyle = .Positional
     }
     
     func getCurrentMinutes() -> Int {
       return Int(self.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+    }
+    
+    func getFormattedTime() -> String {
+        let min = self.getCurrentMinutes()
+        let sec = Int(self.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
+        self.dateComponent.minute = min
+        self.dateComponent.second = sec
+        return self.formatter.stringFromDateComponents(self.dateComponent)!
+    }
+    
+    func toString() -> String {
+        return "self.originStationName \(self.originStationName)\n" +
+        "self.lineName \(self.lineName)\n" +
+        "self.eolStationName \(self.eolStationName)\n" +
+        "self.agency \(self.agency)\n" +
+        "self.originLatLon \(self.originLatLon)\n" +
+        "self.departureTime \(self.departureTime)\n" +
+        "self.lineCode \(self.lineCode)\n" +
+        "self.distanceToStation \(self.distanceToStation)\n" +
+        "self.shouldRun \(self.shouldRun)\n"
     }
 }
 

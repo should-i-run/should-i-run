@@ -14,8 +14,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     var currentBestRoute:Route?
     var currentSecondRoute:Route?
     
-    var currentSeconds = 0
-    
     //alarm
     var alarmTime = 0
     
@@ -51,7 +49,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidAppear(animated: Bool) {
         self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: Selector("updateWalkingDistance:"), userInfo: nil, repeats: true)
-        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
+        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
         
         //get times rendered immediately
         self.updateTimes(nil)
@@ -74,7 +72,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         switch rowNum {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! Cell1ViewController
-            cell.update(self.currentBestRoute, seconds: self.currentSeconds)
+            cell.update(self.currentBestRoute)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell2") as! Cell2ViewController
@@ -91,7 +89,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
             return cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell5") as! Cell5ViewController
-            cell.update(self.currentSecondRoute, seconds: self.currentSeconds)
+            cell.update(self.currentSecondRoute)
             return cell
         default:
             return UITableViewCell()
@@ -109,6 +107,25 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = globalBackgroundColor
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == .MotionShake {
+            apiController.instance.logApiResponse()
+            if let bestRoute = self.currentBestRoute {
+                print("--- Current Best Route:")
+                print(bestRoute.toString())
+            }
+            if let secondRoute = self.currentSecondRoute {
+                print("--- Second BestRoute:")
+                print(secondRoute.toString())
+            }
+
+        }
     }
     
     func render() {
@@ -161,7 +178,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func updateTimes(timer: NSTimer?) {
         if self.currentBestRoute != nil && self.currentBestRoute?.getCurrentMinutes() > -1 {
-            self.currentSeconds = Int(self.currentBestRoute!.departureTime! - NSDate.timeIntervalSinceReferenceDate()) % 60
             self.tableView.reloadData()
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)

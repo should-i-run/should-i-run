@@ -10,12 +10,20 @@ import Foundation
 import UIKit
 
 class Cell5ViewController: UITableViewCell {
-        
-    @IBOutlet weak var followingDepartureLabel: UILabel!
-    @IBOutlet weak var followingDepartureSecondsLabel: UILabel!
+    
+    @IBOutlet weak var followingDepartureTimeLabel: UILabel!
     @IBOutlet weak var followingDepartureDestinationLabel: UILabel!
     
-    func update(secondRoute: Route?, seconds: Int) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.followingDepartureTimeLabel.font = globalNumberStyle
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    func update(secondRoute: Route?) {
         self.followingDepartureDestinationLabel.numberOfLines = 2
         
         //following destination station name label
@@ -25,19 +33,12 @@ class Cell5ViewController: UITableViewCell {
             } else if following.agency == "muni" {
                 self.followingDepartureDestinationLabel.text = following.lineName
             }
-            let followingCurrentMinutes = Int(following.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-            self.followingDepartureLabel.text = String(followingCurrentMinutes)
             
-            if seconds < 10 {
-                self.followingDepartureSecondsLabel.text = ":0" + String(seconds)
-            } else {
-                self.followingDepartureSecondsLabel.text = ":" + String(seconds)
-            }
+            self.followingDepartureTimeLabel.text = following.getFormattedTime()
             
         } else {
             self.followingDepartureDestinationLabel.text = "No other departures found"
-            self.followingDepartureSecondsLabel.hidden = true
-            self.followingDepartureLabel.hidden = true
+            self.followingDepartureTimeLabel.hidden = true
         }
     }
 }

@@ -33,9 +33,7 @@ class AddAlarmViewController: UIViewController {
         // Set background color
         self.view.backgroundColor = colorize(0x6FD57F)
         
-        // request user notification permissions        
-        if  NSString(string: UIDevice.currentDevice().systemVersion).doubleValue >= 8.0 {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
-        }
+        // request user notification permissions
+        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
     }
 }

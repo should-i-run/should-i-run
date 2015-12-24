@@ -19,6 +19,10 @@ import Foundation
     
     var timeoutTimer: NSTimer = NSTimer()
     
+    // the timeout timer may be instantiated on a different thread than, 
+    // say, an api request that would need to invalidate it.
+    var timerInvalidated = false
+    
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
@@ -39,6 +43,7 @@ import Foundation
         
         self.view.backgroundColor = globalBackgroundColor
         self.tableView.backgroundColor = globalBackgroundColor
+        self.emptyView.backgroundColor = globalBackgroundColor
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
@@ -121,9 +126,11 @@ import Foundation
         
         let timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
         self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("onTimeout:"), userInfo: timeoutText, repeats: false)
+        self.timerInvalidated = false
     }
     
     func cleanupLoading() {
+        self.timerInvalidated = true
         self.timeoutTimer.invalidate()
         self.dismissViewControllerAnimated(false, completion: nil)
         DataHandler.instance.cancelLoad()
@@ -146,12 +153,14 @@ import Foundation
 
     func onTimeout(timer: NSTimer) {
         self.cleanupLoading()
-        let message = UIAlertController(title: "Oops!", message: "Request timed out", preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        if self.timerInvalidated == false {
+            let message = UIAlertController(title: "Oops!", message: "Request timed out", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            message.addAction(OKAction)
+            self.presentViewController(message, animated: true) {}
         }
-        message.addAction(OKAction)
-        self.presentViewController(message, animated: true) {}
     }
     
     func checkEmptyState() {

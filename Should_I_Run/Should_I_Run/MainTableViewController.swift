@@ -13,7 +13,7 @@ import Foundation
 @objc (MainTableViewController) class MainTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
     var colors = [UIColor]()
 
-    var colorForChosenLocation = UIColor()
+    var colorForChosenDestination = UIColor()
     
     let fileManager = SharedFileManager
     
@@ -36,10 +36,10 @@ import Foundation
         super.viewDidLoad()
         
         //setting color scheme: https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/
-        self.colors.append(colorize(0xFC5B3F))
-        self.colors.append(colorize(0xFCB03C))
         self.colors.append(colorize(0x6FD57F))
         self.colors.append(colorize(0x068F86))
+        self.colors.append(colorize(0xFCB03C))
+        self.colors.append(colorize(0xFC5B3F))
         
         self.view.backgroundColor = globalBackgroundColor
         self.tableView.backgroundColor = globalBackgroundColor
@@ -101,12 +101,14 @@ import Foundation
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let locations = fileManager.readFromDestinationsList()
+        let destinations = fileManager.readFromDestinationsList()
         let row = indexPath.row as Int
         
-        if row < locations.count {
-            self.colorForChosenLocation = self.colors[row % self.colors.count]
-            self.fetchData(locations[row])
+        if row < destinations.count {
+            let chosenDestination = destinations[row]
+            self.colorForChosenDestination = self.colors[row % self.colors.count]
+            self.reorderDestinations(row)
+            self.getDirectionsForDestination(chosenDestination)
         }
     }
     
@@ -114,11 +116,19 @@ import Foundation
         self.performSegueWithIdentifier("AddSegue", sender: self)
     }
     
+    func reorderDestinations(selectedIndex: Int) {
+        let savedDestinations = self.fileManager.readFromDestinationsList() as NSMutableArray
+        let mostRecentDestination = savedDestinations[selectedIndex]
+        savedDestinations.removeObjectAtIndex(selectedIndex)
+        savedDestinations.insertObject(mostRecentDestination, atIndex: 0)
+        self.fileManager.saveToDestinationsList(savedDestinations)
+    }
+    
     // Data fetching
-    func fetchData(selectedLocation: AnyObject) {
-        let locName = selectedLocation["name"] as! String
-        let locLat = selectedLocation["latitude"] as! Float
-        let locLong = selectedLocation["longitude"] as! Float
+    func getDirectionsForDestination(selectedDestination: AnyObject) {
+        let locName = selectedDestination["name"] as! String
+        let locLat = selectedDestination["latitude"] as! Float
+        let locLong = selectedDestination["longitude"] as! Float
 
         DataHandler.instance.loadTrip(locName, lat: locLat, lon: locLong)
         
@@ -191,7 +201,7 @@ import Foundation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "LoadingSegue" {
             let dest: LoadingViewController = segue.destinationViewController as! LoadingViewController
-            dest.backgroundColor = self.colorForChosenLocation
+            dest.backgroundColor = self.colorForChosenDestination
         }
     }
 }

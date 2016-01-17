@@ -45,7 +45,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Bdo-Bi-3mq" secondAttribute="trailing" id="MvD-bN-cAR"/>
                                     <constraint firstItem="Bdo-Bi-3mq" firstAttribute="leading" secondItem="Rqh-nV-NfU" secondAttribute="leading" id="N0K-i9-Sep"/>
                                     <constraint firstAttribute="bottom" secondItem="Bdo-Bi-3mq" secondAttribute="bottom" id="XEv-h4-6hQ"/>
-                                    <constraint firstAttribute="height" constant="100" id="Zcf-YL-diu"/>
+                                    <constraint firstAttribute="height" constant="90" id="Zcf-YL-diu"/>
                                     <constraint firstItem="Bdo-Bi-3mq" firstAttribute="top" secondItem="Rqh-nV-NfU" secondAttribute="top" id="uay-4u-Atk"/>
                                 </constraints>
                                 <variation key="default">
@@ -80,7 +80,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started by adding a destination below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtJ-vj-CoX">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started by adding a destination below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtJ-vj-CoX">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -353,12 +353,18 @@
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="118" y="9" width="184" height="17"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="to --------" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="huy-5W-OZJ">
                                                     <rect key="frame" x="79" y="49" width="498" height="53"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="118" y="28" width="184" height="24"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -722,7 +728,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="NMi-1M-GF3" secondAttribute="trailing" id="2S0-l8-bbA"/>
                                     <constraint firstAttribute="bottom" secondItem="NMi-1M-GF3" secondAttribute="bottom" id="EIg-aB-9y9"/>
-                                    <constraint firstAttribute="height" constant="100" id="HPG-dJ-qAg"/>
+                                    <constraint firstAttribute="height" constant="90" id="HPG-dJ-qAg"/>
                                     <constraint firstItem="NMi-1M-GF3" firstAttribute="leading" secondItem="wrN-p2-QjT" secondAttribute="leading" id="spW-dC-Qe8"/>
                                     <constraint firstItem="NMi-1M-GF3" firstAttribute="top" secondItem="wrN-p2-QjT" secondAttribute="top" id="y8i-7Q-KDO"/>
                                 </constraints>

@@ -208,6 +208,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             textField.placeholder = "Enter a name"
             textField.addTarget(self, action: "onTextFieldChange:", forControlEvents: UIControlEvents.EditingChanged)
             textField.enablesReturnKeyAutomatically = true
+            textField.autocapitalizationType = UITextAutocapitalizationType.Words
         })
         
         self.presentViewController(self.alertController!, animated: true, completion: nil)

@@ -9,8 +9,7 @@
 import UIKit
 
 class ResultViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
-    
-    var results = [Route]()
+
     var currentBestRoute:Route?
     var currentSecondRoute:Route?
     
@@ -42,8 +41,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         
         DataHandler.instance.delegate = self
         DataHandler.instance.cancelled = false
-        self.results = DataHandler.instance.getResults()
-        
+        self.setBestRoutes(DataHandler.instance.getResults())
         self.render()
     }
     
@@ -128,23 +126,18 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func render() {
-        if (self.results.count > 0) {
-            let firstRoute = self.results[0]
+    func setBestRoutes(routes: [Route]) {
+        if (routes.count > 0) {
+            let firstRoute = routes[0]
             self.currentBestRoute = firstRoute
-        } else {
-            self.handleError("No routes found")
-            self.updateResultTimer.invalidate()
-            self.secondTimer.invalidate()
-            self.navigationController?.popViewControllerAnimated(true)
-            return
         }
-        
-        if (self.results.count > 1) {
-            let secondRoute = self.results[1]
+        if (routes.count > 1) {
+            let secondRoute = routes[1]
             self.currentSecondRoute = secondRoute
         }
-        
+    }
+    
+    func render() {
         //------------------result area things
         // run or not?
         if self.currentBestRoute!.shouldRun {
@@ -172,7 +165,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func handleDataSuccess() {
-        self.results = DataHandler.instance.getResults()
+        self.setBestRoutes(DataHandler.instance.getResults())
         self.render()
     }
     

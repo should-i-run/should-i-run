@@ -58,6 +58,7 @@ import Foundation
         
         self.checkEmptyState()
         super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

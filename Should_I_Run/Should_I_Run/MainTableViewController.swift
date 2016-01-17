@@ -11,7 +11,6 @@ import MapKit
 import Foundation
 
 @objc (MainTableViewController) class MainTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
-    var colors = [UIColor]()
 
     var colorForChosenDestination = UIColor()
     
@@ -36,10 +35,6 @@ import Foundation
         super.viewDidLoad()
         
         //setting color scheme: https://kuler.adobe.com/Copy-of-Close-to-the-Garden-but-more-Teal-color-theme-4324985/
-        self.colors.append(colorize(0x6FD57F))
-        self.colors.append(colorize(0x068F86))
-        self.colors.append(colorize(0xFCB03C))
-        self.colors.append(colorize(0xFC5B3F))
         
         self.view.backgroundColor = globalBackgroundColor
         self.tableView.backgroundColor = globalBackgroundColor
@@ -89,10 +84,10 @@ import Foundation
         if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
-            let index = row % self.colors.count
+            let color = colors[(location["colorIndex"] as? Int)!]
+            cell.textLabel?.textColor = color
+            cell.accessoryView?.tintColor = color
             cell.backgroundColor = globalBackgroundColor
-            cell.textLabel?.textColor = self.colors[index]
-            cell.accessoryView?.tintColor = self.colors[index]
         }
         return cell
     }
@@ -107,7 +102,8 @@ import Foundation
         
         if row < destinations.count {
             let chosenDestination = destinations[row]
-            self.colorForChosenDestination = self.colors[row % self.colors.count]
+            let colorIndex = chosenDestination["colorIndex"] as! Int
+            self.colorForChosenDestination = colors[colorIndex]
             self.reorderDestinations(row)
             self.getDirectionsForDestination(chosenDestination)
         }

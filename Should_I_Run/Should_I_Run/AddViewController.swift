@@ -223,7 +223,8 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if(sender is String){
             if let name = self.destinationName {
                 let savedLocations = self.fileManager.readFromDestinationsList()
-                savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng], atIndex: savedLocations.count)
+                let colorIndex = savedLocations.count % colors.count
+                savedLocations.insertObject(["name": name, "latitude": self.lat, "longitude": self.lng, "colorIndex": colorIndex], atIndex: savedLocations.count)
                 self.fileManager.saveToDestinationsList(savedLocations)
             }
         }

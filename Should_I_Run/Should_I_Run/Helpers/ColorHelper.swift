@@ -18,3 +18,10 @@ func colorize (hex: Int, alpha: Double = 1.0) -> UIColor {
     let color: UIColor = UIColor( red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha:CGFloat(alpha) )
     return color
 }
+
+let colors = [
+  colorize(0x6FD57F),
+  colorize(0x068F86),
+  colorize(0xFCB03C),
+  colorize(0xFC5B3F),
+]

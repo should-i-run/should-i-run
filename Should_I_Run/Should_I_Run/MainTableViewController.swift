@@ -84,7 +84,11 @@ import Foundation
         if let location : AnyObject = locations[row] as AnyObject? {
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             cell.textLabel!.text = location["name"] as? String
-            let color = colors[(location["colorIndex"] as? Int)!]
+            var colorIndex = 0
+            if let c = location["colorIndex"] as? Int {
+                colorIndex = c
+            }
+            let color = colors[colorIndex % (colors.count - 1)]
             cell.textLabel?.textColor = color
             cell.accessoryView?.tintColor = color
             cell.backgroundColor = globalBackgroundColor

@@ -84,7 +84,6 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
         
         for var i = 0; i < self.resultsRoutes.count; ++i {
             if !foundResult {
-                
                 let route = self.resultsRoutes[i]
                 distanceToStation = route.distanceToStation!
                 
@@ -92,10 +91,10 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
                 route.runningTime = (distanceToStation/runningSpeed) + route.stationTime
                 
                 let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                if departingIn > route.runningTime { //if time to departure is less than time to get to station
+                if departingIn >= route.runningTime { //if time to departure is less than time to get to station
                     foundResult = true
                     let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                    if departingIn <= route.walkingTime {
+                    if departingIn < route.walkingTime {
                         route.shouldRun = true
                     }
                     
@@ -104,12 +103,10 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
                     //set the following route if there is one
                     if i + 1 < self.resultsRoutes.count {
                         results.append(self.resultsRoutes[i + 1])
-
                     }
                 }
             }
         }
-        
         return results;
     }
     

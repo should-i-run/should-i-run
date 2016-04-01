@@ -136,7 +136,7 @@ import Foundation
         self.performSegueWithIdentifier("LoadingSegue", sender: self)
         
         let timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("onTimeout:"), userInfo: timeoutText, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: #selector(MainTableViewController.onTimeout(_:)), userInfo: timeoutText, repeats: false)
         self.timerInvalidated = false
     }
     

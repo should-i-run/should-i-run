@@ -78,36 +78,27 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     }
     
     func getResults() -> [Route] {
-        var results = [Route]()
-        var foundResult = false
-        var distanceToStation = 0
-        
-        for var i = 0; i < self.resultsRoutes.count; ++i {
-            if !foundResult {
-                let route = self.resultsRoutes[i]
-                distanceToStation = route.distanceToStation!
-                
-                route.walkingTime = (distanceToStation/walkingSpeed) + route.stationTime
-                route.runningTime = (distanceToStation/runningSpeed) + route.stationTime
-                
-                let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                if departingIn >= route.runningTime { //if time to departure is less than time to get to station
-                    foundResult = true
-                    let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                    if departingIn < route.walkingTime {
-                        route.shouldRun = true
-                    }
-                    
-                    results.append(route)
-                    
-                    //set the following route if there is one
-                    if i + 1 < self.resultsRoutes.count {
-                        results.append(self.resultsRoutes[i + 1])
-                    }
-                }
+        func setTimes(route: Route) -> Route {
+            let distanceToStation = route.distanceToStation!
+            
+            route.walkingTime = (distanceToStation/walkingSpeed) + route.stationTime
+            route.runningTime = (distanceToStation/runningSpeed) + route.stationTime
+            let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+            if departingIn < route.walkingTime {
+                route.shouldRun = true
             }
+            return route
         }
-        return results;
+        
+        let sortedResults = self.resultsRoutes
+            .map(setTimes)
+            .filter({ (route) -> Bool in
+                let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                return departingIn >= route.runningTime //if time to departure is more than time to get to station
+            })
+            .sort({ $0.departureTime < $1.departureTime })
+
+        return [sortedResults[0], sortedResults[1]];
     }
     
     func receiveLocation(location2d: CLLocationCoordinate2D) {

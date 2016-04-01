@@ -10,8 +10,7 @@ import UIKit
 
 class ResultViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
 
-    var currentBestRoute:Route?
-    var currentSecondRoute:Route?
+    var currentRoutes = [Route]()
     
     //alarm
     var alarmTime = 0
@@ -41,13 +40,13 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         
         DataHandler.instance.delegate = self
         DataHandler.instance.cancelled = false
-        self.setBestRoutes(DataHandler.instance.getResults())
+        self.currentRoutes = DataHandler.instance.getResults()
         self.render()
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: Selector("updateWalkingDistance:"), userInfo: nil, repeats: true)
-        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("updateTimes:"), userInfo: nil, repeats: true)
+        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: #selector(ResultViewController.updateWalkingDistance(_:)), userInfo: nil, repeats: true)
+        self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResultViewController.updateTimes(_:)), userInfo: nil, repeats: true)
         
         //get times rendered immediately
         self.updateTimes(nil)
@@ -58,7 +57,7 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.currentSecondRoute != nil {
+        if self.currentRoutes.count >= 2 {
             return 5
         } else {
             return 4
@@ -70,24 +69,24 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         switch rowNum {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! Cell1ViewController
-            cell.update(self.currentBestRoute)
+            cell.update(self.currentRoutes[0])
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell2") as! Cell2ViewController
-            cell.update(self.currentBestRoute)
+            cell.update(self.currentRoutes[0])
             return cell
             
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell3") as! Cell3ViewController
-            cell.update(self.currentBestRoute)
+            cell.update(self.currentRoutes[0])
             return cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell4") as! Cell4ViewController
-            cell.update(self.currentBestRoute)
+            cell.update(self.currentRoutes[0])
             return cell
         case 4:
             let cell = tableView.dequeueReusableCellWithIdentifier("cell5") as! Cell5ViewController
-            cell.update(self.currentSecondRoute)
+            cell.update(self.currentRoutes[1])
             return cell
         default:
             return UITableViewCell()
@@ -112,52 +111,46 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if motion == .MotionShake {
-            apiController.instance.logApiResponse()
-            if let bestRoute = self.currentBestRoute {
-                print("--- Current Best Route:")
-                print(bestRoute.toString())
-            }
-            if let secondRoute = self.currentSecondRoute {
-                print("--- Second BestRoute:")
-                print(secondRoute.toString())
-            }
-
-        }
-    }
-    
-    func setBestRoutes(routes: [Route]) {
-        if (routes.count > 0) {
-            let firstRoute = routes[0]
-            self.currentBestRoute = firstRoute
-        }
-        if (routes.count > 1) {
-            let secondRoute = routes[1]
-            self.currentSecondRoute = secondRoute
-        }
+//        if motion == .MotionShake {
+//            apiController.instance.logApiResponse()
+//            if let bestRoute = self.currentRoutes[0] {
+//                print("--- Current Best Route:")
+//                print(bestRoute.toString())
+//            }
+//            if let secondRoute = self.currentRoutes[1] {
+//                print("--- Second BestRoute:")
+//                print(secondRoute.toString())
+//            }
+//        }
     }
     
     func render() {
-        //------------------result area things
-        // run or not?
-        if self.currentBestRoute!.shouldRun {
-            self.instructionLabel.hidden = false
-            let runUIColor = colorize(0xFC5B3F)
-            self.instructionLabel.textColor = runUIColor
-            self.instructionLabel.text = "Run!"
-            if let secondRoute = self.currentSecondRoute {
-                self.alarmTime = secondRoute.getCurrentMinutes() - secondRoute.walkingTime
+        if self.currentRoutes.count > 0 {
+            //------------------result area things
+            // run or not?
+            if self.currentRoutes[0].shouldRun {
+                self.instructionLabel.hidden = false
+                let runUIColor = colorize(0xFC5B3F)
+                self.instructionLabel.textColor = runUIColor
+                self.instructionLabel.text = "Run!"
+                if self.currentRoutes.count > 1 {
+                    let secondRoute = self.currentRoutes[1]
+                    self.alarmTime = secondRoute.getCurrentMinutes() - secondRoute.walkingTime
+                }
+                
+            } else {
+                self.instructionLabel.hidden = false
+                self.instructionLabel.text = "Take it easy"
+                let walkUIColor = colorize(0x6FD57F)
+                self.instructionLabel.textColor = walkUIColor
+                
+                let bestRoute = self.currentRoutes[0]
+                self.alarmTime = bestRoute.getCurrentMinutes() - bestRoute.walkingTime
             }
-
+            self.tableView.reloadData()
         } else {
-            self.instructionLabel.hidden = false
-            self.instructionLabel.text = "Take it easy"
-            
-            let walkUIColor = colorize(0x6FD57F)
-            self.instructionLabel.textColor = walkUIColor
-            self.alarmTime = (currentBestRoute?.getCurrentMinutes())! - self.currentBestRoute!.walkingTime
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.tableView.reloadData()
     }
     
     func updateWalkingDistance(timer: NSTimer?){
@@ -165,16 +158,15 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func handleDataSuccess() {
-        self.setBestRoutes(DataHandler.instance.getResults())
+        self.currentRoutes = DataHandler.instance.getResults()
         self.render()
     }
     
     func updateTimes(timer: NSTimer?) {
-        if self.currentBestRoute != nil && self.currentBestRoute?.getCurrentMinutes() > -1 {
+        if self.currentRoutes.count > 0 && self.currentRoutes[0].getCurrentMinutes() > -1 {
             self.tableView.reloadData()
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
-
         }
     }
     
@@ -201,8 +193,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         }
         message.addAction(OKAction)
         self.presentViewController(message, animated: true) {}
-        
-        
     }
 }
 

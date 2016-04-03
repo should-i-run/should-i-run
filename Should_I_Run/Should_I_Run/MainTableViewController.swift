@@ -107,7 +107,7 @@ import Foundation
         if row < destinations.count {
             let chosenDestination = destinations[row]
             let colorIndex = chosenDestination["colorIndex"] as! Int
-            self.colorForChosenDestination = colors[colorIndex]
+            self.colorForChosenDestination = colors[colorIndex % (colors.count - 1)]
             self.reorderDestinations(row)
             self.getDirectionsForDestination(chosenDestination)
         }

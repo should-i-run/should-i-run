@@ -206,7 +206,7 @@ class AddViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.alertController!.addAction(cancelAction)
         self.alertController!.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
             textField.placeholder = "Enter a name"
-            textField.addTarget(self, action: "onTextFieldChange:", forControlEvents: UIControlEvents.EditingChanged)
+            textField.addTarget(self, action: #selector(AddViewController.onTextFieldChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
             textField.enablesReturnKeyAutomatically = true
             textField.autocapitalizationType = UITextAutocapitalizationType.Words
         })

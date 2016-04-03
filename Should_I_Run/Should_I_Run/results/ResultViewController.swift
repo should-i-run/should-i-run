@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ResultViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DataHandlerDelegate {
+class ResultViewController: UIViewController, DataHandlerDelegate {
 
     var currentRoutes = [Route]()
+    var currentStations = [Station]()
     
     //alarm
     var alarmTime = 0
@@ -19,8 +20,10 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var instructionLabel: UILabel!
     @IBOutlet weak var alarmButton: UIButton!
     @IBOutlet weak var alarmArea: UIView!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resultArea: UIView!
+    @IBOutlet weak var containerViews: UIView!
+
+    
     
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
@@ -29,18 +32,14 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.navigationItem.backBarButtonItem
         self.view.backgroundColor = globalBackgroundColor
-        self.tableView.backgroundColor = globalBackgroundColor
         self.resultArea.backgroundColor = globalBackgroundColor
 
         self.instructionLabel!.hidden = true
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        
         DataHandler.instance.delegate = self
         DataHandler.instance.cancelled = false
         self.currentRoutes = DataHandler.instance.getResults()
+        self.currentStations = DataHandler.instance.getStations()
         self.render()
     }
     
@@ -50,64 +49,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
         
         //get times rendered immediately
         self.updateTimes(nil)
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.currentRoutes.count >= 2 {
-            return 5
-        } else {
-            return 4
-        }
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let rowNum = indexPath.row
-        switch rowNum {
-        case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! Cell1ViewController
-            cell.update(self.currentRoutes[0])
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell2") as! Cell2ViewController
-            cell.update(self.currentRoutes[0])
-            return cell
-            
-        case 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell3") as! Cell3ViewController
-            cell.update(self.currentRoutes[0])
-            return cell
-        case 3:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell4") as! Cell4ViewController
-            cell.update(self.currentRoutes[0])
-            return cell
-        case 4:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell5") as! Cell5ViewController
-            cell.update(self.currentRoutes[1])
-            return cell
-        default:
-            return UITableViewCell()
-        }
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 2, 3:
-            return 60
-        default:
-            return 90
-        }
-    }
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = globalBackgroundColor
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
@@ -126,7 +67,6 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func render() {
         if self.currentRoutes.count > 0 {
-            //------------------result area things
             // run or not?
             if self.currentRoutes[0].shouldRun {
                 self.instructionLabel.hidden = false
@@ -147,7 +87,10 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
                 let bestRoute = self.currentRoutes[0]
                 self.alarmTime = bestRoute.getCurrentMinutes() - bestRoute.walkingTime
             }
-            self.tableView.reloadData()
+            // TODO handle multiple stations
+            if let stat1 = self.childViewControllers[0] as? StationViewController {
+                stat1.update(self.currentStations[0])
+            }
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -159,12 +102,13 @@ class ResultViewController: UIViewController, UITableViewDataSource, UITableView
     
     func handleDataSuccess() {
         self.currentRoutes = DataHandler.instance.getResults()
+        self.currentStations = DataHandler.instance.getStations()
         self.render()
     }
     
     func updateTimes(timer: NSTimer?) {
         if self.currentRoutes.count > 0 && self.currentRoutes[0].getCurrentMinutes() > -1 {
-            self.tableView.reloadData()
+            self.render()
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }

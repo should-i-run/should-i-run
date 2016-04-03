@@ -84,8 +84,42 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
                 return departingIn >= route.runningTime //if time to departure is more than time to get to station
             })
             .sort({ $0.departureTime < $1.departureTime })
+        
 
-        return [sortedResults[0], sortedResults[1]];
+        return Array(sortedResults.prefix(2)); // first two
+    }
+    
+    func getStations() -> [Station] {
+        // get list of origin station codes
+        // for each station code
+            // make a Station
+            // get list of dest station codes
+            // for each, 
+                // make a Line
+                // add all the Routes that have this origin and dest
+        let stationNames = Array(Set(self.resultsRoutes.map({ (route) -> String in
+            return route.originStationName
+        })))
+        
+        return stationNames.map({ (stationName) -> Station in
+            let matchingRoutes = self.resultsRoutes.filter({(route) in
+                return route.originStationName == stationName
+            })
+            
+            let lineNames = Array(Set(matchingRoutes.map({ (r) -> String in
+                return r.eolStationName
+            })))
+            
+            let lines = lineNames.map( { (lineName) -> Line in
+                let routesMatchingLine = self.resultsRoutes.filter( { (res) in
+                    return res.eolStationName == lineName
+                })
+
+                return Line(departures: routesMatchingLine)
+            })
+            return Station(departures: matchingRoutes, lines: lines)
+        })
+        
     }
     
     func receiveLocation(location2d: CLLocationCoordinate2D) {

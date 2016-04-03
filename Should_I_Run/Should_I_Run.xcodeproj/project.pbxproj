@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2560D6DD1C0D1B77009CB756 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560D6DC1C0D1B77009CB756 /* Reachability.m */; };
 		2569CB9A1C1E144200E10897 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2569CB991C1E144200E10897 /* Images-2.xcassets */; };
+		2572B90E1CB188A0000B08EE /* StationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2572B90D1CB188A0000B08EE /* StationViewController.swift */; };
+		2572B9121CB1B06C000B08EE /* LineCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2572B9111CB1B06C000B08EE /* LineCellController.swift */; };
+		2572B9141CB1B1AF000B08EE /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2572B9131CB1B1AF000B08EE /* Station.swift */; };
 		2599C7071C0CBBA90018DB65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7061C0CBBA90018DB65 /* AppDelegate.swift */; };
 		2599C7091C0CBBA90018DB65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7081C0CBBA90018DB65 /* ViewController.swift */; };
 		2599C71C1C0CBBA90018DB65 /* Should_I_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C71B1C0CBBA90018DB65 /* Should_I_RunTests.swift */; };
@@ -22,11 +25,6 @@
 		2599C7721C0CBCA40018DB65 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7491C0CBCA40018DB65 /* MainTableViewController.swift */; };
 		2599C7731C0CBCA40018DB65 /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C74B1C0CBCA40018DB65 /* ApiController.swift */; };
 		2599C7741C0CBCA40018DB65 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C74C1C0CBCA40018DB65 /* DataHandler.swift */; };
-		2599C7771C0CBCA40018DB65 /* cell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7501C0CBCA40018DB65 /* cell1.swift */; };
-		2599C7781C0CBCA40018DB65 /* cell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7511C0CBCA40018DB65 /* cell2.swift */; };
-		2599C7791C0CBCA40018DB65 /* cell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7521C0CBCA40018DB65 /* cell3.swift */; };
-		2599C77A1C0CBCA40018DB65 /* cell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7531C0CBCA40018DB65 /* cell4.swift */; };
-		2599C77B1C0CBCA40018DB65 /* cell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7541C0CBCA40018DB65 /* cell5.swift */; };
 		2599C77C1C0CBCA40018DB65 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7551C0CBCA40018DB65 /* ResultViewController.swift */; };
 		2599C7831C0CBCA40018DB65 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */; };
 		2599C7841C0CBCA40018DB65 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */; };
@@ -62,6 +60,9 @@
 		2560D6DB1C0D1B77009CB756 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2560D6DC1C0D1B77009CB756 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2569CB991C1E144200E10897 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		2572B90D1CB188A0000B08EE /* StationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationViewController.swift; path = Should_I_Run/results/StationViewController.swift; sourceTree = SOURCE_ROOT; };
+		2572B9111CB1B06C000B08EE /* LineCellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCellController.swift; sourceTree = "<group>"; };
+		2572B9131CB1B1AF000B08EE /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		2599C7031C0CBBA90018DB65 /* Should_I_Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Should_I_Run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599C7061C0CBBA90018DB65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2599C7081C0CBBA90018DB65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,11 +82,6 @@
 		2599C7491C0CBCA40018DB65 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		2599C74B1C0CBCA40018DB65 /* ApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 		2599C74C1C0CBCA40018DB65 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
-		2599C7501C0CBCA40018DB65 /* cell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell1.swift; sourceTree = "<group>"; };
-		2599C7511C0CBCA40018DB65 /* cell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell2.swift; sourceTree = "<group>"; };
-		2599C7521C0CBCA40018DB65 /* cell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell3.swift; sourceTree = "<group>"; };
-		2599C7531C0CBCA40018DB65 /* cell4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell4.swift; sourceTree = "<group>"; };
-		2599C7541C0CBCA40018DB65 /* cell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell5.swift; sourceTree = "<group>"; };
 		2599C7551C0CBCA40018DB65 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +163,7 @@
 				2599C75E1C0CBCA40018DB65 /* AddViewController.swift */,
 				2599C75F1C0CBCA40018DB65 /* FileManager.swift */,
 				2599C7611C0CBCA40018DB65 /* Route.swift */,
+				2572B9131CB1B1AF000B08EE /* Station.swift */,
 				2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */,
 				2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */,
 				2599C7641C0CBCA40018DB65 /* Destination.swift */,
@@ -238,12 +235,9 @@
 		2599C74F1C0CBCA40018DB65 /* results */ = {
 			isa = PBXGroup;
 			children = (
-				2599C7501C0CBCA40018DB65 /* cell1.swift */,
-				2599C7511C0CBCA40018DB65 /* cell2.swift */,
-				2599C7521C0CBCA40018DB65 /* cell3.swift */,
-				2599C7531C0CBCA40018DB65 /* cell4.swift */,
-				2599C7541C0CBCA40018DB65 /* cell5.swift */,
 				2599C7551C0CBCA40018DB65 /* ResultViewController.swift */,
+				2572B90D1CB188A0000B08EE /* StationViewController.swift */,
+				2572B9111CB1B06C000B08EE /* LineCellController.swift */,
 			);
 			path = results;
 			sourceTree = "<group>";
@@ -457,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2599C76C1C0CBCA40018DB65 /* bartLookup.swift in Sources */,
+				2572B90E1CB188A0000B08EE /* StationViewController.swift in Sources */,
 				2599C7881C0CBCA40018DB65 /* Route.swift in Sources */,
 				2599C7851C0CBCA40018DB65 /* AddViewController.swift in Sources */,
 				25B8ECA91C275DDD00121C67 /* Styles.swift in Sources */,
@@ -464,20 +459,17 @@
 				2599C7861C0CBCA40018DB65 /* FileManager.swift in Sources */,
 				2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */,
 				2599C78B1C0CBCA40018DB65 /* Destination.swift in Sources */,
-				2599C7781C0CBCA40018DB65 /* cell2.swift in Sources */,
 				2599C78A1C0CBCA40018DB65 /* WalkingDirectionsManager.swift in Sources */,
+				2572B9121CB1B06C000B08EE /* LineCellController.swift in Sources */,
 				2599C7741C0CBCA40018DB65 /* DataHandler.swift in Sources */,
 				2560D6DD1C0D1B77009CB756 /* Reachability.m in Sources */,
+				2572B9141CB1B1AF000B08EE /* Station.swift in Sources */,
 				2599C7731C0CBCA40018DB65 /* ApiController.swift in Sources */,
-				2599C77A1C0CBCA40018DB65 /* cell4.swift in Sources */,
 				2599C7831C0CBCA40018DB65 /* LoadingViewController.swift in Sources */,
 				2599C7841C0CBCA40018DB65 /* AddAlarmViewController.swift in Sources */,
 				2599C7091C0CBBA90018DB65 /* ViewController.swift in Sources */,
 				2599C7721C0CBCA40018DB65 /* MainTableViewController.swift in Sources */,
 				2599C7071C0CBBA90018DB65 /* AppDelegate.swift in Sources */,
-				2599C7791C0CBCA40018DB65 /* cell3.swift in Sources */,
-				2599C7771C0CBCA40018DB65 /* cell1.swift in Sources */,
-				2599C77B1C0CBCA40018DB65 /* cell5.swift in Sources */,
 				2599C76D1C0CBCA40018DB65 /* ColorHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

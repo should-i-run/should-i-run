@@ -78,20 +78,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     }
     
     func getResults() -> [Route] {
-        func setTimes(route: Route) -> Route {
-            let distanceToStation = route.distanceToStation!
-            
-            route.walkingTime = (distanceToStation/walkingSpeed) + route.stationTime
-            route.runningTime = (distanceToStation/runningSpeed) + route.stationTime
-            let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-            if departingIn < route.walkingTime {
-                route.shouldRun = true
-            }
-            return route
-        }
-        
         let sortedResults = self.resultsRoutes
-            .map(setTimes)
             .filter({ (route) -> Bool in
                 let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
                 return departingIn >= route.runningTime //if time to departure is more than time to get to station
@@ -140,10 +127,18 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     
     func handleWalkingDistance(distance: Int){
         if let temp = self.currentWalkingRoute {
-            // iterate through each results route, and if the station matches, add the distance to the route
+            // iterate through each results route, and if the station matches, add the distance and times to the route
             self.resultsRoutes.forEach({ (route) -> () in
                 if originsAreSame(route, routeB: temp) {
                     route.distanceToStation = distance
+                    route.walkingTime = (distance/walkingSpeed) + route.stationTime
+                    route.runningTime = (distance/runningSpeed) + route.stationTime
+                    let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                    if departingIn < route.walkingTime {
+                        route.shouldRun = true
+                    } else {
+                        route.shouldRun = false
+                    }
                 }
             })
         }

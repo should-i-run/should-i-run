@@ -41,8 +41,8 @@ class StationViewController: UITableViewController {
         self.station = station
         self.stationLabel.text = station.stationName
         self.distanceLabel.text = "\(station.distanceToStation!)m"
-        self.runningLabel.text = "running: \(station.runningTime)"
-        self.walkingLabel.text = "walking: \(station.walkingTime)"
+        self.runningLabel.text = "running: \(station.runningTime!)"
+        self.walkingLabel.text = "walking: \(station.walkingTime!)"
         self.tableView.reloadData()
     }
     

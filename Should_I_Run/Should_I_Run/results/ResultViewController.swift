@@ -97,7 +97,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
                     stationView = self.storyboard?.instantiateViewControllerWithIdentifier("StationView") as! StationViewController
                     stationView.view.translatesAutoresizingMaskIntoConstraints = false
                     self.addChildViewController(stationView)
-                    self.view.addSubview(stationView.view)
+                    self.containerViews.addSubview(stationView.view)
                 } else if self.childViewControllers.count > self.currentStations.count {
                     
                 }

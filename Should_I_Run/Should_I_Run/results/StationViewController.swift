@@ -29,9 +29,10 @@ class StationViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
+//        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.registerNib(UINib(nibName: "lineCell", bundle: nil), forCellReuseIdentifier: "lineCell")
         self.tableView.reloadData()
         
     }
@@ -61,7 +62,7 @@ class StationViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("lineCell") as! LineCellController
+        let cell = tableView.dequeueReusableCellWithIdentifier("lineCell", forIndexPath: indexPath) as! LineCellController
         let row = indexPath.row as Int
         cell.update(self.station!.lines[row])
         return cell

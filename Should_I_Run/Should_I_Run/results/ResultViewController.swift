@@ -21,7 +21,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     @IBOutlet weak var alarmButton: UIButton!
     @IBOutlet weak var alarmArea: UIView!
     @IBOutlet weak var resultArea: UIView!
-    @IBOutlet weak var containerViews: UIView!
+    @IBOutlet weak var stationsContainer: UIView!
 
     
     
@@ -86,21 +86,6 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
                 
                 let bestRoute = self.currentRoutes[0]
                 self.alarmTime = bestRoute.getCurrentMinutes() - bestRoute.walkingTime
-            }
-            var stationView: StationViewController
-//            self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ComponentA")
-//            self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-////            self.addChildViewController(self.currentViewController!)
-//            self.addSubview(self.currentViewController!.view, toView: self.containerView)
-            while self.childViewControllers.count != self.currentStations.count {
-                if self.childViewControllers.count < self.currentStations.count {
-                    stationView = self.storyboard?.instantiateViewControllerWithIdentifier("StationView") as! StationViewController
-                    stationView.view.translatesAutoresizingMaskIntoConstraints = false
-                    self.addChildViewController(stationView)
-                    self.containerViews.addSubview(stationView.view)
-                } else if self.childViewControllers.count > self.currentStations.count {
-                    
-                }
             }
             
             var i = 0 // sorry

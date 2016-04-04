@@ -87,10 +87,30 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
                 let bestRoute = self.currentRoutes[0]
                 self.alarmTime = bestRoute.getCurrentMinutes() - bestRoute.walkingTime
             }
-            // TODO handle multiple stations
-            if let stat1 = self.childViewControllers[0] as? StationViewController {
-                stat1.update(self.currentStations[0])
+            var stationView: StationViewController
+//            self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ComponentA")
+//            self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+////            self.addChildViewController(self.currentViewController!)
+//            self.addSubview(self.currentViewController!.view, toView: self.containerView)
+            while self.childViewControllers.count != self.currentStations.count {
+                if self.childViewControllers.count < self.currentStations.count {
+                    stationView = self.storyboard?.instantiateViewControllerWithIdentifier("StationView") as! StationViewController
+                    stationView.view.translatesAutoresizingMaskIntoConstraints = false
+                    self.addChildViewController(stationView)
+                    self.view.addSubview(stationView.view)
+                } else if self.childViewControllers.count > self.currentStations.count {
+                    
+                }
             }
+            
+            var i = 0 // sorry
+            self.childViewControllers.forEach({(vc) in
+                if let station = vc as? StationViewController {
+                    station.update(self.currentStations[i])
+                    i += 1
+                }
+            })
+
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }

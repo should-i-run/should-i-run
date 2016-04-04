@@ -23,17 +23,17 @@ class StationViewController: UITableViewController {
         self.walkingLabel.font = globalNumberStyle
         self.view.backgroundColor = globalBackgroundColor
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override func viewDidLoad() {
-        print("hey!")
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.reloadData()
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 
     func update(station: Station) {

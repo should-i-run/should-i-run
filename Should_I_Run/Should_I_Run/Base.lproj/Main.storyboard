@@ -265,9 +265,6 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIY-I8-yPb">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qno-xn-loc" userLabel="ResultArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
@@ -318,6 +315,9 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIY-I8-yPb">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrN-p2-QjT" userLabel="AlarmArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
@@ -380,8 +380,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="tIY-I8-yPb"/>
                                 <exclude reference="Qno-xn-loc"/>
+                                <exclude reference="tIY-I8-yPb"/>
                                 <exclude reference="wrN-p2-QjT"/>
                             </mask>
                             <mask key="constraints">
@@ -399,8 +399,8 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="tIY-I8-yPb"/>
                                 <include reference="Qno-xn-loc"/>
+                                <include reference="tIY-I8-yPb"/>
                                 <include reference="wrN-p2-QjT"/>
                             </mask>
                             <mask key="constraints">
@@ -664,7 +664,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTo-ah-yt9">
                                 <rect key="frame" x="20" y="20" width="560" height="580"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MacAurthor Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-iO-uvO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-iO-uvO">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="zEO-zX-dmk"/>
@@ -711,7 +711,7 @@
                                     <constraint firstItem="31I-AJ-sEe" firstAttribute="centerY" secondItem="sjo-Kl-i1Z" secondAttribute="centerY" id="Lws-xc-7AP"/>
                                     <constraint firstItem="sjo-Kl-i1Z" firstAttribute="top" secondItem="Ftl-iO-uvO" secondAttribute="bottom" constant="10" id="M9w-Co-fBJ"/>
                                     <constraint firstItem="31I-AJ-sEe" firstAttribute="top" secondItem="Ftl-iO-uvO" secondAttribute="bottom" constant="10" id="OM5-DS-Rka"/>
-                                    <constraint firstItem="kHW-w1-Hnb" firstAttribute="leading" secondItem="jTo-ah-yt9" secondAttribute="leading" constant="150" id="aTo-su-zio"/>
+                                    <constraint firstItem="kHW-w1-Hnb" firstAttribute="leading" secondItem="jTo-ah-yt9" secondAttribute="leading" constant="160" id="aTo-su-zio"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Ftl-iO-uvO" secondAttribute="trailing" id="erh-D3-zlu"/>
                                     <constraint firstItem="kHW-w1-Hnb" firstAttribute="centerY" secondItem="31I-AJ-sEe" secondAttribute="centerY" id="il5-eg-pR5"/>
                                     <constraint firstItem="Ftl-iO-uvO" firstAttribute="top" secondItem="jTo-ah-yt9" secondAttribute="top" constant="8" id="kWp-cZ-DnZ"/>
@@ -739,8 +739,7 @@
                                         <exclude reference="M9w-Co-fBJ"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="Ftl-iO-uvO"/>
                                         <include reference="sjo-Kl-i1Z"/>
@@ -855,18 +854,15 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="80" width="400" height="296"/>
-                                </variation>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Q5L-cO-m0r" firstAttribute="top" secondItem="jTo-ah-yt9" secondAttribute="bottom" id="4Bn-Wb-pLx"/>
                             <constraint firstAttribute="trailing" secondItem="Q5L-cO-m0r" secondAttribute="trailing" id="Ez6-Xy-Cul"/>
-                            <constraint firstItem="Q5L-cO-m0r" firstAttribute="top" secondItem="jTo-ah-yt9" secondAttribute="bottom" id="HC2-4i-Zpf"/>
                             <constraint firstItem="90q-Ey-Icl" firstAttribute="top" secondItem="Q5L-cO-m0r" secondAttribute="bottom" id="Hac-JN-qDi"/>
                             <constraint firstItem="jTo-ah-yt9" firstAttribute="leading" secondItem="yM0-hL-9yp" secondAttribute="leading" id="dWi-bN-trt"/>
-                            <constraint firstItem="jTo-ah-yt9" firstAttribute="top" secondItem="ykz-fM-1Lb" secondAttribute="bottom" id="jtV-CL-OR6"/>
+                            <constraint firstItem="Q5L-cO-m0r" firstAttribute="top" secondItem="ykz-fM-1Lb" secondAttribute="bottom" constant="60" id="t1Q-fm-HXp"/>
                             <constraint firstAttribute="trailing" secondItem="jTo-ah-yt9" secondAttribute="trailing" id="t4K-T1-wn3"/>
                             <constraint firstItem="Q5L-cO-m0r" firstAttribute="leading" secondItem="yM0-hL-9yp" secondAttribute="leading" id="wHC-hy-kgi"/>
                         </constraints>
@@ -876,13 +872,13 @@
                                 <exclude reference="Q5L-cO-m0r"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Hac-JN-qDi"/>
-                                <exclude reference="Ez6-Xy-Cul"/>
-                                <exclude reference="HC2-4i-Zpf"/>
-                                <exclude reference="wHC-hy-kgi"/>
                                 <exclude reference="dWi-bN-trt"/>
-                                <exclude reference="jtV-CL-OR6"/>
                                 <exclude reference="t4K-T1-wn3"/>
+                                <exclude reference="4Bn-Wb-pLx"/>
+                                <exclude reference="Ez6-Xy-Cul"/>
+                                <exclude reference="t1Q-fm-HXp"/>
+                                <exclude reference="wHC-hy-kgi"/>
+                                <exclude reference="Hac-JN-qDi"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -891,13 +887,13 @@
                                 <include reference="Q5L-cO-m0r"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Hac-JN-qDi"/>
-                                <include reference="Ez6-Xy-Cul"/>
-                                <exclude reference="HC2-4i-Zpf"/>
-                                <include reference="wHC-hy-kgi"/>
                                 <include reference="dWi-bN-trt"/>
-                                <include reference="jtV-CL-OR6"/>
                                 <include reference="t4K-T1-wn3"/>
+                                <include reference="4Bn-Wb-pLx"/>
+                                <include reference="Ez6-Xy-Cul"/>
+                                <include reference="t1Q-fm-HXp"/>
+                                <include reference="wHC-hy-kgi"/>
+                                <include reference="Hac-JN-qDi"/>
                             </mask>
                         </variation>
                     </view>

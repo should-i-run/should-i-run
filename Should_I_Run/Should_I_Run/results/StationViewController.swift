@@ -31,8 +31,8 @@ class StationViewController: UITableViewController {
     override func viewDidLoad() {
 //        self.tableView.delegate = self
 //        self.tableView.dataSource = self
-//        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.registerNib(UINib(nibName: "lineCell", bundle: nil), forCellReuseIdentifier: "lineCell")
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.registerNib(UINib(nibName: "lineCell", bundle: nil), forCellReuseIdentifier: "lineCell")
         self.tableView.reloadData()
         
     }

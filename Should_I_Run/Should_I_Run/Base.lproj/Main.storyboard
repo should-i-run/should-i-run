@@ -321,7 +321,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrN-p2-QjT" userLabel="AlarmArea">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMi-1M-GF3">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMi-1M-GF3" userLabel="BAlarm">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Set an alarm">
@@ -368,17 +368,15 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="Qno-xn-loc" firstAttribute="top" secondItem="Ixe-pM-wp7" secondAttribute="bottom" id="5Rn-Vs-Jxw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wrN-p2-QjT" secondAttribute="trailing" constant="-20" id="SuI-MB-q7x"/>
+                            <constraint firstAttribute="trailing" secondItem="wrN-p2-QjT" secondAttribute="trailing" id="SuI-MB-q7x"/>
                             <constraint firstItem="HXB-Fl-BaQ" firstAttribute="top" secondItem="Ixe-pM-wp7" secondAttribute="bottom" constant="73" id="TPY-OB-qYl"/>
-                            <constraint firstItem="HXB-Fl-BaQ" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leadingMargin" constant="-20" id="TbZ-vl-Wu5"/>
-                            <constraint firstItem="wrN-p2-QjT" firstAttribute="top" secondItem="HXB-Fl-BaQ" secondAttribute="bottom" constant="42" id="YGa-0p-cRG"/>
+                            <constraint firstItem="HXB-Fl-BaQ" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leading" id="TbZ-vl-Wu5"/>
+                            <constraint firstItem="wrN-p2-QjT" firstAttribute="top" secondItem="HXB-Fl-BaQ" secondAttribute="bottom" id="YGa-0p-cRG"/>
                             <constraint firstItem="svA-2S-M0p" firstAttribute="top" secondItem="wrN-p2-QjT" secondAttribute="bottom" id="Z0d-Jn-WVz"/>
-                            <constraint firstItem="Qno-xn-loc" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leadingMargin" constant="-20" id="bS0-EL-evN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HXB-Fl-BaQ" secondAttribute="trailing" constant="-20" id="crR-z4-cia"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Qno-xn-loc" secondAttribute="trailing" constant="-20" id="hh1-bN-T60"/>
-                            <constraint firstItem="HXB-Fl-BaQ" firstAttribute="leading" secondItem="Qno-xn-loc" secondAttribute="trailing" constant="-400" id="kp1-O1-Rym"/>
-                            <constraint firstItem="wrN-p2-QjT" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leadingMargin" constant="-20" id="pkq-iT-HTi"/>
-                            <constraint firstItem="HXB-Fl-BaQ" firstAttribute="leading" secondItem="wrN-p2-QjT" secondAttribute="trailing" constant="-400" id="qJL-e0-zjW"/>
+                            <constraint firstItem="Qno-xn-loc" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leading" id="bS0-EL-evN"/>
+                            <constraint firstAttribute="trailing" secondItem="HXB-Fl-BaQ" secondAttribute="trailing" id="crR-z4-cia"/>
+                            <constraint firstAttribute="trailing" secondItem="Qno-xn-loc" secondAttribute="trailing" id="hh1-bN-T60"/>
+                            <constraint firstItem="wrN-p2-QjT" firstAttribute="leading" secondItem="Eea-UV-eIr" secondAttribute="leading" id="pkq-iT-HTi"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -393,8 +391,6 @@
                                 <exclude reference="TPY-OB-qYl"/>
                                 <exclude reference="TbZ-vl-Wu5"/>
                                 <exclude reference="crR-z4-cia"/>
-                                <exclude reference="kp1-O1-Rym"/>
-                                <exclude reference="qJL-e0-zjW"/>
                                 <exclude reference="SuI-MB-q7x"/>
                                 <exclude reference="YGa-0p-cRG"/>
                                 <exclude reference="pkq-iT-HTi"/>
@@ -414,8 +410,6 @@
                                 <include reference="TPY-OB-qYl"/>
                                 <include reference="TbZ-vl-Wu5"/>
                                 <include reference="crR-z4-cia"/>
-                                <include reference="kp1-O1-Rym"/>
-                                <include reference="qJL-e0-zjW"/>
                                 <include reference="SuI-MB-q7x"/>
                                 <include reference="YGa-0p-cRG"/>
                                 <include reference="pkq-iT-HTi"/>
@@ -667,7 +661,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTo-ah-yt9">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTo-ah-yt9" userLabel="StationDetail">
                                 <rect key="frame" x="20" y="20" width="560" height="580"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-iO-uvO">

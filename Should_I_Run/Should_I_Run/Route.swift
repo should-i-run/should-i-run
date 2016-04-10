@@ -67,12 +67,13 @@ class Route {
     }
     
     func toDictionary() -> Dictionary <String, AnyObject> {
+        let depTime = self.departureTime != nil ? Int(Int(self.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60) : 0
         let dict: [String: AnyObject] = [
             "originStationName": self.originStationName,
             "lineName": self.lineName,
             "eolStationName": self.eolStationName,
             "agency": self.agency,
-            "departureTime": self.departureTime ?? "",
+            "departureTime": depTime,
             "lineCode": self.lineCode ?? "",
             "distanceToStation": self.distanceToStation ?? "",
             "shouldRun": self.shouldRun,

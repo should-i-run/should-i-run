@@ -24,7 +24,6 @@ class SimpleApp extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is a simple application.</Text>
         {this.props.stations && this.props.stations.map((s, i) => <Station key={i} station={s} />)}
       </View>
     )

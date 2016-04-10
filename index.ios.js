@@ -5,7 +5,7 @@ import React, {
   View
 } from 'react-native';
 
-import Station from './Station.js';
+import Station from './Should_I_Run/ReactComponents/Station.js';
 
 var styles = React.StyleSheet.create({
   container: {

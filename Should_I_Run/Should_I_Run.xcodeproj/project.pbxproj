@@ -270,6 +270,7 @@
 				2599C7011C0CBBA90018DB65 /* Resources */,
 				9619477BE73745B779F852D8 /* Embed Pods Frameworks */,
 				A136335409B84A1770DA32A0 /* Copy Pods Resources */,
+				2552CDBE1CBA764D0039FEF2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -395,6 +396,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2552CDBE1CBA764D0039FEF2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../node_modules/react-native/packager/react-native-xcode.sh";
+		};
 		9619477BE73745B779F852D8 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

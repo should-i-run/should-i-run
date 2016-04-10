@@ -65,6 +65,20 @@ class Route {
         "self.distanceToStation \(self.distanceToStation)\n" +
         "self.shouldRun \(self.shouldRun)\n"
     }
+    
+    func toDictionary() -> Dictionary <String, AnyObject> {
+        let dict: [String: AnyObject] = [
+            "originStationName": self.originStationName,
+            "lineName": self.lineName,
+            "eolStationName": self.eolStationName,
+            "agency": self.agency,
+            "departureTime": self.departureTime ?? "",
+            "lineCode": self.lineCode ?? "",
+            "distanceToStation": self.distanceToStation ?? "",
+            "shouldRun": self.shouldRun,
+        ]
+        return dict
+    }
 }
 
 func routesAreSame(routeA: Route, routeB: Route) -> Bool {

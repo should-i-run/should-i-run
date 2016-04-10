@@ -21,10 +21,8 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     @IBOutlet weak var alarmButton: UIButton!
     @IBOutlet weak var alarmArea: UIView!
     @IBOutlet weak var resultArea: UIView!
-    @IBOutlet weak var stationsContainer: UIView!
+    @IBOutlet weak var stationsContainer: ReactView!
 
-    
-    
     var secondTimer: NSTimer = NSTimer()
     var updateResultTimer : NSTimer = NSTimer()
     
@@ -87,14 +85,11 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
                 let bestRoute = self.currentRoutes[0]
                 self.alarmTime = bestRoute.getCurrentMinutes() - bestRoute.walkingTime
             }
-            
-            var i = 0 // sorry
-            self.childViewControllers.forEach({(vc) in
-                if let station = vc as? StationViewController {
-                    station.update(self.currentStations[i])
-                    i += 1
-                }
-            })
+            let data: [String: AnyObject] = [
+                "routes": self.currentRoutes.map {$0.toDictionary()},
+                "stations": self.currentStations.map {$0.toDictionary()},
+            ]
+            self.stationsContainer.updateData(data)
 
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)

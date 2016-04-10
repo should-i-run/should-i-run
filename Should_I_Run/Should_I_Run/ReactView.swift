@@ -23,5 +23,10 @@ class ReactView: UIView {
     func loadReact () {
         addSubview(rootView)
         rootView.frame = self.bounds
+        
+    }
+    // stations: [Dictionary <String, AnyObject>], routes: [Dictionary <String, AnyObject>]
+    func updateData(data: [NSObject: AnyObject]) {
+        rootView.appProperties = data
     }
 }

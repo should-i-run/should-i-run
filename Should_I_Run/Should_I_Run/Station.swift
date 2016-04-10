@@ -25,6 +25,19 @@ class Station {
         self.walkingTime = first.walkingTime
         self.runningTime = first.runningTime
     }
+    
+    func toDictionary () -> Dictionary <String, AnyObject> {
+        let dict: [String: AnyObject] = [
+            "distanceToStation": self.distanceToStation!,
+            "stationName": self.stationName,
+            "agency": self.agency,
+            "stationTime": self.stationTime,
+            "walkingTime": self.walkingTime ?? "",
+            "runningTime": self.runningTime ?? "",
+            "lines": self.lines.map({$0.toDictionary()})
+        ]
+        return dict
+    }
 }
 
 class Line {
@@ -39,5 +52,15 @@ class Line {
         self.lineCode = first.lineCode
         self.eolStationName = first.eolStationName
         self.departures = departures
+    }
+    
+    func toDictionary() -> Dictionary <String, AnyObject> {
+        let dict: [String: AnyObject] = [
+            "lineName": self.lineName,
+            "lineCode": self.lineCode ?? "",
+            "eolStationName": self.eolStationName,
+            "departures": self.departures.map({$0.toDictionary()}),
+        ]
+        return dict
     }
 }

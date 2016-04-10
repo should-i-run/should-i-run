@@ -36,6 +36,9 @@ View our [press release](PRESS-RELEASE.md).
 
 ## Development
 
+1. Xcode etc
+2. start the react-native dev server: `(JS_DIR=`pwd`/Should_I_Run/ReactComponents; cd node_modules/react-native; npm run start -- --root $JS_DIR)`
+
 ### Tasks
 
 See our project's backlog in [Asana](https://app.asana.com/0/14550568166029/14550568166029)

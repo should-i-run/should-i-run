@@ -86,7 +86,6 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
                 self.alarmTime = bestRoute.getCurrentMinutes() - bestRoute.walkingTime
             }
             let data: [String: AnyObject] = [
-                "routes": self.currentRoutes.map {$0.toDictionary()},
                 "stations": self.currentStations.map {$0.toDictionary()},
             ]
             self.stationsContainer.updateData(data)

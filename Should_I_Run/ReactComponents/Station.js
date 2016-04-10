@@ -5,17 +5,20 @@ import React, {
   View
 } from 'react-native';
 
+const text = {
+  color: '#DDD'
+};
+
 var styles = React.StyleSheet.create({
   station: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    backgroundColor: 'red'
+    padding: 10,
   },
   stationInfo: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
   },
   line: {
     flexDirection: 'row',
@@ -25,6 +28,39 @@ var styles = React.StyleSheet.create({
   departure: {
     marginLeft: 5,
   },
+  stationName: {
+    ...text,
+    fontSize: 24,
+    fontWeight: '400',
+  },
+  genericText: {
+    ...text,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  timeLabel: {
+    ...text,
+    fontSize: 18,
+    fontWeight: '400',
+    marginLeft: 15,
+  },
+  departureTime: {
+    ...text,
+    fontSize: 18,
+    fontWeight: '800',
+    marginLeft: 15,
+  },
+  missed: {
+    color: '#AAA',
+  },
+  run: {
+    color: '#FC5B3F',
+  },
+  walk: {
+    color: '#6FD57F',
+  },
+
+
 });
 
 export default class Station extends React.Component {
@@ -41,10 +77,17 @@ export default class Station extends React.Component {
   // "distanceToStation": self.distanceToStation ?? "",
   // "shouldRun": self.shouldRun,
   renderDeparture(departure, i) {
-    const {departureTime} = departure;
+    const {departureTime, shouldRun} = departure;
+    let labelStyle = styles.walk;
+    if (shouldRun) {
+      labelStyle = departureTime >= this.props.station.runningTime ?
+        styles.run : styles.missed;
+    }
     return (
       <View key={i} style={styles.departure}>
-        <Text>{departureTime}</Text>
+        <Text style={[styles.departureTime, labelStyle]}>
+          {departureTime}
+        </Text>
       </View>
     );
   }
@@ -58,8 +101,8 @@ export default class Station extends React.Component {
     const currentDepartures = departures.filter(d => d.departureTime >= 0);
     return (
       <View key={i} style={styles.line}>
-        <Text>{eolStationName} </Text>
-        {currentDepartures.map(this.renderDeparture)}
+        <Text style={styles.genericText}>{eolStationName} </Text>
+        {currentDepartures.map(this.renderDeparture.bind(this))}
       </View>
     );
   }
@@ -68,11 +111,18 @@ export default class Station extends React.Component {
     const s = this.props.station;
     return (
       <View style={styles.station}>
-        <Text>{this.props.station.stationName}</Text>
+        <Text style={styles.stationName}>{s.stationName}</Text>
         <View style={styles.stationInfo}>
-          <Text>{s.distanceToStation} meters</Text>
-          <Text>Running time: {s.runningTime}</Text>
-          <Text>Walking time: {s.walkingTime}</Text>
+          <Text style={styles.genericText}>
+            {s.distanceToStation} m
+          </Text>
+
+          <Text style={styles.timeLabel}>
+            {s.runningTime} running
+          </Text>
+          <Text style={styles.timeLabel}>
+            {s.walkingTime} walking
+          </Text>
         </View>
         {s.lines.map(this.renderLine.bind(this))}
       </View>

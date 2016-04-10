@@ -10,7 +10,7 @@ import Station from './Station.js';
 var styles = React.StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red'
+    backgroundColor: 'black',
   }
 });
 

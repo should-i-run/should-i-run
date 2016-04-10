@@ -90,13 +90,6 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     }
     
     func getStations() -> [Station] {
-        // get list of origin station codes
-        // for each station code
-            // make a Station
-            // get list of dest station codes
-            // for each, 
-                // make a Line
-                // add all the Routes that have this origin and dest
         let stationNames = Array(Set(self.resultsRoutes.map({ (route) -> String in
             return route.originStationName
         })))

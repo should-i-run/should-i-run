@@ -11,6 +11,9 @@ import React
 
 class ReactView: UIView {
     
+//    let jsCodeLocation = NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios")
+//    let jsCodeLocation = NSBundle.mainBundle().URLForResource("main", withExtension: "jsbundle")
+    
     let rootView: RCTRootView = RCTRootView(bundleURL: NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
                                             moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
     
@@ -25,7 +28,7 @@ class ReactView: UIView {
         rootView.frame = self.bounds
         
     }
-    // stations: [Dictionary <String, AnyObject>], routes: [Dictionary <String, AnyObject>]
+
     func updateData(data: [NSObject: AnyObject]) {
         rootView.appProperties = data
     }

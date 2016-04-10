@@ -174,7 +174,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     }
     
     func updateWalkingDistances() {
-        //in the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
+        // In the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
         if self.locationManager.currentLocation2d == nil {
             return
         }

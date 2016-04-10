@@ -5,7 +5,7 @@
 ## Features
 * Add destinations you want to get to using BART.
 * Run or walk recommendation depending on the next incoming train.
-* Time in mintues of when the next makable train will arrive.
+* Time in miutues of when the next makable train will arrive.
 * Time and distance estimation based on your current location.
 * Set an alarm to notify you when to leave to catch your train.
 

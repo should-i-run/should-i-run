@@ -79,9 +79,7 @@ class apiController: NSObject {
     }
 
     func buildRoutes(routes: JSON) -> [Route] {
-        return (routes.arrayValue).filter({ $0 != nil}).map( { (rt: JSON) -> Route in
-            return self.parseRoute(rt)
-        })
+        return (routes.arrayValue).filter({ $0 != nil}).map( { self.parseRoute($0)})
     }
 
     // Move this into an init function on the route

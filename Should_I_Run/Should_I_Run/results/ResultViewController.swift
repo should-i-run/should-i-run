@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ResultViewController: UIViewController, DataHandlerDelegate {
 
@@ -24,7 +25,10 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     @IBOutlet weak var stationsContainer: ReactView!
 
     var secondTimer: NSTimer = NSTimer()
-    var updateResultTimer : NSTimer = NSTimer()
+//    var updateResultTimer : NSTimer = NSTimer()
+    let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    let locationManager = SharedUserLocation
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,25 +46,17 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: #selector(ResultViewController.updateWalkingDistance(_:)), userInfo: nil, repeats: true)
+        
+        self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) {_ in 
+            if let _: CLLocationCoordinate2D = self.locationManager.currentLocation2d {
+                self.updateWalkingDistance()
+            }
+        }
+//        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: #selector(ResultViewController.updateWalkingDistance(_:)), userInfo: nil, repeats: true)
         self.secondTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ResultViewController.updateTimes(_:)), userInfo: nil, repeats: true)
         
         //get times rendered immediately
         self.updateTimes(nil)
-    }
-    
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-//        if motion == .MotionShake {
-//            apiController.instance.logApiResponse()
-//            if let bestRoute = self.currentRoutes[0] {
-//                print("--- Current Best Route:")
-//                print(bestRoute.toString())
-//            }
-//            if let secondRoute = self.currentRoutes[1] {
-//                print("--- Second BestRoute:")
-//                print(secondRoute.toString())
-//            }
-//        }
     }
     
     func render() {
@@ -95,7 +91,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
         }
     }
     
-    func updateWalkingDistance(timer: NSTimer?){
+    func updateWalkingDistance(){
         DataHandler.instance.updateWalkingDistances()
     }
     
@@ -112,6 +108,12 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
+
+    
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        apiController.instance.logApiResponse()
+    }
     
     // Segues and unwinds-----------------------------------------------------
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -123,7 +125,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     
     override func viewDidDisappear(animated: Bool) {
         DataHandler.instance.cancelLoad()
-        self.updateResultTimer.invalidate()
+//        self.updateResultTimer.invalidate()
         self.secondTimer.invalidate()
         super.viewDidDisappear(animated)
     }

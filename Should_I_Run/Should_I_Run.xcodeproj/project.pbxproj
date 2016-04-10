@@ -77,7 +77,7 @@
 		2599C7491C0CBCA40018DB65 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		2599C74B1C0CBCA40018DB65 /* ApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 		2599C74C1C0CBCA40018DB65 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
-		2599C7551C0CBCA40018DB65 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		2599C7551C0CBCA40018DB65 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultViewController.swift; path = results/ResultViewController.swift; sourceTree = "<group>"; };
 		2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		2599C75E1C0CBCA40018DB65 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
@@ -159,12 +159,12 @@
 				2599C73A1C0CBCA40018DB65 /* resources */,
 				2599C73F1C0CBCA40018DB65 /* Helpers */,
 				2599C74A1C0CBCA40018DB65 /* Data */,
-				2599C74F1C0CBCA40018DB65 /* results */,
 				2599C7061C0CBBA90018DB65 /* AppDelegate.swift */,
 				2599C7491C0CBCA40018DB65 /* MainTableViewController.swift */,
 				2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */,
 				2599C75D1C0CBCA40018DB65 /* AddAlarmViewController.swift */,
 				2599C75E1C0CBCA40018DB65 /* AddViewController.swift */,
+				2599C7551C0CBCA40018DB65 /* ResultViewController.swift */,
 				2599C7121C0CBBA90018DB65 /* Info.plist */,
 				2569CB991C1E144200E10897 /* Images-2.xcassets */,
 				2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */,
@@ -232,14 +232,6 @@
 			);
 			name = Data;
 			path = api;
-			sourceTree = "<group>";
-		};
-		2599C74F1C0CBCA40018DB65 /* results */ = {
-			isa = PBXGroup;
-			children = (
-				2599C7551C0CBCA40018DB65 /* ResultViewController.swift */,
-			);
-			path = results;
 			sourceTree = "<group>";
 		};
 		767ECFDEC0EEE5224DABF3DB /* Frameworks */ = {

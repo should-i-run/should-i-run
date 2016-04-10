@@ -48,7 +48,7 @@ var styles = React.StyleSheet.create({
   },
   lineName: {
     ...genericText,
-    width: 100,
+    width: 120,
     fontWeight: '200',
   },
   depTimeContainer: {

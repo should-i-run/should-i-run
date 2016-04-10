@@ -5,6 +5,8 @@ import React, {
   View
 } from 'react-native';
 
+import Station from './Station.js';
+
 var styles = React.StyleSheet.create({
   container: {
     flex: 1,
@@ -13,10 +15,17 @@ var styles = React.StyleSheet.create({
 });
 
 class SimpleApp extends React.Component {
+  static propTypes = {
+    stations: React.PropTypes.array,
+    routes: React.PropTypes.array,
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
         <Text>This is a simple application.</Text>
+        {this.props.stations && this.props.stations.map((s, i) => <Station key={i} station={s} />)}
       </View>
     )
   }

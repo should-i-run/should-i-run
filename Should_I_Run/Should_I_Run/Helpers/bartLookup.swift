@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Should I Run. All rights reserved.
 //
 
-var bartLookup : [String : String] = ["12th St. Oakland City Center" : "12th",
+var bartLookup : [String : String] = [
+    "12th St. Oakland City Center" : "12th",
     "16th St. Mission":"16th",
     "19th St. Oakland":"19th",
     "24th St. Mission":"24th",
@@ -52,7 +53,8 @@ var bartLookup : [String : String] = ["12th St. Oakland City Center" : "12th",
     "West Oakland":"woak"
 ]
 
-var bartLookupReverse : [String : String] = ["12th":"12th St. Oakland City Center",
+var bartLookupReverse : [String : String] = [
+    "12th":"12th St. Oakland City Center",
     "16th":"16th St. Mission",
     "19th":"19th St. Oakland",
     "24th":"24th St. Mission",

@@ -2,7 +2,7 @@
 
 import React, {
   Text,
-  View
+  ScrollView
 } from 'react-native';
 
 import Station from './Should_I_Run/ReactComponents/Station.js';
@@ -20,12 +20,11 @@ class SimpleApp extends React.Component {
     routes: React.PropTypes.array,
   }
 
-
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         {this.props.stations && this.props.stations.map((s, i) => <Station key={i} station={s} />)}
-      </View>
+      </ScrollView>
     )
   }
 }

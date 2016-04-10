@@ -105,7 +105,8 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
             
             let lines = lineNames.map( { (lineName) -> Line in
                 let routesMatchingLine = self.resultsRoutes.filter( { (res) in
-                    return res.eolStationName == lineName
+                    return res.eolStationName == lineName &&
+                        res.originStationName == stationName
                 })
 
                 return Line(departures: routesMatchingLine)

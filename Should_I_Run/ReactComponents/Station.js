@@ -5,53 +5,66 @@ import React, {
   View
 } from 'react-native';
 
-const text = {
-  color: '#DDD'
+const genericText = {
+  color: '#EEE',
+  fontSize: 18,
+  fontWeight: '400',
 };
 
 var styles = React.StyleSheet.create({
+  genericText: {
+    ...genericText,
+  },
   station: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     padding: 10,
   },
-  stationInfo: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+  stationName: {
+    ...genericText,
+    fontSize: 24,
+    fontWeight: '400',
   },
-  line: {
+  stationMetadataContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  stationMetadata: {
+    ...genericText,
+    fontSize: 18,
+    fontWeight: '200',
+    marginRight: 15,
   },
   departure: {
     marginLeft: 5,
   },
-  stationName: {
-    ...text,
-    fontSize: 24,
-    fontWeight: '400',
+  line: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
   },
-  genericText: {
-    ...text,
-    fontSize: 18,
-    fontWeight: '400',
+  lineName: {
+    ...genericText,
+    width: 100,
+    fontWeight: '200',
   },
-  timeLabel: {
-    ...text,
-    fontSize: 18,
-    fontWeight: '400',
-    marginLeft: 15,
+  depTimeContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   departureTime: {
-    ...text,
-    fontSize: 18,
+    ...genericText,
     fontWeight: '800',
     marginLeft: 15,
+    width: 25,
+    textAlign: 'right',
   },
   missed: {
-    color: '#AAA',
+    color: '#999',
   },
   run: {
     color: '#FC5B3F',
@@ -59,8 +72,6 @@ var styles = React.StyleSheet.create({
   walk: {
     color: '#6FD57F',
   },
-
-
 });
 
 export default class Station extends React.Component {
@@ -101,8 +112,14 @@ export default class Station extends React.Component {
     const currentDepartures = departures.filter(d => d.departureTime >= 0);
     return (
       <View key={i} style={styles.line}>
-        <Text style={styles.genericText}>{eolStationName} </Text>
-        {currentDepartures.map(this.renderDeparture.bind(this))}
+        <Text
+          numberOfLines={2}
+          style={styles.lineName}>
+          {eolStationName}
+        </Text>
+        <View style={styles.depTimeContainer}>
+          {currentDepartures.map(this.renderDeparture.bind(this))}
+        </View>
       </View>
     );
   }
@@ -112,16 +129,17 @@ export default class Station extends React.Component {
     return (
       <View style={styles.station}>
         <Text style={styles.stationName}>{s.stationName}</Text>
-        <View style={styles.stationInfo}>
-          <Text style={styles.genericText}>
+        <View style={styles.stationMetadataContainer}>
+          <Text style={styles.stationMetadata}>
             {s.distanceToStation} m
           </Text>
-
-          <Text style={styles.timeLabel}>
-            {s.runningTime} running
+          <Text style={styles.stationMetadata}>
+            <Text>{s.runningTime} </Text>
+            running
           </Text>
-          <Text style={styles.timeLabel}>
-            {s.walkingTime} walking
+          <Text style={styles.stationMetadata}>
+            <Text>{s.walkingTime} </Text>
+            walking
           </Text>
         </View>
         {s.lines.map(this.renderLine.bind(this))}

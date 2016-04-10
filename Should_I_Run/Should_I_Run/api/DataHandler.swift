@@ -78,36 +78,42 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     }
     
     func getResults() -> [Route] {
-        var results = [Route]()
-        var foundResult = false
-        var distanceToStation = 0
-        
-        for var i = 0; i < self.resultsRoutes.count; ++i {
-            if !foundResult {
-                let route = self.resultsRoutes[i]
-                distanceToStation = route.distanceToStation!
-                
-                route.walkingTime = (distanceToStation/walkingSpeed) + route.stationTime
-                route.runningTime = (distanceToStation/runningSpeed) + route.stationTime
-                
+        let sortedResults = self.resultsRoutes
+            .filter({ (route) -> Bool in
                 let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                if departingIn >= route.runningTime { //if time to departure is less than time to get to station
-                    foundResult = true
-                    let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
-                    if departingIn < route.walkingTime {
-                        route.shouldRun = true
-                    }
-                    
-                    results.append(route)
-                    
-                    //set the following route if there is one
-                    if i + 1 < self.resultsRoutes.count {
-                        results.append(self.resultsRoutes[i + 1])
-                    }
-                }
-            }
-        }
-        return results;
+                return departingIn >= route.runningTime //if time to departure is more than time to get to station
+            })
+            .sort({ $0.departureTime < $1.departureTime })
+        
+
+        return Array(sortedResults.prefix(2)); // first two
+    }
+    
+    func getStations() -> [Station] {
+        let stationNames = Array(Set(self.resultsRoutes.map({ (route) -> String in
+            return route.originStationName
+        })))
+        
+        return stationNames.map({ (stationName) -> Station in
+            let matchingRoutes = self.resultsRoutes.filter({(route) in
+                return route.originStationName == stationName
+            })
+            
+            let lineNames = Array(Set(matchingRoutes.map({ (r) -> String in
+                return r.eolStationName
+            })))
+            
+            let lines = lineNames.map( { (lineName) -> Line in
+                let routesMatchingLine = self.resultsRoutes.filter( { (res) in
+                    return res.eolStationName == lineName &&
+                        res.originStationName == stationName
+                })
+
+                return Line(departures: routesMatchingLine)
+            })
+            return Station(departures: matchingRoutes, lines: lines)
+        })
+        
     }
     
     func receiveLocation(location2d: CLLocationCoordinate2D) {
@@ -149,10 +155,18 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     
     func handleWalkingDistance(distance: Int){
         if let temp = self.currentWalkingRoute {
-            // iterate through each results route, and if the station matches, add the distance to the route
+            // iterate through each results route, and if the station matches, add the distance and times to the route
             self.resultsRoutes.forEach({ (route) -> () in
                 if originsAreSame(route, routeB: temp) {
                     route.distanceToStation = distance
+                    route.walkingTime = (distance/walkingSpeed) + route.stationTime
+                    route.runningTime = (distance/runningSpeed) + route.stationTime
+                    let departingIn: Int = Int(route.departureTime! - NSDate.timeIntervalSinceReferenceDate()) / 60
+                    if departingIn < route.walkingTime {
+                        route.shouldRun = true
+                    } else {
+                        route.shouldRun = false
+                    }
                 }
             })
         }

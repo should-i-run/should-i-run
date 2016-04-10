@@ -107,7 +107,7 @@ import Foundation
         if row < destinations.count {
             let chosenDestination = destinations[row]
             let colorIndex = chosenDestination["colorIndex"] as! Int
-            self.colorForChosenDestination = colors[colorIndex]
+            self.colorForChosenDestination = colors[colorIndex % (colors.count - 1)]
             self.reorderDestinations(row)
             self.getDirectionsForDestination(chosenDestination)
         }
@@ -136,7 +136,7 @@ import Foundation
         self.performSegueWithIdentifier("LoadingSegue", sender: self)
         
         let timeoutText: Dictionary = ["titleString": "Time Out", "messageString": "Sorry! Your request took too long."]
-        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("onTimeout:"), userInfo: timeoutText, repeats: false)
+        self.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: #selector(MainTableViewController.onTimeout(_:)), userInfo: timeoutText, repeats: false)
         self.timerInvalidated = false
     }
     

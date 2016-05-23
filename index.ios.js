@@ -18,12 +18,13 @@ class SimpleApp extends React.Component {
   static propTypes = {
     stations: React.PropTypes.array,
     routes: React.PropTypes.array,
+    data: React.PropTypes.array,
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.props.stations && this.props.stations.map((s, i) => <Station key={i} station={s} />)}
+        {this.props.data && this.props.data.map((s, i) => <Station key={i} station={s} />)}
       </ScrollView>
     )
   }

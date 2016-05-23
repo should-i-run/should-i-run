@@ -9,8 +9,8 @@ class apiController: NSObject {
 
     func fetchData(latStart:Float, lngStart:Float, success: (JSON -> ()), fail: String -> ()) {
 //        let url = "https://tranquil-harbor-8717.herokuapp.com/bart"
-        let url = "https://localhost:3000/bart"
-        Alamofire.request(.POST, url, parameters: ["lat": latStart, "lng": lngStart])
+        let url = "http://localhost:3000/bart"
+        Alamofire.request(.POST, url, parameters: ["lat": latStart, "lng": lngStart], encoding: .JSON)
             .responseJSON { response in
                 switch response.result {
                 case .Success(let data):
@@ -20,8 +20,8 @@ class apiController: NSObject {
                     } else {
                         success(json)
                     }
-                case .Failure:
-                    self.handleError(fail)
+                case .Failure(let error):
+                    self.handleError(fail, message: String(error.code))
                 }
             }
         

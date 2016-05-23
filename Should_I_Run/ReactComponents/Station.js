@@ -88,12 +88,13 @@ export default class Station extends React.Component {
   // "distanceToStation": self.distanceToStation ?? "",
   // "shouldRun": self.shouldRun,
   renderDeparture(departure, i) {
-    const {departureTime, shouldRun} = departure;
+    // const {departureTime, shouldRun} = departure;
     let labelStyle = styles.walk;
-    if (shouldRun) {
-      labelStyle = departureTime >= this.props.station.runningTime ?
-        styles.run : styles.missed;
-    }
+    // if (shouldRun) {
+    //   labelStyle = departureTime >= this.props.station.runningTime ?
+    //     styles.run : styles.missed;
+    // }
+    const departureTime = departure === 'Leaving' ? 0 : departure;
     return (
       <View key={i} style={styles.departure}>
         <Text style={[styles.departureTime, labelStyle]}>
@@ -108,17 +109,17 @@ export default class Station extends React.Component {
   // self.eolStationName = first.eolStationName
   // self.departures = departures
   renderLine(line, i) {
-    const {eolStationName, departures} = line;
-    const currentDepartures = departures.filter(d => d.departureTime >= 0);
+    const {code, departures} = line;
+    // const currentDepartures = departures.filter(d => d.departureTime >= 0);
     return (
       <View key={i} style={styles.line}>
         <Text
           numberOfLines={2}
           style={styles.lineName}>
-          {eolStationName}
+          {code}
         </Text>
         <View style={styles.depTimeContainer}>
-          {currentDepartures.map(this.renderDeparture.bind(this))}
+          {departures.map(this.renderDeparture.bind(this))}
         </View>
       </View>
     );
@@ -128,7 +129,7 @@ export default class Station extends React.Component {
     const s = this.props.station;
     return (
       <View style={styles.station}>
-        <Text style={styles.stationName}>{s.stationName}</Text>
+        <Text style={styles.stationName}>{s.name}</Text>
         <View style={styles.stationMetadataContainer}>
           <Text style={styles.stationMetadata}>
             {s.distanceToStation} m
@@ -142,16 +143,29 @@ export default class Station extends React.Component {
             walking
           </Text>
         </View>
-        {s.lines.map(this.renderLine.bind(this))}
+        {s.departures.map(this.renderLine.bind(this))}
       </View>
     );
   }
 }
 
-// "distanceToStation": self.distanceToStation!,
-// "stationName": self.stationName,
-// "agency": self.agency,
-// "stationTime": self.stationTime,
-// "walkingTime": self.walkingTime ?? "",
-// "runningTime": self.runningTime ?? "",
-// "lines": self.lines.map({$0.toDictionary()})
+
+// "address": "899 Market Street",
+// "departures": [
+//   {
+//     "code": "DALY",
+//     "departures": [
+//       "8",
+//       "27",
+//       "47"
+//     ]
+//   },
+// "gtfs_longitude": "-122.406857",
+// "name": "Powell St.",
+// "city": "San Francisco",
+// "county": "sanfrancisco",
+// "abbr": "POWL",
+// "state": "CA",
+// "zipcode": "94102",
+// "distance": 0.0027096245127228285,
+// "gtfs_latitude": "37.784991"

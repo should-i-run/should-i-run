@@ -8,8 +8,7 @@ class apiController: NSObject {
     static let instance = apiController()
 
     func fetchData(latStart:Float, lngStart:Float, success: (JSON -> ()), fail: String -> ()) {
-//        let url = "https://tranquil-harbor-8717.herokuapp.com/bart"
-        let url = "http://localhost:3000/bart"
+        let url = "https://tranquil-harbor-8717.herokuapp.com/bart"
         Alamofire.request(.POST, url, parameters: ["lat": latStart, "lng": lngStart], encoding: .JSON)
             .responseJSON { response in
                 switch response.result {

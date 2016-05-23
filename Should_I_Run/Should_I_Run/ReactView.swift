@@ -12,8 +12,8 @@ import SwiftyJSON
 
 class ReactView: UIView {
     
-//    let rootView: RCTRootView = RCTRootView(bundleURL: NSBundle.mainBundle().URLForResource("main", withExtension: "jsbundle"),
-    let rootView: RCTRootView = RCTRootView(bundleURL: NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
+    let rootView: RCTRootView = RCTRootView(bundleURL: NSBundle.mainBundle().URLForResource("main", withExtension: "jsbundle"),
+//    let rootView: RCTRootView = RCTRootView(bundleURL: NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
 
                                         moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
 

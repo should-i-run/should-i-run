@@ -20,6 +20,12 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     let locationManager = SharedUserLocation
     
     override func viewDidLoad() {
+        let img = UIImage()
+        self.navigationController?.navigationBar.shadowImage = img
+        self.navigationController?.navigationBar.setBackgroundImage(img, forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
         super.viewDidLoad()
 
         DataHandler.instance.delegate = self

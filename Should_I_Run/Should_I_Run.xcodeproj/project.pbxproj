@@ -22,9 +22,8 @@
 		2599C7831C0CBCA40018DB65 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */; };
 		2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */; };
 		2599C78A1C0CBCA40018DB65 /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */; };
+		25B751351CF35B6D00915ABC /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25B751341CF35B6D00915ABC /* Images-2.xcassets */; };
 		25B8ECA91C275DDD00121C67 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8ECA81C275DDD00121C67 /* Styles.swift */; };
-		25C17CB11CF2E7B8004B96C6 /* React.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C17CB01CF2E7B8004B96C6 /* React.framework */; };
-		25C17CB21CF2E7B8004B96C6 /* React.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25C17CB01CF2E7B8004B96C6 /* React.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43EBCA5FD5058824FA8081FA /* Pods_Should_I_Run.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FDD0006E0A7192974E9827 /* Pods_Should_I_Run.framework */; };
 		FEF07E7B1C2C502300A73364 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF07E7A1C2C502300A73364 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -53,7 +52,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				25C17CB21CF2E7B8004B96C6 /* React.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,11 +83,10 @@
 		2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = ../UserLocationManager.swift; sourceTree = "<group>"; };
 		2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkingDirectionsManager.swift; path = ../WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		2599C78C1C0CBD200018DB65 /* Should_I_Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should_I_Run-Bridging-Header.h"; sourceTree = "<group>"; };
+		25B751341CF35B6D00915ABC /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		25B8ECA81C275DDD00121C67 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		25C17CB01CF2E7B8004B96C6 /* React.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = React.framework; path = "/Users/rogergoldfinger/Library/Developer/Xcode/DerivedData/Should_I_Run-fsyaiknrclqlufdunhdsctowfbtw/Build/Products/Release-iphonesimulator/React/React.framework"; sourceTree = "<absolute>"; };
 		88E7FA33EF4E8ABF1CB8F04B /* Pods-Should_I_Run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Should_I_Run.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Should_I_Run/Pods-Should_I_Run.release.xcconfig"; sourceTree = "<group>"; };
 		CBFF4E50CB431A9A95744220 /* Pods-Should_I_Run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Should_I_Run.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Should_I_Run/Pods-Should_I_Run.debug.xcconfig"; sourceTree = "<group>"; };
-		EEDDB5DF0AFA58D9F03C185C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF07E7A1C2C502300A73364 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -99,7 +96,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEF07E7B1C2C502300A73364 /* MapKit.framework in Frameworks */,
-				25C17CB11CF2E7B8004B96C6 /* React.framework in Frameworks */,
 				43EBCA5FD5058824FA8081FA /* Pods_Should_I_Run.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,7 +120,6 @@
 		2599C6FA1C0CBBA80018DB65 = {
 			isa = PBXGroup;
 			children = (
-				25C17CB01CF2E7B8004B96C6 /* React.framework */,
 				2599C7051C0CBBA90018DB65 /* Should_I_Run */,
 				2599C71A1C0CBBA90018DB65 /* Should_I_RunTests */,
 				2599C7251C0CBBA90018DB65 /* Should_I_RunUITests */,
@@ -147,6 +142,7 @@
 		2599C7051C0CBBA90018DB65 /* Should_I_Run */ = {
 			isa = PBXGroup;
 			children = (
+				25B751341CF35B6D00915ABC /* Images-2.xcassets */,
 				2599C7341C0CBCA40018DB65 /* Base.lproj */,
 				2599C73F1C0CBCA40018DB65 /* Helpers */,
 				2599C74A1C0CBCA40018DB65 /* Data */,
@@ -215,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				FEF07E7A1C2C502300A73364 /* MapKit.framework */,
-				EEDDB5DF0AFA58D9F03C185C /* Pods.framework */,
 				09FDD0006E0A7192974E9827 /* Pods_Should_I_Run.framework */,
 			);
 			name = Frameworks;
@@ -345,6 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25B751351CF35B6D00915ABC /* Images-2.xcassets in Resources */,
 				2599C7661C0CBCA40018DB65 /* Main.storyboard in Resources */,
 				2599C7651C0CBCA40018DB65 /* LaunchScreen.storyboard in Resources */,
 			);

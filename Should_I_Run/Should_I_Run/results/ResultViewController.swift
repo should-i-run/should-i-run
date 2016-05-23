@@ -8,14 +8,12 @@
 
 import UIKit
 import MapKit
+import SwiftyJSON
 
 class ResultViewController: UIViewController, DataHandlerDelegate {
-
-    var data:JSON
     
     @IBOutlet weak var stationsContainer: ReactView!
-
-    var updateResultTimer : NSTimer = NSTimer()
+    
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let locationManager = SharedUserLocation
@@ -38,8 +36,8 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
 //        self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: #selector(ResultViewController.updateWalkingDistance(_:)), userInfo: nil, repeats: true)
     }
     
-    func render() {
-        self.stationsContainer.updateData(self.data)
+    func render(data: JSON) {
+        self.stationsContainer.updateData(data)
     }
     
 //    func updateWalkingDistance(){
@@ -47,8 +45,11 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
 //    }
     
     func handleDataSuccess(data: JSON) {
-        self.data = data
-        self.render()
+        self.render(data)
+    }
+    
+    func handleError(error: String) {
+        print(error)
     }
 }
 

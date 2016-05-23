@@ -1,14 +1,14 @@
 PODS:
-  - Alamofire (3.3.1)
-  - React/Core (0.23.1)
-  - React/RCTImage (0.23.1):
+  - Alamofire (3.4.0)
+  - React/Core (0.25.1)
+  - React/RCTImage (0.25.1):
     - React/Core
     - React/RCTNetwork
-  - React/RCTNetwork (0.23.1):
+  - React/RCTNetwork (0.25.1):
     - React/Core
-  - React/RCTText (0.23.1):
+  - React/RCTText (0.25.1):
     - React/Core
-  - React/RCTWebSocket (0.23.1):
+  - React/RCTWebSocket (0.25.1):
     - React/Core
   - SwiftyJSON (2.3.2)
 
@@ -33,8 +33,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  React: 0bc1e9a6369dc610ff0b29415ed0cab5229614f5
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  React: b35b2b2e07273da1f7266ab2975e0d1033bd913d
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 1f37fe6b507ad131f3ada5b3a0689de3f3a2e108
+
+COCOAPODS: 1.0.0

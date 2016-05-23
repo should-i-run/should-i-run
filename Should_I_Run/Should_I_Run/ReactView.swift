@@ -8,6 +8,7 @@
 
 import UIKit
 import React
+import SwiftyJSON
 
 class ReactView: UIView {
     
@@ -27,7 +28,7 @@ class ReactView: UIView {
         rootView.backgroundColor = globalBackgroundColor
     }
 
-    func updateData(data: [NSObject: AnyObject]) {
-        rootView.appProperties = data
+    func updateData(data: JSON) {
+        rootView.appProperties = ["data": data.object]
     }
 }

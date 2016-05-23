@@ -8,19 +8,19 @@
 import UIKit
 import MapKit
 import Foundation
+import SwiftyJSON
 
 let walkingSpeed = 80 //meters per minute
 let runningSpeed = 200 //meters per minute
 
 protocol DataHandlerDelegate {
-    func handleDataSuccess()
-    func handleError(_: String)
+    func handleDataSuccess(_: JSON)
+    func handleError(error: String)
 }
 
 class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegate {
     let locationManager = SharedUserLocation
     var walkingDirectionsManager = SharedWalkingDirectionsManager
-    var walkingDistanceQueue = [Route]()
     var internetReachability: Reachability = Reachability.reachabilityForInternetConnection()
     static var apiHandler = apiController()
     
@@ -45,7 +45,6 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     
     func loadTrip() {
         self.cancelled = false
-        self.locationName = name
         let networkStatus = self.internetReachability.currentReachabilityStatus()
         if (networkStatus == NOT_REACHABLE ) {
             self.handleError("Sorry, no internet access")
@@ -67,7 +66,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     
     
     func receiveLocation(location2d: CLLocationCoordinate2D) {
-        apiController.instance.fetchData(latStart: Float(location2d.latitude), lngStart: self.Float(location2d.longitude), success: self.receiveData, fail: self.handleError)
+        apiController.instance.fetchData(Float(location2d.latitude), lngStart: Float(location2d.longitude), success: self.receiveData, fail: self.handleError)
         if self.locationObserver != nil {
             self.notificationCenter.removeObserver(self.locationObserver!)
         }
@@ -79,8 +78,9 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
 
     
     func receiveData(results: JSON)  {
-        self.data = results
-        self.handleDone()
+        if self.cancelled != true {
+            self.delegate!.handleDataSuccess(results)
+        }
     }
     
     // getting walking distance for each route
@@ -105,7 +105,7 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
 //        }
 //    }
 //    
-//    func handleWalkingDistance(distance: Int){
+    func handleWalkingDistance(distance: Int){
 //        if let temp = self.currentWalkingRoute {
 //            // iterate through each results route, and if the station matches, add the distance and times to the route
 //            self.resultsRoutes.forEach({ (route) -> () in
@@ -123,8 +123,8 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
 //            })
 //        }
 //        self.queuer()
-//    }
-//    
+    }
+//
 //    func updateWalkingDistances() {
 //        // In the rare event that we don't have a location yet, lets just wait until the next time walking distance is updated
 //        if self.locationManager.currentLocation2d == nil {
@@ -137,11 +137,5 @@ class DataHandler: NSObject, WalkingDirectionsDelegate, CLLocationManagerDelegat
     
     func handleError(errorMessage: String) {
         self.delegate!.handleError(errorMessage)
-    }
-    
-    func handleDone() {
-        if self.cancelled != true {
-            self.delegate!.handleDataSuccess(data)
-        }
     }
 }

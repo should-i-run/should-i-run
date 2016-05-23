@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/rogergoldfinger/coding/should-i-run/bart_client/Should_I_Run/BartClient.xcodeproj">
+      location = "group:/Users/rogergoldfinger/coding/should-i-run/bart_client/Should_I_Run/Should_I_Run.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Should_I_Run/Should_I_Run.xcodeproj">
    </FileRef>
 </Workspace>

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2552CDBC1CB9ED4D0039FEF2 /* ReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */; };
 		2560D6DD1C0D1B77009CB756 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560D6DC1C0D1B77009CB756 /* Reachability.m */; };
-		2569CB9A1C1E144200E10897 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2569CB991C1E144200E10897 /* Images-2.xcassets */; };
 		2599C7071C0CBBA90018DB65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7061C0CBBA90018DB65 /* AppDelegate.swift */; };
 		2599C71C1C0CBBA90018DB65 /* Should_I_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C71B1C0CBBA90018DB65 /* Should_I_RunTests.swift */; };
 		2599C7271C0CBBA90018DB65 /* Should_I_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7261C0CBBA90018DB65 /* Should_I_RunUITests.swift */; };
@@ -24,7 +23,9 @@
 		2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */; };
 		2599C78A1C0CBCA40018DB65 /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */; };
 		25B8ECA91C275DDD00121C67 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8ECA81C275DDD00121C67 /* Styles.swift */; };
-		B51C47266A41BC47920155F7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDDB5DF0AFA58D9F03C185C /* Pods.framework */; };
+		25C17CB11CF2E7B8004B96C6 /* React.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C17CB01CF2E7B8004B96C6 /* React.framework */; };
+		25C17CB21CF2E7B8004B96C6 /* React.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25C17CB01CF2E7B8004B96C6 /* React.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		43EBCA5FD5058824FA8081FA /* Pods_Should_I_Run.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09FDD0006E0A7192974E9827 /* Pods_Should_I_Run.framework */; };
 		FEF07E7B1C2C502300A73364 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF07E7A1C2C502300A73364 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,18 +46,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		25C17CB31CF2E7B8004B96C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				25C17CB21CF2E7B8004B96C6 /* React.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		09FDD0006E0A7192974E9827 /* Pods_Should_I_Run.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Should_I_Run.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactView.swift; sourceTree = "<group>"; };
 		2560D6DB1C0D1B77009CB756 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2560D6DC1C0D1B77009CB756 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		2569CB991C1E144200E10897 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
-		2599C7031C0CBBA90018DB65 /* BartClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BartClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2599C7031C0CBBA90018DB65 /* Should_I_Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Should_I_Run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599C7061C0CBBA90018DB65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2599C7121C0CBBA90018DB65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2599C7171C0CBBA90018DB65 /* BartClient.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BartClient.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2599C7171C0CBBA90018DB65 /* Should_I_Run.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Should_I_Run.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599C71B1C0CBBA90018DB65 /* Should_I_RunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Should_I_RunTests.swift; sourceTree = "<group>"; };
 		2599C71D1C0CBBA90018DB65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2599C7221C0CBBA90018DB65 /* BartClient.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BartClient.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2599C7221C0CBBA90018DB65 /* Should_I_Run.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Should_I_Run.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599C7261C0CBBA90018DB65 /* Should_I_RunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Should_I_RunUITests.swift; sourceTree = "<group>"; };
 		2599C7281C0CBBA90018DB65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2599C7361C0CBCA40018DB65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,8 +86,9 @@
 		2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkingDirectionsManager.swift; path = ../WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		2599C78C1C0CBD200018DB65 /* Should_I_Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should_I_Run-Bridging-Header.h"; sourceTree = "<group>"; };
 		25B8ECA81C275DDD00121C67 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		74BF1B1E16D8725F3206C97E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		DE267F3A1510D0B85BB6D2BD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		25C17CB01CF2E7B8004B96C6 /* React.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = React.framework; path = "/Users/rogergoldfinger/Library/Developer/Xcode/DerivedData/Should_I_Run-fsyaiknrclqlufdunhdsctowfbtw/Build/Products/Release-iphonesimulator/React/React.framework"; sourceTree = "<absolute>"; };
+		88E7FA33EF4E8ABF1CB8F04B /* Pods-Should_I_Run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Should_I_Run.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Should_I_Run/Pods-Should_I_Run.release.xcconfig"; sourceTree = "<group>"; };
+		CBFF4E50CB431A9A95744220 /* Pods-Should_I_Run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Should_I_Run.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Should_I_Run/Pods-Should_I_Run.debug.xcconfig"; sourceTree = "<group>"; };
 		EEDDB5DF0AFA58D9F03C185C /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEF07E7A1C2C502300A73364 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -83,7 +99,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEF07E7B1C2C502300A73364 /* MapKit.framework in Frameworks */,
-				B51C47266A41BC47920155F7 /* Pods.framework in Frameworks */,
+				25C17CB11CF2E7B8004B96C6 /* React.framework in Frameworks */,
+				43EBCA5FD5058824FA8081FA /* Pods_Should_I_Run.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +124,7 @@
 		2599C6FA1C0CBBA80018DB65 = {
 			isa = PBXGroup;
 			children = (
+				25C17CB01CF2E7B8004B96C6 /* React.framework */,
 				2599C7051C0CBBA90018DB65 /* Should_I_Run */,
 				2599C71A1C0CBBA90018DB65 /* Should_I_RunTests */,
 				2599C7251C0CBBA90018DB65 /* Should_I_RunUITests */,
@@ -119,9 +137,9 @@
 		2599C7041C0CBBA90018DB65 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2599C7031C0CBBA90018DB65 /* BartClient.app */,
-				2599C7171C0CBBA90018DB65 /* BartClient.xctest */,
-				2599C7221C0CBBA90018DB65 /* BartClient.xctest */,
+				2599C7031C0CBBA90018DB65 /* Should_I_Run.app */,
+				2599C7171C0CBBA90018DB65 /* Should_I_Run.xctest */,
+				2599C7221C0CBBA90018DB65 /* Should_I_Run.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,7 +154,6 @@
 				2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */,
 				2599C7551C0CBCA40018DB65 /* ResultViewController.swift */,
 				2599C7121C0CBBA90018DB65 /* Info.plist */,
-				2569CB991C1E144200E10897 /* Images-2.xcassets */,
 				2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */,
 			);
 			path = Should_I_Run;
@@ -199,6 +216,7 @@
 			children = (
 				FEF07E7A1C2C502300A73364 /* MapKit.framework */,
 				EEDDB5DF0AFA58D9F03C185C /* Pods.framework */,
+				09FDD0006E0A7192974E9827 /* Pods_Should_I_Run.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,8 +224,8 @@
 		F460B1E1242E27F568CE4B64 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DE267F3A1510D0B85BB6D2BD /* Pods.debug.xcconfig */,
-				74BF1B1E16D8725F3206C97E /* Pods.release.xcconfig */,
+				CBFF4E50CB431A9A95744220 /* Pods-Should_I_Run.debug.xcconfig */,
+				88E7FA33EF4E8ABF1CB8F04B /* Pods-Should_I_Run.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -215,30 +233,31 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2599C7021C0CBBA90018DB65 /* BartClient */ = {
+		2599C7021C0CBBA90018DB65 /* Should_I_Run */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2599C72B1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "BartClient" */;
+			buildConfigurationList = 2599C72B1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "Should_I_Run" */;
 			buildPhases = (
-				D1B763682B47A48A8C63E799 /* Check Pods Manifest.lock */,
+				D1B763682B47A48A8C63E799 /* 📦 Check Pods Manifest.lock */,
 				2599C6FF1C0CBBA90018DB65 /* Sources */,
 				2599C7001C0CBBA90018DB65 /* Frameworks */,
 				2599C7011C0CBBA90018DB65 /* Resources */,
-				9619477BE73745B779F852D8 /* Embed Pods Frameworks */,
-				A136335409B84A1770DA32A0 /* Copy Pods Resources */,
+				9619477BE73745B779F852D8 /* 📦 Embed Pods Frameworks */,
+				A136335409B84A1770DA32A0 /* 📦 Copy Pods Resources */,
 				2552CDBE1CBA764D0039FEF2 /* ShellScript */,
+				25C17CB31CF2E7B8004B96C6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BartClient;
+			name = Should_I_Run;
 			productName = Should_I_Run;
-			productReference = 2599C7031C0CBBA90018DB65 /* BartClient.app */;
+			productReference = 2599C7031C0CBBA90018DB65 /* Should_I_Run.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2599C7161C0CBBA90018DB65 /* BartClientTests */ = {
+		2599C7161C0CBBA90018DB65 /* Should_I_RunTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2599C72E1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "BartClientTests" */;
+			buildConfigurationList = 2599C72E1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "Should_I_RunTests" */;
 			buildPhases = (
 				2599C7131C0CBBA90018DB65 /* Sources */,
 				2599C7141C0CBBA90018DB65 /* Frameworks */,
@@ -249,14 +268,14 @@
 			dependencies = (
 				2599C7191C0CBBA90018DB65 /* PBXTargetDependency */,
 			);
-			name = BartClientTests;
+			name = Should_I_RunTests;
 			productName = Should_I_RunTests;
-			productReference = 2599C7171C0CBBA90018DB65 /* BartClient.xctest */;
+			productReference = 2599C7171C0CBBA90018DB65 /* Should_I_Run.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2599C7211C0CBBA90018DB65 /* BartClientUITests */ = {
+		2599C7211C0CBBA90018DB65 /* Should_I_RunUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2599C7311C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "BartClientUITests" */;
+			buildConfigurationList = 2599C7311C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "Should_I_RunUITests" */;
 			buildPhases = (
 				2599C71E1C0CBBA90018DB65 /* Sources */,
 				2599C71F1C0CBBA90018DB65 /* Frameworks */,
@@ -267,9 +286,9 @@
 			dependencies = (
 				2599C7241C0CBBA90018DB65 /* PBXTargetDependency */,
 			);
-			name = BartClientUITests;
+			name = Should_I_RunUITests;
 			productName = Should_I_RunUITests;
-			productReference = 2599C7221C0CBBA90018DB65 /* BartClient.xctest */;
+			productReference = 2599C7221C0CBBA90018DB65 /* Should_I_Run.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -301,7 +320,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2599C6FE1C0CBBA90018DB65 /* Build configuration list for PBXProject "BartClient" */;
+			buildConfigurationList = 2599C6FE1C0CBBA90018DB65 /* Build configuration list for PBXProject "Should_I_Run" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -314,9 +333,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2599C7021C0CBBA90018DB65 /* BartClient */,
-				2599C7161C0CBBA90018DB65 /* BartClientTests */,
-				2599C7211C0CBBA90018DB65 /* BartClientUITests */,
+				2599C7021C0CBBA90018DB65 /* Should_I_Run */,
+				2599C7161C0CBBA90018DB65 /* Should_I_RunTests */,
+				2599C7211C0CBBA90018DB65 /* Should_I_RunUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -328,7 +347,6 @@
 			files = (
 				2599C7661C0CBCA40018DB65 /* Main.storyboard in Resources */,
 				2599C7651C0CBCA40018DB65 /* LaunchScreen.storyboard in Resources */,
-				2569CB9A1C1E144200E10897 /* Images-2.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,44 +380,44 @@
 			shellPath = /bin/sh;
 			shellScript = "../node_modules/react-native/packager/react-native-xcode.sh";
 		};
-		9619477BE73745B779F852D8 /* Embed Pods Frameworks */ = {
+		9619477BE73745B779F852D8 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Should_I_Run/Pods-Should_I_Run-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A136335409B84A1770DA32A0 /* Copy Pods Resources */ = {
+		A136335409B84A1770DA32A0 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Should_I_Run/Pods-Should_I_Run-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D1B763682B47A48A8C63E799 /* Check Pods Manifest.lock */ = {
+		D1B763682B47A48A8C63E799 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,12 +468,12 @@
 /* Begin PBXTargetDependency section */
 		2599C7191C0CBBA90018DB65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2599C7021C0CBBA90018DB65 /* BartClient */;
+			target = 2599C7021C0CBBA90018DB65 /* Should_I_Run */;
 			targetProxy = 2599C7181C0CBBA90018DB65 /* PBXContainerItemProxy */;
 		};
 		2599C7241C0CBBA90018DB65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2599C7021C0CBBA90018DB65 /* BartClient */;
+			target = 2599C7021C0CBBA90018DB65 /* Should_I_Run */;
 			targetProxy = 2599C7231C0CBBA90018DB65 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -563,7 +581,7 @@
 		};
 		2599C72C1C0CBBA90018DB65 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE267F3A1510D0B85BB6D2BD /* Pods.debug.xcconfig */;
+			baseConfigurationReference = CBFF4E50CB431A9A95744220 /* Pods-Should_I_Run.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -573,7 +591,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hr.Should-I-Run";
-				PRODUCT_NAME = BartClient;
+				PRODUCT_NAME = Should_I_Run;
 				SWIFT_OBJC_BRIDGING_HEADER = "Should_I_Run/Helpers/Should_I_Run-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -581,7 +599,7 @@
 		};
 		2599C72D1C0CBBA90018DB65 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74BF1B1E16D8725F3206C97E /* Pods.release.xcconfig */;
+			baseConfigurationReference = 88E7FA33EF4E8ABF1CB8F04B /* Pods-Should_I_Run.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -591,7 +609,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hr.Should-I-Run";
-				PRODUCT_NAME = BartClient;
+				PRODUCT_NAME = Should_I_Run;
 				SWIFT_OBJC_BRIDGING_HEADER = "Should_I_Run/Helpers/Should_I_Run-Bridging-Header.h";
 			};
 			name = Release;
@@ -603,8 +621,8 @@
 				INFOPLIST_FILE = Should_I_RunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.should-i-run.Should-I-RunTests";
-				PRODUCT_NAME = BartClient;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BartClient.app/BartClient";
+				PRODUCT_NAME = Should_I_Run;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Should_I_Run.app/Should_I_Run";
 			};
 			name = Debug;
 		};
@@ -615,8 +633,8 @@
 				INFOPLIST_FILE = Should_I_RunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.should-i-run.Should-I-RunTests";
-				PRODUCT_NAME = BartClient;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BartClient.app/BartClient";
+				PRODUCT_NAME = Should_I_Run;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Should_I_Run.app/Should_I_Run";
 			};
 			name = Release;
 		};
@@ -626,7 +644,7 @@
 				INFOPLIST_FILE = Should_I_RunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.should-i-run.Should-I-RunUITests";
-				PRODUCT_NAME = BartClient;
+				PRODUCT_NAME = Should_I_Run;
 				TEST_TARGET_NAME = Should_I_Run;
 				USES_XCTRUNNER = YES;
 			};
@@ -638,7 +656,7 @@
 				INFOPLIST_FILE = Should_I_RunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.should-i-run.Should-I-RunUITests";
-				PRODUCT_NAME = BartClient;
+				PRODUCT_NAME = Should_I_Run;
 				TEST_TARGET_NAME = Should_I_Run;
 				USES_XCTRUNNER = YES;
 			};
@@ -647,7 +665,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2599C6FE1C0CBBA90018DB65 /* Build configuration list for PBXProject "BartClient" */ = {
+		2599C6FE1C0CBBA90018DB65 /* Build configuration list for PBXProject "Should_I_Run" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2599C7291C0CBBA90018DB65 /* Debug */,
@@ -656,7 +674,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2599C72B1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "BartClient" */ = {
+		2599C72B1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "Should_I_Run" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2599C72C1C0CBBA90018DB65 /* Debug */,
@@ -665,7 +683,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2599C72E1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "BartClientTests" */ = {
+		2599C72E1C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "Should_I_RunTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2599C72F1C0CBBA90018DB65 /* Debug */,
@@ -674,7 +692,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2599C7311C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "BartClientUITests" */ = {
+		2599C7311C0CBBA90018DB65 /* Build configuration list for PBXNativeTarget "Should_I_RunUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2599C7321C0CBBA90018DB65 /* Debug */,

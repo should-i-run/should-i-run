@@ -1,5 +1,6 @@
 'use strict';
-
+// let walkingSpeed = 80 //meters per minute
+const runningSpeed = 200 //meters per minute
 import React, {
   Text,
   View
@@ -72,29 +73,36 @@ var styles = React.StyleSheet.create({
   walk: {
     color: '#6FD57F',
   },
+  direction: {
+    ...genericText,
+    width: 500,
+    fontWeight: '200',
+    backgroundColor: '#555',
+    padding: 5,
+    marginTop: 10,
+    borderRadius: 2,
+  },
 });
+
+const getRunningTime = (distance) => {
+  return Math.ceil(distance / runningSpeed);
+}
 
 export default class Station extends React.Component {
   static propTypes = {
-    station: React.PropTypes.object,
+    station: React.PropTypes.object.isRequired,
+    walking: React.PropTypes.object,
   }
 
-  // "originStationName": self.originStationName,
-  // "lineName": self.lineName,
-  // "eolStationName": self.eolStationName,
-  // "agency": self.agency,
-  // "departureTime": self.departureTime ?? "",
-  // "lineCode": self.lineCode ?? "",
-  // "distanceToStation": self.distanceToStation ?? "",
-  // "shouldRun": self.shouldRun,
   renderDeparture(departure, i) {
-    // const {departureTime, shouldRun} = departure;
-    let labelStyle = styles.walk;
-    // if (shouldRun) {
-    //   labelStyle = departureTime >= this.props.station.runningTime ?
-    //     styles.run : styles.missed;
-    // }
+    const {distance, time} = this.props.walking || {};
     const departureTime = departure === 'Leaving' ? 0 : departure;
+    let labelStyle = styles.missed;
+    if (departureTime >= time) {
+      labelStyle = styles.walk;
+    } else if (departureTime >= getRunningTime(distance)) {
+      labelStyle = styles.run;
+    }
     return (
       <View key={i} style={styles.departure}>
         <Text style={[styles.departureTime, labelStyle]}>
@@ -104,22 +112,18 @@ export default class Station extends React.Component {
     );
   }
 
-  // self.lineName = first.lineName
-  // self.lineCode = first.lineCode
-  // self.eolStationName = first.eolStationName
-  // self.departures = departures
   renderLine(line, i) {
-    const {code, departures} = line;
-    // const currentDepartures = departures.filter(d => d.departureTime >= 0);
+    const {destination, estimates} = line;
+    const times = estimates.map(e => e.minutes);
     return (
       <View key={i} style={styles.line}>
         <Text
           numberOfLines={2}
           style={styles.lineName}>
-          {code}
+          {destination}
         </Text>
         <View style={styles.depTimeContainer}>
-          {departures.map(this.renderDeparture.bind(this))}
+          {times.map(this.renderDeparture.bind(this))}
         </View>
       </View>
     );
@@ -127,23 +131,29 @@ export default class Station extends React.Component {
 
   render() {
     const s = this.props.station;
+    const {distance, time} = this.props.walking || {};
+    const north = s.departures.filter(d => d.estimates[0].direction === 'North');
+    const south = s.departures.filter(d => d.estimates[0].direction === 'South');
     return (
       <View style={styles.station}>
         <Text style={styles.stationName}>{s.name}</Text>
         <View style={styles.stationMetadataContainer}>
           <Text style={styles.stationMetadata}>
-            {s.distanceToStation} m
+            {distance} m
           </Text>
           <Text style={styles.stationMetadata}>
-            <Text>{s.runningTime} </Text>
+            <Text>{distance ? getRunningTime(distance) : ''} </Text>
             running
           </Text>
           <Text style={styles.stationMetadata}>
-            <Text>{s.walkingTime} </Text>
+            <Text>{time} </Text>
             walking
           </Text>
         </View>
-        {s.departures.map(this.renderLine.bind(this))}
+        <Text style={styles.direction}>North</Text>
+        {north.map(this.renderLine.bind(this))}
+        <Text style={styles.direction}>South</Text>
+        {south.map(this.renderLine.bind(this))}
       </View>
     );
   }

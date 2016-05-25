@@ -11,7 +11,7 @@ import MapKit
 let SharedWalkingDirectionsManager = WalkingDirectionsManager()
 
 protocol WalkingDirectionsDelegate {
-    func handleWalkingDistance(distance:Int)
+    func handleWalkingDistance(stationCode:String, distance:Int, time:Int)
 }
 
 class WalkingDirectionsManager: NSObject {
@@ -27,7 +27,7 @@ class WalkingDirectionsManager: NSObject {
         return mapItem
     }
     
-    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D) {
+    func getWalkingDirectionsBetween(startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D, stationCode: String) {
         let walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.Walking
         
@@ -37,12 +37,10 @@ class WalkingDirectionsManager: NSObject {
         walkingRouteRequest.destination = endMapItem
         
         let walkingRouteDirections = MKDirections(request: walkingRouteRequest)
-        walkingRouteDirections.calculateDirectionsWithCompletionHandler(getDistanceFromDirections)
-    }
-    
-    func getDistanceFromDirections(response:MKDirectionsResponse?, error: NSError?) -> Void {
-        if let temp = response?.routes[0].distance {
-            self.delegate?.handleWalkingDistance(Int(temp))
+        walkingRouteDirections.calculateDirectionsWithCompletionHandler { (response: MKDirectionsResponse?, error: NSError?) in
+            if let distance = response?.routes[0].distance, time = response?.routes[0].expectedTravelTime {
+                self.delegate?.handleWalkingDistance(stationCode, distance: Int(distance), time: Int(time / 60))
+            }
         }
     }
 }

@@ -16,15 +16,15 @@ var styles = React.StyleSheet.create({
 
 class SimpleApp extends React.Component {
   static propTypes = {
-    stations: React.PropTypes.array,
-    routes: React.PropTypes.array,
     data: React.PropTypes.array,
+    walkingData: React.PropTypes.object,
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.props.data && this.props.data.map((s, i) => <Station key={i} station={s} />)}
+        {this.props.data && this.props.data.map((s, i) =>
+          <Station key={i} station={s} walking={this.props.walkingData[s.abbr]}/>)}
       </ScrollView>
     )
   }

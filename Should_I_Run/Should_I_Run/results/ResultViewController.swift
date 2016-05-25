@@ -10,14 +10,18 @@ import UIKit
 import MapKit
 import SwiftyJSON
 
-class ResultViewController: UIViewController, DataHandlerDelegate {
+class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirectionsDelegate {
+    var data:JSON?
+    var walkingData = Dictionary<String, AnyObject>()
     @IBOutlet weak var stationsContainer: ReactView!
     
     var updateResultTimer = NSTimer()
+    var walkingDirectionsObserver:NSObjectProtocol?
     
     let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     let locationManager = SharedUserLocation
+    let walkingDirectionsManager = SharedWalkingDirectionsManager
     
     override func viewDidLoad() {
         let img = UIImage()
@@ -34,30 +38,49 @@ class ResultViewController: UIViewController, DataHandlerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        
-//        self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) {_ in 
-//            if let _: CLLocationCoordinate2D = self.locationManager.currentLocation2d {
-//                self.updateWalkingDistance()
-//            }
-//        }
         self.updateResultTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: #selector(ResultViewController.updateBart(_:)), userInfo: nil, repeats: true)
     }
-
     
     func updateBart(timer: NSTimer?) {
         DataHandler.instance.loadTrip()
     }
-    
-//    func updateWalkingDistance(){
-//        DataHandler.instance.updateWalkingDistances()
-//    }
 
     func handleDataSuccess(data: JSON) {
-        self.render(data)
+        self.data = data
+        self.render()
+        if ((self.walkingDirectionsObserver) == nil) {
+            self.setupWalkingDirections()
+        }
     }
     
-    func render(data: JSON) {
-        self.stationsContainer.updateData(data)
+    func setupWalkingDirections() {
+        self.walkingDirectionsManager.delegate = self
+        self.walkingDirectionsObserver = self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) {_ in
+            if let _: CLLocationCoordinate2D = self.locationManager.currentLocation2d {
+                self.updateWalkingDistances()
+            }
+        }
+        self.updateWalkingDistances()
+    }
+    
+    func updateWalkingDistances() {
+        let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
+        for (_, subJson):(String, JSON) in self.data! {
+            let lat = subJson["gtfs_latitude"].doubleValue
+            let lng = subJson["gtfs_longitude"].doubleValue
+            let code = subJson["abbr"].stringValue
+            let endCoord = CLLocationCoordinate2DMake(CLLocationDegrees(lat), CLLocationDegrees(lng))
+            self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: endCoord, stationCode: code)
+        }
+    }
+    
+    func handleWalkingDistance(stationCode: String, distance: Int, time: Int) {
+        self.walkingData[stationCode] = ["distance": distance, "time": time]
+        self.render()
+    }
+    
+    func render() {
+        self.stationsContainer.updateData(self.data!.object, walkingData: self.walkingData)
     }
     
     func handleError(error: String) {

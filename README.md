@@ -17,3 +17,8 @@
 ### Build for phone
 1. Change where the react bundle comes from in ReactView.
 2. Product > Scheme > Edit Scheme, change to Release from Debug
+
+
+### Updating React Native
+`npm install --save react-native@[current version]`
+`react-native upgrade`

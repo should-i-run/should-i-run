@@ -1,14 +1,42 @@
-xcdebugger
+# OSX
+#
 .DS_Store
-ShouldIRun.xcodeproj/project.xcworkspace/xcuserdata/rgoldfinger.xcuserdatad/UserInterfaceState.xcuserstate
-ShouldIRun.xcodeproj/xcuserdata/rgoldfinger.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-*.orig
-ShouldIRun.xcodeproj/project.xcworkspace/xcshareddata/
-*.playground
-.xcuserdatad
-xcuserdata/
-Pods/
-.xctimeline
-
 icon_psd
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IJ
+#
+*.iml
+.idea
+.gradle
+local.properties
+
+# node.js
+#
 node_modules/
+npm-debug.log
+
+# BUCK
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore

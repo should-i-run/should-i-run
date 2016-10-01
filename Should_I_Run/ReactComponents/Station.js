@@ -11,14 +11,50 @@ import {
 const runningSpeed = 200 //meters per minute
 
 const genericText = {
-  color: '#EEE',
+  color: '#E6E6E6',
   fontSize: 18,
-  fontWeight: '400',
+  fontWeight: '200',
 };
 
 var styles = StyleSheet.create({
   genericText: {
     ...genericText,
+  },
+  stationName: {
+    ...genericText,
+    fontSize: 26,
+  },
+  stationMetadata: {
+    ...genericText,
+    fontSize: 14,
+    marginRight: 15,
+  },
+  departureTime: {
+    ...genericText,
+    width: 25,
+    textAlign: 'right',
+    fontWeight: '400',
+  },
+  lineName: {
+    ...genericText,
+    width: 120,
+  },
+  direction: {
+    backgroundColor: '#344453',
+    padding: 5,
+    marginTop: 10,
+    borderRadius: 2,
+  },
+  directionText: {
+    ...genericText,
+    fontSize: 14,
+    color: '#AAA',
+    marginBottom: -5,
+  },
+  stationNameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   station: {
     flex: 1,
@@ -26,21 +62,10 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     padding: 10,
   },
-  stationName: {
-    ...genericText,
-    fontSize: 24,
-    fontWeight: '400',
-  },
   stationMetadataContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
-  },
-  stationMetadata: {
-    ...genericText,
-    fontSize: 18,
-    fontWeight: '200',
-    marginRight: 15,
+    // marginTop: 5,
   },
   departure: {
     marginLeft: 5,
@@ -51,22 +76,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  lineName: {
-    ...genericText,
-    width: 120,
-    fontWeight: '200',
-  },
   depTimeContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-  },
-  departureTime: {
-    ...genericText,
-    fontWeight: '800',
-    marginLeft: 15,
-    width: 25,
-    textAlign: 'right',
+    justifyContent: 'space-around',
   },
   missed: {
     color: '#999',
@@ -76,15 +89,6 @@ var styles = StyleSheet.create({
   },
   walk: {
     color: '#6FD57F',
-  },
-  direction: {
-    ...genericText,
-    width: 500,
-    fontWeight: '200',
-    backgroundColor: '#555',
-    padding: 5,
-    marginTop: 10,
-    borderRadius: 2,
   },
 });
 
@@ -98,7 +102,16 @@ export default class Station extends React.Component {
     walking: React.PropTypes.object,
   }
 
-  renderDeparture(departure, i) {
+  renderDeparture = (departure, i) => {
+    if (departure === 'blank') {
+      return (
+        <View key={i} style={styles.departure}>
+          <Text style={[styles.departureTime, labelStyle]}>
+            {' '}
+          </Text>
+        </View>
+      );
+    }
     const {distance, time} = this.props.walking || {};
     const departureTime = departure === 'Leaving' ? 0 : departure;
     let labelStyle = styles.missed;
@@ -116,9 +129,12 @@ export default class Station extends React.Component {
     );
   }
 
-  renderLine(line, i) {
+  renderLine = (line, i) => {
     const {destination, estimates} = line;
     const times = estimates.map(e => e.minutes);
+    while (times.length < 3) {
+      times.push('blank');
+    }
     return (
       <View key={i} style={styles.line}>
         <Text
@@ -127,7 +143,7 @@ export default class Station extends React.Component {
           {destination}
         </Text>
         <View style={styles.depTimeContainer}>
-          {times.map(this.renderDeparture.bind(this))}
+          {times.map(this.renderDeparture)}
         </View>
       </View>
     );
@@ -141,23 +157,30 @@ export default class Station extends React.Component {
     return (
       <View style={styles.station}>
         <Text style={styles.stationName}>{s.name}</Text>
+
         <View style={styles.stationMetadataContainer}>
           <Text style={styles.stationMetadata}>
-            {distance} m
+            {distance || '...'} m
           </Text>
           <Text style={styles.stationMetadata}>
-            <Text>{distance ? getRunningTime(distance) : ''} </Text>
+            <Text>{distance ? getRunningTime(distance) : '...'} </Text>
             running
           </Text>
           <Text style={styles.stationMetadata}>
-            <Text>{time} </Text>
+            <Text>{time || '...'} </Text>
             walking
           </Text>
         </View>
-        <Text style={styles.direction}>North</Text>
-        {north.map(this.renderLine.bind(this))}
-        <Text style={styles.direction}>South</Text>
-        {south.map(this.renderLine.bind(this))}
+        {!!north.length &&
+          <View style={styles.direction}>
+            <Text style={styles.directionText}>North</Text>
+            {north.map(this.renderLine)}
+          </View>}
+        {!!south.length &&
+          <View style={styles.direction}>
+            <Text style={styles.directionText}>South</Text>
+            {south.map(this.renderLine)}
+          </View>}
       </View>
     );
   }

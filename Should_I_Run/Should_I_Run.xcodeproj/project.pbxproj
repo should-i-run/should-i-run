@@ -19,7 +19,6 @@
 		2599C7731C0CBCA40018DB65 /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C74B1C0CBCA40018DB65 /* ApiController.swift */; };
 		2599C7741C0CBCA40018DB65 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C74C1C0CBCA40018DB65 /* DataHandler.swift */; };
 		2599C77C1C0CBCA40018DB65 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7551C0CBCA40018DB65 /* ResultViewController.swift */; };
-		2599C7831C0CBCA40018DB65 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */; };
 		2599C7891C0CBCA40018DB65 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */; };
 		2599C78A1C0CBCA40018DB65 /* WalkingDirectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */; };
 		25B751351CF35B6D00915ABC /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25B751341CF35B6D00915ABC /* Images-2.xcassets */; };
@@ -79,7 +78,6 @@
 		2599C74B1C0CBCA40018DB65 /* ApiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 		2599C74C1C0CBCA40018DB65 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		2599C7551C0CBCA40018DB65 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultViewController.swift; path = results/ResultViewController.swift; sourceTree = "<group>"; };
-		2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2599C7621C0CBCA40018DB65 /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserLocationManager.swift; path = ../UserLocationManager.swift; sourceTree = "<group>"; };
 		2599C7631C0CBCA40018DB65 /* WalkingDirectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalkingDirectionsManager.swift; path = ../WalkingDirectionsManager.swift; sourceTree = "<group>"; };
 		2599C78C1C0CBD200018DB65 /* Should_I_Run-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Should_I_Run-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				2599C73F1C0CBCA40018DB65 /* Helpers */,
 				2599C74A1C0CBCA40018DB65 /* Data */,
 				2599C7061C0CBBA90018DB65 /* AppDelegate.swift */,
-				2599C75C1C0CBCA40018DB65 /* LoadingViewController.swift */,
 				2599C7551C0CBCA40018DB65 /* ResultViewController.swift */,
 				2599C7121C0CBBA90018DB65 /* Info.plist */,
 				2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */,
@@ -439,7 +436,6 @@
 				2599C7741C0CBCA40018DB65 /* DataHandler.swift in Sources */,
 				2560D6DD1C0D1B77009CB756 /* Reachability.m in Sources */,
 				2599C7731C0CBCA40018DB65 /* ApiController.swift in Sources */,
-				2599C7831C0CBCA40018DB65 /* LoadingViewController.swift in Sources */,
 				2552CDBC1CB9ED4D0039FEF2 /* ReactView.swift in Sources */,
 				2599C7071C0CBBA90018DB65 /* AppDelegate.swift in Sources */,
 				2599C76D1C0CBCA40018DB65 /* ColorHelper.swift in Sources */,

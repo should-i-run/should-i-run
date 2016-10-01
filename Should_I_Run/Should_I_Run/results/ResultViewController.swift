@@ -24,12 +24,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
     let walkingDirectionsManager = SharedWalkingDirectionsManager
     
     override func viewDidLoad() {
-        let img = UIImage()
-        self.navigationController?.navigationBar.shadowImage = img
-        self.navigationController?.navigationBar.setBackgroundImage(img, for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.black
+        
         super.viewDidLoad()
 
         DataHandler.instance.delegate = self

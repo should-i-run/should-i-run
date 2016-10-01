@@ -1,10 +1,14 @@
 'use strict';
+
+import React from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+} from 'react-native';
+
 // let walkingSpeed = 80 //meters per minute
 const runningSpeed = 200 //meters per minute
-import React, {
-  Text,
-  View
-} from 'react-native';
 
 const genericText = {
   color: '#EEE',
@@ -12,7 +16,7 @@ const genericText = {
   fontWeight: '400',
 };
 
-var styles = React.StyleSheet.create({
+var styles = StyleSheet.create({
   genericText: {
     ...genericText,
   },

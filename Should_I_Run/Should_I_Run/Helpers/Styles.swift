@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 //let globalBackgroundColor: UIColor = colorize(0x222222, alpha: 1.0)
-let globalBackgroundColor = UIColor.blackColor()
+let globalBackgroundColor = UIColor.black
 
-let globalNumberStyle = UIFont.monospacedDigitSystemFontOfSize(24, weight: UIFontWeightRegular)
+let globalNumberStyle = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: UIFontWeightRegular)

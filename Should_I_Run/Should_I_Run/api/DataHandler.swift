@@ -12,12 +12,12 @@ import SwiftyJSON
 
 protocol DataHandlerDelegate {
     func handleDataSuccess(_: JSON)
-    func handleError(error: String)
+    func handleError(_ error: String)
 }
 
 class DataHandler: NSObject, CLLocationManagerDelegate {
     let locationManager = SharedUserLocation
-    var internetReachability: Reachability = Reachability.reachabilityForInternetConnection()
+    var internetReachability: Reachability = Reachability.forInternetConnection()
     static var apiHandler = apiController()
     
     var startLatitude = Float()
@@ -26,8 +26,8 @@ class DataHandler: NSObject, CLLocationManagerDelegate {
     var delegate:DataHandlerDelegate?
     
     var locationObserver:AnyObject?
-    let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-    let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    let notificationCenter: NotificationCenter = NotificationCenter.default
+    let mainQueue: OperationQueue = OperationQueue.main
     
     var cancelled = false
     
@@ -49,7 +49,7 @@ class DataHandler: NSObject, CLLocationManagerDelegate {
             if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                 self.receiveLocation(loc2d)
             } else {
-                self.locationObserver = self.notificationCenter.addObserverForName("LocationDidUpdate", object: nil, queue: self.mainQueue) { _ in
+                self.locationObserver = self.notificationCenter.addObserver(forName: NSNotification.Name(rawValue: "LocationDidUpdate"), object: nil, queue: self.mainQueue) { _ in
                     if let loc2d: CLLocationCoordinate2D =  self.locationManager.currentLocation2d {
                         self.receiveLocation(loc2d)
                     }
@@ -58,7 +58,7 @@ class DataHandler: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func receiveLocation(location2d: CLLocationCoordinate2D) {
+    func receiveLocation(_ location2d: CLLocationCoordinate2D) {
         apiController.instance.fetchData(Float(location2d.latitude), lngStart: Float(location2d.longitude), success: self.receiveData, fail: self.handleError)
         if self.locationObserver != nil {
             self.notificationCenter.removeObserver(self.locationObserver!)
@@ -69,13 +69,13 @@ class DataHandler: NSObject, CLLocationManagerDelegate {
         self.cancelled = true
     }
 
-    func receiveData(results: JSON)  {
+    func receiveData(_ results: JSON)  {
         if self.cancelled != true {
             self.delegate!.handleDataSuccess(results)
         }
     }
     
-    func handleError(errorMessage: String) {
+    func handleError(_ errorMessage: String) {
         self.delegate!.handleError(errorMessage)
     }
 }

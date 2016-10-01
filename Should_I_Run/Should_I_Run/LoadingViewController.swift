@@ -10,9 +10,9 @@ import UIKit
 import MapKit
 
 enum NetworkStatusStruct: Int {
-    case NotReachable = 0
-    case ReachableViaWiFi
-    case ReachableViaWWAN
+    case notReachable = 0
+    case reachableViaWiFi
+    case reachableViaWWAN
 }
 
 class LoadingViewController: UIViewController {
@@ -28,7 +28,7 @@ class LoadingViewController: UIViewController {
         self.view.backgroundColor = self.backgroundColor
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         spinner!.stopAnimating()
         super.viewDidDisappear(animated)
     }

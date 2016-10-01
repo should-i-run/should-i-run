@@ -1,13 +1,17 @@
 'use strict';
 
-import React, {
+import React from 'react';
+
+import {
   Text,
-  ScrollView
+  ScrollView,
+  StyleSheet,
+  AppRegistry,
 } from 'react-native';
 
 import Station from './Should_I_Run/ReactComponents/Station.js';
 
-var styles = React.StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
@@ -30,4 +34,4 @@ class SimpleApp extends React.Component {
   }
 }
 
-React.AppRegistry.registerComponent('SimpleApp', () => SimpleApp);
+AppRegistry.registerComponent('SimpleApp', () => SimpleApp);

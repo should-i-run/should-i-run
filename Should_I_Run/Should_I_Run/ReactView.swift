@@ -11,8 +11,8 @@ import React
 import SwiftyJSON
 
 class ReactView: UIView {
-    let rootView: RCTRootView = RCTRootView(bundleURL: NSBundle.mainBundle().URLForResource("main", withExtension: "jsbundle"),
-//    let rootView: RCTRootView = RCTRootView(bundleURL: NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
+    // let rootView: RCTRootView = RCTRootView(bundleURL: Bundle.main.url(forResource: "main", withExtension: "jsbundle"),
+    let rootView: RCTRootView = RCTRootView(bundleURL: URL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
 
                                         moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
 
@@ -27,7 +27,7 @@ class ReactView: UIView {
         rootView.backgroundColor = globalBackgroundColor
     }
 
-    func updateData(data: AnyObject, walkingData: AnyObject) {
+    func updateData(_ data: AnyObject, walkingData: AnyObject) {
         rootView.appProperties = ["data": data, "walkingData": walkingData]
     }
 }

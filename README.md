@@ -19,6 +19,7 @@
 2. Product > Scheme > Edit Scheme, change to Release from Debug
 
 
-### Updating React Native
+### Updating
 `npm install --save react-native@[current version]`
-`react-native upgrade`
+`pod update`
+you may have to specify the new version in the Podfile and run `pod install`

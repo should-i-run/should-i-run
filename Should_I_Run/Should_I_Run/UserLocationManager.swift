@@ -30,8 +30,8 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
     var currentLocation2d:CLLocationCoordinate2D?
     var currentLocation:CLLocation?
     
-    let notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-    let mainQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    let notificationCenter: NotificationCenter = NotificationCenter.default
+    let mainQueue: OperationQueue = OperationQueue.main
     
     class var manager: UserLocation {
         return SharedUserLocation
@@ -49,15 +49,15 @@ class UserLocation: NSObject, CLLocationManagerDelegate {
 
     // didUpdateLocations
     // This method is executed whenever a location is found.
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.currentLocation2d = manager.location!.coordinate
         self.currentLocation =  manager.location
-        self.notificationCenter.postNotificationName("LocationDidUpdate", object: nil)
+        self.notificationCenter.post(name: Notification.Name(rawValue: "LocationDidUpdate"), object: nil)
     }
     
     // didFailWithError
     // This method is executed whenever a location is not found.
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("location fail error:")
         print(error)
     }

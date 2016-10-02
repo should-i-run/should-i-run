@@ -77,7 +77,6 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
                 let winner = sortedEntrances[0]
                 lat = winner["lat"]!
                 lng = winner["lng"]!
-                print(winner)
             } else {
                 lat = subJson["gtfs_latitude"].doubleValue
                 lng = subJson["gtfs_longitude"].doubleValue
@@ -95,7 +94,8 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
     }
     
     func render() {
-        self.stationsContainer.updateData(self.data!.object as AnyObject, walkingData: self.walkingData as AnyObject)
+        let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
+        self.stationsContainer.updateData(self.data!.object as AnyObject, walkingData: self.walkingData as AnyObject, location: startCoord)
     }
     
     func handleError(_ error: String) {

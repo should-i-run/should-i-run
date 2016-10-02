@@ -8,6 +8,8 @@ import {
   Linking,
 } from 'react-native';
 
+import {getClosestEntrance} from './utils/distance.js';
+
 // let walkingSpeed = 80 //meters per minute
 const runningSpeed = 200 //meters per minute
 
@@ -172,7 +174,8 @@ export default class Station extends React.Component {
 
   renderStationName = (s, distance) => {
     const goToDirections = () => {
-      Linking.openURL('http://maps.apple.com/?daddr=San+Francisco&dirflg=d&t=r');
+      const {lat, lng} = getClosestEntrance(s, this.props.location);
+      Linking.openURL(`http://maps.apple.com/?daddr=${lat},${lng}&dirflg=w&t=r`);
     };
     return (
       <View style={styles.stationNameContainer}>

@@ -33,7 +33,7 @@ class ReactView: UIView {
         rootView.backgroundColor = globalBackgroundColor
     }
 
-    func updateData(_ data: AnyObject, walkingData: AnyObject) {
-        rootView.appProperties = ["data": data, "walkingData": walkingData]
+    func updateData(_ data: AnyObject, walkingData: AnyObject, location: CLLocationCoordinate2D) {
+        rootView.appProperties = ["data": data, "walkingData": walkingData, "location": ["lat": location.latitude, "lng": location.longitude]]
     }
 }

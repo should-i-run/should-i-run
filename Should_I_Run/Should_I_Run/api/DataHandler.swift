@@ -60,9 +60,6 @@ class DataHandler: NSObject, CLLocationManagerDelegate {
     
     func receiveLocation(_ location2d: CLLocationCoordinate2D) {
         apiController.instance.fetchData(Float(location2d.latitude), lngStart: Float(location2d.longitude), success: self.receiveData, fail: self.handleError)
-        if self.locationObserver != nil {
-            self.notificationCenter.removeObserver(self.locationObserver!)
-        }
     }
     
     func cancelLoad() {

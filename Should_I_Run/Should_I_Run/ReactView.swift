@@ -11,10 +11,16 @@ import React
 import SwiftyJSON
 
 class ReactView: UIView {
-    // let rootView: RCTRootView = RCTRootView(bundleURL: Bundle.main.url(forResource: "main", withExtension: "jsbundle"),
+    #if DEBUG
     let rootView: RCTRootView = RCTRootView(bundleURL: URL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
+                                            moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
+    #else
+    let rootView: RCTRootView = RCTRootView(bundleURL: Bundle.main.url(forResource: "main", withExtension: "jsbundle"),
+    moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
+    #endif
 
-                                        moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
+    
+
 
     override func layoutSubviews() {
         super.layoutSubviews()

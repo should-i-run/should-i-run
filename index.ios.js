@@ -13,7 +13,6 @@ import Station from './Should_I_Run/ReactComponents/Station.js';
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#252F39',
     paddingTop: 20,
   }

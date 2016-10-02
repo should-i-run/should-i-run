@@ -65,6 +65,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
             let lng = subJson["gtfs_longitude"].doubleValue
             let code = subJson["abbr"].stringValue
             let endCoord = CLLocationCoordinate2DMake(CLLocationDegrees(lat), CLLocationDegrees(lng))
+            // figure out the closest of the 'entrances' and use it.
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: endCoord, stationCode: code)
         }
     }

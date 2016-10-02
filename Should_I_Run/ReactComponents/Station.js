@@ -28,12 +28,13 @@ var styles = StyleSheet.create({
     ...genericText,
     fontSize: 14,
     marginRight: 15,
+    color: '#AAA',
   },
   departureTime: {
     ...genericText,
-    width: 25,
+    width: 35,
     textAlign: 'right',
-    fontWeight: '400',
+    fontSize: 26,
   },
   lineName: {
     ...genericText,
@@ -44,12 +45,18 @@ var styles = StyleSheet.create({
     padding: 5,
     marginTop: 10,
     borderRadius: 2,
+    paddingLeft: 10,
   },
   directionText: {
     ...genericText,
     fontSize: 14,
     color: '#AAA',
     marginBottom: -5,
+  },
+  stationDistance: {
+    ...genericText,
+    color: '#AAA',
+    fontSize: 26,
   },
   stationNameContainer: {
     flexDirection: 'row',
@@ -61,11 +68,19 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     padding: 10,
+    paddingTop: 30,
+    marginBottom: 20,
+  },
+  stationNameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   stationMetadataContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    // marginTop: 5,
+    justifyContent: 'flex-start',
+    // paddingLeft: 10,
+    marginTop: 10,
   },
   departure: {
     marginLeft: 5,
@@ -86,9 +101,11 @@ var styles = StyleSheet.create({
   },
   run: {
     color: '#FC5B3F',
+    // fontWeight: '400',
   },
   walk: {
     color: '#6FD57F',
+    // fontWeight: '400',
   },
 });
 
@@ -156,21 +173,24 @@ export default class Station extends React.Component {
     const south = s.departures.filter(d => d.estimates[0].direction === 'South');
     return (
       <View style={styles.station}>
-        <Text style={styles.stationName}>{s.name}</Text>
+        <View style={styles.stationNameContainer}>
+          <Text style={styles.stationName}>{s.name}</Text>
+          <Text style={[styles.stationDistance]}>
+            {distance ? distance.toLocaleString() : '...'} meters
+          </Text>
+        </View>
 
         <View style={styles.stationMetadataContainer}>
           <Text style={styles.stationMetadata}>
-            {distance || '...'} m
+            Running:
+            <Text style={styles.run}> {distance ? getRunningTime(distance) : '...'} min</Text>
           </Text>
           <Text style={styles.stationMetadata}>
-            <Text>{distance ? getRunningTime(distance) : '...'} </Text>
-            running
-          </Text>
-          <Text style={styles.stationMetadata}>
-            <Text>{time || '...'} </Text>
-            walking
+            Walking:
+            <Text style={styles.walk}> {time || '...'} min</Text>
           </Text>
         </View>
+
         {!!north.length &&
           <View style={styles.direction}>
             <Text style={styles.directionText}>North</Text>

@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "(JS_DIR=`pwd`/Should_I_Run/ReactComponents; cd node_modules/react-native; npm run start -- --root $JS_DIR)"
   },
   "repository": {
     "type": "git",

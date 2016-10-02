@@ -61,11 +61,29 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
     func updateWalkingDistances() {
         let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
         for (_, subJson):(String, JSON) in self.data! {
-            let lat = subJson["gtfs_latitude"].doubleValue
-            let lng = subJson["gtfs_longitude"].doubleValue
-            let code = subJson["abbr"].stringValue
+            var lat: Double
+            var lng: Double
+            let entrances = subJson["entrances"].arrayValue.map({["lat": $0["lat"].doubleValue, "lng": $0["lng"].doubleValue]});
+            if entrances.count > 0 {
+                // figure out the closest of the 'entrances' and use it.
+                func getDistance(e: AnyObject) -> Double{
+                    let lngDistance: Double = pow((startCoord.latitude - (e["lat"] as! Double)), 2)
+                    let latDistance: Double = pow((startCoord.longitude - (e["lng"] as! Double)), 2)
+                    return sqrt(lngDistance + latDistance)
+                }
+                let sortedEntrances = entrances.sorted {
+                    return getDistance(e: $0 as AnyObject) <= getDistance(e: $1 as AnyObject)
+                }
+                let winner = sortedEntrances[0]
+                lat = winner["lat"]!
+                lng = winner["lng"]!
+            } else {
+                lat = subJson["gtfs_latitude"].doubleValue
+                lng = subJson["gtfs_longitude"].doubleValue
+            }
             let endCoord = CLLocationCoordinate2DMake(CLLocationDegrees(lat), CLLocationDegrees(lng))
-            // figure out the closest of the 'entrances' and use it.
+            
+            let code = subJson["abbr"].stringValue
             self.walkingDirectionsManager.getWalkingDirectionsBetween(startCoord, endLatLon: endCoord, stationCode: code)
         }
     }

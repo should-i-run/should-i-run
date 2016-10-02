@@ -1,37 +1,8 @@
 'use strict';
-
-import React from 'react';
-
 import {
-  Text,
-  ScrollView,
-  StyleSheet,
   AppRegistry,
 } from 'react-native';
 
-import Station from './Should_I_Run/ReactComponents/Station.js';
+import App from './Should_I_Run/ReactComponents/App.js';
 
-var styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#252F39',
-    paddingTop: 20,
-  }
-});
-
-class SimpleApp extends React.Component {
-  static propTypes = {
-    data: React.PropTypes.array,
-    walkingData: React.PropTypes.object,
-  }
-
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        {this.props.data && this.props.data.map((s, i) =>
-          <Station key={i} station={s} walking={this.props.walkingData[s.abbr]}/>)}
-      </ScrollView>
-    )
-  }
-}
-
-AppRegistry.registerComponent('SimpleApp', () => SimpleApp);
+AppRegistry.registerComponent('SimpleApp', () => App);

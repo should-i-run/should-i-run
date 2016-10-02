@@ -5,6 +5,7 @@ import {
   Text,
   View,
   StyleSheet,
+  Linking,
 } from 'react-native';
 
 // let walkingSpeed = 80 //meters per minute
@@ -23,6 +24,7 @@ var styles = StyleSheet.create({
   stationName: {
     ...genericText,
     fontSize: 26,
+    flex: 3,
   },
   stationMetadata: {
     ...genericText,
@@ -57,6 +59,8 @@ var styles = StyleSheet.create({
     ...genericText,
     color: '#AAA',
     fontSize: 26,
+    flex: 2,
+    marginRight: 10,
   },
   stationNameContainer: {
     flexDirection: 'row',
@@ -79,7 +83,7 @@ var styles = StyleSheet.create({
   stationMetadataContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    // paddingLeft: 10,
+    paddingLeft: 10,
     marginTop: 10,
   },
   departure: {
@@ -166,20 +170,41 @@ export default class Station extends React.Component {
     );
   }
 
+  renderStationName = (s, distance) => {
+    const goToDirections = () => {
+      Linking.openURL('http://maps.apple.com/?daddr=San+Francisco&dirflg=d&t=r');
+    };
+    return (
+      <View style={styles.stationNameContainer}>
+        <Text style={styles.stationName} numberOfLines={1}>{s.name}</Text>
+        <Text style={[styles.stationDistance]} onPress={goToDirections}>
+          {distance ? distance.toLocaleString() : '...'} meters
+        </Text>
+      </View>
+    );
+  }
+
   render() {
     const s = this.props.station;
     const {distance, time} = this.props.walking || {};
-    const north = s.departures.filter(d => d.estimates[0].direction === 'North');
-    const south = s.departures.filter(d => d.estimates[0].direction === 'South');
+    const isMakable = (estimate) => estimate.minutes >= time;
+    const makableDepartureTime = (a, b) => {
+      const aBest = a.estimates.filter(isMakable)[0];
+      const aMinutes =  aBest ? aBest.minutes : 999;
+      const bBest = b.estimates.filter(isMakable)[0];
+      const bMinutes =  bBest ? bBest.minutes : 999;
+      return parseInt(aMinutes, 10) >= parseInt(bMinutes, 10);
+    }
+
+    const north = s.departures
+      .filter(d => d.estimates[0].direction === 'North')
+      .sort(makableDepartureTime);
+    const south = s.departures
+      .filter(d => d.estimates[0].direction === 'South')
+      .sort(makableDepartureTime);
     return (
       <View style={styles.station}>
-        <View style={styles.stationNameContainer}>
-          <Text style={styles.stationName}>{s.name}</Text>
-          <Text style={[styles.stationDistance]}>
-            {distance ? distance.toLocaleString() : '...'} meters
-          </Text>
-        </View>
-
+        {this.renderStationName(s, distance)}
         <View style={styles.stationMetadataContainer}>
           <Text style={styles.stationMetadata}>
             Running:
@@ -193,12 +218,12 @@ export default class Station extends React.Component {
 
         {!!north.length &&
           <View style={styles.direction}>
-            <Text style={styles.directionText}>North</Text>
+            <Text style={styles.directionText}>Northbound departuers</Text>
             {north.map(this.renderLine)}
           </View>}
         {!!south.length &&
           <View style={styles.direction}>
-            <Text style={styles.directionText}>South</Text>
+            <Text style={styles.directionText}>Southbound departures</Text>
             {south.map(this.renderLine)}
           </View>}
       </View>

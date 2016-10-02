@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2552CDBC1CB9ED4D0039FEF2 /* ReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */; };
 		2560D6DD1C0D1B77009CB756 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560D6DC1C0D1B77009CB756 /* Reachability.m */; };
+		2586E6801DA0DE000032A052 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2586E6671DA0DDDE0032A052 /* libRCTLinking.a */; };
 		2599C7071C0CBBA90018DB65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7061C0CBBA90018DB65 /* AppDelegate.swift */; };
 		2599C71C1C0CBBA90018DB65 /* Should_I_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C71B1C0CBBA90018DB65 /* Should_I_RunTests.swift */; };
 		2599C7271C0CBBA90018DB65 /* Should_I_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599C7261C0CBBA90018DB65 /* Should_I_RunUITests.swift */; };
@@ -28,6 +29,125 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2586E3741DA0DC560032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E36E1DA0DC560032A052 /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTLinking;
+		};
+		2586E6511DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E3A81DA0DDDD0032A052 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		2586E6541DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E37A1DA0DDDD0032A052 /* RCTActionSheet.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTActionSheet;
+		};
+		2586E6571DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E3831DA0DDDD0032A052 /* RCTAdSupport.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
+			remoteInfo = RCTAdSupport;
+		};
+		2586E65A1DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E53B1DA0DDDE0032A052 /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTAnimation;
+		};
+		2586E65D1DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E3E81DA0DDDD0032A052 /* RCTCameraRoll.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RCTCameraRoll;
+		};
+		2586E6601DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E4BE1DA0DDDD0032A052 /* RCTGeolocation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTGeolocation;
+		};
+		2586E6631DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E4D51DA0DDDD0032A052 /* RCTImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RCTImage;
+		};
+		2586E6661DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E51C1DA0DDDD0032A052 /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTLinking;
+		};
+		2586E6691DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E5601DA0DDDE0032A052 /* RCTNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B511DB1A9E6C8500147676;
+			remoteInfo = RCTNetwork;
+		};
+		2586E66C1DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E5701DA0DDDE0032A052 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		2586E66F1DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E5A61DA0DDDE0032A052 /* RCTSettings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTSettings;
+		};
+		2586E6721DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E5831DA0DDDE0032A052 /* RCTTest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 580C376F1AB104AF0015E709;
+			remoteInfo = RCTTest;
+		};
+		2586E6751DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E5D01DA0DDDE0032A052 /* RCTText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
+			remoteInfo = RCTText;
+		};
+		2586E6781DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E6381DA0DDDE0032A052 /* RCTVibration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
+			remoteInfo = RCTVibration;
+		};
+		2586E67B1DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E6451DA0DDDE0032A052 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3C86DF461ADF2C930047B81A;
+			remoteInfo = RCTWebSocket;
+		};
+		2586E67E1DA0DDDE0032A052 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2586E5A21DA0DDDE0032A052 /* Sample.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = Sample;
+		};
 		2599C7181C0CBBA90018DB65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2599C6FB1C0CBBA80018DB65 /* Project object */;
@@ -62,6 +182,586 @@
 		2552CDBB1CB9ED4D0039FEF2 /* ReactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactView.swift; sourceTree = "<group>"; };
 		2560D6DB1C0D1B77009CB756 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2560D6DC1C0D1B77009CB756 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		2586E3671DA0DB860032A052 /* Should_I_Run.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Should_I_Run.xcodeproj; sourceTree = "<group>"; };
+		2586E36B1DA0DC3F0032A052 /* Linking.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Linking.js; sourceTree = "<group>"; };
+		2586E36D1DA0DC560032A052 /* LinkingIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LinkingIOS.js; sourceTree = "<group>"; };
+		2586E36E1DA0DC560032A052 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTLinking.xcodeproj; sourceTree = "<group>"; };
+		2586E3711DA0DC560032A052 /* RCTLinkingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTLinkingManager.h; sourceTree = "<group>"; };
+		2586E3721DA0DC560032A052 /* RCTLinkingManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTLinkingManager.m; sourceTree = "<group>"; };
+		2586E3791DA0DDDD0032A052 /* ActionSheetIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ActionSheetIOS.js; sourceTree = "<group>"; };
+		2586E37A1DA0DDDD0032A052 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTActionSheet.xcodeproj; sourceTree = "<group>"; };
+		2586E37D1DA0DDDD0032A052 /* RCTActionSheetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTActionSheetManager.h; sourceTree = "<group>"; };
+		2586E37E1DA0DDDD0032A052 /* RCTActionSheetManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTActionSheetManager.m; sourceTree = "<group>"; };
+		2586E3801DA0DDDD0032A052 /* AdSupportIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AdSupportIOS.js; sourceTree = "<group>"; };
+		2586E3811DA0DDDD0032A052 /* RCTAdSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAdSupport.h; sourceTree = "<group>"; };
+		2586E3821DA0DDDD0032A052 /* RCTAdSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAdSupport.m; sourceTree = "<group>"; };
+		2586E3831DA0DDDD0032A052 /* RCTAdSupport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTAdSupport.xcodeproj; sourceTree = "<group>"; };
+		2586E3881DA0DDDD0032A052 /* demo.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
+		2586E3891DA0DDDD0032A052 /* pic1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic1.jpg; sourceTree = "<group>"; };
+		2586E38A1DA0DDDD0032A052 /* pic2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic2.jpg; sourceTree = "<group>"; };
+		2586E38B1DA0DDDD0032A052 /* pic3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic3.jpg; sourceTree = "<group>"; };
+		2586E38C1DA0DDDD0032A052 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		2586E38E1DA0DDDD0032A052 /* gulpfile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = gulpfile.js; sourceTree = "<group>"; };
+		2586E38F1DA0DDDD0032A052 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		2586E3921DA0DDDD0032A052 /* Animated-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "Animated-test.js"; sourceTree = "<group>"; };
+		2586E3931DA0DDDD0032A052 /* bezier-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "bezier-test.js"; sourceTree = "<group>"; };
+		2586E3941DA0DDDD0032A052 /* Easing-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "Easing-test.js"; sourceTree = "<group>"; };
+		2586E3951DA0DDDD0032A052 /* Interpolation-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "Interpolation-test.js"; sourceTree = "<group>"; };
+		2586E3961DA0DDDD0032A052 /* Animated.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Animated.js; sourceTree = "<group>"; };
+		2586E3971DA0DDDD0032A052 /* AnimatedImplementation.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AnimatedImplementation.js; sourceTree = "<group>"; };
+		2586E3981DA0DDDD0032A052 /* AnimatedWeb.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AnimatedWeb.js; sourceTree = "<group>"; };
+		2586E3991DA0DDDD0032A052 /* bezier.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = bezier.js; sourceTree = "<group>"; };
+		2586E39A1DA0DDDD0032A052 /* Easing.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Easing.js; sourceTree = "<group>"; };
+		2586E39B1DA0DDDD0032A052 /* Interpolation.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Interpolation.js; sourceTree = "<group>"; };
+		2586E39C1DA0DDDD0032A052 /* NativeAnimatedHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NativeAnimatedHelper.js; sourceTree = "<group>"; };
+		2586E39E1DA0DDDD0032A052 /* flattenStyle.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = flattenStyle.js; sourceTree = "<group>"; };
+		2586E39F1DA0DDDD0032A052 /* InteractionManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InteractionManager.js; sourceTree = "<group>"; };
+		2586E3A01DA0DDDD0032A052 /* Set.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Set.js; sourceTree = "<group>"; };
+		2586E3A11DA0DDDD0032A052 /* SpringConfig.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SpringConfig.js; sourceTree = "<group>"; };
+		2586E3A31DA0DDDD0032A052 /* AppRegistry.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AppRegistry.js; sourceTree = "<group>"; };
+		2586E3A51DA0DDDD0032A052 /* AppState.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AppState.js; sourceTree = "<group>"; };
+		2586E3A61DA0DDDD0032A052 /* AppStateIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AppStateIOS.js; sourceTree = "<group>"; };
+		2586E3A81DA0DDDD0032A052 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ART.xcodeproj; sourceTree = "<group>"; };
+		2586E3AB1DA0DDDD0032A052 /* ARTCGFloatArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTCGFloatArray.h; sourceTree = "<group>"; };
+		2586E3AC1DA0DDDD0032A052 /* ARTContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTContainer.h; sourceTree = "<group>"; };
+		2586E3AD1DA0DDDD0032A052 /* ARTGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTGroup.h; sourceTree = "<group>"; };
+		2586E3AE1DA0DDDD0032A052 /* ARTGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTGroup.m; sourceTree = "<group>"; };
+		2586E3AF1DA0DDDD0032A052 /* ARTNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTNode.h; sourceTree = "<group>"; };
+		2586E3B01DA0DDDD0032A052 /* ARTNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTNode.m; sourceTree = "<group>"; };
+		2586E3B11DA0DDDD0032A052 /* ARTRenderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTRenderable.h; sourceTree = "<group>"; };
+		2586E3B21DA0DDDD0032A052 /* ARTRenderable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTRenderable.m; sourceTree = "<group>"; };
+		2586E3B31DA0DDDD0032A052 /* ARTSerializablePath.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ARTSerializablePath.js; sourceTree = "<group>"; };
+		2586E3B41DA0DDDD0032A052 /* ARTShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTShape.h; sourceTree = "<group>"; };
+		2586E3B51DA0DDDD0032A052 /* ARTShape.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTShape.m; sourceTree = "<group>"; };
+		2586E3B61DA0DDDD0032A052 /* ARTSurfaceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTSurfaceView.h; sourceTree = "<group>"; };
+		2586E3B71DA0DDDD0032A052 /* ARTSurfaceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTSurfaceView.m; sourceTree = "<group>"; };
+		2586E3B81DA0DDDD0032A052 /* ARTText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTText.h; sourceTree = "<group>"; };
+		2586E3B91DA0DDDD0032A052 /* ARTText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTText.m; sourceTree = "<group>"; };
+		2586E3BA1DA0DDDD0032A052 /* ARTTextFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTTextFrame.h; sourceTree = "<group>"; };
+		2586E3BC1DA0DDDD0032A052 /* ARTBrush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTBrush.h; sourceTree = "<group>"; };
+		2586E3BD1DA0DDDD0032A052 /* ARTBrush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTBrush.m; sourceTree = "<group>"; };
+		2586E3BE1DA0DDDD0032A052 /* ARTLinearGradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTLinearGradient.h; sourceTree = "<group>"; };
+		2586E3BF1DA0DDDD0032A052 /* ARTLinearGradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTLinearGradient.m; sourceTree = "<group>"; };
+		2586E3C01DA0DDDD0032A052 /* ARTPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTPattern.h; sourceTree = "<group>"; };
+		2586E3C11DA0DDDD0032A052 /* ARTPattern.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTPattern.m; sourceTree = "<group>"; };
+		2586E3C21DA0DDDD0032A052 /* ARTRadialGradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTRadialGradient.h; sourceTree = "<group>"; };
+		2586E3C31DA0DDDD0032A052 /* ARTRadialGradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTRadialGradient.m; sourceTree = "<group>"; };
+		2586E3C41DA0DDDD0032A052 /* ARTSolidColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTSolidColor.h; sourceTree = "<group>"; };
+		2586E3C51DA0DDDD0032A052 /* ARTSolidColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTSolidColor.m; sourceTree = "<group>"; };
+		2586E3C61DA0DDDD0032A052 /* RCTConvert+ART.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+ART.h"; sourceTree = "<group>"; };
+		2586E3C71DA0DDDD0032A052 /* RCTConvert+ART.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+ART.m"; sourceTree = "<group>"; };
+		2586E3C81DA0DDDD0032A052 /* ReactNativeART.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ReactNativeART.js; sourceTree = "<group>"; };
+		2586E3CA1DA0DDDD0032A052 /* ARTGroupManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTGroupManager.h; sourceTree = "<group>"; };
+		2586E3CB1DA0DDDD0032A052 /* ARTGroupManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTGroupManager.m; sourceTree = "<group>"; };
+		2586E3CC1DA0DDDD0032A052 /* ARTNodeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTNodeManager.h; sourceTree = "<group>"; };
+		2586E3CD1DA0DDDD0032A052 /* ARTNodeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTNodeManager.m; sourceTree = "<group>"; };
+		2586E3CE1DA0DDDD0032A052 /* ARTRenderableManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTRenderableManager.h; sourceTree = "<group>"; };
+		2586E3CF1DA0DDDD0032A052 /* ARTRenderableManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTRenderableManager.m; sourceTree = "<group>"; };
+		2586E3D01DA0DDDD0032A052 /* ARTShapeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTShapeManager.h; sourceTree = "<group>"; };
+		2586E3D11DA0DDDD0032A052 /* ARTShapeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTShapeManager.m; sourceTree = "<group>"; };
+		2586E3D21DA0DDDD0032A052 /* ARTSurfaceViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTSurfaceViewManager.h; sourceTree = "<group>"; };
+		2586E3D31DA0DDDD0032A052 /* ARTSurfaceViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTSurfaceViewManager.m; sourceTree = "<group>"; };
+		2586E3D41DA0DDDD0032A052 /* ARTTextManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARTTextManager.h; sourceTree = "<group>"; };
+		2586E3D51DA0DDDD0032A052 /* ARTTextManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARTTextManager.m; sourceTree = "<group>"; };
+		2586E3D71DA0DDDD0032A052 /* BatchedBridge.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BatchedBridge.js; sourceTree = "<group>"; };
+		2586E3DA1DA0DDDD0032A052 /* NativeModules.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NativeModules.js; sourceTree = "<group>"; };
+		2586E3DB1DA0DDDD0032A052 /* NativeModules.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NativeModules.js; sourceTree = "<group>"; };
+		2586E3DC1DA0DDDD0032A052 /* NativeModules.js.flow */ = {isa = PBXFileReference; lastKnownFileType = text; path = NativeModules.js.flow; sourceTree = "<group>"; };
+		2586E3DD1DA0DDDD0032A052 /* RCTAlertManager.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTAlertManager.ios.js; sourceTree = "<group>"; };
+		2586E3DE1DA0DDDD0032A052 /* RCTEventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTEventEmitter.js; sourceTree = "<group>"; };
+		2586E3E01DA0DDDD0032A052 /* BugReporting.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BugReporting.js; sourceTree = "<group>"; };
+		2586E3E11DA0DDDD0032A052 /* dumpReactTree.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = dumpReactTree.js; sourceTree = "<group>"; };
+		2586E3E21DA0DDDD0032A052 /* getReactData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = getReactData.js; sourceTree = "<group>"; };
+		2586E3E41DA0DDDD0032A052 /* CameraRoll.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CameraRoll.js; sourceTree = "<group>"; };
+		2586E3E51DA0DDDD0032A052 /* ImagePickerIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImagePickerIOS.js; sourceTree = "<group>"; };
+		2586E3E61DA0DDDD0032A052 /* RCTAssetsLibraryRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAssetsLibraryRequestHandler.h; sourceTree = "<group>"; };
+		2586E3E71DA0DDDD0032A052 /* RCTAssetsLibraryRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAssetsLibraryRequestHandler.m; sourceTree = "<group>"; };
+		2586E3E81DA0DDDD0032A052 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTCameraRoll.xcodeproj; sourceTree = "<group>"; };
+		2586E3EB1DA0DDDD0032A052 /* RCTCameraRollManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCameraRollManager.h; sourceTree = "<group>"; };
+		2586E3EC1DA0DDDD0032A052 /* RCTCameraRollManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTCameraRollManager.m; sourceTree = "<group>"; };
+		2586E3ED1DA0DDDD0032A052 /* RCTImagePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImagePickerManager.h; sourceTree = "<group>"; };
+		2586E3EE1DA0DDDD0032A052 /* RCTImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImagePickerManager.m; sourceTree = "<group>"; };
+		2586E3EF1DA0DDDD0032A052 /* RCTPhotoLibraryImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTPhotoLibraryImageLoader.h; sourceTree = "<group>"; };
+		2586E3F01DA0DDDD0032A052 /* RCTPhotoLibraryImageLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTPhotoLibraryImageLoader.m; sourceTree = "<group>"; };
+		2586E3F31DA0DDDD0032A052 /* ActivityIndicator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ActivityIndicator.js; sourceTree = "<group>"; };
+		2586E3F41DA0DDDD0032A052 /* ActivityIndicatorIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ActivityIndicatorIOS.android.js; sourceTree = "<group>"; };
+		2586E3F51DA0DDDD0032A052 /* ActivityIndicatorIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ActivityIndicatorIOS.ios.js; sourceTree = "<group>"; };
+		2586E3F71DA0DDDD0032A052 /* Clipboard.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Clipboard.js; sourceTree = "<group>"; };
+		2586E3F91DA0DDDD0032A052 /* DatePickerIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DatePickerIOS.android.js; sourceTree = "<group>"; };
+		2586E3FA1DA0DDDD0032A052 /* DatePickerIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DatePickerIOS.ios.js; sourceTree = "<group>"; };
+		2586E3FC1DA0DDDD0032A052 /* DatePickerAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DatePickerAndroid.android.js; sourceTree = "<group>"; };
+		2586E3FD1DA0DDDD0032A052 /* DatePickerAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DatePickerAndroid.ios.js; sourceTree = "<group>"; };
+		2586E3FF1DA0DDDD0032A052 /* DrawerLayoutAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DrawerLayoutAndroid.android.js; sourceTree = "<group>"; };
+		2586E4001DA0DDDD0032A052 /* DrawerLayoutAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DrawerLayoutAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4021DA0DDDD0032A052 /* IntentAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = IntentAndroid.android.js; sourceTree = "<group>"; };
+		2586E4031DA0DDDD0032A052 /* IntentAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = IntentAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4051DA0DDDD0032A052 /* Keyboard.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Keyboard.js; sourceTree = "<group>"; };
+		2586E4061DA0DDDD0032A052 /* KeyboardAvoidingView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = KeyboardAvoidingView.js; sourceTree = "<group>"; };
+		2586E4071DA0DDDD0032A052 /* LazyRenderer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LazyRenderer.js; sourceTree = "<group>"; };
+		2586E4091DA0DDDD0032A052 /* MapView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MapView.js; sourceTree = "<group>"; };
+		2586E40B1DA0DDDD0032A052 /* NavigatorIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorIOS.android.js; sourceTree = "<group>"; };
+		2586E40C1DA0DDDD0032A052 /* NavigatorIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorIOS.ios.js; sourceTree = "<group>"; };
+		2586E40E1DA0DDDD0032A052 /* Picker.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Picker.js; sourceTree = "<group>"; };
+		2586E40F1DA0DDDD0032A052 /* PickerAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PickerAndroid.android.js; sourceTree = "<group>"; };
+		2586E4101DA0DDDD0032A052 /* PickerAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PickerAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4111DA0DDDD0032A052 /* PickerIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PickerIOS.android.js; sourceTree = "<group>"; };
+		2586E4121DA0DDDD0032A052 /* PickerIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PickerIOS.ios.js; sourceTree = "<group>"; };
+		2586E4141DA0DDDD0032A052 /* ProgressBarAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProgressBarAndroid.android.js; sourceTree = "<group>"; };
+		2586E4151DA0DDDD0032A052 /* ProgressBarAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProgressBarAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4171DA0DDDD0032A052 /* ProgressViewIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProgressViewIOS.android.js; sourceTree = "<group>"; };
+		2586E4181DA0DDDD0032A052 /* ProgressViewIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProgressViewIOS.ios.js; sourceTree = "<group>"; };
+		2586E41A1DA0DDDD0032A052 /* RefreshControl.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RefreshControl.js; sourceTree = "<group>"; };
+		2586E41B1DA0DDDD0032A052 /* ScrollResponder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ScrollResponder.js; sourceTree = "<group>"; };
+		2586E41D1DA0DDDD0032A052 /* processDecelerationRate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = processDecelerationRate.js; sourceTree = "<group>"; };
+		2586E41E1DA0DDDD0032A052 /* RecyclerViewBackedScrollView.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RecyclerViewBackedScrollView.android.js; sourceTree = "<group>"; };
+		2586E41F1DA0DDDD0032A052 /* RecyclerViewBackedScrollView.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RecyclerViewBackedScrollView.ios.js; sourceTree = "<group>"; };
+		2586E4201DA0DDDD0032A052 /* ScrollView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ScrollView.js; sourceTree = "<group>"; };
+		2586E4221DA0DDDD0032A052 /* SegmentedControlIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SegmentedControlIOS.android.js; sourceTree = "<group>"; };
+		2586E4231DA0DDDD0032A052 /* SegmentedControlIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SegmentedControlIOS.ios.js; sourceTree = "<group>"; };
+		2586E4251DA0DDDD0032A052 /* Slider.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Slider.js; sourceTree = "<group>"; };
+		2586E4271DA0DDDD0032A052 /* SliderIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SliderIOS.android.js; sourceTree = "<group>"; };
+		2586E4281DA0DDDD0032A052 /* SliderIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SliderIOS.ios.js; sourceTree = "<group>"; };
+		2586E4291DA0DDDD0032A052 /* StaticContainer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StaticContainer.js; sourceTree = "<group>"; };
+		2586E42A1DA0DDDD0032A052 /* StaticRenderer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StaticRenderer.js; sourceTree = "<group>"; };
+		2586E42C1DA0DDDD0032A052 /* StatusBar.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StatusBar.js; sourceTree = "<group>"; };
+		2586E42D1DA0DDDD0032A052 /* StatusBarIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StatusBarIOS.android.js; sourceTree = "<group>"; };
+		2586E42E1DA0DDDD0032A052 /* StatusBarIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StatusBarIOS.ios.js; sourceTree = "<group>"; };
+		2586E42F1DA0DDDD0032A052 /* Subscribable.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Subscribable.js; sourceTree = "<group>"; };
+		2586E4311DA0DDDD0032A052 /* Switch.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Switch.js; sourceTree = "<group>"; };
+		2586E4331DA0DDDD0032A052 /* SwitchAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwitchAndroid.android.js; sourceTree = "<group>"; };
+		2586E4341DA0DDDD0032A052 /* SwitchAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwitchAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4361DA0DDDD0032A052 /* SwitchIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwitchIOS.android.js; sourceTree = "<group>"; };
+		2586E4371DA0DDDD0032A052 /* SwitchIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwitchIOS.ios.js; sourceTree = "<group>"; };
+		2586E4391DA0DDDD0032A052 /* TabBarIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TabBarIOS.android.js; sourceTree = "<group>"; };
+		2586E43A1DA0DDDD0032A052 /* TabBarIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TabBarIOS.ios.js; sourceTree = "<group>"; };
+		2586E43B1DA0DDDD0032A052 /* TabBarItemIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TabBarItemIOS.android.js; sourceTree = "<group>"; };
+		2586E43C1DA0DDDD0032A052 /* TabBarItemIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TabBarItemIOS.ios.js; sourceTree = "<group>"; };
+		2586E43E1DA0DDDD0032A052 /* TextInput.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TextInput.js; sourceTree = "<group>"; };
+		2586E43F1DA0DDDD0032A052 /* TextInputState.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TextInputState.js; sourceTree = "<group>"; };
+		2586E4411DA0DDDD0032A052 /* TimePickerAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TimePickerAndroid.android.js; sourceTree = "<group>"; };
+		2586E4421DA0DDDD0032A052 /* TimePickerAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TimePickerAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4441DA0DDDD0032A052 /* ToastAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ToastAndroid.android.js; sourceTree = "<group>"; };
+		2586E4451DA0DDDD0032A052 /* ToastAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ToastAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4471DA0DDDD0032A052 /* ToolbarAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ToolbarAndroid.android.js; sourceTree = "<group>"; };
+		2586E4481DA0DDDD0032A052 /* ToolbarAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ToolbarAndroid.ios.js; sourceTree = "<group>"; };
+		2586E44B1DA0DDDD0032A052 /* ensureComponentIsNative.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ensureComponentIsNative.js; sourceTree = "<group>"; };
+		2586E44E1DA0DDDD0032A052 /* TouchableHighlight-test.js.snap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "TouchableHighlight-test.js.snap"; sourceTree = "<group>"; };
+		2586E44F1DA0DDDD0032A052 /* TouchableHighlight-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "TouchableHighlight-test.js"; sourceTree = "<group>"; };
+		2586E4501DA0DDDD0032A052 /* BoundingDimensions.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BoundingDimensions.js; sourceTree = "<group>"; };
+		2586E4511DA0DDDD0032A052 /* ensureComponentIsNative.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ensureComponentIsNative.js; sourceTree = "<group>"; };
+		2586E4521DA0DDDD0032A052 /* ensurePositiveDelayProps.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ensurePositiveDelayProps.js; sourceTree = "<group>"; };
+		2586E4531DA0DDDD0032A052 /* Position.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Position.js; sourceTree = "<group>"; };
+		2586E4541DA0DDDD0032A052 /* Touchable.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Touchable.js; sourceTree = "<group>"; };
+		2586E4551DA0DDDD0032A052 /* TouchableBounce.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TouchableBounce.js; sourceTree = "<group>"; };
+		2586E4561DA0DDDD0032A052 /* TouchableHighlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TouchableHighlight.js; sourceTree = "<group>"; };
+		2586E4571DA0DDDD0032A052 /* TouchableNativeFeedback.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TouchableNativeFeedback.android.js; sourceTree = "<group>"; };
+		2586E4581DA0DDDD0032A052 /* TouchableNativeFeedback.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TouchableNativeFeedback.ios.js; sourceTree = "<group>"; };
+		2586E4591DA0DDDD0032A052 /* TouchableOpacity.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TouchableOpacity.js; sourceTree = "<group>"; };
+		2586E45A1DA0DDDD0032A052 /* TouchableWithoutFeedback.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TouchableWithoutFeedback.js; sourceTree = "<group>"; };
+		2586E45C1DA0DDDD0032A052 /* UnimplementedView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = UnimplementedView.js; sourceTree = "<group>"; };
+		2586E45F1DA0DDDD0032A052 /* View.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = View.js; sourceTree = "<group>"; };
+		2586E4601DA0DDDD0032A052 /* ReactNativeStyleAttributes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ReactNativeStyleAttributes.js; sourceTree = "<group>"; };
+		2586E4611DA0DDDD0032A052 /* ReactNativeViewAttributes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ReactNativeViewAttributes.js; sourceTree = "<group>"; };
+		2586E4621DA0DDDD0032A052 /* ShadowPropTypesIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ShadowPropTypesIOS.js; sourceTree = "<group>"; };
+		2586E4631DA0DDDD0032A052 /* View.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = View.js; sourceTree = "<group>"; };
+		2586E4641DA0DDDD0032A052 /* ViewStylePropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ViewStylePropTypes.js; sourceTree = "<group>"; };
+		2586E4661DA0DDDD0032A052 /* ViewPagerAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ViewPagerAndroid.android.js; sourceTree = "<group>"; };
+		2586E4671DA0DDDD0032A052 /* ViewPagerAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ViewPagerAndroid.ios.js; sourceTree = "<group>"; };
+		2586E4691DA0DDDD0032A052 /* WebView.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebView.android.js; sourceTree = "<group>"; };
+		2586E46A1DA0DDDD0032A052 /* WebView.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebView.ios.js; sourceTree = "<group>"; };
+		2586E46C1DA0DDDD0032A052 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2586E46E1DA0DDDD0032A052 /* ListView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ListView.js; sourceTree = "<group>"; };
+		2586E46F1DA0DDDD0032A052 /* ListViewDataSource.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ListViewDataSource.js; sourceTree = "<group>"; };
+		2586E4721DA0DDDD0032A052 /* back-icon@1.5x.android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@1.5x.android.png"; sourceTree = "<group>"; };
+		2586E4731DA0DDDD0032A052 /* back-icon@1.5x.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@1.5x.ios.png"; sourceTree = "<group>"; };
+		2586E4741DA0DDDD0032A052 /* back-icon@1x.android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@1x.android.png"; sourceTree = "<group>"; };
+		2586E4751DA0DDDD0032A052 /* back-icon@1x.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@1x.ios.png"; sourceTree = "<group>"; };
+		2586E4761DA0DDDD0032A052 /* back-icon@2x.android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@2x.android.png"; sourceTree = "<group>"; };
+		2586E4771DA0DDDD0032A052 /* back-icon@2x.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@2x.ios.png"; sourceTree = "<group>"; };
+		2586E4781DA0DDDD0032A052 /* back-icon@3x.android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@3x.android.png"; sourceTree = "<group>"; };
+		2586E4791DA0DDDD0032A052 /* back-icon@3x.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@3x.ios.png"; sourceTree = "<group>"; };
+		2586E47A1DA0DDDD0032A052 /* back-icon@4x.android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@4x.android.png"; sourceTree = "<group>"; };
+		2586E47B1DA0DDDD0032A052 /* back-icon@4x.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@4x.ios.png"; sourceTree = "<group>"; };
+		2586E47C1DA0DDDD0032A052 /* NavigationAnimatedValueSubscription.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationAnimatedValueSubscription.js; sourceTree = "<group>"; };
+		2586E47D1DA0DDDD0032A052 /* NavigationCard.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationCard.js; sourceTree = "<group>"; };
+		2586E47E1DA0DDDD0032A052 /* NavigationCardStack.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationCardStack.js; sourceTree = "<group>"; };
+		2586E47F1DA0DDDD0032A052 /* NavigationCardStackPanResponder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationCardStackPanResponder.js; sourceTree = "<group>"; };
+		2586E4801DA0DDDD0032A052 /* NavigationCardStackStyleInterpolator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationCardStackStyleInterpolator.js; sourceTree = "<group>"; };
+		2586E4811DA0DDDD0032A052 /* NavigationHeader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationHeader.js; sourceTree = "<group>"; };
+		2586E4821DA0DDDD0032A052 /* NavigationHeaderBackButton.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationHeaderBackButton.js; sourceTree = "<group>"; };
+		2586E4831DA0DDDD0032A052 /* NavigationHeaderStyleInterpolator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationHeaderStyleInterpolator.js; sourceTree = "<group>"; };
+		2586E4841DA0DDDD0032A052 /* NavigationHeaderTitle.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationHeaderTitle.js; sourceTree = "<group>"; };
+		2586E4851DA0DDDD0032A052 /* NavigationPagerPanResponder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationPagerPanResponder.js; sourceTree = "<group>"; };
+		2586E4861DA0DDDD0032A052 /* NavigationPagerStyleInterpolator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationPagerStyleInterpolator.js; sourceTree = "<group>"; };
+		2586E4871DA0DDDD0032A052 /* NavigationPointerEventsContainer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationPointerEventsContainer.js; sourceTree = "<group>"; };
+		2586E48B1DA0DDDD0032A052 /* NavigationContext-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationContext-test.js"; sourceTree = "<group>"; };
+		2586E48C1DA0DDDD0032A052 /* NavigationEvent-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationEvent-test.js"; sourceTree = "<group>"; };
+		2586E48D1DA0DDDD0032A052 /* NavigationEventEmitter-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationEventEmitter-test.js"; sourceTree = "<group>"; };
+		2586E48E1DA0DDDD0032A052 /* NavigationRouteStack-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationRouteStack-test.js"; sourceTree = "<group>"; };
+		2586E48F1DA0DDDD0032A052 /* NavigationTreeNode-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationTreeNode-test.js"; sourceTree = "<group>"; };
+		2586E4901DA0DDDD0032A052 /* NavigationContext.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationContext.js; sourceTree = "<group>"; };
+		2586E4911DA0DDDD0032A052 /* NavigationEvent.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationEvent.js; sourceTree = "<group>"; };
+		2586E4921DA0DDDD0032A052 /* NavigationEventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationEventEmitter.js; sourceTree = "<group>"; };
+		2586E4931DA0DDDD0032A052 /* NavigationRouteStack.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationRouteStack.js; sourceTree = "<group>"; };
+		2586E4941DA0DDDD0032A052 /* NavigationTreeNode.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationTreeNode.js; sourceTree = "<group>"; };
+		2586E4951DA0DDDD0032A052 /* Navigator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Navigator.js; sourceTree = "<group>"; };
+		2586E4961DA0DDDD0032A052 /* NavigatorBreadcrumbNavigationBar.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorBreadcrumbNavigationBar.js; sourceTree = "<group>"; };
+		2586E4971DA0DDDD0032A052 /* NavigatorBreadcrumbNavigationBarStyles.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorBreadcrumbNavigationBarStyles.android.js; sourceTree = "<group>"; };
+		2586E4981DA0DDDD0032A052 /* NavigatorBreadcrumbNavigationBarStyles.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorBreadcrumbNavigationBarStyles.ios.js; sourceTree = "<group>"; };
+		2586E4991DA0DDDD0032A052 /* NavigatorNavigationBar.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorNavigationBar.js; sourceTree = "<group>"; };
+		2586E49A1DA0DDDD0032A052 /* NavigatorNavigationBarStylesAndroid.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorNavigationBarStylesAndroid.js; sourceTree = "<group>"; };
+		2586E49B1DA0DDDD0032A052 /* NavigatorNavigationBarStylesIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorNavigationBarStylesIOS.js; sourceTree = "<group>"; };
+		2586E49C1DA0DDDD0032A052 /* NavigatorSceneConfigs.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigatorSceneConfigs.js; sourceTree = "<group>"; };
+		2586E49E1DA0DDDD0032A052 /* RCTDebugComponentOwnership.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTDebugComponentOwnership.js; sourceTree = "<group>"; };
+		2586E4A01DA0DDDD0032A052 /* setupDevtools.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = setupDevtools.js; sourceTree = "<group>"; };
+		2586E4A21DA0DDDD0032A052 /* EmitterSubscription.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EmitterSubscription.js; sourceTree = "<group>"; };
+		2586E4A31DA0DDDD0032A052 /* EventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EventEmitter.js; sourceTree = "<group>"; };
+		2586E4A41DA0DDDD0032A052 /* EventEmitterWithHolding.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EventEmitterWithHolding.js; sourceTree = "<group>"; };
+		2586E4A51DA0DDDD0032A052 /* EventHolder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EventHolder.js; sourceTree = "<group>"; };
+		2586E4A61DA0DDDD0032A052 /* EventSubscription.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EventSubscription.js; sourceTree = "<group>"; };
+		2586E4A71DA0DDDD0032A052 /* EventSubscriptionVendor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EventSubscriptionVendor.js; sourceTree = "<group>"; };
+		2586E4A81DA0DDDD0032A052 /* EventValidator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EventValidator.js; sourceTree = "<group>"; };
+		2586E4A91DA0DDDD0032A052 /* mixInEventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mixInEventEmitter.js; sourceTree = "<group>"; };
+		2586E4AA1DA0DDDD0032A052 /* NativeEventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NativeEventEmitter.js; sourceTree = "<group>"; };
+		2586E4AB1DA0DDDD0032A052 /* RCTDeviceEventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTDeviceEventEmitter.js; sourceTree = "<group>"; };
+		2586E4AC1DA0DDDD0032A052 /* RCTNativeAppEventEmitter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTNativeAppEventEmitter.js; sourceTree = "<group>"; };
+		2586E4AE1DA0DDDD0032A052 /* Incremental.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Incremental.js; sourceTree = "<group>"; };
+		2586E4AF1DA0DDDD0032A052 /* IncrementalExample.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = IncrementalExample.js; sourceTree = "<group>"; };
+		2586E4B01DA0DDDD0032A052 /* IncrementalGroup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = IncrementalGroup.js; sourceTree = "<group>"; };
+		2586E4B11DA0DDDD0032A052 /* IncrementalPresenter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = IncrementalPresenter.js; sourceTree = "<group>"; };
+		2586E4B31DA0DDDD0032A052 /* SwipeableListView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwipeableListView.js; sourceTree = "<group>"; };
+		2586E4B41DA0DDDD0032A052 /* SwipeableListViewDataSource.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwipeableListViewDataSource.js; sourceTree = "<group>"; };
+		2586E4B51DA0DDDD0032A052 /* SwipeableQuickActionButton.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwipeableQuickActionButton.js; sourceTree = "<group>"; };
+		2586E4B61DA0DDDD0032A052 /* SwipeableQuickActions.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwipeableQuickActions.js; sourceTree = "<group>"; };
+		2586E4B71DA0DDDD0032A052 /* SwipeableRow.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SwipeableRow.js; sourceTree = "<group>"; };
+		2586E4B81DA0DDDD0032A052 /* ViewabilityHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ViewabilityHelper.js; sourceTree = "<group>"; };
+		2586E4B91DA0DDDD0032A052 /* WindowedListView.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WindowedListView.js; sourceTree = "<group>"; };
+		2586E4BB1DA0DDDD0032A052 /* fetch.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = fetch.js; sourceTree = "<group>"; };
+		2586E4BD1DA0DDDD0032A052 /* Geolocation.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Geolocation.js; sourceTree = "<group>"; };
+		2586E4BE1DA0DDDD0032A052 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTGeolocation.xcodeproj; sourceTree = "<group>"; };
+		2586E4C11DA0DDDD0032A052 /* RCTLocationObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTLocationObserver.h; sourceTree = "<group>"; };
+		2586E4C21DA0DDDD0032A052 /* RCTLocationObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTLocationObserver.m; sourceTree = "<group>"; };
+		2586E4C51DA0DDDD0032A052 /* Image.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Image.js; sourceTree = "<group>"; };
+		2586E4C71DA0DDDD0032A052 /* resolveAssetSource-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "resolveAssetSource-test.js"; sourceTree = "<group>"; };
+		2586E4C81DA0DDDD0032A052 /* AssetRegistry.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AssetRegistry.js; sourceTree = "<group>"; };
+		2586E4C91DA0DDDD0032A052 /* AssetSourceResolver.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AssetSourceResolver.js; sourceTree = "<group>"; };
+		2586E4CA1DA0DDDD0032A052 /* GlobalImageStub.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GlobalImageStub.js; sourceTree = "<group>"; };
+		2586E4CB1DA0DDDD0032A052 /* Image.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Image.android.js; sourceTree = "<group>"; };
+		2586E4CC1DA0DDDD0032A052 /* Image.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Image.ios.js; sourceTree = "<group>"; };
+		2586E4CD1DA0DDDD0032A052 /* ImageEditor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImageEditor.js; sourceTree = "<group>"; };
+		2586E4CE1DA0DDDD0032A052 /* ImageResizeMode.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImageResizeMode.js; sourceTree = "<group>"; };
+		2586E4CF1DA0DDDD0032A052 /* ImageSource.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImageSource.js; sourceTree = "<group>"; };
+		2586E4D01DA0DDDD0032A052 /* ImageSourcePropType.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImageSourcePropType.js; sourceTree = "<group>"; };
+		2586E4D11DA0DDDD0032A052 /* ImageStore.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImageStore.js; sourceTree = "<group>"; };
+		2586E4D21DA0DDDD0032A052 /* ImageStylePropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImageStylePropTypes.js; sourceTree = "<group>"; };
+		2586E4D31DA0DDDD0032A052 /* RCTGIFImageDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTGIFImageDecoder.h; sourceTree = "<group>"; };
+		2586E4D41DA0DDDD0032A052 /* RCTGIFImageDecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTGIFImageDecoder.m; sourceTree = "<group>"; };
+		2586E4D51DA0DDDD0032A052 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTImage.xcodeproj; sourceTree = "<group>"; };
+		2586E4D81DA0DDDD0032A052 /* RCTImageBlurUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageBlurUtils.h; sourceTree = "<group>"; };
+		2586E4D91DA0DDDD0032A052 /* RCTImageBlurUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageBlurUtils.m; sourceTree = "<group>"; };
+		2586E4DA1DA0DDDD0032A052 /* RCTImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageCache.h; sourceTree = "<group>"; };
+		2586E4DB1DA0DDDD0032A052 /* RCTImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageCache.m; sourceTree = "<group>"; };
+		2586E4DC1DA0DDDD0032A052 /* RCTImageEditingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageEditingManager.h; sourceTree = "<group>"; };
+		2586E4DD1DA0DDDD0032A052 /* RCTImageEditingManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageEditingManager.m; sourceTree = "<group>"; };
+		2586E4DE1DA0DDDD0032A052 /* RCTImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageLoader.h; sourceTree = "<group>"; };
+		2586E4DF1DA0DDDD0032A052 /* RCTImageLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageLoader.m; sourceTree = "<group>"; };
+		2586E4E01DA0DDDD0032A052 /* RCTImageStoreManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageStoreManager.h; sourceTree = "<group>"; };
+		2586E4E11DA0DDDD0032A052 /* RCTImageStoreManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageStoreManager.m; sourceTree = "<group>"; };
+		2586E4E21DA0DDDD0032A052 /* RCTImageUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageUtils.h; sourceTree = "<group>"; };
+		2586E4E31DA0DDDD0032A052 /* RCTImageUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageUtils.m; sourceTree = "<group>"; };
+		2586E4E41DA0DDDD0032A052 /* RCTImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageView.h; sourceTree = "<group>"; };
+		2586E4E51DA0DDDD0032A052 /* RCTImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageView.m; sourceTree = "<group>"; };
+		2586E4E61DA0DDDD0032A052 /* RCTImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTImageViewManager.h; sourceTree = "<group>"; };
+		2586E4E71DA0DDDD0032A052 /* RCTImageViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTImageViewManager.m; sourceTree = "<group>"; };
+		2586E4E81DA0DDDD0032A052 /* RCTLocalAssetImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTLocalAssetImageLoader.h; sourceTree = "<group>"; };
+		2586E4E91DA0DDDD0032A052 /* RCTLocalAssetImageLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTLocalAssetImageLoader.m; sourceTree = "<group>"; };
+		2586E4EA1DA0DDDD0032A052 /* RCTResizeMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTResizeMode.h; sourceTree = "<group>"; };
+		2586E4EB1DA0DDDD0032A052 /* RCTResizeMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTResizeMode.m; sourceTree = "<group>"; };
+		2586E4EC1DA0DDDD0032A052 /* RelativeImageStub.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RelativeImageStub.js; sourceTree = "<group>"; };
+		2586E4ED1DA0DDDD0032A052 /* resolveAssetSource.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = resolveAssetSource.js; sourceTree = "<group>"; };
+		2586E4EF1DA0DDDD0032A052 /* BorderBox.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BorderBox.js; sourceTree = "<group>"; };
+		2586E4F01DA0DDDD0032A052 /* BoxInspector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BoxInspector.js; sourceTree = "<group>"; };
+		2586E4F11DA0DDDD0032A052 /* ElementBox.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ElementBox.js; sourceTree = "<group>"; };
+		2586E4F21DA0DDDD0032A052 /* ElementProperties.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ElementProperties.js; sourceTree = "<group>"; };
+		2586E4F31DA0DDDD0032A052 /* Inspector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Inspector.js; sourceTree = "<group>"; };
+		2586E4F41DA0DDDD0032A052 /* InspectorOverlay.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InspectorOverlay.js; sourceTree = "<group>"; };
+		2586E4F51DA0DDDD0032A052 /* InspectorPanel.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InspectorPanel.js; sourceTree = "<group>"; };
+		2586E4F61DA0DDDD0032A052 /* InspectorUtils.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InspectorUtils.js; sourceTree = "<group>"; };
+		2586E4F71DA0DDDD0032A052 /* NetworkOverlay.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NetworkOverlay.js; sourceTree = "<group>"; };
+		2586E4F81DA0DDDD0032A052 /* PerformanceOverlay.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PerformanceOverlay.js; sourceTree = "<group>"; };
+		2586E4F91DA0DDDD0032A052 /* resolveBoxStyle.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = resolveBoxStyle.js; sourceTree = "<group>"; };
+		2586E4FA1DA0DDDD0032A052 /* StyleInspector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StyleInspector.js; sourceTree = "<group>"; };
+		2586E4FD1DA0DDDD0032A052 /* Batchinator-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "Batchinator-test.js"; sourceTree = "<group>"; };
+		2586E4FE1DA0DDDD0032A052 /* InteractionManager-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "InteractionManager-test.js"; sourceTree = "<group>"; };
+		2586E4FF1DA0DDDD0032A052 /* InteractionMixin-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "InteractionMixin-test.js"; sourceTree = "<group>"; };
+		2586E5001DA0DDDD0032A052 /* TaskQueue-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "TaskQueue-test.js"; sourceTree = "<group>"; };
+		2586E5011DA0DDDD0032A052 /* Batchinator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Batchinator.js; sourceTree = "<group>"; };
+		2586E5021DA0DDDD0032A052 /* InteractionManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InteractionManager.js; sourceTree = "<group>"; };
+		2586E5031DA0DDDD0032A052 /* InteractionMixin.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InteractionMixin.js; sourceTree = "<group>"; };
+		2586E5041DA0DDDD0032A052 /* JSEventLoopWatchdog.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = JSEventLoopWatchdog.js; sourceTree = "<group>"; };
+		2586E5051DA0DDDD0032A052 /* PanResponder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PanResponder.js; sourceTree = "<group>"; };
+		2586E5061DA0DDDD0032A052 /* TaskQueue.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TaskQueue.js; sourceTree = "<group>"; };
+		2586E50A1DA0DDDD0032A052 /* parseErrorStack-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "parseErrorStack-test.js"; sourceTree = "<group>"; };
+		2586E50B1DA0DDDD0032A052 /* ExceptionsManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExceptionsManager.js; sourceTree = "<group>"; };
+		2586E50C1DA0DDDD0032A052 /* getDevServer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = getDevServer.js; sourceTree = "<group>"; };
+		2586E50D1DA0DDDD0032A052 /* InitializeJavaScriptAppEngine.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InitializeJavaScriptAppEngine.js; sourceTree = "<group>"; };
+		2586E50E1DA0DDDD0032A052 /* openFileInEditor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = openFileInEditor.js; sourceTree = "<group>"; };
+		2586E50F1DA0DDDD0032A052 /* parseErrorStack.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = parseErrorStack.js; sourceTree = "<group>"; };
+		2586E5101DA0DDDD0032A052 /* source-map-url.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "source-map-url.js"; sourceTree = "<group>"; };
+		2586E5111DA0DDDD0032A052 /* symbolicateStackTrace.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = symbolicateStackTrace.js; sourceTree = "<group>"; };
+		2586E5141DA0DDDD0032A052 /* JSTimers.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = JSTimers.js; sourceTree = "<group>"; };
+		2586E5151DA0DDDD0032A052 /* JSTimersExecution.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = JSTimersExecution.js; sourceTree = "<group>"; };
+		2586E5171DA0DDDD0032A052 /* LayoutAnimation.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LayoutAnimation.js; sourceTree = "<group>"; };
+		2586E5191DA0DDDD0032A052 /* Linking.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Linking.js; sourceTree = "<group>"; };
+		2586E51B1DA0DDDD0032A052 /* LinkingIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LinkingIOS.js; sourceTree = "<group>"; };
+		2586E51C1DA0DDDD0032A052 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTLinking.xcodeproj; sourceTree = "<group>"; };
+		2586E51F1DA0DDDE0032A052 /* RCTLinkingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTLinkingManager.h; sourceTree = "<group>"; };
+		2586E5201DA0DDDE0032A052 /* RCTLinkingManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTLinkingManager.m; sourceTree = "<group>"; };
+		2586E5221DA0DDDE0032A052 /* Modal.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Modal.js; sourceTree = "<group>"; };
+		2586E5251DA0DDDE0032A052 /* RCTAdditionAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAdditionAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5261DA0DDDE0032A052 /* RCTAdditionAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAdditionAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5271DA0DDDE0032A052 /* RCTAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5281DA0DDDE0032A052 /* RCTAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5291DA0DDDE0032A052 /* RCTAnimationDriverNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAnimationDriverNode.h; sourceTree = "<group>"; };
+		2586E52A1DA0DDDE0032A052 /* RCTAnimationDriverNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAnimationDriverNode.m; sourceTree = "<group>"; };
+		2586E52B1DA0DDDE0032A052 /* RCTDiffClampAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTDiffClampAnimatedNode.h; sourceTree = "<group>"; };
+		2586E52C1DA0DDDE0032A052 /* RCTDiffClampAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTDiffClampAnimatedNode.m; sourceTree = "<group>"; };
+		2586E52D1DA0DDDE0032A052 /* RCTInterpolationAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTInterpolationAnimatedNode.h; sourceTree = "<group>"; };
+		2586E52E1DA0DDDE0032A052 /* RCTInterpolationAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTInterpolationAnimatedNode.m; sourceTree = "<group>"; };
+		2586E52F1DA0DDDE0032A052 /* RCTModuloAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTModuloAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5301DA0DDDE0032A052 /* RCTModuloAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTModuloAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5311DA0DDDE0032A052 /* RCTMultiplicationAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMultiplicationAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5321DA0DDDE0032A052 /* RCTMultiplicationAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTMultiplicationAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5331DA0DDDE0032A052 /* RCTPropsAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTPropsAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5341DA0DDDE0032A052 /* RCTPropsAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTPropsAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5351DA0DDDE0032A052 /* RCTStyleAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTStyleAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5361DA0DDDE0032A052 /* RCTStyleAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTStyleAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5371DA0DDDE0032A052 /* RCTTransformAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTransformAnimatedNode.h; sourceTree = "<group>"; };
+		2586E5381DA0DDDE0032A052 /* RCTTransformAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTransformAnimatedNode.m; sourceTree = "<group>"; };
+		2586E5391DA0DDDE0032A052 /* RCTValueAnimatedNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTValueAnimatedNode.h; sourceTree = "<group>"; };
+		2586E53A1DA0DDDE0032A052 /* RCTValueAnimatedNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTValueAnimatedNode.m; sourceTree = "<group>"; };
+		2586E53B1DA0DDDE0032A052 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTAnimation.xcodeproj; sourceTree = "<group>"; };
+		2586E53E1DA0DDDE0032A052 /* RCTAnimationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAnimationUtils.h; sourceTree = "<group>"; };
+		2586E53F1DA0DDDE0032A052 /* RCTAnimationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAnimationUtils.m; sourceTree = "<group>"; };
+		2586E5401DA0DDDE0032A052 /* RCTNativeAnimatedModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTNativeAnimatedModule.h; sourceTree = "<group>"; };
+		2586E5411DA0DDDE0032A052 /* RCTNativeAnimatedModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTNativeAnimatedModule.m; sourceTree = "<group>"; };
+		2586E5421DA0DDDE0032A052 /* RCTViewPropertyMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTViewPropertyMapper.h; sourceTree = "<group>"; };
+		2586E5431DA0DDDE0032A052 /* RCTViewPropertyMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTViewPropertyMapper.m; sourceTree = "<group>"; };
+		2586E5461DA0DDDE0032A052 /* NavigationRootContainer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationRootContainer.js; sourceTree = "<group>"; };
+		2586E5481DA0DDDE0032A052 /* NavigationStateUtils-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationStateUtils-test.js"; sourceTree = "<group>"; };
+		2586E5491DA0DDDE0032A052 /* NavigationAbstractPanResponder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationAbstractPanResponder.js; sourceTree = "<group>"; };
+		2586E54A1DA0DDDE0032A052 /* NavigationExperimental.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationExperimental.js; sourceTree = "<group>"; };
+		2586E54B1DA0DDDE0032A052 /* NavigationPropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationPropTypes.js; sourceTree = "<group>"; };
+		2586E54C1DA0DDDE0032A052 /* NavigationStateUtils.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationStateUtils.js; sourceTree = "<group>"; };
+		2586E54D1DA0DDDE0032A052 /* NavigationTransitioner.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationTransitioner.js; sourceTree = "<group>"; };
+		2586E54E1DA0DDDE0032A052 /* NavigationTypeDefinition.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationTypeDefinition.js; sourceTree = "<group>"; };
+		2586E5511DA0DDDE0032A052 /* NavigationScenesReducer-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "NavigationScenesReducer-test.js"; sourceTree = "<group>"; };
+		2586E5521DA0DDDE0032A052 /* NavigationScenesReducer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NavigationScenesReducer.js; sourceTree = "<group>"; };
+		2586E5551DA0DDDE0032A052 /* XMLHttpRequest-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "XMLHttpRequest-test.js"; sourceTree = "<group>"; };
+		2586E5561DA0DDDE0032A052 /* FormData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = FormData.js; sourceTree = "<group>"; };
+		2586E5571DA0DDDE0032A052 /* NetInfo.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = NetInfo.js; sourceTree = "<group>"; };
+		2586E5581DA0DDDE0032A052 /* RCTDataRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTDataRequestHandler.h; sourceTree = "<group>"; };
+		2586E5591DA0DDDE0032A052 /* RCTDataRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTDataRequestHandler.m; sourceTree = "<group>"; };
+		2586E55A1DA0DDDE0032A052 /* RCTFileRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTFileRequestHandler.h; sourceTree = "<group>"; };
+		2586E55B1DA0DDDE0032A052 /* RCTFileRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTFileRequestHandler.m; sourceTree = "<group>"; };
+		2586E55C1DA0DDDE0032A052 /* RCTHTTPRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTHTTPRequestHandler.h; sourceTree = "<group>"; };
+		2586E55D1DA0DDDE0032A052 /* RCTHTTPRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTHTTPRequestHandler.m; sourceTree = "<group>"; };
+		2586E55E1DA0DDDE0032A052 /* RCTNetInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTNetInfo.h; sourceTree = "<group>"; };
+		2586E55F1DA0DDDE0032A052 /* RCTNetInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTNetInfo.m; sourceTree = "<group>"; };
+		2586E5601DA0DDDE0032A052 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTNetwork.xcodeproj; sourceTree = "<group>"; };
+		2586E5631DA0DDDE0032A052 /* RCTNetworking.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTNetworking.android.js; sourceTree = "<group>"; };
+		2586E5641DA0DDDE0032A052 /* RCTNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTNetworking.h; sourceTree = "<group>"; };
+		2586E5651DA0DDDE0032A052 /* RCTNetworking.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTNetworking.ios.js; sourceTree = "<group>"; };
+		2586E5661DA0DDDE0032A052 /* RCTNetworking.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTNetworking.mm; sourceTree = "<group>"; };
+		2586E5671DA0DDDE0032A052 /* RCTNetworkTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTNetworkTask.h; sourceTree = "<group>"; };
+		2586E5681DA0DDDE0032A052 /* RCTNetworkTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTNetworkTask.m; sourceTree = "<group>"; };
+		2586E5691DA0DDDE0032A052 /* XMLHttpRequest.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = XMLHttpRequest.js; sourceTree = "<group>"; };
+		2586E56B1DA0DDDE0032A052 /* PermissionsAndroid.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PermissionsAndroid.js; sourceTree = "<group>"; };
+		2586E56C1DA0DDDE0032A052 /* Promise.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Promise.js; sourceTree = "<group>"; };
+		2586E56D1DA0DDDE0032A052 /* promiseRejectionIsError.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = promiseRejectionIsError.js; sourceTree = "<group>"; };
+		2586E56F1DA0DDDE0032A052 /* PushNotificationIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PushNotificationIOS.js; sourceTree = "<group>"; };
+		2586E5701DA0DDDE0032A052 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTPushNotification.xcodeproj; sourceTree = "<group>"; };
+		2586E5731DA0DDDE0032A052 /* RCTPushNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTPushNotificationManager.h; sourceTree = "<group>"; };
+		2586E5741DA0DDDE0032A052 /* RCTPushNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTPushNotificationManager.m; sourceTree = "<group>"; };
+		2586E5761DA0DDDE0032A052 /* QuickPerformanceLogger.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuickPerformanceLogger.js; sourceTree = "<group>"; };
+		2586E5791DA0DDDE0032A052 /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCase.h; sourceTree = "<group>"; };
+		2586E57A1DA0DDDE0032A052 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCase.m; sourceTree = "<group>"; };
+		2586E57B1DA0DDDE0032A052 /* FBSnapshotTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestController.h; sourceTree = "<group>"; };
+		2586E57C1DA0DDDE0032A052 /* FBSnapshotTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestController.m; sourceTree = "<group>"; };
+		2586E57D1DA0DDDE0032A052 /* UIImage+Compare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compare.h"; sourceTree = "<group>"; };
+		2586E57E1DA0DDDE0032A052 /* UIImage+Compare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compare.m"; sourceTree = "<group>"; };
+		2586E57F1DA0DDDE0032A052 /* UIImage+Diff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Diff.h"; sourceTree = "<group>"; };
+		2586E5801DA0DDDE0032A052 /* UIImage+Diff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Diff.m"; sourceTree = "<group>"; };
+		2586E5811DA0DDDE0032A052 /* RCTSnapshotManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTSnapshotManager.h; sourceTree = "<group>"; };
+		2586E5821DA0DDDE0032A052 /* RCTSnapshotManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTSnapshotManager.m; sourceTree = "<group>"; };
+		2586E5831DA0DDDE0032A052 /* RCTTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTTest.xcodeproj; sourceTree = "<group>"; };
+		2586E5861DA0DDDE0032A052 /* RCTTestModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTestModule.h; sourceTree = "<group>"; };
+		2586E5871DA0DDDE0032A052 /* RCTTestModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTestModule.m; sourceTree = "<group>"; };
+		2586E5881DA0DDDE0032A052 /* RCTTestRunner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTestRunner.h; sourceTree = "<group>"; };
+		2586E5891DA0DDDE0032A052 /* RCTTestRunner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTestRunner.m; sourceTree = "<group>"; };
+		2586E58A1DA0DDDE0032A052 /* SnapshotViewIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SnapshotViewIOS.android.js; sourceTree = "<group>"; };
+		2586E58B1DA0DDDE0032A052 /* SnapshotViewIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SnapshotViewIOS.ios.js; sourceTree = "<group>"; };
+		2586E58D1DA0DDDE0032A052 /* react-native-interface.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "react-native-interface.js"; sourceTree = "<group>"; };
+		2586E58E1DA0DDDE0032A052 /* react-native.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "react-native.js"; sourceTree = "<group>"; };
+		2586E58F1DA0DDDE0032A052 /* react-native.js.flow */ = {isa = PBXFileReference; lastKnownFileType = text; path = "react-native.js.flow"; sourceTree = "<group>"; };
+		2586E5901DA0DDDE0032A052 /* React.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = React.js; sourceTree = "<group>"; };
+		2586E5911DA0DDDE0032A052 /* ReactNative.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ReactNative.js; sourceTree = "<group>"; };
+		2586E5931DA0DDDE0032A052 /* AppContainer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AppContainer.js; sourceTree = "<group>"; };
+		2586E5941DA0DDDE0032A052 /* renderApplication.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = renderApplication.js; sourceTree = "<group>"; };
+		2586E5951DA0DDDE0032A052 /* requireNativeComponent.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = requireNativeComponent.js; sourceTree = "<group>"; };
+		2586E5961DA0DDDE0032A052 /* verifyPropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = verifyPropTypes.js; sourceTree = "<group>"; };
+		2586E5971DA0DDDE0032A052 /* YellowBox.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = YellowBox.js; sourceTree = "<group>"; };
+		2586E5991DA0DDDE0032A052 /* UIManagerStatTracker.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = UIManagerStatTracker.js; sourceTree = "<group>"; };
+		2586E59B1DA0DDDE0032A052 /* queryLayoutByID.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = queryLayoutByID.js; sourceTree = "<group>"; };
+		2586E59D1DA0DDDE0032A052 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		2586E59E1DA0DDDE0032A052 /* Sample.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Sample.android.js; sourceTree = "<group>"; };
+		2586E59F1DA0DDDE0032A052 /* Sample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sample.h; sourceTree = "<group>"; };
+		2586E5A01DA0DDDE0032A052 /* Sample.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Sample.ios.js; sourceTree = "<group>"; };
+		2586E5A11DA0DDDE0032A052 /* Sample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sample.m; sourceTree = "<group>"; };
+		2586E5A21DA0DDDE0032A052 /* Sample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Sample.xcodeproj; sourceTree = "<group>"; };
+		2586E5A61DA0DDDE0032A052 /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTSettings.xcodeproj; sourceTree = "<group>"; };
+		2586E5A91DA0DDDE0032A052 /* RCTSettingsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTSettingsManager.h; sourceTree = "<group>"; };
+		2586E5AA1DA0DDDE0032A052 /* RCTSettingsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTSettingsManager.m; sourceTree = "<group>"; };
+		2586E5AB1DA0DDDE0032A052 /* Settings.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Settings.android.js; sourceTree = "<group>"; };
+		2586E5AC1DA0DDDE0032A052 /* Settings.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Settings.ios.js; sourceTree = "<group>"; };
+		2586E5AE1DA0DDDE0032A052 /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
+		2586E5B01DA0DDDE0032A052 /* AsyncStorage.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AsyncStorage.js; sourceTree = "<group>"; };
+		2586E5B31DA0DDDE0032A052 /* flattenStyle-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "flattenStyle-test.js"; sourceTree = "<group>"; };
+		2586E5B41DA0DDDE0032A052 /* normalizeColor-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "normalizeColor-test.js"; sourceTree = "<group>"; };
+		2586E5B51DA0DDDE0032A052 /* processColor-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "processColor-test.js"; sourceTree = "<group>"; };
+		2586E5B61DA0DDDE0032A052 /* setNormalizedColorAlpha-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "setNormalizedColorAlpha-test.js"; sourceTree = "<group>"; };
+		2586E5B71DA0DDDE0032A052 /* ColorPropType.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ColorPropType.js; sourceTree = "<group>"; };
+		2586E5B81DA0DDDE0032A052 /* EdgeInsetsPropType.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = EdgeInsetsPropType.js; sourceTree = "<group>"; };
+		2586E5B91DA0DDDE0032A052 /* flattenStyle.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = flattenStyle.js; sourceTree = "<group>"; };
+		2586E5BA1DA0DDDE0032A052 /* LayoutPropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LayoutPropTypes.js; sourceTree = "<group>"; };
+		2586E5BB1DA0DDDE0032A052 /* normalizeColor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = normalizeColor.js; sourceTree = "<group>"; };
+		2586E5BC1DA0DDDE0032A052 /* PointPropType.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PointPropType.js; sourceTree = "<group>"; };
+		2586E5BD1DA0DDDE0032A052 /* processColor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = processColor.js; sourceTree = "<group>"; };
+		2586E5BE1DA0DDDE0032A052 /* processTransform.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = processTransform.js; sourceTree = "<group>"; };
+		2586E5BF1DA0DDDE0032A052 /* setNormalizedColorAlpha.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = setNormalizedColorAlpha.js; sourceTree = "<group>"; };
+		2586E5C01DA0DDDE0032A052 /* StyleSheet.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StyleSheet.js; sourceTree = "<group>"; };
+		2586E5C11DA0DDDE0032A052 /* StyleSheetPropType.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StyleSheetPropType.js; sourceTree = "<group>"; };
+		2586E5C21DA0DDDE0032A052 /* StyleSheetTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StyleSheetTypes.js; sourceTree = "<group>"; };
+		2586E5C31DA0DDDE0032A052 /* StyleSheetValidation.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = StyleSheetValidation.js; sourceTree = "<group>"; };
+		2586E5C41DA0DDDE0032A052 /* TransformPropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TransformPropTypes.js; sourceTree = "<group>"; };
+		2586E5C71DA0DDDE0032A052 /* Text.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Text.js; sourceTree = "<group>"; };
+		2586E5C81DA0DDDE0032A052 /* RCTRawTextManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTRawTextManager.h; sourceTree = "<group>"; };
+		2586E5C91DA0DDDE0032A052 /* RCTRawTextManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTRawTextManager.m; sourceTree = "<group>"; };
+		2586E5CA1DA0DDDE0032A052 /* RCTShadowRawText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTShadowRawText.h; sourceTree = "<group>"; };
+		2586E5CB1DA0DDDE0032A052 /* RCTShadowRawText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTShadowRawText.m; sourceTree = "<group>"; };
+		2586E5CC1DA0DDDE0032A052 /* RCTShadowText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTShadowText.h; sourceTree = "<group>"; };
+		2586E5CD1DA0DDDE0032A052 /* RCTShadowText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTShadowText.m; sourceTree = "<group>"; };
+		2586E5CE1DA0DDDE0032A052 /* RCTText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTText.h; sourceTree = "<group>"; };
+		2586E5CF1DA0DDDE0032A052 /* RCTText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTText.m; sourceTree = "<group>"; };
+		2586E5D01DA0DDDE0032A052 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTText.xcodeproj; sourceTree = "<group>"; };
+		2586E5D31DA0DDDE0032A052 /* RCTTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextField.h; sourceTree = "<group>"; };
+		2586E5D41DA0DDDE0032A052 /* RCTTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextField.m; sourceTree = "<group>"; };
+		2586E5D51DA0DDDE0032A052 /* RCTTextFieldManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextFieldManager.h; sourceTree = "<group>"; };
+		2586E5D61DA0DDDE0032A052 /* RCTTextFieldManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextFieldManager.m; sourceTree = "<group>"; };
+		2586E5D71DA0DDDE0032A052 /* RCTTextManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextManager.h; sourceTree = "<group>"; };
+		2586E5D81DA0DDDE0032A052 /* RCTTextManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextManager.m; sourceTree = "<group>"; };
+		2586E5D91DA0DDDE0032A052 /* RCTTextSelection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextSelection.h; sourceTree = "<group>"; };
+		2586E5DA1DA0DDDE0032A052 /* RCTTextSelection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextSelection.m; sourceTree = "<group>"; };
+		2586E5DB1DA0DDDE0032A052 /* RCTTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextView.h; sourceTree = "<group>"; };
+		2586E5DC1DA0DDDE0032A052 /* RCTTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextView.m; sourceTree = "<group>"; };
+		2586E5DD1DA0DDDE0032A052 /* RCTTextViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextViewManager.h; sourceTree = "<group>"; };
+		2586E5DE1DA0DDDE0032A052 /* RCTTextViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextViewManager.m; sourceTree = "<group>"; };
+		2586E5DF1DA0DDDE0032A052 /* Text.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Text.js; sourceTree = "<group>"; };
+		2586E5E01DA0DDDE0032A052 /* TextStylePropTypes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TextStylePropTypes.js; sourceTree = "<group>"; };
+		2586E5E11DA0DDDE0032A052 /* TextUpdateTest.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TextUpdateTest.js; sourceTree = "<group>"; };
+		2586E5E41DA0DDDE0032A052 /* ErrorUtils.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ErrorUtils.js; sourceTree = "<group>"; };
+		2586E5E51DA0DDDE0032A052 /* MessageQueueTestConfig.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MessageQueueTestConfig.js; sourceTree = "<group>"; };
+		2586E5E61DA0DDDE0032A052 /* MessageQueueTestModule1.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MessageQueueTestModule1.js; sourceTree = "<group>"; };
+		2586E5E71DA0DDDE0032A052 /* MessageQueueTestModule2.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MessageQueueTestModule2.js; sourceTree = "<group>"; };
+		2586E5E81DA0DDDE0032A052 /* PixelRatio.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PixelRatio.js; sourceTree = "<group>"; };
+		2586E5EA1DA0DDDE0032A052 /* deepFreezeAndThrowOnMutationInDev-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "deepFreezeAndThrowOnMutationInDev-test.js"; sourceTree = "<group>"; };
+		2586E5EB1DA0DDDE0032A052 /* groupByEveryN-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "groupByEveryN-test.js"; sourceTree = "<group>"; };
+		2586E5EC1DA0DDDE0032A052 /* mapWithSeparator-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "mapWithSeparator-test.js"; sourceTree = "<group>"; };
+		2586E5ED1DA0DDDE0032A052 /* MatrixMath-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "MatrixMath-test.js"; sourceTree = "<group>"; };
+		2586E5EE1DA0DDDE0032A052 /* MessageQueue-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "MessageQueue-test.js"; sourceTree = "<group>"; };
+		2586E5EF1DA0DDDE0032A052 /* Platform-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "Platform-test.js"; sourceTree = "<group>"; };
+		2586E5F01DA0DDDE0032A052 /* truncate-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "truncate-test.js"; sourceTree = "<group>"; };
+		2586E5F11DA0DDDE0032A052 /* utf8-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "utf8-test.js"; sourceTree = "<group>"; };
+		2586E5F21DA0DDDE0032A052 /* Alert.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Alert.js; sourceTree = "<group>"; };
+		2586E5F31DA0DDDE0032A052 /* AlertIOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AlertIOS.js; sourceTree = "<group>"; };
+		2586E5F41DA0DDDE0032A052 /* BackAndroid.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BackAndroid.android.js; sourceTree = "<group>"; };
+		2586E5F51DA0DDDE0032A052 /* BackAndroid.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BackAndroid.ios.js; sourceTree = "<group>"; };
+		2586E5F61DA0DDDE0032A052 /* buildStyleInterpolator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = buildStyleInterpolator.js; sourceTree = "<group>"; };
+		2586E5F71DA0DDDE0032A052 /* clamp.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = clamp.js; sourceTree = "<group>"; };
+		2586E5F81DA0DDDE0032A052 /* CPUProfiler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CPUProfiler.js; sourceTree = "<group>"; };
+		2586E5F91DA0DDDE0032A052 /* createStrictShapeTypeChecker.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = createStrictShapeTypeChecker.js; sourceTree = "<group>"; };
+		2586E5FA1DA0DDDE0032A052 /* deepFreezeAndThrowOnMutationInDev.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = deepFreezeAndThrowOnMutationInDev.js; sourceTree = "<group>"; };
+		2586E5FB1DA0DDDE0032A052 /* defineLazyObjectProperty.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = defineLazyObjectProperty.js; sourceTree = "<group>"; };
+		2586E5FC1DA0DDDE0032A052 /* deprecatedCallback.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = deprecatedCallback.js; sourceTree = "<group>"; };
+		2586E5FD1DA0DDDE0032A052 /* deprecatedPropType.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = deprecatedPropType.js; sourceTree = "<group>"; };
+		2586E6001DA0DDDE0032A052 /* deepDiffer-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "deepDiffer-test.js"; sourceTree = "<group>"; };
+		2586E6011DA0DDDE0032A052 /* deepDiffer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = deepDiffer.js; sourceTree = "<group>"; };
+		2586E6021DA0DDDE0032A052 /* insetsDiffer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = insetsDiffer.js; sourceTree = "<group>"; };
+		2586E6031DA0DDDE0032A052 /* matricesDiffer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = matricesDiffer.js; sourceTree = "<group>"; };
+		2586E6041DA0DDDE0032A052 /* pointsDiffer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = pointsDiffer.js; sourceTree = "<group>"; };
+		2586E6051DA0DDDE0032A052 /* sizesDiffer.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = sizesDiffer.js; sourceTree = "<group>"; };
+		2586E6061DA0DDDE0032A052 /* Dimensions.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Dimensions.js; sourceTree = "<group>"; };
+		2586E6071DA0DDDE0032A052 /* dismissKeyboard.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = dismissKeyboard.js; sourceTree = "<group>"; };
+		2586E6081DA0DDDE0032A052 /* ErrorUtils.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ErrorUtils.js; sourceTree = "<group>"; };
+		2586E6091DA0DDDE0032A052 /* groupByEveryN.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = groupByEveryN.js; sourceTree = "<group>"; };
+		2586E60A1DA0DDDE0032A052 /* HeapCapture.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HeapCapture.js; sourceTree = "<group>"; };
+		2586E60B1DA0DDDE0032A052 /* HMRClient.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HMRClient.js; sourceTree = "<group>"; };
+		2586E60C1DA0DDDE0032A052 /* HMRLoadingView.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HMRLoadingView.android.js; sourceTree = "<group>"; };
+		2586E60D1DA0DDDE0032A052 /* HMRLoadingView.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HMRLoadingView.ios.js; sourceTree = "<group>"; };
+		2586E60E1DA0DDDE0032A052 /* I18nManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = I18nManager.js; sourceTree = "<group>"; };
+		2586E60F1DA0DDDE0032A052 /* infoLog.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = infoLog.js; sourceTree = "<group>"; };
+		2586E6101DA0DDDE0032A052 /* logError.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = logError.js; sourceTree = "<group>"; };
+		2586E6111DA0DDDE0032A052 /* mapWithSeparator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mapWithSeparator.js; sourceTree = "<group>"; };
+		2586E6121DA0DDDE0032A052 /* MatrixMath.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MatrixMath.js; sourceTree = "<group>"; };
+		2586E6131DA0DDDE0032A052 /* mergeFast.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mergeFast.js; sourceTree = "<group>"; };
+		2586E6141DA0DDDE0032A052 /* mergeIntoFast.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mergeIntoFast.js; sourceTree = "<group>"; };
+		2586E6151DA0DDDE0032A052 /* MessageQueue.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MessageQueue.js; sourceTree = "<group>"; };
+		2586E6161DA0DDDE0032A052 /* PerformanceLogger.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PerformanceLogger.js; sourceTree = "<group>"; };
+		2586E6171DA0DDDE0032A052 /* PixelRatio.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PixelRatio.js; sourceTree = "<group>"; };
+		2586E6181DA0DDDE0032A052 /* Platform.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Platform.android.js; sourceTree = "<group>"; };
+		2586E6191DA0DDDE0032A052 /* Platform.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Platform.ios.js; sourceTree = "<group>"; };
+		2586E61A1DA0DDDE0032A052 /* RCTLog.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTLog.js; sourceTree = "<group>"; };
+		2586E61B1DA0DDDE0032A052 /* RCTRenderingPerf.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = RCTRenderingPerf.js; sourceTree = "<group>"; };
+		2586E61C1DA0DDDE0032A052 /* SamplingProfiler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SamplingProfiler.js; sourceTree = "<group>"; };
+		2586E61D1DA0DDDE0032A052 /* stringifySafe.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = stringifySafe.js; sourceTree = "<group>"; };
+		2586E61E1DA0DDDE0032A052 /* Systrace.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Systrace.js; sourceTree = "<group>"; };
+		2586E61F1DA0DDDE0032A052 /* throwOnWrongReactAPI.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = throwOnWrongReactAPI.js; sourceTree = "<group>"; };
+		2586E6201DA0DDDE0032A052 /* truncate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = truncate.js; sourceTree = "<group>"; };
+		2586E6211DA0DDDE0032A052 /* UIManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = UIManager.js; sourceTree = "<group>"; };
+		2586E6221DA0DDDE0032A052 /* utf8.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = utf8.js; sourceTree = "<group>"; };
+		2586E6231DA0DDDE0032A052 /* WebSocketInterceptor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebSocketInterceptor.js; sourceTree = "<group>"; };
+		2586E6241DA0DDDE0032A052 /* XHRInterceptor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = XHRInterceptor.js; sourceTree = "<group>"; };
+		2586E6271DA0DDDE0032A052 /* _shouldPolyfillES6Collection.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = _shouldPolyfillES6Collection.js; sourceTree = "<group>"; };
+		2586E6281DA0DDDE0032A052 /* copyProperties.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = copyProperties.js; sourceTree = "<group>"; };
+		2586E6291DA0DDDE0032A052 /* getObjectValues.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = getObjectValues.js; sourceTree = "<group>"; };
+		2586E62A1DA0DDDE0032A052 /* guid.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = guid.js; sourceTree = "<group>"; };
+		2586E62B1DA0DDDE0032A052 /* isEmpty.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = isEmpty.js; sourceTree = "<group>"; };
+		2586E62C1DA0DDDE0032A052 /* Map.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Map.js; sourceTree = "<group>"; };
+		2586E62D1DA0DDDE0032A052 /* merge.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = merge.js; sourceTree = "<group>"; };
+		2586E62E1DA0DDDE0032A052 /* mergeHelpers.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mergeHelpers.js; sourceTree = "<group>"; };
+		2586E62F1DA0DDDE0032A052 /* mergeInto.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mergeInto.js; sourceTree = "<group>"; };
+		2586E6301DA0DDDE0032A052 /* Set.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Set.js; sourceTree = "<group>"; };
+		2586E6311DA0DDDE0032A052 /* toIterator.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = toIterator.js; sourceTree = "<group>"; };
+		2586E6341DA0DDDE0032A052 /* DocumentSelectionState.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentSelectionState.js; sourceTree = "<group>"; };
+		2586E6361DA0DDDE0032A052 /* RCTVibration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTVibration.h; sourceTree = "<group>"; };
+		2586E6371DA0DDDE0032A052 /* RCTVibration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTVibration.m; sourceTree = "<group>"; };
+		2586E6381DA0DDDE0032A052 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTVibration.xcodeproj; sourceTree = "<group>"; };
+		2586E63B1DA0DDDE0032A052 /* Vibration.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Vibration.js; sourceTree = "<group>"; };
+		2586E63C1DA0DDDE0032A052 /* VibrationIOS.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VibrationIOS.android.js; sourceTree = "<group>"; };
+		2586E63D1DA0DDDE0032A052 /* VibrationIOS.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VibrationIOS.ios.js; sourceTree = "<group>"; };
+		2586E6401DA0DDDE0032A052 /* event-target-shim.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "event-target-shim.js"; sourceTree = "<group>"; };
+		2586E6421DA0DDDE0032A052 /* WebSocket-test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "WebSocket-test.js"; sourceTree = "<group>"; };
+		2586E6431DA0DDDE0032A052 /* RCTSRWebSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTSRWebSocket.h; sourceTree = "<group>"; };
+		2586E6441DA0DDDE0032A052 /* RCTSRWebSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTSRWebSocket.m; sourceTree = "<group>"; };
+		2586E6451DA0DDDE0032A052 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTWebSocket.xcodeproj; sourceTree = "<group>"; };
+		2586E6481DA0DDDE0032A052 /* RCTWebSocketExecutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTWebSocketExecutor.h; sourceTree = "<group>"; };
+		2586E6491DA0DDDE0032A052 /* RCTWebSocketExecutor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTWebSocketExecutor.m; sourceTree = "<group>"; };
+		2586E64A1DA0DDDE0032A052 /* RCTWebSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTWebSocketManager.h; sourceTree = "<group>"; };
+		2586E64B1DA0DDDE0032A052 /* RCTWebSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTWebSocketManager.m; sourceTree = "<group>"; };
+		2586E64C1DA0DDDE0032A052 /* RCTWebSocketModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTWebSocketModule.h; sourceTree = "<group>"; };
+		2586E64D1DA0DDDE0032A052 /* RCTWebSocketModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTWebSocketModule.m; sourceTree = "<group>"; };
+		2586E64E1DA0DDDE0032A052 /* WebSocket.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebSocket.js; sourceTree = "<group>"; };
+		2586E64F1DA0DDDE0032A052 /* WebSocketEvent.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebSocketEvent.js; sourceTree = "<group>"; };
 		2599C7031C0CBBA90018DB65 /* Should_I_Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Should_I_Run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599C7061C0CBBA90018DB65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2599C7121C0CBBA90018DB65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +793,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2586E6801DA0DE000032A052 /* libRCTLinking.a in Frameworks */,
 				FEF07E7B1C2C502300A73364 /* MapKit.framework in Frameworks */,
 				43EBCA5FD5058824FA8081FA /* Pods_Should_I_Run.framework in Frameworks */,
 			);
@@ -115,9 +816,1730 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2586E3681DA0DB860032A052 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E36A1DA0DC3F0032A052 /* Linking */ = {
+			isa = PBXGroup;
+			children = (
+				2586E36B1DA0DC3F0032A052 /* Linking.js */,
+			);
+			name = Linking;
+			path = "../node_modules/react-native/Libraries/Linking";
+			sourceTree = "<group>";
+		};
+		2586E36C1DA0DC560032A052 /* LinkingIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E36D1DA0DC560032A052 /* LinkingIOS.js */,
+				2586E36E1DA0DC560032A052 /* RCTLinking.xcodeproj */,
+				2586E3711DA0DC560032A052 /* RCTLinkingManager.h */,
+				2586E3721DA0DC560032A052 /* RCTLinkingManager.m */,
+			);
+			name = LinkingIOS;
+			path = "../node_modules/react-native/Libraries/LinkingIOS";
+			sourceTree = "<group>";
+		};
+		2586E36F1DA0DC560032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3751DA0DC560032A052 /* libRCTLinking.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E3771DA0DDDD0032A052 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3781DA0DDDD0032A052 /* ActionSheetIOS */,
+				2586E37F1DA0DDDD0032A052 /* AdSupport */,
+				2586E3861DA0DDDD0032A052 /* Animated */,
+				2586E3A21DA0DDDD0032A052 /* AppRegistry */,
+				2586E3A41DA0DDDD0032A052 /* AppState */,
+				2586E3A71DA0DDDD0032A052 /* ART */,
+				2586E3D61DA0DDDD0032A052 /* BatchedBridge */,
+				2586E3DF1DA0DDDD0032A052 /* BugReporting */,
+				2586E3E31DA0DDDD0032A052 /* CameraRoll */,
+				2586E3F11DA0DDDD0032A052 /* Components */,
+				2586E46B1DA0DDDD0032A052 /* CustomComponents */,
+				2586E49D1DA0DDDD0032A052 /* DebugComponentHierarchy */,
+				2586E49F1DA0DDDD0032A052 /* Devtools */,
+				2586E4A11DA0DDDD0032A052 /* EventEmitter */,
+				2586E4AD1DA0DDDD0032A052 /* Experimental */,
+				2586E4BA1DA0DDDD0032A052 /* Fetch */,
+				2586E4BC1DA0DDDD0032A052 /* Geolocation */,
+				2586E4C31DA0DDDD0032A052 /* Image */,
+				2586E4EE1DA0DDDD0032A052 /* Inspector */,
+				2586E4FB1DA0DDDD0032A052 /* Interaction */,
+				2586E5071DA0DDDD0032A052 /* JavaScriptAppEngine */,
+				2586E5161DA0DDDD0032A052 /* LayoutAnimation */,
+				2586E5181DA0DDDD0032A052 /* Linking */,
+				2586E51A1DA0DDDD0032A052 /* LinkingIOS */,
+				2586E5211DA0DDDE0032A052 /* Modal */,
+				2586E5231DA0DDDE0032A052 /* NativeAnimation */,
+				2586E5441DA0DDDE0032A052 /* NavigationExperimental */,
+				2586E5531DA0DDDE0032A052 /* Network */,
+				2586E56A1DA0DDDE0032A052 /* PermissionsAndroid */,
+				2586E56C1DA0DDDE0032A052 /* Promise.js */,
+				2586E56D1DA0DDDE0032A052 /* promiseRejectionIsError.js */,
+				2586E56E1DA0DDDE0032A052 /* PushNotificationIOS */,
+				2586E5751DA0DDDE0032A052 /* QuickPerformanceLogger */,
+				2586E5771DA0DDDE0032A052 /* RCTTest */,
+				2586E58C1DA0DDDE0032A052 /* react-native */,
+				2586E5921DA0DDDE0032A052 /* ReactIOS */,
+				2586E5981DA0DDDE0032A052 /* ReactNative */,
+				2586E59A1DA0DDDE0032A052 /* RKBackendNode */,
+				2586E59C1DA0DDDE0032A052 /* Sample */,
+				2586E5A51DA0DDDE0032A052 /* Settings */,
+				2586E5AD1DA0DDDE0032A052 /* Share */,
+				2586E5AF1DA0DDDE0032A052 /* Storage */,
+				2586E5B11DA0DDDE0032A052 /* StyleSheet */,
+				2586E5C51DA0DDDE0032A052 /* Text */,
+				2586E5E21DA0DDDE0032A052 /* Utilities */,
+				2586E6251DA0DDDE0032A052 /* vendor */,
+				2586E6351DA0DDDE0032A052 /* Vibration */,
+				2586E63E1DA0DDDE0032A052 /* WebSocket */,
+			);
+			name = Libraries;
+			path = "../node_modules/react-native/Libraries";
+			sourceTree = "<group>";
+		};
+		2586E3781DA0DDDD0032A052 /* ActionSheetIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3791DA0DDDD0032A052 /* ActionSheetIOS.js */,
+				2586E37A1DA0DDDD0032A052 /* RCTActionSheet.xcodeproj */,
+				2586E37D1DA0DDDD0032A052 /* RCTActionSheetManager.h */,
+				2586E37E1DA0DDDD0032A052 /* RCTActionSheetManager.m */,
+			);
+			path = ActionSheetIOS;
+			sourceTree = "<group>";
+		};
+		2586E37B1DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6551DA0DDDE0032A052 /* libRCTActionSheet.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E37F1DA0DDDD0032A052 /* AdSupport */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3801DA0DDDD0032A052 /* AdSupportIOS.js */,
+				2586E3811DA0DDDD0032A052 /* RCTAdSupport.h */,
+				2586E3821DA0DDDD0032A052 /* RCTAdSupport.m */,
+				2586E3831DA0DDDD0032A052 /* RCTAdSupport.xcodeproj */,
+			);
+			path = AdSupport;
+			sourceTree = "<group>";
+		};
+		2586E3841DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6581DA0DDDE0032A052 /* libRCTAdSupport.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E3861DA0DDDD0032A052 /* Animated */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3871DA0DDDD0032A052 /* examples */,
+				2586E38D1DA0DDDD0032A052 /* release */,
+				2586E3901DA0DDDD0032A052 /* src */,
+			);
+			path = Animated;
+			sourceTree = "<group>";
+		};
+		2586E3871DA0DDDD0032A052 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3881DA0DDDD0032A052 /* demo.html */,
+				2586E3891DA0DDDD0032A052 /* pic1.jpg */,
+				2586E38A1DA0DDDD0032A052 /* pic2.jpg */,
+				2586E38B1DA0DDDD0032A052 /* pic3.jpg */,
+				2586E38C1DA0DDDD0032A052 /* style.css */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		2586E38D1DA0DDDD0032A052 /* release */ = {
+			isa = PBXGroup;
+			children = (
+				2586E38E1DA0DDDD0032A052 /* gulpfile.js */,
+				2586E38F1DA0DDDD0032A052 /* package.json */,
+			);
+			path = release;
+			sourceTree = "<group>";
+		};
+		2586E3901DA0DDDD0032A052 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3911DA0DDDD0032A052 /* __tests__ */,
+				2586E3961DA0DDDD0032A052 /* Animated.js */,
+				2586E3971DA0DDDD0032A052 /* AnimatedImplementation.js */,
+				2586E3981DA0DDDD0032A052 /* AnimatedWeb.js */,
+				2586E3991DA0DDDD0032A052 /* bezier.js */,
+				2586E39A1DA0DDDD0032A052 /* Easing.js */,
+				2586E39B1DA0DDDD0032A052 /* Interpolation.js */,
+				2586E39C1DA0DDDD0032A052 /* NativeAnimatedHelper.js */,
+				2586E39D1DA0DDDD0032A052 /* polyfills */,
+				2586E3A11DA0DDDD0032A052 /* SpringConfig.js */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2586E3911DA0DDDD0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3921DA0DDDD0032A052 /* Animated-test.js */,
+				2586E3931DA0DDDD0032A052 /* bezier-test.js */,
+				2586E3941DA0DDDD0032A052 /* Easing-test.js */,
+				2586E3951DA0DDDD0032A052 /* Interpolation-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E39D1DA0DDDD0032A052 /* polyfills */ = {
+			isa = PBXGroup;
+			children = (
+				2586E39E1DA0DDDD0032A052 /* flattenStyle.js */,
+				2586E39F1DA0DDDD0032A052 /* InteractionManager.js */,
+				2586E3A01DA0DDDD0032A052 /* Set.js */,
+			);
+			path = polyfills;
+			sourceTree = "<group>";
+		};
+		2586E3A21DA0DDDD0032A052 /* AppRegistry */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3A31DA0DDDD0032A052 /* AppRegistry.js */,
+			);
+			path = AppRegistry;
+			sourceTree = "<group>";
+		};
+		2586E3A41DA0DDDD0032A052 /* AppState */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3A51DA0DDDD0032A052 /* AppState.js */,
+				2586E3A61DA0DDDD0032A052 /* AppStateIOS.js */,
+			);
+			path = AppState;
+			sourceTree = "<group>";
+		};
+		2586E3A71DA0DDDD0032A052 /* ART */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3A81DA0DDDD0032A052 /* ART.xcodeproj */,
+				2586E3AB1DA0DDDD0032A052 /* ARTCGFloatArray.h */,
+				2586E3AC1DA0DDDD0032A052 /* ARTContainer.h */,
+				2586E3AD1DA0DDDD0032A052 /* ARTGroup.h */,
+				2586E3AE1DA0DDDD0032A052 /* ARTGroup.m */,
+				2586E3AF1DA0DDDD0032A052 /* ARTNode.h */,
+				2586E3B01DA0DDDD0032A052 /* ARTNode.m */,
+				2586E3B11DA0DDDD0032A052 /* ARTRenderable.h */,
+				2586E3B21DA0DDDD0032A052 /* ARTRenderable.m */,
+				2586E3B31DA0DDDD0032A052 /* ARTSerializablePath.js */,
+				2586E3B41DA0DDDD0032A052 /* ARTShape.h */,
+				2586E3B51DA0DDDD0032A052 /* ARTShape.m */,
+				2586E3B61DA0DDDD0032A052 /* ARTSurfaceView.h */,
+				2586E3B71DA0DDDD0032A052 /* ARTSurfaceView.m */,
+				2586E3B81DA0DDDD0032A052 /* ARTText.h */,
+				2586E3B91DA0DDDD0032A052 /* ARTText.m */,
+				2586E3BA1DA0DDDD0032A052 /* ARTTextFrame.h */,
+				2586E3BB1DA0DDDD0032A052 /* Brushes */,
+				2586E3C61DA0DDDD0032A052 /* RCTConvert+ART.h */,
+				2586E3C71DA0DDDD0032A052 /* RCTConvert+ART.m */,
+				2586E3C81DA0DDDD0032A052 /* ReactNativeART.js */,
+				2586E3C91DA0DDDD0032A052 /* ViewManagers */,
+			);
+			path = ART;
+			sourceTree = "<group>";
+		};
+		2586E3A91DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6521DA0DDDE0032A052 /* libART.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E3BB1DA0DDDD0032A052 /* Brushes */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3BC1DA0DDDD0032A052 /* ARTBrush.h */,
+				2586E3BD1DA0DDDD0032A052 /* ARTBrush.m */,
+				2586E3BE1DA0DDDD0032A052 /* ARTLinearGradient.h */,
+				2586E3BF1DA0DDDD0032A052 /* ARTLinearGradient.m */,
+				2586E3C01DA0DDDD0032A052 /* ARTPattern.h */,
+				2586E3C11DA0DDDD0032A052 /* ARTPattern.m */,
+				2586E3C21DA0DDDD0032A052 /* ARTRadialGradient.h */,
+				2586E3C31DA0DDDD0032A052 /* ARTRadialGradient.m */,
+				2586E3C41DA0DDDD0032A052 /* ARTSolidColor.h */,
+				2586E3C51DA0DDDD0032A052 /* ARTSolidColor.m */,
+			);
+			path = Brushes;
+			sourceTree = "<group>";
+		};
+		2586E3C91DA0DDDD0032A052 /* ViewManagers */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3CA1DA0DDDD0032A052 /* ARTGroupManager.h */,
+				2586E3CB1DA0DDDD0032A052 /* ARTGroupManager.m */,
+				2586E3CC1DA0DDDD0032A052 /* ARTNodeManager.h */,
+				2586E3CD1DA0DDDD0032A052 /* ARTNodeManager.m */,
+				2586E3CE1DA0DDDD0032A052 /* ARTRenderableManager.h */,
+				2586E3CF1DA0DDDD0032A052 /* ARTRenderableManager.m */,
+				2586E3D01DA0DDDD0032A052 /* ARTShapeManager.h */,
+				2586E3D11DA0DDDD0032A052 /* ARTShapeManager.m */,
+				2586E3D21DA0DDDD0032A052 /* ARTSurfaceViewManager.h */,
+				2586E3D31DA0DDDD0032A052 /* ARTSurfaceViewManager.m */,
+				2586E3D41DA0DDDD0032A052 /* ARTTextManager.h */,
+				2586E3D51DA0DDDD0032A052 /* ARTTextManager.m */,
+			);
+			path = ViewManagers;
+			sourceTree = "<group>";
+		};
+		2586E3D61DA0DDDD0032A052 /* BatchedBridge */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3D71DA0DDDD0032A052 /* BatchedBridge.js */,
+				2586E3D81DA0DDDD0032A052 /* BatchedBridgedModules */,
+			);
+			path = BatchedBridge;
+			sourceTree = "<group>";
+		};
+		2586E3D81DA0DDDD0032A052 /* BatchedBridgedModules */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3D91DA0DDDD0032A052 /* __mocks__ */,
+				2586E3DB1DA0DDDD0032A052 /* NativeModules.js */,
+				2586E3DC1DA0DDDD0032A052 /* NativeModules.js.flow */,
+				2586E3DD1DA0DDDD0032A052 /* RCTAlertManager.ios.js */,
+				2586E3DE1DA0DDDD0032A052 /* RCTEventEmitter.js */,
+			);
+			path = BatchedBridgedModules;
+			sourceTree = "<group>";
+		};
+		2586E3D91DA0DDDD0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3DA1DA0DDDD0032A052 /* NativeModules.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E3DF1DA0DDDD0032A052 /* BugReporting */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3E01DA0DDDD0032A052 /* BugReporting.js */,
+				2586E3E11DA0DDDD0032A052 /* dumpReactTree.js */,
+				2586E3E21DA0DDDD0032A052 /* getReactData.js */,
+			);
+			path = BugReporting;
+			sourceTree = "<group>";
+		};
+		2586E3E31DA0DDDD0032A052 /* CameraRoll */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3E41DA0DDDD0032A052 /* CameraRoll.js */,
+				2586E3E51DA0DDDD0032A052 /* ImagePickerIOS.js */,
+				2586E3E61DA0DDDD0032A052 /* RCTAssetsLibraryRequestHandler.h */,
+				2586E3E71DA0DDDD0032A052 /* RCTAssetsLibraryRequestHandler.m */,
+				2586E3E81DA0DDDD0032A052 /* RCTCameraRoll.xcodeproj */,
+				2586E3EB1DA0DDDD0032A052 /* RCTCameraRollManager.h */,
+				2586E3EC1DA0DDDD0032A052 /* RCTCameraRollManager.m */,
+				2586E3ED1DA0DDDD0032A052 /* RCTImagePickerManager.h */,
+				2586E3EE1DA0DDDD0032A052 /* RCTImagePickerManager.m */,
+				2586E3EF1DA0DDDD0032A052 /* RCTPhotoLibraryImageLoader.h */,
+				2586E3F01DA0DDDD0032A052 /* RCTPhotoLibraryImageLoader.m */,
+			);
+			path = CameraRoll;
+			sourceTree = "<group>";
+		};
+		2586E3E91DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E65E1DA0DDDE0032A052 /* libRCTCameraRoll.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E3F11DA0DDDD0032A052 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3F21DA0DDDD0032A052 /* ActivityIndicator */,
+				2586E3F61DA0DDDD0032A052 /* Clipboard */,
+				2586E3F81DA0DDDD0032A052 /* DatePicker */,
+				2586E3FB1DA0DDDD0032A052 /* DatePickerAndroid */,
+				2586E3FE1DA0DDDD0032A052 /* DrawerAndroid */,
+				2586E4011DA0DDDD0032A052 /* Intent */,
+				2586E4041DA0DDDD0032A052 /* Keyboard */,
+				2586E4071DA0DDDD0032A052 /* LazyRenderer.js */,
+				2586E4081DA0DDDD0032A052 /* MapView */,
+				2586E40A1DA0DDDD0032A052 /* Navigation */,
+				2586E40D1DA0DDDD0032A052 /* Picker */,
+				2586E4131DA0DDDD0032A052 /* ProgressBarAndroid */,
+				2586E4161DA0DDDD0032A052 /* ProgressViewIOS */,
+				2586E4191DA0DDDD0032A052 /* RefreshControl */,
+				2586E41B1DA0DDDD0032A052 /* ScrollResponder.js */,
+				2586E41C1DA0DDDD0032A052 /* ScrollView */,
+				2586E4211DA0DDDD0032A052 /* SegmentedControlIOS */,
+				2586E4241DA0DDDD0032A052 /* Slider */,
+				2586E4261DA0DDDD0032A052 /* SliderIOS */,
+				2586E4291DA0DDDD0032A052 /* StaticContainer.js */,
+				2586E42A1DA0DDDD0032A052 /* StaticRenderer.js */,
+				2586E42B1DA0DDDD0032A052 /* StatusBar */,
+				2586E42F1DA0DDDD0032A052 /* Subscribable.js */,
+				2586E4301DA0DDDD0032A052 /* Switch */,
+				2586E4321DA0DDDD0032A052 /* SwitchAndroid */,
+				2586E4351DA0DDDD0032A052 /* SwitchIOS */,
+				2586E4381DA0DDDD0032A052 /* TabBarIOS */,
+				2586E43D1DA0DDDD0032A052 /* TextInput */,
+				2586E4401DA0DDDD0032A052 /* TimePickerAndroid */,
+				2586E4431DA0DDDD0032A052 /* ToastAndroid */,
+				2586E4461DA0DDDD0032A052 /* ToolbarAndroid */,
+				2586E4491DA0DDDD0032A052 /* Touchable */,
+				2586E45B1DA0DDDD0032A052 /* UnimplementedViews */,
+				2586E45D1DA0DDDD0032A052 /* View */,
+				2586E4651DA0DDDD0032A052 /* ViewPager */,
+				2586E4681DA0DDDD0032A052 /* WebView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2586E3F21DA0DDDD0032A052 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3F31DA0DDDD0032A052 /* ActivityIndicator.js */,
+				2586E3F41DA0DDDD0032A052 /* ActivityIndicatorIOS.android.js */,
+				2586E3F51DA0DDDD0032A052 /* ActivityIndicatorIOS.ios.js */,
+			);
+			path = ActivityIndicator;
+			sourceTree = "<group>";
+		};
+		2586E3F61DA0DDDD0032A052 /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3F71DA0DDDD0032A052 /* Clipboard.js */,
+			);
+			path = Clipboard;
+			sourceTree = "<group>";
+		};
+		2586E3F81DA0DDDD0032A052 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3F91DA0DDDD0032A052 /* DatePickerIOS.android.js */,
+				2586E3FA1DA0DDDD0032A052 /* DatePickerIOS.ios.js */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		2586E3FB1DA0DDDD0032A052 /* DatePickerAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3FC1DA0DDDD0032A052 /* DatePickerAndroid.android.js */,
+				2586E3FD1DA0DDDD0032A052 /* DatePickerAndroid.ios.js */,
+			);
+			path = DatePickerAndroid;
+			sourceTree = "<group>";
+		};
+		2586E3FE1DA0DDDD0032A052 /* DrawerAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E3FF1DA0DDDD0032A052 /* DrawerLayoutAndroid.android.js */,
+				2586E4001DA0DDDD0032A052 /* DrawerLayoutAndroid.ios.js */,
+			);
+			path = DrawerAndroid;
+			sourceTree = "<group>";
+		};
+		2586E4011DA0DDDD0032A052 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4021DA0DDDD0032A052 /* IntentAndroid.android.js */,
+				2586E4031DA0DDDD0032A052 /* IntentAndroid.ios.js */,
+			);
+			path = Intent;
+			sourceTree = "<group>";
+		};
+		2586E4041DA0DDDD0032A052 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4051DA0DDDD0032A052 /* Keyboard.js */,
+				2586E4061DA0DDDD0032A052 /* KeyboardAvoidingView.js */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		2586E4081DA0DDDD0032A052 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4091DA0DDDD0032A052 /* MapView.js */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		2586E40A1DA0DDDD0032A052 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				2586E40B1DA0DDDD0032A052 /* NavigatorIOS.android.js */,
+				2586E40C1DA0DDDD0032A052 /* NavigatorIOS.ios.js */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		2586E40D1DA0DDDD0032A052 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				2586E40E1DA0DDDD0032A052 /* Picker.js */,
+				2586E40F1DA0DDDD0032A052 /* PickerAndroid.android.js */,
+				2586E4101DA0DDDD0032A052 /* PickerAndroid.ios.js */,
+				2586E4111DA0DDDD0032A052 /* PickerIOS.android.js */,
+				2586E4121DA0DDDD0032A052 /* PickerIOS.ios.js */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
+		2586E4131DA0DDDD0032A052 /* ProgressBarAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4141DA0DDDD0032A052 /* ProgressBarAndroid.android.js */,
+				2586E4151DA0DDDD0032A052 /* ProgressBarAndroid.ios.js */,
+			);
+			path = ProgressBarAndroid;
+			sourceTree = "<group>";
+		};
+		2586E4161DA0DDDD0032A052 /* ProgressViewIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4171DA0DDDD0032A052 /* ProgressViewIOS.android.js */,
+				2586E4181DA0DDDD0032A052 /* ProgressViewIOS.ios.js */,
+			);
+			path = ProgressViewIOS;
+			sourceTree = "<group>";
+		};
+		2586E4191DA0DDDD0032A052 /* RefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				2586E41A1DA0DDDD0032A052 /* RefreshControl.js */,
+			);
+			path = RefreshControl;
+			sourceTree = "<group>";
+		};
+		2586E41C1DA0DDDD0032A052 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				2586E41D1DA0DDDD0032A052 /* processDecelerationRate.js */,
+				2586E41E1DA0DDDD0032A052 /* RecyclerViewBackedScrollView.android.js */,
+				2586E41F1DA0DDDD0032A052 /* RecyclerViewBackedScrollView.ios.js */,
+				2586E4201DA0DDDD0032A052 /* ScrollView.js */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		2586E4211DA0DDDD0032A052 /* SegmentedControlIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4221DA0DDDD0032A052 /* SegmentedControlIOS.android.js */,
+				2586E4231DA0DDDD0032A052 /* SegmentedControlIOS.ios.js */,
+			);
+			path = SegmentedControlIOS;
+			sourceTree = "<group>";
+		};
+		2586E4241DA0DDDD0032A052 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4251DA0DDDD0032A052 /* Slider.js */,
+			);
+			path = Slider;
+			sourceTree = "<group>";
+		};
+		2586E4261DA0DDDD0032A052 /* SliderIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4271DA0DDDD0032A052 /* SliderIOS.android.js */,
+				2586E4281DA0DDDD0032A052 /* SliderIOS.ios.js */,
+			);
+			path = SliderIOS;
+			sourceTree = "<group>";
+		};
+		2586E42B1DA0DDDD0032A052 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				2586E42C1DA0DDDD0032A052 /* StatusBar.js */,
+				2586E42D1DA0DDDD0032A052 /* StatusBarIOS.android.js */,
+				2586E42E1DA0DDDD0032A052 /* StatusBarIOS.ios.js */,
+			);
+			path = StatusBar;
+			sourceTree = "<group>";
+		};
+		2586E4301DA0DDDD0032A052 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4311DA0DDDD0032A052 /* Switch.js */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
+		2586E4321DA0DDDD0032A052 /* SwitchAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4331DA0DDDD0032A052 /* SwitchAndroid.android.js */,
+				2586E4341DA0DDDD0032A052 /* SwitchAndroid.ios.js */,
+			);
+			path = SwitchAndroid;
+			sourceTree = "<group>";
+		};
+		2586E4351DA0DDDD0032A052 /* SwitchIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4361DA0DDDD0032A052 /* SwitchIOS.android.js */,
+				2586E4371DA0DDDD0032A052 /* SwitchIOS.ios.js */,
+			);
+			path = SwitchIOS;
+			sourceTree = "<group>";
+		};
+		2586E4381DA0DDDD0032A052 /* TabBarIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4391DA0DDDD0032A052 /* TabBarIOS.android.js */,
+				2586E43A1DA0DDDD0032A052 /* TabBarIOS.ios.js */,
+				2586E43B1DA0DDDD0032A052 /* TabBarItemIOS.android.js */,
+				2586E43C1DA0DDDD0032A052 /* TabBarItemIOS.ios.js */,
+			);
+			path = TabBarIOS;
+			sourceTree = "<group>";
+		};
+		2586E43D1DA0DDDD0032A052 /* TextInput */ = {
+			isa = PBXGroup;
+			children = (
+				2586E43E1DA0DDDD0032A052 /* TextInput.js */,
+				2586E43F1DA0DDDD0032A052 /* TextInputState.js */,
+			);
+			path = TextInput;
+			sourceTree = "<group>";
+		};
+		2586E4401DA0DDDD0032A052 /* TimePickerAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4411DA0DDDD0032A052 /* TimePickerAndroid.android.js */,
+				2586E4421DA0DDDD0032A052 /* TimePickerAndroid.ios.js */,
+			);
+			path = TimePickerAndroid;
+			sourceTree = "<group>";
+		};
+		2586E4431DA0DDDD0032A052 /* ToastAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4441DA0DDDD0032A052 /* ToastAndroid.android.js */,
+				2586E4451DA0DDDD0032A052 /* ToastAndroid.ios.js */,
+			);
+			path = ToastAndroid;
+			sourceTree = "<group>";
+		};
+		2586E4461DA0DDDD0032A052 /* ToolbarAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4471DA0DDDD0032A052 /* ToolbarAndroid.android.js */,
+				2586E4481DA0DDDD0032A052 /* ToolbarAndroid.ios.js */,
+			);
+			path = ToolbarAndroid;
+			sourceTree = "<group>";
+		};
+		2586E4491DA0DDDD0032A052 /* Touchable */ = {
+			isa = PBXGroup;
+			children = (
+				2586E44A1DA0DDDD0032A052 /* __mocks__ */,
+				2586E44C1DA0DDDD0032A052 /* __tests__ */,
+				2586E4501DA0DDDD0032A052 /* BoundingDimensions.js */,
+				2586E4511DA0DDDD0032A052 /* ensureComponentIsNative.js */,
+				2586E4521DA0DDDD0032A052 /* ensurePositiveDelayProps.js */,
+				2586E4531DA0DDDD0032A052 /* Position.js */,
+				2586E4541DA0DDDD0032A052 /* Touchable.js */,
+				2586E4551DA0DDDD0032A052 /* TouchableBounce.js */,
+				2586E4561DA0DDDD0032A052 /* TouchableHighlight.js */,
+				2586E4571DA0DDDD0032A052 /* TouchableNativeFeedback.android.js */,
+				2586E4581DA0DDDD0032A052 /* TouchableNativeFeedback.ios.js */,
+				2586E4591DA0DDDD0032A052 /* TouchableOpacity.js */,
+				2586E45A1DA0DDDD0032A052 /* TouchableWithoutFeedback.js */,
+			);
+			path = Touchable;
+			sourceTree = "<group>";
+		};
+		2586E44A1DA0DDDD0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E44B1DA0DDDD0032A052 /* ensureComponentIsNative.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E44C1DA0DDDD0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E44D1DA0DDDD0032A052 /* __snapshots__ */,
+				2586E44F1DA0DDDD0032A052 /* TouchableHighlight-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E44D1DA0DDDD0032A052 /* __snapshots__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E44E1DA0DDDD0032A052 /* TouchableHighlight-test.js.snap */,
+			);
+			path = __snapshots__;
+			sourceTree = "<group>";
+		};
+		2586E45B1DA0DDDD0032A052 /* UnimplementedViews */ = {
+			isa = PBXGroup;
+			children = (
+				2586E45C1DA0DDDD0032A052 /* UnimplementedView.js */,
+			);
+			path = UnimplementedViews;
+			sourceTree = "<group>";
+		};
+		2586E45D1DA0DDDD0032A052 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2586E45E1DA0DDDD0032A052 /* __mocks__ */,
+				2586E4601DA0DDDD0032A052 /* ReactNativeStyleAttributes.js */,
+				2586E4611DA0DDDD0032A052 /* ReactNativeViewAttributes.js */,
+				2586E4621DA0DDDD0032A052 /* ShadowPropTypesIOS.js */,
+				2586E4631DA0DDDD0032A052 /* View.js */,
+				2586E4641DA0DDDD0032A052 /* ViewStylePropTypes.js */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2586E45E1DA0DDDD0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E45F1DA0DDDD0032A052 /* View.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E4651DA0DDDD0032A052 /* ViewPager */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4661DA0DDDD0032A052 /* ViewPagerAndroid.android.js */,
+				2586E4671DA0DDDD0032A052 /* ViewPagerAndroid.ios.js */,
+			);
+			path = ViewPager;
+			sourceTree = "<group>";
+		};
+		2586E4681DA0DDDD0032A052 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4691DA0DDDD0032A052 /* WebView.android.js */,
+				2586E46A1DA0DDDD0032A052 /* WebView.ios.js */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		2586E46B1DA0DDDD0032A052 /* CustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				2586E46C1DA0DDDD0032A052 /* LICENSE */,
+				2586E46D1DA0DDDD0032A052 /* ListView */,
+				2586E4701DA0DDDD0032A052 /* NavigationExperimental */,
+				2586E4881DA0DDDD0032A052 /* Navigator */,
+			);
+			path = CustomComponents;
+			sourceTree = "<group>";
+		};
+		2586E46D1DA0DDDD0032A052 /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				2586E46E1DA0DDDD0032A052 /* ListView.js */,
+				2586E46F1DA0DDDD0032A052 /* ListViewDataSource.js */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		2586E4701DA0DDDD0032A052 /* NavigationExperimental */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4711DA0DDDD0032A052 /* assets */,
+				2586E47C1DA0DDDD0032A052 /* NavigationAnimatedValueSubscription.js */,
+				2586E47D1DA0DDDD0032A052 /* NavigationCard.js */,
+				2586E47E1DA0DDDD0032A052 /* NavigationCardStack.js */,
+				2586E47F1DA0DDDD0032A052 /* NavigationCardStackPanResponder.js */,
+				2586E4801DA0DDDD0032A052 /* NavigationCardStackStyleInterpolator.js */,
+				2586E4811DA0DDDD0032A052 /* NavigationHeader.js */,
+				2586E4821DA0DDDD0032A052 /* NavigationHeaderBackButton.js */,
+				2586E4831DA0DDDD0032A052 /* NavigationHeaderStyleInterpolator.js */,
+				2586E4841DA0DDDD0032A052 /* NavigationHeaderTitle.js */,
+				2586E4851DA0DDDD0032A052 /* NavigationPagerPanResponder.js */,
+				2586E4861DA0DDDD0032A052 /* NavigationPagerStyleInterpolator.js */,
+				2586E4871DA0DDDD0032A052 /* NavigationPointerEventsContainer.js */,
+			);
+			path = NavigationExperimental;
+			sourceTree = "<group>";
+		};
+		2586E4711DA0DDDD0032A052 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4721DA0DDDD0032A052 /* back-icon@1.5x.android.png */,
+				2586E4731DA0DDDD0032A052 /* back-icon@1.5x.ios.png */,
+				2586E4741DA0DDDD0032A052 /* back-icon@1x.android.png */,
+				2586E4751DA0DDDD0032A052 /* back-icon@1x.ios.png */,
+				2586E4761DA0DDDD0032A052 /* back-icon@2x.android.png */,
+				2586E4771DA0DDDD0032A052 /* back-icon@2x.ios.png */,
+				2586E4781DA0DDDD0032A052 /* back-icon@3x.android.png */,
+				2586E4791DA0DDDD0032A052 /* back-icon@3x.ios.png */,
+				2586E47A1DA0DDDD0032A052 /* back-icon@4x.android.png */,
+				2586E47B1DA0DDDD0032A052 /* back-icon@4x.ios.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		2586E4881DA0DDDD0032A052 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4891DA0DDDD0032A052 /* Navigation */,
+				2586E4951DA0DDDD0032A052 /* Navigator.js */,
+				2586E4961DA0DDDD0032A052 /* NavigatorBreadcrumbNavigationBar.js */,
+				2586E4971DA0DDDD0032A052 /* NavigatorBreadcrumbNavigationBarStyles.android.js */,
+				2586E4981DA0DDDD0032A052 /* NavigatorBreadcrumbNavigationBarStyles.ios.js */,
+				2586E4991DA0DDDD0032A052 /* NavigatorNavigationBar.js */,
+				2586E49A1DA0DDDD0032A052 /* NavigatorNavigationBarStylesAndroid.js */,
+				2586E49B1DA0DDDD0032A052 /* NavigatorNavigationBarStylesIOS.js */,
+				2586E49C1DA0DDDD0032A052 /* NavigatorSceneConfigs.js */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
+		2586E4891DA0DDDD0032A052 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				2586E48A1DA0DDDD0032A052 /* __tests__ */,
+				2586E4901DA0DDDD0032A052 /* NavigationContext.js */,
+				2586E4911DA0DDDD0032A052 /* NavigationEvent.js */,
+				2586E4921DA0DDDD0032A052 /* NavigationEventEmitter.js */,
+				2586E4931DA0DDDD0032A052 /* NavigationRouteStack.js */,
+				2586E4941DA0DDDD0032A052 /* NavigationTreeNode.js */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		2586E48A1DA0DDDD0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E48B1DA0DDDD0032A052 /* NavigationContext-test.js */,
+				2586E48C1DA0DDDD0032A052 /* NavigationEvent-test.js */,
+				2586E48D1DA0DDDD0032A052 /* NavigationEventEmitter-test.js */,
+				2586E48E1DA0DDDD0032A052 /* NavigationRouteStack-test.js */,
+				2586E48F1DA0DDDD0032A052 /* NavigationTreeNode-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E49D1DA0DDDD0032A052 /* DebugComponentHierarchy */ = {
+			isa = PBXGroup;
+			children = (
+				2586E49E1DA0DDDD0032A052 /* RCTDebugComponentOwnership.js */,
+			);
+			path = DebugComponentHierarchy;
+			sourceTree = "<group>";
+		};
+		2586E49F1DA0DDDD0032A052 /* Devtools */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4A01DA0DDDD0032A052 /* setupDevtools.js */,
+			);
+			path = Devtools;
+			sourceTree = "<group>";
+		};
+		2586E4A11DA0DDDD0032A052 /* EventEmitter */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4A21DA0DDDD0032A052 /* EmitterSubscription.js */,
+				2586E4A31DA0DDDD0032A052 /* EventEmitter.js */,
+				2586E4A41DA0DDDD0032A052 /* EventEmitterWithHolding.js */,
+				2586E4A51DA0DDDD0032A052 /* EventHolder.js */,
+				2586E4A61DA0DDDD0032A052 /* EventSubscription.js */,
+				2586E4A71DA0DDDD0032A052 /* EventSubscriptionVendor.js */,
+				2586E4A81DA0DDDD0032A052 /* EventValidator.js */,
+				2586E4A91DA0DDDD0032A052 /* mixInEventEmitter.js */,
+				2586E4AA1DA0DDDD0032A052 /* NativeEventEmitter.js */,
+				2586E4AB1DA0DDDD0032A052 /* RCTDeviceEventEmitter.js */,
+				2586E4AC1DA0DDDD0032A052 /* RCTNativeAppEventEmitter.js */,
+			);
+			path = EventEmitter;
+			sourceTree = "<group>";
+		};
+		2586E4AD1DA0DDDD0032A052 /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4AE1DA0DDDD0032A052 /* Incremental.js */,
+				2586E4AF1DA0DDDD0032A052 /* IncrementalExample.js */,
+				2586E4B01DA0DDDD0032A052 /* IncrementalGroup.js */,
+				2586E4B11DA0DDDD0032A052 /* IncrementalPresenter.js */,
+				2586E4B21DA0DDDD0032A052 /* SwipeableRow */,
+				2586E4B81DA0DDDD0032A052 /* ViewabilityHelper.js */,
+				2586E4B91DA0DDDD0032A052 /* WindowedListView.js */,
+			);
+			path = Experimental;
+			sourceTree = "<group>";
+		};
+		2586E4B21DA0DDDD0032A052 /* SwipeableRow */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4B31DA0DDDD0032A052 /* SwipeableListView.js */,
+				2586E4B41DA0DDDD0032A052 /* SwipeableListViewDataSource.js */,
+				2586E4B51DA0DDDD0032A052 /* SwipeableQuickActionButton.js */,
+				2586E4B61DA0DDDD0032A052 /* SwipeableQuickActions.js */,
+				2586E4B71DA0DDDD0032A052 /* SwipeableRow.js */,
+			);
+			path = SwipeableRow;
+			sourceTree = "<group>";
+		};
+		2586E4BA1DA0DDDD0032A052 /* Fetch */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4BB1DA0DDDD0032A052 /* fetch.js */,
+			);
+			path = Fetch;
+			sourceTree = "<group>";
+		};
+		2586E4BC1DA0DDDD0032A052 /* Geolocation */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4BD1DA0DDDD0032A052 /* Geolocation.js */,
+				2586E4BE1DA0DDDD0032A052 /* RCTGeolocation.xcodeproj */,
+				2586E4C11DA0DDDD0032A052 /* RCTLocationObserver.h */,
+				2586E4C21DA0DDDD0032A052 /* RCTLocationObserver.m */,
+			);
+			path = Geolocation;
+			sourceTree = "<group>";
+		};
+		2586E4BF1DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6611DA0DDDE0032A052 /* libRCTGeolocation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E4C31DA0DDDD0032A052 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4C41DA0DDDD0032A052 /* __mocks__ */,
+				2586E4C61DA0DDDD0032A052 /* __tests__ */,
+				2586E4C81DA0DDDD0032A052 /* AssetRegistry.js */,
+				2586E4C91DA0DDDD0032A052 /* AssetSourceResolver.js */,
+				2586E4CA1DA0DDDD0032A052 /* GlobalImageStub.js */,
+				2586E4CB1DA0DDDD0032A052 /* Image.android.js */,
+				2586E4CC1DA0DDDD0032A052 /* Image.ios.js */,
+				2586E4CD1DA0DDDD0032A052 /* ImageEditor.js */,
+				2586E4CE1DA0DDDD0032A052 /* ImageResizeMode.js */,
+				2586E4CF1DA0DDDD0032A052 /* ImageSource.js */,
+				2586E4D01DA0DDDD0032A052 /* ImageSourcePropType.js */,
+				2586E4D11DA0DDDD0032A052 /* ImageStore.js */,
+				2586E4D21DA0DDDD0032A052 /* ImageStylePropTypes.js */,
+				2586E4D31DA0DDDD0032A052 /* RCTGIFImageDecoder.h */,
+				2586E4D41DA0DDDD0032A052 /* RCTGIFImageDecoder.m */,
+				2586E4D51DA0DDDD0032A052 /* RCTImage.xcodeproj */,
+				2586E4D81DA0DDDD0032A052 /* RCTImageBlurUtils.h */,
+				2586E4D91DA0DDDD0032A052 /* RCTImageBlurUtils.m */,
+				2586E4DA1DA0DDDD0032A052 /* RCTImageCache.h */,
+				2586E4DB1DA0DDDD0032A052 /* RCTImageCache.m */,
+				2586E4DC1DA0DDDD0032A052 /* RCTImageEditingManager.h */,
+				2586E4DD1DA0DDDD0032A052 /* RCTImageEditingManager.m */,
+				2586E4DE1DA0DDDD0032A052 /* RCTImageLoader.h */,
+				2586E4DF1DA0DDDD0032A052 /* RCTImageLoader.m */,
+				2586E4E01DA0DDDD0032A052 /* RCTImageStoreManager.h */,
+				2586E4E11DA0DDDD0032A052 /* RCTImageStoreManager.m */,
+				2586E4E21DA0DDDD0032A052 /* RCTImageUtils.h */,
+				2586E4E31DA0DDDD0032A052 /* RCTImageUtils.m */,
+				2586E4E41DA0DDDD0032A052 /* RCTImageView.h */,
+				2586E4E51DA0DDDD0032A052 /* RCTImageView.m */,
+				2586E4E61DA0DDDD0032A052 /* RCTImageViewManager.h */,
+				2586E4E71DA0DDDD0032A052 /* RCTImageViewManager.m */,
+				2586E4E81DA0DDDD0032A052 /* RCTLocalAssetImageLoader.h */,
+				2586E4E91DA0DDDD0032A052 /* RCTLocalAssetImageLoader.m */,
+				2586E4EA1DA0DDDD0032A052 /* RCTResizeMode.h */,
+				2586E4EB1DA0DDDD0032A052 /* RCTResizeMode.m */,
+				2586E4EC1DA0DDDD0032A052 /* RelativeImageStub.js */,
+				2586E4ED1DA0DDDD0032A052 /* resolveAssetSource.js */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		2586E4C41DA0DDDD0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4C51DA0DDDD0032A052 /* Image.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E4C61DA0DDDD0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4C71DA0DDDD0032A052 /* resolveAssetSource-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E4D61DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6641DA0DDDE0032A052 /* libRCTImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E4EE1DA0DDDD0032A052 /* Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4EF1DA0DDDD0032A052 /* BorderBox.js */,
+				2586E4F01DA0DDDD0032A052 /* BoxInspector.js */,
+				2586E4F11DA0DDDD0032A052 /* ElementBox.js */,
+				2586E4F21DA0DDDD0032A052 /* ElementProperties.js */,
+				2586E4F31DA0DDDD0032A052 /* Inspector.js */,
+				2586E4F41DA0DDDD0032A052 /* InspectorOverlay.js */,
+				2586E4F51DA0DDDD0032A052 /* InspectorPanel.js */,
+				2586E4F61DA0DDDD0032A052 /* InspectorUtils.js */,
+				2586E4F71DA0DDDD0032A052 /* NetworkOverlay.js */,
+				2586E4F81DA0DDDD0032A052 /* PerformanceOverlay.js */,
+				2586E4F91DA0DDDD0032A052 /* resolveBoxStyle.js */,
+				2586E4FA1DA0DDDD0032A052 /* StyleInspector.js */,
+			);
+			path = Inspector;
+			sourceTree = "<group>";
+		};
+		2586E4FB1DA0DDDD0032A052 /* Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4FC1DA0DDDD0032A052 /* __tests__ */,
+				2586E5011DA0DDDD0032A052 /* Batchinator.js */,
+				2586E5021DA0DDDD0032A052 /* InteractionManager.js */,
+				2586E5031DA0DDDD0032A052 /* InteractionMixin.js */,
+				2586E5041DA0DDDD0032A052 /* JSEventLoopWatchdog.js */,
+				2586E5051DA0DDDD0032A052 /* PanResponder.js */,
+				2586E5061DA0DDDD0032A052 /* TaskQueue.js */,
+			);
+			path = Interaction;
+			sourceTree = "<group>";
+		};
+		2586E4FC1DA0DDDD0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E4FD1DA0DDDD0032A052 /* Batchinator-test.js */,
+				2586E4FE1DA0DDDD0032A052 /* InteractionManager-test.js */,
+				2586E4FF1DA0DDDD0032A052 /* InteractionMixin-test.js */,
+				2586E5001DA0DDDD0032A052 /* TaskQueue-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E5071DA0DDDD0032A052 /* JavaScriptAppEngine */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5081DA0DDDD0032A052 /* Initialization */,
+				2586E5121DA0DDDD0032A052 /* System */,
+			);
+			path = JavaScriptAppEngine;
+			sourceTree = "<group>";
+		};
+		2586E5081DA0DDDD0032A052 /* Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5091DA0DDDD0032A052 /* __tests__ */,
+				2586E50B1DA0DDDD0032A052 /* ExceptionsManager.js */,
+				2586E50C1DA0DDDD0032A052 /* getDevServer.js */,
+				2586E50D1DA0DDDD0032A052 /* InitializeJavaScriptAppEngine.js */,
+				2586E50E1DA0DDDD0032A052 /* openFileInEditor.js */,
+				2586E50F1DA0DDDD0032A052 /* parseErrorStack.js */,
+				2586E5101DA0DDDD0032A052 /* source-map-url.js */,
+				2586E5111DA0DDDD0032A052 /* symbolicateStackTrace.js */,
+			);
+			path = Initialization;
+			sourceTree = "<group>";
+		};
+		2586E5091DA0DDDD0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E50A1DA0DDDD0032A052 /* parseErrorStack-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E5121DA0DDDD0032A052 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5131DA0DDDD0032A052 /* JSTimers */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		2586E5131DA0DDDD0032A052 /* JSTimers */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5141DA0DDDD0032A052 /* JSTimers.js */,
+				2586E5151DA0DDDD0032A052 /* JSTimersExecution.js */,
+			);
+			path = JSTimers;
+			sourceTree = "<group>";
+		};
+		2586E5161DA0DDDD0032A052 /* LayoutAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5171DA0DDDD0032A052 /* LayoutAnimation.js */,
+			);
+			path = LayoutAnimation;
+			sourceTree = "<group>";
+		};
+		2586E5181DA0DDDD0032A052 /* Linking */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5191DA0DDDD0032A052 /* Linking.js */,
+			);
+			path = Linking;
+			sourceTree = "<group>";
+		};
+		2586E51A1DA0DDDD0032A052 /* LinkingIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E51B1DA0DDDD0032A052 /* LinkingIOS.js */,
+				2586E51C1DA0DDDD0032A052 /* RCTLinking.xcodeproj */,
+				2586E51F1DA0DDDE0032A052 /* RCTLinkingManager.h */,
+				2586E5201DA0DDDE0032A052 /* RCTLinkingManager.m */,
+			);
+			path = LinkingIOS;
+			sourceTree = "<group>";
+		};
+		2586E51D1DA0DDDD0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6671DA0DDDE0032A052 /* libRCTLinking.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E5211DA0DDDE0032A052 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5221DA0DDDE0032A052 /* Modal.js */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		2586E5231DA0DDDE0032A052 /* NativeAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5241DA0DDDE0032A052 /* Nodes */,
+				2586E53B1DA0DDDE0032A052 /* RCTAnimation.xcodeproj */,
+				2586E53E1DA0DDDE0032A052 /* RCTAnimationUtils.h */,
+				2586E53F1DA0DDDE0032A052 /* RCTAnimationUtils.m */,
+				2586E5401DA0DDDE0032A052 /* RCTNativeAnimatedModule.h */,
+				2586E5411DA0DDDE0032A052 /* RCTNativeAnimatedModule.m */,
+				2586E5421DA0DDDE0032A052 /* RCTViewPropertyMapper.h */,
+				2586E5431DA0DDDE0032A052 /* RCTViewPropertyMapper.m */,
+			);
+			path = NativeAnimation;
+			sourceTree = "<group>";
+		};
+		2586E5241DA0DDDE0032A052 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5251DA0DDDE0032A052 /* RCTAdditionAnimatedNode.h */,
+				2586E5261DA0DDDE0032A052 /* RCTAdditionAnimatedNode.m */,
+				2586E5271DA0DDDE0032A052 /* RCTAnimatedNode.h */,
+				2586E5281DA0DDDE0032A052 /* RCTAnimatedNode.m */,
+				2586E5291DA0DDDE0032A052 /* RCTAnimationDriverNode.h */,
+				2586E52A1DA0DDDE0032A052 /* RCTAnimationDriverNode.m */,
+				2586E52B1DA0DDDE0032A052 /* RCTDiffClampAnimatedNode.h */,
+				2586E52C1DA0DDDE0032A052 /* RCTDiffClampAnimatedNode.m */,
+				2586E52D1DA0DDDE0032A052 /* RCTInterpolationAnimatedNode.h */,
+				2586E52E1DA0DDDE0032A052 /* RCTInterpolationAnimatedNode.m */,
+				2586E52F1DA0DDDE0032A052 /* RCTModuloAnimatedNode.h */,
+				2586E5301DA0DDDE0032A052 /* RCTModuloAnimatedNode.m */,
+				2586E5311DA0DDDE0032A052 /* RCTMultiplicationAnimatedNode.h */,
+				2586E5321DA0DDDE0032A052 /* RCTMultiplicationAnimatedNode.m */,
+				2586E5331DA0DDDE0032A052 /* RCTPropsAnimatedNode.h */,
+				2586E5341DA0DDDE0032A052 /* RCTPropsAnimatedNode.m */,
+				2586E5351DA0DDDE0032A052 /* RCTStyleAnimatedNode.h */,
+				2586E5361DA0DDDE0032A052 /* RCTStyleAnimatedNode.m */,
+				2586E5371DA0DDDE0032A052 /* RCTTransformAnimatedNode.h */,
+				2586E5381DA0DDDE0032A052 /* RCTTransformAnimatedNode.m */,
+				2586E5391DA0DDDE0032A052 /* RCTValueAnimatedNode.h */,
+				2586E53A1DA0DDDE0032A052 /* RCTValueAnimatedNode.m */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		2586E53C1DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E65B1DA0DDDE0032A052 /* libRCTAnimation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E5441DA0DDDE0032A052 /* NavigationExperimental */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5451DA0DDDE0032A052 /* __mocks__ */,
+				2586E5471DA0DDDE0032A052 /* __tests__ */,
+				2586E5491DA0DDDE0032A052 /* NavigationAbstractPanResponder.js */,
+				2586E54A1DA0DDDE0032A052 /* NavigationExperimental.js */,
+				2586E54B1DA0DDDE0032A052 /* NavigationPropTypes.js */,
+				2586E54C1DA0DDDE0032A052 /* NavigationStateUtils.js */,
+				2586E54D1DA0DDDE0032A052 /* NavigationTransitioner.js */,
+				2586E54E1DA0DDDE0032A052 /* NavigationTypeDefinition.js */,
+				2586E54F1DA0DDDE0032A052 /* Reducer */,
+			);
+			path = NavigationExperimental;
+			sourceTree = "<group>";
+		};
+		2586E5451DA0DDDE0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5461DA0DDDE0032A052 /* NavigationRootContainer.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E5471DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5481DA0DDDE0032A052 /* NavigationStateUtils-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E54F1DA0DDDE0032A052 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5501DA0DDDE0032A052 /* __tests__ */,
+				2586E5521DA0DDDE0032A052 /* NavigationScenesReducer.js */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		2586E5501DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5511DA0DDDE0032A052 /* NavigationScenesReducer-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E5531DA0DDDE0032A052 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5541DA0DDDE0032A052 /* __tests__ */,
+				2586E5561DA0DDDE0032A052 /* FormData.js */,
+				2586E5571DA0DDDE0032A052 /* NetInfo.js */,
+				2586E5581DA0DDDE0032A052 /* RCTDataRequestHandler.h */,
+				2586E5591DA0DDDE0032A052 /* RCTDataRequestHandler.m */,
+				2586E55A1DA0DDDE0032A052 /* RCTFileRequestHandler.h */,
+				2586E55B1DA0DDDE0032A052 /* RCTFileRequestHandler.m */,
+				2586E55C1DA0DDDE0032A052 /* RCTHTTPRequestHandler.h */,
+				2586E55D1DA0DDDE0032A052 /* RCTHTTPRequestHandler.m */,
+				2586E55E1DA0DDDE0032A052 /* RCTNetInfo.h */,
+				2586E55F1DA0DDDE0032A052 /* RCTNetInfo.m */,
+				2586E5601DA0DDDE0032A052 /* RCTNetwork.xcodeproj */,
+				2586E5631DA0DDDE0032A052 /* RCTNetworking.android.js */,
+				2586E5641DA0DDDE0032A052 /* RCTNetworking.h */,
+				2586E5651DA0DDDE0032A052 /* RCTNetworking.ios.js */,
+				2586E5661DA0DDDE0032A052 /* RCTNetworking.mm */,
+				2586E5671DA0DDDE0032A052 /* RCTNetworkTask.h */,
+				2586E5681DA0DDDE0032A052 /* RCTNetworkTask.m */,
+				2586E5691DA0DDDE0032A052 /* XMLHttpRequest.js */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2586E5541DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5551DA0DDDE0032A052 /* XMLHttpRequest-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E5611DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E66A1DA0DDDE0032A052 /* libRCTNetwork.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E56A1DA0DDDE0032A052 /* PermissionsAndroid */ = {
+			isa = PBXGroup;
+			children = (
+				2586E56B1DA0DDDE0032A052 /* PermissionsAndroid.js */,
+			);
+			path = PermissionsAndroid;
+			sourceTree = "<group>";
+		};
+		2586E56E1DA0DDDE0032A052 /* PushNotificationIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E56F1DA0DDDE0032A052 /* PushNotificationIOS.js */,
+				2586E5701DA0DDDE0032A052 /* RCTPushNotification.xcodeproj */,
+				2586E5731DA0DDDE0032A052 /* RCTPushNotificationManager.h */,
+				2586E5741DA0DDDE0032A052 /* RCTPushNotificationManager.m */,
+			);
+			path = PushNotificationIOS;
+			sourceTree = "<group>";
+		};
+		2586E5711DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E66D1DA0DDDE0032A052 /* libRCTPushNotification.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E5751DA0DDDE0032A052 /* QuickPerformanceLogger */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5761DA0DDDE0032A052 /* QuickPerformanceLogger.js */,
+			);
+			path = QuickPerformanceLogger;
+			sourceTree = "<group>";
+		};
+		2586E5771DA0DDDE0032A052 /* RCTTest */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5781DA0DDDE0032A052 /* FBSnapshotTestCase */,
+				2586E5811DA0DDDE0032A052 /* RCTSnapshotManager.h */,
+				2586E5821DA0DDDE0032A052 /* RCTSnapshotManager.m */,
+				2586E5831DA0DDDE0032A052 /* RCTTest.xcodeproj */,
+				2586E5861DA0DDDE0032A052 /* RCTTestModule.h */,
+				2586E5871DA0DDDE0032A052 /* RCTTestModule.m */,
+				2586E5881DA0DDDE0032A052 /* RCTTestRunner.h */,
+				2586E5891DA0DDDE0032A052 /* RCTTestRunner.m */,
+				2586E58A1DA0DDDE0032A052 /* SnapshotViewIOS.android.js */,
+				2586E58B1DA0DDDE0032A052 /* SnapshotViewIOS.ios.js */,
+			);
+			path = RCTTest;
+			sourceTree = "<group>";
+		};
+		2586E5781DA0DDDE0032A052 /* FBSnapshotTestCase */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5791DA0DDDE0032A052 /* FBSnapshotTestCase.h */,
+				2586E57A1DA0DDDE0032A052 /* FBSnapshotTestCase.m */,
+				2586E57B1DA0DDDE0032A052 /* FBSnapshotTestController.h */,
+				2586E57C1DA0DDDE0032A052 /* FBSnapshotTestController.m */,
+				2586E57D1DA0DDDE0032A052 /* UIImage+Compare.h */,
+				2586E57E1DA0DDDE0032A052 /* UIImage+Compare.m */,
+				2586E57F1DA0DDDE0032A052 /* UIImage+Diff.h */,
+				2586E5801DA0DDDE0032A052 /* UIImage+Diff.m */,
+			);
+			path = FBSnapshotTestCase;
+			sourceTree = "<group>";
+		};
+		2586E5841DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6731DA0DDDE0032A052 /* libRCTTest.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E58C1DA0DDDE0032A052 /* react-native */ = {
+			isa = PBXGroup;
+			children = (
+				2586E58D1DA0DDDE0032A052 /* react-native-interface.js */,
+				2586E58E1DA0DDDE0032A052 /* react-native.js */,
+				2586E58F1DA0DDDE0032A052 /* react-native.js.flow */,
+				2586E5901DA0DDDE0032A052 /* React.js */,
+				2586E5911DA0DDDE0032A052 /* ReactNative.js */,
+			);
+			path = "react-native";
+			sourceTree = "<group>";
+		};
+		2586E5921DA0DDDE0032A052 /* ReactIOS */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5931DA0DDDE0032A052 /* AppContainer.js */,
+				2586E5941DA0DDDE0032A052 /* renderApplication.js */,
+				2586E5951DA0DDDE0032A052 /* requireNativeComponent.js */,
+				2586E5961DA0DDDE0032A052 /* verifyPropTypes.js */,
+				2586E5971DA0DDDE0032A052 /* YellowBox.js */,
+			);
+			path = ReactIOS;
+			sourceTree = "<group>";
+		};
+		2586E5981DA0DDDE0032A052 /* ReactNative */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5991DA0DDDE0032A052 /* UIManagerStatTracker.js */,
+			);
+			path = ReactNative;
+			sourceTree = "<group>";
+		};
+		2586E59A1DA0DDDE0032A052 /* RKBackendNode */ = {
+			isa = PBXGroup;
+			children = (
+				2586E59B1DA0DDDE0032A052 /* queryLayoutByID.js */,
+			);
+			path = RKBackendNode;
+			sourceTree = "<group>";
+		};
+		2586E59C1DA0DDDE0032A052 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				2586E59D1DA0DDDE0032A052 /* package.json */,
+				2586E59E1DA0DDDE0032A052 /* Sample.android.js */,
+				2586E59F1DA0DDDE0032A052 /* Sample.h */,
+				2586E5A01DA0DDDE0032A052 /* Sample.ios.js */,
+				2586E5A11DA0DDDE0032A052 /* Sample.m */,
+				2586E5A21DA0DDDE0032A052 /* Sample.xcodeproj */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		2586E5A31DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E67F1DA0DDDE0032A052 /* libSample.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E5A51DA0DDDE0032A052 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5A61DA0DDDE0032A052 /* RCTSettings.xcodeproj */,
+				2586E5A91DA0DDDE0032A052 /* RCTSettingsManager.h */,
+				2586E5AA1DA0DDDE0032A052 /* RCTSettingsManager.m */,
+				2586E5AB1DA0DDDE0032A052 /* Settings.android.js */,
+				2586E5AC1DA0DDDE0032A052 /* Settings.ios.js */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2586E5A71DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6701DA0DDDE0032A052 /* libRCTSettings.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E5AD1DA0DDDE0032A052 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5AE1DA0DDDE0032A052 /* Share.js */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		2586E5AF1DA0DDDE0032A052 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5B01DA0DDDE0032A052 /* AsyncStorage.js */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		2586E5B11DA0DDDE0032A052 /* StyleSheet */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5B21DA0DDDE0032A052 /* __tests__ */,
+				2586E5B71DA0DDDE0032A052 /* ColorPropType.js */,
+				2586E5B81DA0DDDE0032A052 /* EdgeInsetsPropType.js */,
+				2586E5B91DA0DDDE0032A052 /* flattenStyle.js */,
+				2586E5BA1DA0DDDE0032A052 /* LayoutPropTypes.js */,
+				2586E5BB1DA0DDDE0032A052 /* normalizeColor.js */,
+				2586E5BC1DA0DDDE0032A052 /* PointPropType.js */,
+				2586E5BD1DA0DDDE0032A052 /* processColor.js */,
+				2586E5BE1DA0DDDE0032A052 /* processTransform.js */,
+				2586E5BF1DA0DDDE0032A052 /* setNormalizedColorAlpha.js */,
+				2586E5C01DA0DDDE0032A052 /* StyleSheet.js */,
+				2586E5C11DA0DDDE0032A052 /* StyleSheetPropType.js */,
+				2586E5C21DA0DDDE0032A052 /* StyleSheetTypes.js */,
+				2586E5C31DA0DDDE0032A052 /* StyleSheetValidation.js */,
+				2586E5C41DA0DDDE0032A052 /* TransformPropTypes.js */,
+			);
+			path = StyleSheet;
+			sourceTree = "<group>";
+		};
+		2586E5B21DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5B31DA0DDDE0032A052 /* flattenStyle-test.js */,
+				2586E5B41DA0DDDE0032A052 /* normalizeColor-test.js */,
+				2586E5B51DA0DDDE0032A052 /* processColor-test.js */,
+				2586E5B61DA0DDDE0032A052 /* setNormalizedColorAlpha-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E5C51DA0DDDE0032A052 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5C61DA0DDDE0032A052 /* __mocks__ */,
+				2586E5C81DA0DDDE0032A052 /* RCTRawTextManager.h */,
+				2586E5C91DA0DDDE0032A052 /* RCTRawTextManager.m */,
+				2586E5CA1DA0DDDE0032A052 /* RCTShadowRawText.h */,
+				2586E5CB1DA0DDDE0032A052 /* RCTShadowRawText.m */,
+				2586E5CC1DA0DDDE0032A052 /* RCTShadowText.h */,
+				2586E5CD1DA0DDDE0032A052 /* RCTShadowText.m */,
+				2586E5CE1DA0DDDE0032A052 /* RCTText.h */,
+				2586E5CF1DA0DDDE0032A052 /* RCTText.m */,
+				2586E5D01DA0DDDE0032A052 /* RCTText.xcodeproj */,
+				2586E5D31DA0DDDE0032A052 /* RCTTextField.h */,
+				2586E5D41DA0DDDE0032A052 /* RCTTextField.m */,
+				2586E5D51DA0DDDE0032A052 /* RCTTextFieldManager.h */,
+				2586E5D61DA0DDDE0032A052 /* RCTTextFieldManager.m */,
+				2586E5D71DA0DDDE0032A052 /* RCTTextManager.h */,
+				2586E5D81DA0DDDE0032A052 /* RCTTextManager.m */,
+				2586E5D91DA0DDDE0032A052 /* RCTTextSelection.h */,
+				2586E5DA1DA0DDDE0032A052 /* RCTTextSelection.m */,
+				2586E5DB1DA0DDDE0032A052 /* RCTTextView.h */,
+				2586E5DC1DA0DDDE0032A052 /* RCTTextView.m */,
+				2586E5DD1DA0DDDE0032A052 /* RCTTextViewManager.h */,
+				2586E5DE1DA0DDDE0032A052 /* RCTTextViewManager.m */,
+				2586E5DF1DA0DDDE0032A052 /* Text.js */,
+				2586E5E01DA0DDDE0032A052 /* TextStylePropTypes.js */,
+				2586E5E11DA0DDDE0032A052 /* TextUpdateTest.js */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		2586E5C61DA0DDDE0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5C71DA0DDDE0032A052 /* Text.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E5D11DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6761DA0DDDE0032A052 /* libRCTText.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E5E21DA0DDDE0032A052 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5E31DA0DDDE0032A052 /* __mocks__ */,
+				2586E5E91DA0DDDE0032A052 /* __tests__ */,
+				2586E5F21DA0DDDE0032A052 /* Alert.js */,
+				2586E5F31DA0DDDE0032A052 /* AlertIOS.js */,
+				2586E5F41DA0DDDE0032A052 /* BackAndroid.android.js */,
+				2586E5F51DA0DDDE0032A052 /* BackAndroid.ios.js */,
+				2586E5F61DA0DDDE0032A052 /* buildStyleInterpolator.js */,
+				2586E5F71DA0DDDE0032A052 /* clamp.js */,
+				2586E5F81DA0DDDE0032A052 /* CPUProfiler.js */,
+				2586E5F91DA0DDDE0032A052 /* createStrictShapeTypeChecker.js */,
+				2586E5FA1DA0DDDE0032A052 /* deepFreezeAndThrowOnMutationInDev.js */,
+				2586E5FB1DA0DDDE0032A052 /* defineLazyObjectProperty.js */,
+				2586E5FC1DA0DDDE0032A052 /* deprecatedCallback.js */,
+				2586E5FD1DA0DDDE0032A052 /* deprecatedPropType.js */,
+				2586E5FE1DA0DDDE0032A052 /* differ */,
+				2586E6061DA0DDDE0032A052 /* Dimensions.js */,
+				2586E6071DA0DDDE0032A052 /* dismissKeyboard.js */,
+				2586E6081DA0DDDE0032A052 /* ErrorUtils.js */,
+				2586E6091DA0DDDE0032A052 /* groupByEveryN.js */,
+				2586E60A1DA0DDDE0032A052 /* HeapCapture.js */,
+				2586E60B1DA0DDDE0032A052 /* HMRClient.js */,
+				2586E60C1DA0DDDE0032A052 /* HMRLoadingView.android.js */,
+				2586E60D1DA0DDDE0032A052 /* HMRLoadingView.ios.js */,
+				2586E60E1DA0DDDE0032A052 /* I18nManager.js */,
+				2586E60F1DA0DDDE0032A052 /* infoLog.js */,
+				2586E6101DA0DDDE0032A052 /* logError.js */,
+				2586E6111DA0DDDE0032A052 /* mapWithSeparator.js */,
+				2586E6121DA0DDDE0032A052 /* MatrixMath.js */,
+				2586E6131DA0DDDE0032A052 /* mergeFast.js */,
+				2586E6141DA0DDDE0032A052 /* mergeIntoFast.js */,
+				2586E6151DA0DDDE0032A052 /* MessageQueue.js */,
+				2586E6161DA0DDDE0032A052 /* PerformanceLogger.js */,
+				2586E6171DA0DDDE0032A052 /* PixelRatio.js */,
+				2586E6181DA0DDDE0032A052 /* Platform.android.js */,
+				2586E6191DA0DDDE0032A052 /* Platform.ios.js */,
+				2586E61A1DA0DDDE0032A052 /* RCTLog.js */,
+				2586E61B1DA0DDDE0032A052 /* RCTRenderingPerf.js */,
+				2586E61C1DA0DDDE0032A052 /* SamplingProfiler.js */,
+				2586E61D1DA0DDDE0032A052 /* stringifySafe.js */,
+				2586E61E1DA0DDDE0032A052 /* Systrace.js */,
+				2586E61F1DA0DDDE0032A052 /* throwOnWrongReactAPI.js */,
+				2586E6201DA0DDDE0032A052 /* truncate.js */,
+				2586E6211DA0DDDE0032A052 /* UIManager.js */,
+				2586E6221DA0DDDE0032A052 /* utf8.js */,
+				2586E6231DA0DDDE0032A052 /* WebSocketInterceptor.js */,
+				2586E6241DA0DDDE0032A052 /* XHRInterceptor.js */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		2586E5E31DA0DDDE0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5E41DA0DDDE0032A052 /* ErrorUtils.js */,
+				2586E5E51DA0DDDE0032A052 /* MessageQueueTestConfig.js */,
+				2586E5E61DA0DDDE0032A052 /* MessageQueueTestModule1.js */,
+				2586E5E71DA0DDDE0032A052 /* MessageQueueTestModule2.js */,
+				2586E5E81DA0DDDE0032A052 /* PixelRatio.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E5E91DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5EA1DA0DDDE0032A052 /* deepFreezeAndThrowOnMutationInDev-test.js */,
+				2586E5EB1DA0DDDE0032A052 /* groupByEveryN-test.js */,
+				2586E5EC1DA0DDDE0032A052 /* mapWithSeparator-test.js */,
+				2586E5ED1DA0DDDE0032A052 /* MatrixMath-test.js */,
+				2586E5EE1DA0DDDE0032A052 /* MessageQueue-test.js */,
+				2586E5EF1DA0DDDE0032A052 /* Platform-test.js */,
+				2586E5F01DA0DDDE0032A052 /* truncate-test.js */,
+				2586E5F11DA0DDDE0032A052 /* utf8-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E5FE1DA0DDDE0032A052 /* differ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E5FF1DA0DDDE0032A052 /* __tests__ */,
+				2586E6011DA0DDDE0032A052 /* deepDiffer.js */,
+				2586E6021DA0DDDE0032A052 /* insetsDiffer.js */,
+				2586E6031DA0DDDE0032A052 /* matricesDiffer.js */,
+				2586E6041DA0DDDE0032A052 /* pointsDiffer.js */,
+				2586E6051DA0DDDE0032A052 /* sizesDiffer.js */,
+			);
+			path = differ;
+			sourceTree = "<group>";
+		};
+		2586E5FF1DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6001DA0DDDE0032A052 /* deepDiffer-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E6251DA0DDDE0032A052 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6261DA0DDDE0032A052 /* core */,
+				2586E6321DA0DDDE0032A052 /* document */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		2586E6261DA0DDDE0032A052 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6271DA0DDDE0032A052 /* _shouldPolyfillES6Collection.js */,
+				2586E6281DA0DDDE0032A052 /* copyProperties.js */,
+				2586E6291DA0DDDE0032A052 /* getObjectValues.js */,
+				2586E62A1DA0DDDE0032A052 /* guid.js */,
+				2586E62B1DA0DDDE0032A052 /* isEmpty.js */,
+				2586E62C1DA0DDDE0032A052 /* Map.js */,
+				2586E62D1DA0DDDE0032A052 /* merge.js */,
+				2586E62E1DA0DDDE0032A052 /* mergeHelpers.js */,
+				2586E62F1DA0DDDE0032A052 /* mergeInto.js */,
+				2586E6301DA0DDDE0032A052 /* Set.js */,
+				2586E6311DA0DDDE0032A052 /* toIterator.js */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		2586E6321DA0DDDE0032A052 /* document */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6331DA0DDDE0032A052 /* selection */,
+			);
+			path = document;
+			sourceTree = "<group>";
+		};
+		2586E6331DA0DDDE0032A052 /* selection */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6341DA0DDDE0032A052 /* DocumentSelectionState.js */,
+			);
+			path = selection;
+			sourceTree = "<group>";
+		};
+		2586E6351DA0DDDE0032A052 /* Vibration */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6361DA0DDDE0032A052 /* RCTVibration.h */,
+				2586E6371DA0DDDE0032A052 /* RCTVibration.m */,
+				2586E6381DA0DDDE0032A052 /* RCTVibration.xcodeproj */,
+				2586E63B1DA0DDDE0032A052 /* Vibration.js */,
+				2586E63C1DA0DDDE0032A052 /* VibrationIOS.android.js */,
+				2586E63D1DA0DDDE0032A052 /* VibrationIOS.ios.js */,
+			);
+			path = Vibration;
+			sourceTree = "<group>";
+		};
+		2586E6391DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6791DA0DDDE0032A052 /* libRCTVibration.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2586E63E1DA0DDDE0032A052 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				2586E63F1DA0DDDE0032A052 /* __mocks__ */,
+				2586E6411DA0DDDE0032A052 /* __tests__ */,
+				2586E6431DA0DDDE0032A052 /* RCTSRWebSocket.h */,
+				2586E6441DA0DDDE0032A052 /* RCTSRWebSocket.m */,
+				2586E6451DA0DDDE0032A052 /* RCTWebSocket.xcodeproj */,
+				2586E6481DA0DDDE0032A052 /* RCTWebSocketExecutor.h */,
+				2586E6491DA0DDDE0032A052 /* RCTWebSocketExecutor.m */,
+				2586E64A1DA0DDDE0032A052 /* RCTWebSocketManager.h */,
+				2586E64B1DA0DDDE0032A052 /* RCTWebSocketManager.m */,
+				2586E64C1DA0DDDE0032A052 /* RCTWebSocketModule.h */,
+				2586E64D1DA0DDDE0032A052 /* RCTWebSocketModule.m */,
+				2586E64E1DA0DDDE0032A052 /* WebSocket.js */,
+				2586E64F1DA0DDDE0032A052 /* WebSocketEvent.js */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		2586E63F1DA0DDDE0032A052 /* __mocks__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6401DA0DDDE0032A052 /* event-target-shim.js */,
+			);
+			path = __mocks__;
+			sourceTree = "<group>";
+		};
+		2586E6411DA0DDDE0032A052 /* __tests__ */ = {
+			isa = PBXGroup;
+			children = (
+				2586E6421DA0DDDE0032A052 /* WebSocket-test.js */,
+			);
+			path = __tests__;
+			sourceTree = "<group>";
+		};
+		2586E6461DA0DDDE0032A052 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2586E67C1DA0DDDE0032A052 /* libRCTWebSocket.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2599C6FA1C0CBBA80018DB65 = {
 			isa = PBXGroup;
 			children = (
+				2586E3671DA0DB860032A052 /* Should_I_Run.xcodeproj */,
 				2599C7051C0CBBA90018DB65 /* Should_I_Run */,
 				2599C71A1C0CBBA90018DB65 /* Should_I_RunTests */,
 				2599C7251C0CBBA90018DB65 /* Should_I_RunUITests */,
@@ -207,6 +2629,9 @@
 		767ECFDEC0EEE5224DABF3DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2586E3771DA0DDDD0032A052 /* Libraries */,
+				2586E36C1DA0DC560032A052 /* LinkingIOS */,
+				2586E36A1DA0DC3F0032A052 /* Linking */,
 				FEF07E7A1C2C502300A73364 /* MapKit.framework */,
 				09FDD0006E0A7192974E9827 /* Pods_Should_I_Run.framework */,
 			);
@@ -326,6 +2751,80 @@
 			mainGroup = 2599C6FA1C0CBBA80018DB65;
 			productRefGroup = 2599C7041C0CBBA90018DB65 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2586E3A91DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E3A81DA0DDDD0032A052 /* ART.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E37B1DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E37A1DA0DDDD0032A052 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E3841DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E3831DA0DDDD0032A052 /* RCTAdSupport.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E53C1DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E53B1DA0DDDE0032A052 /* RCTAnimation.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E3E91DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E3E81DA0DDDD0032A052 /* RCTCameraRoll.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E4BF1DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E4BE1DA0DDDD0032A052 /* RCTGeolocation.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E4D61DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E4D51DA0DDDD0032A052 /* RCTImage.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E51D1DA0DDDD0032A052 /* Products */;
+					ProjectRef = 2586E51C1DA0DDDD0032A052 /* RCTLinking.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E36F1DA0DC560032A052 /* Products */;
+					ProjectRef = 2586E36E1DA0DC560032A052 /* RCTLinking.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E5611DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E5601DA0DDDE0032A052 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E5711DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E5701DA0DDDE0032A052 /* RCTPushNotification.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E5A71DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E5A61DA0DDDE0032A052 /* RCTSettings.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E5841DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E5831DA0DDDE0032A052 /* RCTTest.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E5D11DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E5D01DA0DDDE0032A052 /* RCTText.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E6391DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E6381DA0DDDE0032A052 /* RCTVibration.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E6461DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E6451DA0DDDE0032A052 /* RCTWebSocket.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E5A31DA0DDDE0032A052 /* Products */;
+					ProjectRef = 2586E5A21DA0DDDE0032A052 /* Sample.xcodeproj */;
+				},
+				{
+					ProductGroup = 2586E3681DA0DB860032A052 /* Products */;
+					ProjectRef = 2586E3671DA0DB860032A052 /* Should_I_Run.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2599C7021C0CBBA90018DB65 /* Should_I_Run */,
@@ -334,6 +2833,128 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2586E3751DA0DC560032A052 /* libRCTLinking.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTLinking.a;
+			remoteRef = 2586E3741DA0DC560032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6521DA0DDDE0032A052 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = 2586E6511DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6551DA0DDDE0032A052 /* libRCTActionSheet.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTActionSheet.a;
+			remoteRef = 2586E6541DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6581DA0DDDE0032A052 /* libRCTAdSupport.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAdSupport.a;
+			remoteRef = 2586E6571DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E65B1DA0DDDE0032A052 /* libRCTAnimation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAnimation.a;
+			remoteRef = 2586E65A1DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E65E1DA0DDDE0032A052 /* libRCTCameraRoll.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTCameraRoll.a;
+			remoteRef = 2586E65D1DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6611DA0DDDE0032A052 /* libRCTGeolocation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTGeolocation.a;
+			remoteRef = 2586E6601DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6641DA0DDDE0032A052 /* libRCTImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTImage.a;
+			remoteRef = 2586E6631DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6671DA0DDDE0032A052 /* libRCTLinking.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTLinking.a;
+			remoteRef = 2586E6661DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E66A1DA0DDDE0032A052 /* libRCTNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTNetwork.a;
+			remoteRef = 2586E6691DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E66D1DA0DDDE0032A052 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 2586E66C1DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6701DA0DDDE0032A052 /* libRCTSettings.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTSettings.a;
+			remoteRef = 2586E66F1DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6731DA0DDDE0032A052 /* libRCTTest.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTTest.a;
+			remoteRef = 2586E6721DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6761DA0DDDE0032A052 /* libRCTText.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTText.a;
+			remoteRef = 2586E6751DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E6791DA0DDDE0032A052 /* libRCTVibration.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVibration.a;
+			remoteRef = 2586E6781DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E67C1DA0DDDE0032A052 /* libRCTWebSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTWebSocket.a;
+			remoteRef = 2586E67B1DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2586E67F1DA0DDDE0032A052 /* libSample.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSample.a;
+			remoteRef = 2586E67E1DA0DDDE0032A052 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2599C7011C0CBBA90018DB65 /* Resources */ = {
@@ -589,6 +3210,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/node_modules/react-native/Libraries/LinkingIOS/**";
 				INFOPLIST_FILE = Should_I_Run/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -609,6 +3231,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/node_modules/react-native/Libraries/LinkingIOS/**";
 				INFOPLIST_FILE = Should_I_Run/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

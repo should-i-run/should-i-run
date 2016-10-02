@@ -14,6 +14,7 @@ target 'Should_I_Run' do
     'RCTNetwork',
     'RCTText',
     'RCTWebSocket',
+    # 'RCTLinking',
     # Add any other subspecs you want to use in your project
   ]
 end

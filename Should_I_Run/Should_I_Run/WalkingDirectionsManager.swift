@@ -28,6 +28,8 @@ class WalkingDirectionsManager: NSObject {
     }
     
     func getWalkingDirectionsBetween(_ startLatLon:CLLocationCoordinate2D, endLatLon:CLLocationCoordinate2D, stationCode: String) {
+        print("start \(startLatLon.latitude), \(startLatLon.longitude)")
+        print("end \(endLatLon.latitude), \(endLatLon.longitude)")
         let walkingRouteRequest = MKDirectionsRequest()
         walkingRouteRequest.transportType = MKDirectionsTransportType.walking
         

@@ -68,7 +68,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
                 // figure out the closest of the 'entrances' and use it.
                 func getDistance(e: AnyObject) -> Double{
                     let lngDistance: Double = pow((startCoord.latitude - (e["lat"] as! Double)), 2)
-                    let latDistance: Double = pow((startCoord.longitude - (e["lng"] as! Double)), 2)
+                    let     latDistance: Double = pow((startCoord.longitude - (e["lng"] as! Double)), 2)
                     return sqrt(lngDistance + latDistance)
                 }
                 let sortedEntrances = entrances.sorted {
@@ -77,6 +77,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
                 let winner = sortedEntrances[0]
                 lat = winner["lat"]!
                 lng = winner["lng"]!
+                print(winner)
             } else {
                 lat = subJson["gtfs_latitude"].doubleValue
                 lng = subJson["gtfs_longitude"].doubleValue

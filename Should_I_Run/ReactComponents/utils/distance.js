@@ -7,7 +7,7 @@ export function getClosestEntrance(station, start) {
     return Math.sqrt(lngDistance + latDistance);
   };
   if (station.entrances.length) {
-    const sortedEntrances = station.entrances.sort((a, b) => getDistance(a) >= getDistance(b));
+    const sortedEntrances = station.entrances.sort((a, b) => getDistance(a) - getDistance(b));
     return sortedEntrances[0];
   }
   return {lat: station.gtfs_latitude, lng: station.gtfs_longitude};

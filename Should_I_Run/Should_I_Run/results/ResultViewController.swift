@@ -24,9 +24,7 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
     let walkingDirectionsManager = SharedWalkingDirectionsManager
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-
         DataHandler.instance.delegate = self
         DataHandler.instance.cancelled = false
         DataHandler.instance.loadTrip()
@@ -34,6 +32,13 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
     
     override func viewDidAppear(_ animated: Bool) {
         self.updateResultTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(ResultViewController.updateBart(_:)), userInfo: nil, repeats: true)
+    }
+    
+    func resetData() {
+        self.walkingData = [:]
+        self.data = JSON([])
+        DataHandler.instance.loadTrip()
+        self.render()
     }
     
     func updateBart(_ timer: Timer?) {
@@ -45,6 +50,8 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
         self.render()
         if ((self.walkingDirectionsObserver) == nil) {
             self.setupWalkingDirections()
+        } else {
+            self.updateWalkingDistances()
         }
     }
     
@@ -94,8 +101,9 @@ class ResultViewController: UIViewController, DataHandlerDelegate, WalkingDirect
     }
     
     func render() {
-        let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d!
-        self.stationsContainer.updateData(self.data!.object as AnyObject, walkingData: self.walkingData as AnyObject, location: startCoord)
+        if let startCoord: CLLocationCoordinate2D = self.locationManager.currentLocation2d {
+            self.stationsContainer.updateData(self.data!.object as AnyObject, walkingData: self.walkingData as AnyObject, location: startCoord)
+        }
     }
     
     func handleError(_ error: String) {

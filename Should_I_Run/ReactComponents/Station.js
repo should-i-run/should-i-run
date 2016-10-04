@@ -26,7 +26,7 @@ var styles = StyleSheet.create({
   stationName: {
     ...genericText,
     fontSize: 26,
-    flex: 3,
+    flex: 5,
   },
   stationMetadata: {
     ...genericText,
@@ -61,8 +61,9 @@ var styles = StyleSheet.create({
     ...genericText,
     color: '#AAA',
     fontSize: 26,
-    flex: 2,
+    flex: 4,
     marginRight: 10,
+    textAlign: 'right',
   },
   stationNameContainer: {
     flexDirection: 'row',
@@ -181,7 +182,7 @@ export default class Station extends React.Component {
       <View style={styles.stationNameContainer}>
         <Text style={styles.stationName} numberOfLines={1}>{s.name}</Text>
         <Text style={[styles.stationDistance]} onPress={goToDirections}>
-          {distance ? distance.toLocaleString() : '...'} meters
+          {typeof distance === 'number' ? distance.toLocaleString() : '...'} meters
         </Text>
       </View>
     );
@@ -196,7 +197,7 @@ export default class Station extends React.Component {
       const aMinutes =  aBest ? aBest.minutes : 999;
       const bBest = b.estimates.filter(isMakable)[0];
       const bMinutes =  bBest ? bBest.minutes : 999;
-      return parseInt(aMinutes, 10) >= parseInt(bMinutes, 10);
+      return parseInt(aMinutes, 10) - parseInt(bMinutes, 10);
     }
 
     const north = s.departures
@@ -211,11 +212,11 @@ export default class Station extends React.Component {
         <View style={styles.stationMetadataContainer}>
           <Text style={styles.stationMetadata}>
             Running:
-            <Text style={styles.run}> {distance ? getRunningTime(distance) : '...'} min</Text>
+            <Text style={styles.run}> {typeof distance === 'number' ? getRunningTime(distance) : '...'} min</Text>
           </Text>
           <Text style={styles.stationMetadata}>
             Walking:
-            <Text style={styles.walk}> {time || '...'} min</Text>
+            <Text style={styles.walk}> {typeof time === 'number' ? (time || 1) : '...'} min</Text>
           </Text>
         </View>
 

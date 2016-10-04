@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class ReactView: UIView {
     #if DEBUG
+    // 192.168.0.101
     let rootView: RCTRootView = RCTRootView(bundleURL: URL(string: "http://localhost:8081/index.ios.bundle?platform=ios"),
                                             moduleName: "SimpleApp", initialProperties: nil, launchOptions: nil)
     #else

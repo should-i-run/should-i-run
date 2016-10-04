@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     let locationManager = SharedUserLocation
-    var lastActiveTime = Date()
+    var lastActiveTime: Date? = Date()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         return true
@@ -46,6 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.locationManager.locationManager.requestWhenInUseAuthorization()
         self.locationManager.locationManager.startUpdatingLocation()
+        if let lastActive: Date = self.lastActiveTime {
+            let diff = lastActive.timeIntervalSinceNow
+            if diff < -500 {
+                DataHandler.instance.resetData()
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

@@ -13,6 +13,7 @@ import SwiftyJSON
 protocol DataHandlerDelegate {
     func handleDataSuccess(_: JSON)
     func handleError(_ error: String)
+    func resetData()
 }
 
 class DataHandler: NSObject, CLLocationManagerDelegate {
@@ -70,6 +71,10 @@ class DataHandler: NSObject, CLLocationManagerDelegate {
         if self.cancelled != true {
             self.delegate!.handleDataSuccess(results)
         }
+    }
+    
+    func resetData() {
+        self.delegate!.resetData()
     }
     
     func handleError(_ errorMessage: String) {
